@@ -1,4 +1,4 @@
-﻿namespace ManchkinCore;
+﻿namespace ManchkinCore.Enums.Gears;
 
 public enum DisposableStuff
 {

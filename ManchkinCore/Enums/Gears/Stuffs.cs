@@ -1,6 +1,6 @@
-﻿namespace ManchkinCore;
+﻿namespace ManchkinCore.Enums.Gears;
 
-public enum Stuff
+public enum Stuffs
 {
     STEPLADDER,
     TIGHTS,

@@ -1,4 +1,4 @@
-﻿namespace ManchkinCore;
+﻿namespace ManchkinCore.Enums.Accessory;
 
 public enum Genders
 {

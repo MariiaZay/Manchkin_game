@@ -3,5 +3,6 @@
 public enum Arms
 {
     SINGLE,
-    BOTH
+    BOTH,
+    NO
 }

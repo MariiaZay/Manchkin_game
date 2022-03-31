@@ -2,7 +2,7 @@
 
 public interface ILevel
 {
-    public int Value { get; set; }
+    public int Value { get; }
     public void Increase();
     public void Reduce();
 }

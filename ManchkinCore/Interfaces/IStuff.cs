@@ -1,25 +1,25 @@
 ﻿using ManchkinCore.Enums;
 using ManchkinCore.Enums.Accessory;
+using ManchkinCore.Implementation;
 
 namespace ManchkinCore.Interfaces;
 
 public interface IStuff
 {
-    public int Price { get; set; }
-    public int Damage { get; set; }
-    public bool ActiveCheat { get; set; }
-    public Bulkiness Weight { get; set; }
-    public Arms Fullness { get; set; }
+    public int Price { get;}
+    public int Damage { get;}
+    public bool ActiveCheat { get;}
+    public IMercenary? Mercenary { get; }
+    public Bulkiness Weight { get;}
+    public Arms Fullness { get;}
 
-
+    
     public bool CheckRace(IRaceAndClass race);
-    public bool CheckClass(IRaceAndClass race);
+    public bool CheckClass(IRaceAndClass _class);
     public bool CheckGender(Genders gender);
 
-    public void Drop();
-    public void Change();
-    public void Present();
-    public void Lost(); //TODO: здесь нужно прописать, что мы теряем
-    public void Sell();
-
+    public void SetMercenary(IMercenary? mercenary);
+    public void RemoveMercenary();
+    public void SetCheat();
+    public void RemoveCheat();
 }

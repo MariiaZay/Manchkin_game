@@ -2,6 +2,7 @@
 
 public interface IRaceAndClass
 {
-    public object FirstOption { get; set; }
-    public object SecondOption { get; set; }
+    public void FirstOption();
+    public void SecondOption();
 }
+//TODO: придумать, как реализовать полукровку и суперманчкина

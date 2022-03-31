@@ -2,5 +2,9 @@
 
 public interface IMercenary
 {
-    public void ChangeEquipment(); //TODO: добавить носибельную вещь,которую можно менять
+    public IStuff? Item { get; }
+    public int Damage { get; }
+    public void ChangeEquipment(IStuff? stuff);
+    
+    //TODO: придумать, как реализовать остальной функционал наемничка
 }

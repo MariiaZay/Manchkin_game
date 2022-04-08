@@ -2,72 +2,66 @@
 
 namespace ManchkinCore.Implementation;
 
-public abstract class Class : IRaceAndClass
+public class Cleric : IClass
 {
-    public abstract void FirstOption();
-    public abstract void SecondOption();
-}
-
-public class Cleric: Class
-{
-    public override void FirstOption()
+    public void FirstFeature()
     {
         throw new NotImplementedException();
     }
 
-    public override void SecondOption()
+    public void SecondFeature()
     {
         throw new NotImplementedException();
     }
 }
 
-public class Warrior: Class
+public class Warrior : IClass
 {
-    public override void FirstOption()
+    public void FirstFeature()
     {
         throw new NotImplementedException();
     }
 
-    public override void SecondOption()
+    public void SecondFeature()
     {
         throw new NotImplementedException();
     }
 }
 
-public class Thief: Class
+public class Thief : IClass
 {
-    public override void FirstOption()
+    public void FirstFeature()
     {
         throw new NotImplementedException();
     }
 
-    public override void SecondOption()
+    public void SecondFeature()
     {
         throw new NotImplementedException();
     }
 }
 
-public class Wizard: Class
+public class Wizard : IClass
 {
-    public override void FirstOption()
+    public void FirstFeature()
     {
         throw new NotImplementedException();
     }
 
-    public override void SecondOption()
+    public void SecondFeature()
     {
         throw new NotImplementedException();
     }
 }
 
-public class Nobody : Class
+public class Nobody : IClass
 {
-    public override void FirstOption()
+    public void FirstFeature()
     {
         throw new NotImplementedException();
     }
 
-    public override void SecondOption()
+    public void SecondFeature()
     {
         throw new NotImplementedException();
     }

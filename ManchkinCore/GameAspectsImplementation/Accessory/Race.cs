@@ -2,55 +2,53 @@
 
 namespace ManchkinCore.Implementation;
 
-public abstract class Race: IRaceAndClass
+
+public class Elf : IRace
 {
-    public abstract void FirstOption();
-    public abstract void SecondOption();
-}
-
-public class Elf : Race{
-    public override void FirstOption()
+    public void FirstFeature()
     {
         throw new NotImplementedException();
     }
 
-    public override void SecondOption()
+    public void SecondFeature()
     {
         throw new NotImplementedException();
     }
 }
 
-public class Human : Race
+public class Human : IRace
 {
-    public override void FirstOption()
+    public void FirstFeature()
     {
         throw new NotImplementedException();
     }
 
-    public override void SecondOption()
+    public void SecondFeature()
     {
         throw new NotImplementedException();
     }
 }
 
-public class Dwarf : Race{
-    public override void FirstOption()
+public class Dwarf : IRace
+{
+    public void FirstFeature()
     {
         throw new NotImplementedException();
     }
 
-    public override void SecondOption()
+    public void SecondFeature()
     {
         throw new NotImplementedException();
     }
 }
-public class Halfling : Race{
-    public override void FirstOption()
+public class Halfling : IRace
+{
+    public void FirstFeature()
     {
         throw new NotImplementedException();
     }
 
-    public override void SecondOption()
+    public void SecondFeature()
     {
         throw new NotImplementedException();
     }

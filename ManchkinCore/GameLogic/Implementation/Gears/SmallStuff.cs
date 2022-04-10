@@ -15,6 +15,7 @@ public abstract class SmallStuff : IStuff
     public abstract bool CanBeUsed(IRace race);
     public abstract bool CanBeUsed(IClass _class);
     public abstract bool CanBeUsed(Genders gender);
+    //TODO: придумать, как сделать проверку, что шмотку можно взять, основываясь на весе
 }
 
 public class Stepladder : SmallStuff

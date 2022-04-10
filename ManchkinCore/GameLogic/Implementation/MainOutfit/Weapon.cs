@@ -14,6 +14,8 @@ public abstract class Weapon : IStuff
     public abstract bool CanBeUsed(IRace race);
     public abstract bool CanBeUsed(IClass _class);
     public abstract bool CanBeUsed(Genders gender);
+    
+    //TODO: придумать, как сделать проверку, что оружие можно взять, основываясь на весе и занятости рук
 }
 
 public class Buckler : Weapon

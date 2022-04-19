@@ -1,5 +1,5 @@
 ﻿using ManchkinCore.Enums.Accessory;
-using ManchkinCore.Enums.Gears;
+
 using ManchkinCore.Interfaces;
 
 namespace ManchkinCore.Implementation.Gears;

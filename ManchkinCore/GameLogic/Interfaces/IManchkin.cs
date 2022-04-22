@@ -13,6 +13,7 @@ public interface IManchkin
         public IClass Class { get; }
         public Genders Gender { get; set; }
         public int Damage { get; }
+        public int CardsCount { get; }
         public bool IsDead { get; }
 
     #endregion

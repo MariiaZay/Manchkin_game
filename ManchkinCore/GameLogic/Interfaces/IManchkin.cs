@@ -16,36 +16,13 @@ public interface IManchkin
         public bool IsDead { get; }
 
     #endregion
-
-    #region Methods
-
-        #region Race
-
-            public void ChangeRace(IRace race);
-            public void LostRace();
-
-        #endregion
-
-        #region Class
+    
+    public void ChangeGender();
+    public void RecalculateDamage();
+    public void ToDie();
         
-            public void ChangeClass(IClass _class);
-            public void LostClass();
 
-        #endregion
-
-        #region Level
-        
-            public void LostLevel();
-            public void GetLevel();
-            
-        #endregion
-        public void ChangeGender();
-        public void RecalculateDamage();
-        public void ToDie();
-
-    #endregion
-
-    #region Hulfbood and SuperManchkin
+    #region Halfbood and SuperManchkin
     
         public IHulfblood Hulfblood { get; }
         public ISuperManchkin SuperManchkin { get; }
@@ -57,16 +34,16 @@ public interface IManchkin
         #region SuperManchkin
 
             public bool IsSuperManchkin();
-            public void BecameSuperManchkin(IClass first, IClass second);
-            public void BecameSuperManchkin(IClass first);
+            public void BecameSuperManchkin(IClass second);
+            public void BecameSuperManchkin();
 
         #endregion
 
         #region HalfBlood
 
             public bool IsHalfBlood();
-            public void BecameHalfBlood(IRace first, IRace second);
-            public void BecameHalfBlood(IRace first);
+            public void BecameHalfBlood(IRace second);
+            public void BecameHalfBlood();
 
         #endregion
         
@@ -102,35 +79,19 @@ public interface IManchkin
         public IHands Hands { get; }
 
     #endregion
-
-    #region Methods
-
+    
     public bool HasHugeStuff();
     public bool HasMercenary();
     
     public bool CanTakeStuff(IStuff stuff);
-    public void TakeStuff(IStuff stuff);
-    public void ChangeEquipment(List<IStuff> equipment);
+    //public void ChangeEquipment(List<IStuff> equipment);
 
     #region Lost Stuff
 
-        public void LostHugeStuff(IStuff stuff);
-        public void LostSmallStuff(IStuff stuff);
         public void LostMostPowerfulStuff();
         public void LostStuff(IStuff stuff);
         public void LostAllStuffs();
 
     #endregion
-
-    #region Lost Equipment
-
-        public void LostArmor();
-        public void LostShoes();
-        public void LostHat();
-
-    #endregion
-    
     public int SellStuffs(List<IStuff> stuffs);
-
-    #endregion
 }

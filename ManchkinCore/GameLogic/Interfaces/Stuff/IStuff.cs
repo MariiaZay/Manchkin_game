@@ -8,7 +8,7 @@ public interface IStuff
 {
     public int Price { get;}
     public int Damage { get;}
-    public bool ActiveCheat { get; }
+    
     public Bulkiness Weight { get;}
     public Arms Fullness { get;}
     

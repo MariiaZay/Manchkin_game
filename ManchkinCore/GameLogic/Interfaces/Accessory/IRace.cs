@@ -2,6 +2,6 @@
 
 public interface IRace
 {
-    public void FirstFeature();
-    public void SecondFeature();
+    public string FirstFeature { get; }
+    public string SecondFeature { get; }
 }

@@ -5,53 +5,27 @@ namespace ManchkinCore.Implementation;
 
 public class Elf : IRace
 {
-    public void FirstFeature()
-    {
-        throw new NotImplementedException();
-    }
+    public string FirstFeature => "Получай уровень за каждого монстра, которого помог убить";
 
-    public void SecondFeature()
-    {
-        throw new NotImplementedException();
-    }
+    public string SecondFeature => "У тебя +1 на смывку";
 }
 
 public class Human : IRace
 {
-    public void FirstFeature()
-    {
-        throw new NotImplementedException();
-    }
+    public string FirstFeature => "";
 
-    public void SecondFeature()
-    {
-        throw new NotImplementedException();
-    }
+    public string SecondFeature => "";
 }
 
 public class Dwarf : IRace
 {
-    public void FirstFeature()
-    {
-        throw new NotImplementedException();
-    }
-
-    public void SecondFeature()
-    {
-        throw new NotImplementedException();
-    }
+    public string FirstFeature => "У тебя может быть любое количество больших шмоток";
+    public string SecondFeature => "В конце хода можешь оставлять на руке 6 карт";
 }
 public class Halfling : IRace
 {
-    public void FirstFeature()
-    {
-        throw new NotImplementedException();
-    }
+    public string FirstFeature => "Раз в ход можешь продать одну шмотку за двойную цену(и другие по обычной)";
 
-    public void SecondFeature()
-    {
-        throw new NotImplementedException();
-    }
+    public string SecondFeature => "Провалив первый бросок смывки, можешь сбросить карту для второйпопытки";
 }
 
-//TODO: прописать особенности рас

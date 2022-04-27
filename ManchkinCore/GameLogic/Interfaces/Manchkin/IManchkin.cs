@@ -4,15 +4,15 @@ using ManchkinCore.Implementation;
 
 namespace ManchkinCore.Interfaces;
 
-public interface IManchkin : IOwnStuffs , IСurseable, IHalfBloodAble, ISuper, IDescriptable
+public interface IManchkin : IOwnStuffs /*, IСurseable, IHalfBloodAble, ISuper, IDescriptable*/
 {
     #region Main properties
 
         public int Level { get; }
         public IRace Race { get; }
         public IClass Class { get; }
-        public Genders Gender { get; set; }
-        public int Damage { get; }
+        public Genders Gender { get;}
+        public int Damage { get;}
         public int CardsCount { get; }
         public bool IsDead { get; }
 
@@ -27,5 +27,8 @@ public interface IManchkin : IOwnStuffs , IСurseable, IHalfBloodAble, ISuper, I
 
         public int FlushingBonus { get; }
         public int DebuffOnDiceRolls { get; }
-    #endregion
+
+        public bool DoublePrice { get; }
+
+        #endregion
 }

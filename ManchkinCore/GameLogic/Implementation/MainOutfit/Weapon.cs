@@ -7,15 +7,13 @@ public abstract class Weapon : IStuff
 {
     public int Price { get; protected init; }
     public int Damage { get; protected init; }
-    public bool ActiveCheat { get; protected set; }
+    public bool ActiveCheat { get; set; }
     public Bulkiness Weight { get; protected init; }
     public Arms Fullness { get; protected init; }
 
     public abstract bool CanBeUsed(IRace race);
     public abstract bool CanBeUsed(IClass _class);
     public abstract bool CanBeUsed(Genders gender);
-    
-    //TODO: придумать, как сделать проверку, что оружие можно взять, основываясь на весе и занятости рук
 }
 
 public class Buckler : Weapon
@@ -43,7 +41,7 @@ public class Hammer : Weapon
         Fullness = Arms.SINGLE;
     }
 
-    public override bool CanBeUsed(IRace race) => race is Dwarf;
+    public override bool CanBeUsed(IRace race) => race is Dwarf || ActiveCheat;
     public override bool CanBeUsed(IClass _class) => true;
     public override bool CanBeUsed(Genders gender) => true;
 }
@@ -60,7 +58,7 @@ public class ProgressiveSword : Weapon
 
     public override bool CanBeUsed(IRace race) => true;
     public override bool CanBeUsed(IClass _class) => true;
-    public override bool CanBeUsed(Genders gender) => gender is Genders.FEMALE;
+    public override bool CanBeUsed(Genders gender) => gender is Genders.FEMALE || ActiveCheat;
 }
 
 public class BastardSword : Weapon
@@ -105,7 +103,7 @@ public class NapalmStuff : Weapon
 
     public override bool CanBeUsed(IRace race) => true;
 
-    public override bool CanBeUsed(IClass _class) => _class is Wizard;
+    public override bool CanBeUsed(IClass _class) => _class is Wizard || ActiveCheat;
 
     public override bool CanBeUsed(Genders gender) => true;
 }
@@ -139,7 +137,7 @@ public class Dagger : Weapon
 
     public override bool CanBeUsed(IRace race) => true;
 
-    public override bool CanBeUsed(IClass _class) => _class is Thief;
+    public override bool CanBeUsed(IClass _class) => _class is Thief || ActiveCheat;
 
     public override bool CanBeUsed(Genders gender) => true;
 }
@@ -156,7 +154,7 @@ public class Club : Weapon
 
     public override bool CanBeUsed(IRace race) => true;
 
-    public override bool CanBeUsed(IClass _class) => _class is Cleric;
+    public override bool CanBeUsed(IClass _class) => _class is Cleric || ActiveCheat;
 
     public override bool CanBeUsed(Genders gender) => true;
 }
@@ -192,7 +190,7 @@ public class Oak : Weapon
 
     public override bool CanBeUsed(IClass _class) => true;
 
-    public override bool CanBeUsed(Genders gender) => gender is Genders.MALE;
+    public override bool CanBeUsed(Genders gender) => gender is Genders.MALE || ActiveCheat;
 }
 
 public class Chainsaw : Weapon
@@ -273,7 +271,7 @@ public class Bow : Weapon
         Fullness = Arms.BOTH;
     }
 
-    public override bool CanBeUsed(IRace race) => race is Elf;
+    public override bool CanBeUsed(IRace race) => race is Elf || ActiveCheat;
 
     public override bool CanBeUsed(IClass _class) => true;
 

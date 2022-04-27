@@ -27,7 +27,7 @@ public class HornedHelmet : Hat
         Fullness = Arms.NO;
     }
 
-    public override bool CanBeUsed(IRace race) => race is Elf;
+    public override bool CanBeUsed(IRace race) => race is Elf || ActiveCheat;
 
     public override bool CanBeUsed(IClass _class) => true;
 
@@ -44,7 +44,7 @@ public class BandanaOfBastartism : Hat
         Fullness = Arms.NO;
     }
 
-    public override bool CanBeUsed(IRace race) => race is Human;
+    public override bool CanBeUsed(IRace race) => race is Human || ActiveCheat;
 
     public override bool CanBeUsed(IClass _class) => true;
 
@@ -63,7 +63,7 @@ public class HatOfPower : Hat
 
     public override bool CanBeUsed(IRace race) => true;
 
-    public override bool CanBeUsed(IClass _class) => _class is Wizard;
+    public override bool CanBeUsed(IClass _class) => _class is Wizard || ActiveCheat;
 
     public override bool CanBeUsed(Genders gender) => true;
 }

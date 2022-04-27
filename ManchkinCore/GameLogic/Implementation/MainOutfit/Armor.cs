@@ -7,7 +7,7 @@ public abstract class Armor : IStuff
 {
     public int Price { get; protected init; }
     public int Damage { get; protected init; }
-    public bool ActiveCheat { get; protected set; }
+    public bool ActiveCheat { get;  set; }
     public Bulkiness Weight { get; protected init; }
     public Arms Fullness { get; protected init; }
     
@@ -29,7 +29,7 @@ public class MithrilArmor : Armor
 
     public override bool CanBeUsed(IRace race) => true;
 
-    public override bool CanBeUsed(IClass _class) => _class is not Wizard;
+    public override bool CanBeUsed(IClass _class) => _class is not Wizard || ActiveCheat;
 
     public override bool CanBeUsed(Genders gender) => true;
 }
@@ -44,7 +44,7 @@ public class DwarfArmor : Armor
         Fullness = Arms.NO;
     }
 
-    public override bool CanBeUsed(IRace race) => race is Dwarf;
+    public override bool CanBeUsed(IRace race) => race is Dwarf || ActiveCheat;
 
     public override bool CanBeUsed(IClass _class) => true;
 

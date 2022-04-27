@@ -7,17 +7,27 @@ public interface IOwnStuffs
     public List<IStuff> SmallStuffs { get; }
     public List<IStuff> HugeStuffs { get; }
     public  List<IMercenary> Mercenaries { get; }
-    public IStuff Armor { get; }
-    public IStuff Shoes { get; }
-    public IStuff Hat { get; }
+    public IStuff? WornArmor { get; }
+    public IStuff? WornShoes { get; }
+    public IStuff? WornHat { get; }
     public IHands Hands { get; }
+    
+    public bool Cheat { get; }
 
     #endregion
     
-    public bool HasHugeStuff();
-    public bool HasMercenary();
+    public bool HasHugeStuff { get; }
+    public bool HasMercenary { get; }
+    public void ChangeCheat();
+
+    public void GetMercenary();
+    public void GetMercenary(IStuff stuff);
+    public void GiveToMercenary(IStuff stuff);
+    public void KillMercenary();
     
     public bool CanTakeStuff(IStuff stuff);
+
+    public string TakeStuff(IStuff stuff);
     //public void ChangeEquipment(List<IStuff> equipment);
 
     #region Lost Stuff
@@ -27,5 +37,6 @@ public interface IOwnStuffs
     public void LostAllStuffs();
 
     #endregion
-    public int SellStuffs(List<IStuff> stuffs);
+    public void SellStuffs(List<IStuff> stuffs);
+    public void SellByDoublePrice(IStuff stuff);
 }

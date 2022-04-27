@@ -7,7 +7,7 @@ public abstract class Shoes : IStuff
 {
     public int Price { get; protected init; }
     public int Damage { get; protected init; }
-    public bool ActiveCheat { get; protected set; }
+    public bool ActiveCheat { get; set; }
     public Bulkiness Weight { get; protected init; }
     public Arms Fullness { get; protected init; }
 

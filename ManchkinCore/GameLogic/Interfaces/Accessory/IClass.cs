@@ -1,7 +1,5 @@
 ﻿namespace ManchkinCore.Interfaces;
 
-public interface IClass
+public interface IClass : IDescriptable
 {
-    public string FirstFeature { get; }
-    public string SecondFeature { get; }
 }

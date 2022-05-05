@@ -10,10 +10,13 @@ public abstract class Shoes : IStuff
     public bool ActiveCheat { get; set; }
     public Bulkiness Weight { get; protected init; }
     public Arms Fullness { get; protected init; }
+    public int FlushingBonus { get; protected set; }
+    public bool Cheat { get; set; } = false;
 
     public abstract bool CanBeUsed(IRace _class);
     public abstract bool CanBeUsed(IClass race);
     public abstract bool CanBeUsed(Genders gender);
+    public List<string> Descriptions { get; protected set; }
 }
 
 public class MightyShoes : Shoes
@@ -30,8 +33,48 @@ public class MightyShoes : Shoes
         Damage = 2;
         Weight = Bulkiness.SMALL;
         Fullness = Arms.NO;
+        Descriptions = new List<string>();
+        FlushingBonus = 0;
     }
 }
 
-//TODO: Дописать сандалеты-протекторы
-//TODO: Дописать башмаки реального бега
+public class ReallyFastBoots : Shoes
+{
+    public ReallyFastBoots()
+    {
+        Price = 400;
+        Damage = 0;
+        Weight = Bulkiness.SMALL;
+        Fullness = Arms.NO;
+        Descriptions = new List<string>();
+        FlushingBonus = 2;
+    }
+
+    public override bool CanBeUsed(IRace _class) => true;
+
+    public override bool CanBeUsed(IClass race) => true;
+
+    public override bool CanBeUsed(Genders gender) => true;
+}
+
+public class SandalsOfProtection : Shoes
+{
+    public SandalsOfProtection()
+    {
+        Price = 700;
+        Damage = 0;
+        Weight = Bulkiness.SMALL;
+        Fullness = Arms.NO;
+        Descriptions = new List<string> {FirstFeature};
+        FlushingBonus = 0;
+    }
+
+    private const string FirstFeature = "Защищают тебя от проклятий, которые ты вытягиваешь, вышибая двери. Не спасут "
+                                        + "от проклятий, сыгранных на тебя другими игроками";
+
+    public override bool CanBeUsed(IRace _class) => true;
+
+    public override bool CanBeUsed(IClass race) => true;
+
+    public override bool CanBeUsed(Genders gender) => true;
+}

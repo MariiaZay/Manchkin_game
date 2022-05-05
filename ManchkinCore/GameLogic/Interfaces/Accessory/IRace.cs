@@ -1,7 +1,8 @@
 ﻿namespace ManchkinCore.Interfaces;
 
-public interface IRace
+public interface IRace : IDescriptable
 {
-    public string FirstFeature { get; }
-    public string SecondFeature { get; }
+    public int FlushingBonus { get; }
+    public int CardCount { get; }
+    public bool CellingByDoublePrice { get; }
 }

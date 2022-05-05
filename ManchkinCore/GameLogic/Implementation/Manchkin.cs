@@ -1,5 +1,7 @@
-﻿using ManchkinCore.Enums.Accessory;
+﻿using System.Reflection.PortableExecutable;
+using ManchkinCore.Enums.Accessory;
 using ManchkinCore.Implementation;
+
 using ManchkinCore.Interfaces;
 
 namespace ManchkinCore.GameLogic.Implementation;
@@ -9,9 +11,8 @@ public class Manchkin : IManchkin
     #region Main fields
 
     public int Level { get; private set; }
-
+    
     private IRace _race;
-
     public IRace Race
     {
         get => _race;
@@ -23,7 +24,6 @@ public class Manchkin : IManchkin
     }
 
     private IClass _class;
-
     public IClass Class
     {
         get => _class;
@@ -35,7 +35,6 @@ public class Manchkin : IManchkin
     }
 
     private Genders _gender;
-
     public Genders Gender
     {
         get => _gender;
@@ -107,7 +106,7 @@ public class Manchkin : IManchkin
         RecalculateDamage();
         RecalculateFlushingBonus();
     }
-
+    
     public IRace ChangeRace(IRace race)
     {
         FlushingBonus = race.FlushingBonus;
@@ -232,7 +231,6 @@ public class Manchkin : IManchkin
             mer.ChangeEquipment(stuff);
             break;
         }
-
         RecalculateParameters();
     }
 
@@ -247,6 +245,7 @@ public class Manchkin : IManchkin
         Mercenaries.Remove(mercenary);
         RecalculateParameters();
     }
+    
 
     #endregion
 
@@ -279,7 +278,7 @@ public class Manchkin : IManchkin
         if (!CanHaveStuff(WornShoes))
             WornShoes = null;
 
-        if (Hands.LeftHand == Hands.RightHand)
+        if(Hands.LeftHand == Hands.RightHand)
             Hands.TakeInBothHands(null);
         else
         {
@@ -291,12 +290,12 @@ public class Manchkin : IManchkin
 
         foreach (var stuff in SmallStuffs.Where(stuff => !CanHaveStuff(stuff)))
             SmallStuffs.Remove(stuff);
-
+        
 
         foreach (var stuff in HugeStuffs.Where(stuff => !CanHaveStuff(stuff)))
             SmallStuffs.Remove(stuff);
     }
-
+    
     public string TakeStuff(IStuff stuff)
     {
         if (!CanTakeStuff(stuff)) return "невозможно взять шмотку";
@@ -306,15 +305,15 @@ public class Manchkin : IManchkin
             case Hat:
                 WornHat = stuff;
                 break;
-
+            
             case Armor:
                 WornArmor = stuff;
                 break;
-
+            
             case Shoes:
                 WornShoes = stuff;
                 break;
-
+            
             case Weapon:
                 if (stuff.Fullness == Arms.BOTH)
                     Hands.TakeInBothHands(stuff);
@@ -336,7 +335,7 @@ public class Manchkin : IManchkin
                 break;
             }
         }
-
+        
         RecalculateParameters();
         return "шмотка успешно добавлена";
     }
@@ -370,12 +369,12 @@ public class Manchkin : IManchkin
 
     public void LostMostPowerfulStuff()
     {
-        var wornStuffs = GetAllWornStuffs();
+        var wornStuffs =GetAllWornStuffs();
         var maxPowerStuff = wornStuffs.MaxBy(stuff => stuff.Damage);
         if (!IsNull(maxPowerStuff))
             LostStuff(maxPowerStuff);
     }
-
+    
     public void LostStuff(IStuff stuff)
     {
         CancelCheat(stuff);
@@ -405,7 +404,6 @@ public class Manchkin : IManchkin
                             Hands.TakeInRightHand(stuff);
                         break;
                 }
-
                 break;
             default:
                 if (stuff.Weight == Bulkiness.HUGE)
@@ -420,10 +418,10 @@ public class Manchkin : IManchkin
     {
         foreach (var stuff in SmallStuffs)
             LostStuff(stuff);
-
+        
         foreach (var stuff in HugeStuffs)
             LostStuff(stuff);
-
+        
         SmallStuffs.Clear();
         HugeStuffs.Clear();
 
@@ -467,8 +465,4 @@ public class Manchkin : IManchkin
         foreach (var desc in descriptions)
             Descriptions.Add(desc);
     }
-    
-    
-
-    //TODO:дописать
 }

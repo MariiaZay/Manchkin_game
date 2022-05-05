@@ -1,4 +1,6 @@
-﻿namespace ManchkinCore.Interfaces;
+﻿using ManchkinCore.Enums.Accessory;
+
+namespace ManchkinCore.Interfaces;
 
 public interface IOwnStuffs
 {
@@ -11,24 +13,24 @@ public interface IOwnStuffs
     public IStuff? WornShoes { get; }
     public IStuff? WornHat { get; }
     public IHands Hands { get; }
-    
-    public bool Cheat { get; }
 
     #endregion
     
     public bool HasHugeStuff { get; }
     public bool HasMercenary { get; }
-    public void ChangeCheat();
+    public void UseCheat(IStuff stuff);
+    public void CancelCheat(IStuff stuff);
 
     public void GetMercenary();
     public void GetMercenary(IStuff stuff);
     public void GiveToMercenary(IStuff stuff);
-    public void KillMercenary();
+    public void KillMercenary(IMercenary mercenary);
+    public void LostMercenary(IMercenary mercenary);
     
     public bool CanTakeStuff(IStuff stuff);
-
+    public bool CanHaveStuff(IStuff stuff);
+    public void CheckStuffsForСompatibility();
     public string TakeStuff(IStuff stuff);
-    //public void ChangeEquipment(List<IStuff> equipment);
 
     #region Lost Stuff
 

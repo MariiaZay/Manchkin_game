@@ -1,10 +1,10 @@
-﻿using ManchkinCore.CardEnums.Aspects;
+﻿
 using ManchkinCore.Enums.Accessory;
 using ManchkinCore.Implementation;
 
 namespace ManchkinCore.Interfaces;
 
-public interface IManchkin : IOwnStuffs /*, IСurseable, IHalfBloodAble, ISuper, IDescriptable*/
+public interface IManchkin : IOwnStuffs, IDescriptable
 {
     #region Main properties
 
@@ -19,14 +19,17 @@ public interface IManchkin : IOwnStuffs /*, IСurseable, IHalfBloodAble, ISuper,
     #endregion
     
     public void ChangeGender();
+    public IRace ChangeRace(IRace race);
+    public IClass ChangeClass(IClass manCLass);
     public void RecalculateDamage();
+    public void RecalculateFlushingBonus();
     public void ToDie();
-   
+    public void GetLevel();
+    public void LostLevel();
     
     #region Additional properties
 
         public int FlushingBonus { get; }
-        public int DebuffOnDiceRolls { get; }
 
         public bool DoublePrice { get; }
 

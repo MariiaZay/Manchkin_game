@@ -11,10 +11,14 @@ public abstract class Hat : IStuff
     
     public Bulkiness Weight { get; protected init; }
     public Arms Fullness { get; protected init; }
+    public int FlushingBonus { get; protected set; }
+    public bool Cheat { get; set; } = false;
+    public List<string> Descriptions { get; protected set; }
 
     public abstract bool CanBeUsed(IRace race);
     public abstract bool CanBeUsed(IClass _class);
     public abstract bool CanBeUsed(Genders gender);
+    
 }
 
 public class HornedHelmet : Hat
@@ -25,6 +29,8 @@ public class HornedHelmet : Hat
         Damage = 1;
         Weight = Bulkiness.SMALL;
         Fullness = Arms.NO;
+        Descriptions = new List<string>();
+        FlushingBonus = 0;
     }
 
     public override bool CanBeUsed(IRace race) => race is Elf || ActiveCheat;
@@ -42,6 +48,8 @@ public class BandanaOfBastartism : Hat
         Damage = 3;
         Weight = Bulkiness.SMALL;
         Fullness = Arms.NO;
+        Descriptions = new List<string>();
+        FlushingBonus = 0;
     }
 
     public override bool CanBeUsed(IRace race) => race is Human || ActiveCheat;
@@ -59,6 +67,8 @@ public class HatOfPower : Hat
         Damage = 3;
         Weight = Bulkiness.SMALL;
         Fullness = Arms.NO;
+        Descriptions = new List<string>();
+        FlushingBonus = 0;
     }
 
     public override bool CanBeUsed(IRace race) => true;
@@ -76,6 +86,8 @@ public class HelmetOfCourage : Hat
         Damage = 1;
         Weight = Bulkiness.SMALL;
         Fullness = Arms.NO;
+        Descriptions = new List<string>();
+        FlushingBonus = 0;
     }
 
     public override bool CanBeUsed(IRace race) => true;

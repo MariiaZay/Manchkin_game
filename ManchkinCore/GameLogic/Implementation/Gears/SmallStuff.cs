@@ -4,17 +4,22 @@ using ManchkinCore.Interfaces;
 
 namespace ManchkinCore.Implementation.Gears;
 
-public abstract class SmallStuff : IStuff
+public abstract class SmallStuff : IStuff, IDescriptable
 {
     public int Price { get; protected set; }
     public int Damage { get; protected set; }
     public bool ActiveCheat { get; set; }
     public Bulkiness Weight { get; protected set; }
     public Arms Fullness { get; protected set; }
+    public int FlushingBonus { get; protected set; }
+    public bool Cheat { get; set; } = false;
+
+    public List<string> Descriptions { get; protected set; }
 
     public abstract bool CanBeUsed(IRace race);
     public abstract bool CanBeUsed(IClass _class);
     public abstract bool CanBeUsed(Genders gender);
+    
 }
 
 public class Stepladder : SmallStuff
@@ -25,6 +30,8 @@ public class Stepladder : SmallStuff
         Damage = 3;
         Weight = Bulkiness.HUGE;
         Fullness = Arms.NO;
+        Descriptions = new List<string>();
+        FlushingBonus = 0;
     }
 
     public override bool CanBeUsed(IRace race) => race is Halfling || ActiveCheat;
@@ -42,6 +49,8 @@ public class GreatTitle : SmallStuff
         Damage = 3;
         Weight = Bulkiness.SMALL;
         Fullness = Arms.NO;
+        Descriptions = new List<string>();
+        FlushingBonus = 0;
     }
 
     public override bool CanBeUsed(IRace race) => true;
@@ -59,6 +68,8 @@ public class SpikedKnees : SmallStuff
         Damage = 1;
         Weight = Bulkiness.SMALL;
         Fullness = Arms.NO;
+        Descriptions = new List<string>();
+        FlushingBonus = 0;
     }
 
     public override bool CanBeUsed(IRace race) => true;
@@ -76,6 +87,8 @@ public class SingingSword : SmallStuff
         Damage = 2;
         Weight = Bulkiness.SMALL;
         Fullness = Arms.NO;
+        Descriptions = new List<string>();
+        FlushingBonus = 0;
     }
 
     public override bool CanBeUsed(IRace race) => true;
@@ -93,6 +106,8 @@ public class Sandwich : SmallStuff
         Damage = 3;
         Weight = Bulkiness.SMALL;
         Fullness = Arms.NO;
+        Descriptions = new List<string>();
+        FlushingBonus = 0;
     }
 
     public override bool CanBeUsed(IRace race) => race is Halfling || ActiveCheat;
@@ -110,6 +125,8 @@ public class Cloack : SmallStuff
         Damage = 4;
         Weight = Bulkiness.SMALL;
         Fullness = Arms.NO;
+        Descriptions = new List<string>();
+        FlushingBonus = 0;
     }
 
     public override bool CanBeUsed(IRace race) => true;
@@ -127,6 +144,8 @@ public class Pantyhose : SmallStuff
         Damage = 3;
         Weight = Bulkiness.SMALL;
         Fullness = Arms.NO;
+        Descriptions = new List<string>();
+        FlushingBonus = 0;
     }
 
     public override bool CanBeUsed(IRace race) => true;
@@ -136,4 +155,24 @@ public class Pantyhose : SmallStuff
     public override bool CanBeUsed(Genders gender) => true;
 }
 
-//TODO: придумать, как написать наколенники развода
+public class KneepadsOfAllure : SmallStuff, IDescriptable
+{
+    public KneepadsOfAllure()
+    {
+        Price = 600;
+        Damage = 0;
+        Weight = Bulkiness.SMALL;
+        Fullness = Arms.NO;
+        Descriptions = new List<string>() {
+            "Ни один игрок, чей уровень выше твоего, не может отказать тебе помочь в бою и не требует за это награды." +
+            " Ты не можешь получить победнй уровень за бой, в котором твой помощник разведен наколенниками."
+        };
+        FlushingBonus = 0;
+    }
+
+    public override bool CanBeUsed(IRace race) => true;
+
+    public override bool CanBeUsed(IClass _class) => true;
+
+    public override bool CanBeUsed(Genders gender) => true;
+}

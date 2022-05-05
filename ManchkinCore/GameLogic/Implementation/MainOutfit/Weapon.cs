@@ -10,10 +10,13 @@ public abstract class Weapon : IStuff
     public bool ActiveCheat { get; set; }
     public Bulkiness Weight { get; protected init; }
     public Arms Fullness { get; protected init; }
+    public int FlushingBonus { get; protected set; }
+    public bool Cheat { get; set; } = false;
 
     public abstract bool CanBeUsed(IRace race);
     public abstract bool CanBeUsed(IClass _class);
     public abstract bool CanBeUsed(Genders gender);
+    public List<string> Descriptions { get; protected set; }
 }
 
 public class Buckler : Weapon
@@ -24,6 +27,8 @@ public class Buckler : Weapon
         Damage = 2;
         Weight = Bulkiness.SMALL;
         Fullness = Arms.SINGLE;
+        Descriptions = new List<string>();
+        FlushingBonus = 0;
     }
 
     public override bool CanBeUsed(IRace race) => true;
@@ -39,6 +44,8 @@ public class Hammer : Weapon
         Damage = 4;
         Weight = Bulkiness.SMALL;
         Fullness = Arms.SINGLE;
+        Descriptions = new List<string>();
+        FlushingBonus = 0;
     }
 
     public override bool CanBeUsed(IRace race) => race is Dwarf || ActiveCheat;
@@ -54,6 +61,8 @@ public class ProgressiveSword : Weapon
         Damage = 3;
         Weight = Bulkiness.SMALL;
         Fullness = Arms.SINGLE;
+        Descriptions = new List<string>();
+        FlushingBonus = 0;
     }
 
     public override bool CanBeUsed(IRace race) => true;
@@ -69,6 +78,8 @@ public class BastardSword : Weapon
         Damage = 2;
         Weight = Bulkiness.SMALL;
         Fullness = Arms.SINGLE;
+        Descriptions = new List<string>();
+        FlushingBonus = 0;
     }
 
     public override bool CanBeUsed(IRace race) => true;
@@ -84,6 +95,8 @@ public class CheeseGrater : Weapon
         Damage = 3;
         Weight = Bulkiness.SMALL;
         Fullness = Arms.SINGLE;
+        Descriptions = new List<string>();
+        FlushingBonus = 0;
     }
 
     public override bool CanBeUsed(IRace race) => true;
@@ -99,6 +112,8 @@ public class NapalmStuff : Weapon
         Damage = 5;
         Weight = Bulkiness.SMALL;
         Fullness = Arms.SINGLE;
+        Descriptions = new List<string>();
+        FlushingBonus = 0;
     }
 
     public override bool CanBeUsed(IRace race) => true;
@@ -116,6 +131,8 @@ public class Rapier : Weapon
         Damage = 3;
         Weight = Bulkiness.SMALL;
         Fullness = Arms.SINGLE;
+        Descriptions = new List<string>();
+        FlushingBonus = 0;
     }
 
     public override bool CanBeUsed(IRace race) => true;
@@ -133,6 +150,8 @@ public class Dagger : Weapon
         Damage = 3;
         Weight = Bulkiness.SMALL;
         Fullness = Arms.SINGLE;
+        Descriptions = new List<string>();
+        FlushingBonus = 0;
     }
 
     public override bool CanBeUsed(IRace race) => true;
@@ -150,6 +169,8 @@ public class Club : Weapon
         Damage = 4;
         Weight = Bulkiness.SMALL;
         Fullness = Arms.SINGLE;
+        Descriptions = new List<string>();
+        FlushingBonus = 0;
     }
 
     public override bool CanBeUsed(IRace race) => true;
@@ -167,6 +188,8 @@ public class Shild : Weapon
         Damage = 4;
         Weight = Bulkiness.HUGE;
         Fullness = Arms.SINGLE;
+        Descriptions = new List<string>();
+        FlushingBonus = 0;
     }
 
     public override bool CanBeUsed(IRace race) => true;
@@ -184,6 +207,8 @@ public class Oak : Weapon
         Damage = 3;
         Weight = Bulkiness.SMALL;
         Fullness = Arms.SINGLE;
+        Descriptions = new List<string>();
+        FlushingBonus = 0;
     }
 
     public override bool CanBeUsed(IRace race) => true;
@@ -201,6 +226,8 @@ public class Chainsaw : Weapon
         Damage = 3;
         Weight = Bulkiness.HUGE;
         Fullness = Arms.BOTH;
+        Descriptions = new List<string>();
+        FlushingBonus = 0;
     }
 
     public override bool CanBeUsed(IRace race) => true;
@@ -218,6 +245,8 @@ public class Halberd : Weapon
         Damage = 4;
         Weight = Bulkiness.HUGE;
         Fullness = Arms.BOTH;
+        Descriptions = new List<string>();
+        FlushingBonus = 0;
     }
 
     public override bool CanBeUsed(IRace race) => true;
@@ -235,6 +264,8 @@ public class HugeRock : Weapon
         Damage = 3;
         Weight = Bulkiness.HUGE;
         Fullness = Arms.BOTH;
+        Descriptions = new List<string>();
+        FlushingBonus = 0;
     }
 
     public override bool CanBeUsed(IRace race) => true;
@@ -252,6 +283,8 @@ public class Pole : Weapon
         Damage = 1;
         Weight = Bulkiness.SMALL;
         Fullness = Arms.BOTH;
+        Descriptions = new List<string>();
+        FlushingBonus = 0;
     }
 
     public override bool CanBeUsed(IRace race) => true;
@@ -269,6 +302,8 @@ public class Bow : Weapon
         Damage = 4;
         Weight = Bulkiness.SMALL;
         Fullness = Arms.BOTH;
+        Descriptions = new List<string>();
+        FlushingBonus = 0;
     }
 
     public override bool CanBeUsed(IRace race) => race is Elf || ActiveCheat;
@@ -278,5 +313,44 @@ public class Bow : Weapon
     public override bool CanBeUsed(Genders gender) => true;
 }
 
-//TODO:сделать крысу на палке
-//TODO:сделать чарующую дуду
+public class RatOnStick : Weapon
+{
+    public RatOnStick()
+    {
+        Price = 0;
+        Damage = 1;
+        Weight = Bulkiness.SMALL;
+        Fullness = Arms.SINGLE;
+        Descriptions = new List<string> {FirstFeature};
+        FlushingBonus = 0;
+    }
+
+    private const string FirstFeature = "Лучше, чем ничего! Можешь сбросить крысу, даже если не используешь ее, "
+                                        + "чтобы автоматически смыться от любого монстра не выше 8 уровня";
+
+    public override bool CanBeUsed(IRace race) => true;
+
+    public override bool CanBeUsed(IClass _class) => true;
+
+    public override bool CanBeUsed(Genders gender) => true;
+}
+
+public class TubeOfCharm : Weapon
+{
+    public TubeOfCharm()
+    {
+        Price = 300;
+        Damage = 0;
+        Weight = Bulkiness.HUGE;
+        Fullness = Arms.SINGLE;
+        Descriptions = new List<string> {FirstFeature};
+        FlushingBonus = 3;
+    }
+
+    private const string FirstFeature = "Успешно смывшись, можешь взять одно сокровище в закрытую (один раз в ход)";
+    public override bool CanBeUsed(IRace race) => true;
+
+    public override bool CanBeUsed(IClass _class) => true;
+
+    public override bool CanBeUsed(Genders gender) => true;
+}

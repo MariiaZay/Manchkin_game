@@ -2,8 +2,10 @@
 
 public interface IHalfBloodAble
 {
-    public IHulfblood HalfBlood { get; }
-    public bool IsHalfBlood();
-    public void BecameHalfBlood(IRace second);
+    public IHulfblood? HalfBlood { get; }
+    public bool IsHalfBlood { get; }
+    public void BecameHalfBlood(IRace? second);
     public void BecameHalfBlood();
+    public void RefuseHalfblood();
+
 }

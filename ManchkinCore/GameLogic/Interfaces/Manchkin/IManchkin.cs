@@ -4,7 +4,7 @@ using ManchkinCore.Implementation;
 
 namespace ManchkinCore.Interfaces;
 
-public interface IManchkin : IOwnStuffs, IDescriptable
+public interface IManchkin : IOwnStuffs, IDescriptable, IHalfBloodAble, ISuper
 {
     #region Main properties
 

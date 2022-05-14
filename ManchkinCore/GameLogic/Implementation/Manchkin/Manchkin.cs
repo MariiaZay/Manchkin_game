@@ -276,8 +276,8 @@ public class Manchkin : IManchkin
         bool mainRight;
         bool additionalRaceRight;
         var additionalClassRight = false;
-        
-        
+
+
         if (IsNull(stuff))
             mainRight = additionalRaceRight = additionalClassRight = true;
         else
@@ -286,12 +286,12 @@ public class Manchkin : IManchkin
                 mainRight = true;
             else
                 mainRight = stuff.CanBeUsed(Class) && stuff.CanBeUsed(Race) && stuff.CanBeUsed(Gender);
-            
+
             if (IsHalfBlood)
             {
                 if (HalfBlood.HalfType == HalfTypes.BOTH)
                     additionalRaceRight = stuff.CanBeUsed(Class) && stuff.CanBeUsed(HalfBlood.SecondRace)
-                                                             && stuff.CanBeUsed(Gender);
+                                                                 && stuff.CanBeUsed(Gender);
                 else
                     additionalRaceRight = stuff.CanBeUsed(Class) && stuff.CanBeUsed(Gender);
             }
@@ -302,14 +302,13 @@ public class Manchkin : IManchkin
             {
                 if (SuperManchkin.HalfType == HalfTypes.BOTH)
                     additionalRaceRight = stuff.CanBeUsed(SuperManchkin.SecondClass) && stuff.CanBeUsed(Race)
-                                                                 && stuff.CanBeUsed(Gender);
+                        && stuff.CanBeUsed(Gender);
                 else
-                    additionalRaceRight = stuff.CanBeUsed(Race) && stuff.CanBeUsed(Gender);   
+                    additionalRaceRight = stuff.CanBeUsed(Race) && stuff.CanBeUsed(Gender);
             }
             else
                 additionalClassRight = false;
         }
-
 
         return mainRight || additionalRaceRight || additionalClassRight;
     }
@@ -470,7 +469,7 @@ public class Manchkin : IManchkin
 
         foreach (var stuff in HugeStuffs)
             LostStuff(stuff);
-        
+
         LostStuff(WornArmor);
         LostStuff(WornHat);
         LostStuff(WornShoes);
@@ -542,8 +541,9 @@ public class Manchkin : IManchkin
     #endregion
 
     #region SuperManchkin region
-    
+
     public bool IsSuperManchkin => SuperManchkin != null;
+
     public void BecameSuperManchkin(IClass second)
     {
         SuperManchkin = new SuperManchkin(HalfTypes.BOTH, second);
@@ -561,7 +561,6 @@ public class Manchkin : IManchkin
         RecalculateParameters();
         SuperManchkin = null;
     }
-    
 
     #endregion
 }

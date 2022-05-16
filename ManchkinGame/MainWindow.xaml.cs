@@ -24,40 +24,50 @@ namespace ManchkinGame
         public MainWindow()
         {
             InitializeComponent();
-            
+
             var button = StartButton;
             button.Click += StartButtonClick;
         }
-        
+
         private void CreateMessageForUser(string mess, string caption,
             MessageBoxButton button, MessageBoxImage icon)
             => MessageBox.Show(mess, caption, button, icon, MessageBoxResult.Yes);
-        
+
         private void StartButtonClick(object sender, RoutedEventArgs e)
         {
             var userName = NameBox.Text;
-            if(userName.Length == 0)
+            if (userName.Length == 0)
             {
                 CreateMessageForUser("Пожалуйста введите имя", "Недостаточно данных",
                     MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else
             {
-                if (MaleButton.IsChecked == false && FemaleBottun.IsChecked == false)
+                if (userName.Length > 59)
                 {
-                    CreateMessageForUser("Пожалуйста укажите пол", "Недостаточно данных",
-                        MessageBoxButton.OK, MessageBoxImage.Warning);
+                    CreateMessageForUser(String.Format("Ваше имя слишком длинное!\n" +
+                                                       "Пожалуйста, введите имя на {0} символа короче",
+                            userName.Length - 59), "Некорректный ввод",
+                        MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 else
                 {
-                    var sex = MaleButton.IsChecked == true ? "мужcкой" : "женский";
-                    
-                    App.Current.Resources["USER_NAME"] = userName;
-                    App.Current.Resources["SEX"] = sex;
-                    
-                    var PlayWin= new PlayerWindow();
-                    PlayWin.Show();
-                    Close();
+                    if (MaleButton.IsChecked == false && FemaleBottun.IsChecked == false)
+                    {
+                        CreateMessageForUser("Пожалуйста укажите пол", "Недостаточно данных",
+                            MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
+                    else
+                    {
+                        var sex = MaleButton.IsChecked == true ? "мужcкой" : "женский";
+
+                        App.Current.Resources["USER_NAME"] = userName;
+                        App.Current.Resources["SEX"] = sex;
+
+                        var PlayWin = new PlayerWindow();
+                        PlayWin.Show();
+                        Close();
+                    }
                 }
             }
         }

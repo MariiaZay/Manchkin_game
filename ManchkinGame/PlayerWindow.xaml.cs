@@ -11,6 +11,6 @@ public partial class PlayerWindow
         var name = Application.Current.Resources["USER_NAME"].ToString();
         var sex = Application.Current.Resources["SEX"].ToString() == "мужской" ? Genders.MALE : Genders.FEMALE;
 
-        var player = new Player(name, sex);
+        //var player = new Player(name, sex);
     }
 }

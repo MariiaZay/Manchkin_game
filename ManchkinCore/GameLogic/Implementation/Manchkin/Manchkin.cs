@@ -119,8 +119,12 @@ public class Manchkin : IManchkin
         FlushingBonus = race.FlushingBonus;
         CardsCount = race.CardCount;
         DoublePrice = race.CellingByDoublePrice;
-        LostDescriptions(Race.Descriptions);
+        
+        if (IsNull(Race)) return race;
+        
+        LostDescriptions(Race.Descriptions); 
         PurchaseDescriptions(race.Descriptions);
+
         return race;
     }
 
@@ -324,15 +328,15 @@ public class Manchkin : IManchkin
         if (!CanHaveStuff(WornShoes))
             LostStuff(WornShoes);
 
-        if (Hands.LeftHand == Hands.RightHand)
+        if (!IsNull(Hands) && Hands.LeftHand == Hands.RightHand)
             LostStuff(Hands.LeftHand);
 
         else
         {
-            if (!CanHaveStuff(Hands.LeftHand))
+            if (!IsNull(Hands) && !CanHaveStuff(Hands.LeftHand))
                 LostStuff(Hands.LeftHand);
 
-            if (!CanHaveStuff(Hands.RightHand))
+            if (!IsNull(Hands) && !CanHaveStuff(Hands.RightHand))
                 LostStuff(Hands.RightHand);
         }
 
@@ -343,6 +347,8 @@ public class Manchkin : IManchkin
             LostStuff(stuff);
     }
 
+    private bool IsNull(object ob) => ob == null;
+    
     public string TakeStuff(IStuff stuff)
     {
         if (!CanTakeStuff(stuff)) return "невозможно взять шмотку";

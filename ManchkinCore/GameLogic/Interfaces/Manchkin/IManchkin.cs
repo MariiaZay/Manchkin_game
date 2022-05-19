@@ -24,7 +24,7 @@ public interface IManchkin : IOwnStuffs, IDescriptable, IHalfBloodAble, ISuper
     public void RecalculateDamage();
     public void RecalculateFlushingBonus();
     public void ToDie();
-    public void GetLevel(int l);
+    public void GetLevel();
     public void LostLevel();
     
     #region Additional properties

@@ -64,12 +64,12 @@
                                         Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="Background" TargetName="border" Value="#EAB01E" />
-                                <Setter Property="BorderBrush" TargetName="border" Value="#EAB01E" />
+                                <Setter Property="Background" TargetName="border" Value="#40847E" />
+                                <Setter Property="BorderBrush" TargetName="border" Value="#40847E" />
                             </Trigger>
                             <Trigger Property="IsPressed" Value="true">
-                                <Setter Property="Background" TargetName="border" Value="#F1CA68" />
-                                <Setter Property="BorderBrush" TargetName="border" Value="#F1CA68" />
+                                <Setter Property="Background" TargetName="border" Value="#3A7771" />
+                                <Setter Property="BorderBrush" TargetName="border" Value="#3A7771" />
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="false">
                                 <Setter Property="Background" TargetName="border"

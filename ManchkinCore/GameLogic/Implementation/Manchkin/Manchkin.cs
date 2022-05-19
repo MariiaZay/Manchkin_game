@@ -208,12 +208,18 @@ public class Manchkin : IManchkin
         RecalculateParameters();
     }
 
-    public void GetLevel(int l) => Level += l;
-
+    public void GetLevel()
+    {
+        if(Level < 10) Level ++;
+        RecalculateDamage();
+    } 
+    
+    
     public void LostLevel()
     {
         if (Level > 1)
             Level--;
+        RecalculateDamage();
     }
 
     #endregion

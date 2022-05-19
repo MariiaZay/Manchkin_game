@@ -108,8 +108,11 @@ public class Manchkin : IManchkin
 
     public IClass ChangeClass(IClass manClass)
     {
+        if (IsNull(_class)) return manClass;
+        
         LostDescriptions(Class.Descriptions);
         PurchaseDescriptions(manClass.Descriptions);
+        
         return manClass;
     }
 
@@ -441,6 +444,7 @@ public class Manchkin : IManchkin
 
     public void LostStuff(IStuff stuff)
     {
+        if (IsNull(stuff)) return;
         CancelCheat(stuff);
         LostDescriptions(stuff.Descriptions);
         switch (stuff)

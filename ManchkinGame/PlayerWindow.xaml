@@ -130,7 +130,7 @@
                             Background="#4FA39C"
                             Foreground="White"
                             Padding="4.5"
-                            FontSize="15"
+                            FontSize="14"
                             FontWeight="SemiBold"
                             FontFamily="Comic Sans MS"
                             
@@ -143,7 +143,7 @@
                             Background="#4FA39C"
                             Foreground="White"
                             Padding="4.5"
-                            FontSize="15"
+                            FontSize="14"
                             FontWeight="SemiBold"
                             FontFamily="Comic Sans MS"
 
@@ -408,7 +408,7 @@
                             Style="{DynamicResource RoundedButtonStyle}"
                             Background="#4FA39C"
                             Foreground="White"
-                            FontSize="15"
+                            FontSize="14"
                             FontWeight="SemiBold"
                             FontFamily="Comic Sans MS"
                             Padding="4.5"
@@ -421,7 +421,7 @@
                             Style="{DynamicResource RoundedButtonStyle}"
                             Background="#FAB88F"
                             Foreground="White"
-                            FontSize="15"
+                            FontSize="14"
                             FontWeight="SemiBold"
                             FontFamily="Comic Sans MS"
                             Padding="4.5"
@@ -445,7 +445,7 @@
                             Style="{DynamicResource RoundedButtonStyle}"
                             Background="#4FA39C"
                             Foreground="White"
-                            FontSize="15"
+                            FontSize="14"
                             FontWeight="SemiBold"
                             FontFamily="Comic Sans MS"
                             Padding="4.5"
@@ -458,7 +458,7 @@
                             Style="{DynamicResource RoundedButtonStyle}"
                             Background="#FAB88F"
                             Foreground="White"
-                            FontSize="15"
+                            FontSize="14"
                             FontWeight="SemiBold"
                             FontFamily="Comic Sans MS"
                             Padding="4.5"
@@ -476,7 +476,7 @@
                             Style="{DynamicResource RoundedButtonStyle}"
                             Background="#4FA39C"
                             Foreground="White"
-                            FontSize="15"
+                            FontSize="14"
                             FontWeight="SemiBold"
                             FontFamily="Comic Sans MS"
                             Padding="4.5"
@@ -491,7 +491,7 @@
                             Margin="4.4,4.4,0,4.4"
                             Name="DeathButton"
                             Foreground="White"
-                            FontSize="15"
+                            FontSize="14"
                             FontWeight="SemiBold"
                             FontFamily="Comic Sans MS"
                             Padding="4.5"
@@ -649,6 +649,7 @@
                             </Grid.ColumnDefinitions>
                             
                             <TextBlock
+                                Name="SupermanchkinBlock"
                                 Grid.Column="0"
                                 Margin="0,0,4.4, 0"
                                 VerticalAlignment="Center"
@@ -664,7 +665,7 @@
                                 Background="#4FA39C"
                                 Foreground="White"
                                 Padding="4.5"
-                                FontSize="15"
+                                FontSize="14"
                                 FontWeight="SemiBold"
                                 FontFamily="Comic Sans MS">ПОЛУЧИТЬ</Button>
                         </Grid>
@@ -678,6 +679,7 @@
                                 <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <TextBlock
+                                Name="HalfBloodBlock"
                                 Grid.Column="0"
                                 Margin="0,0,4.4, 0"
                                 VerticalAlignment="Center"
@@ -694,7 +696,7 @@
                                 Background="#4FA39C"
                                 Foreground="White"
                                 Padding="4.5"
-                                FontSize="15"
+                                FontSize="14"
                                 FontWeight="SemiBold"
                                 FontFamily="Comic Sans MS">ПОЛУЧИТЬ</Button>
                         </Grid>
@@ -725,7 +727,7 @@
                             Background="#4FA39C"
                             Foreground="White"
                             FontWeight="SemiBold"
-                            FontSize="15"
+                            FontSize="14"
                             FontFamily="Comic Sans MS"
                             Padding="4.5">МОИ СВОЙСТВА</Button>
                         
@@ -736,7 +738,7 @@
                             Style="{DynamicResource RoundedButtonStyle}"
                             Background="#4FA39C"
                             Foreground="White"
-                            FontSize="15"
+                            FontSize="14"
                             FontWeight="SemiBold"
                             FontFamily="Comic Sans MS"
                             Padding="4.5">ЧТО МОГУ ДЕЛАТЬ</Button>
@@ -877,7 +879,7 @@
                             Style="{DynamicResource RoundedButtonStyle}"
                             Background="#4FA39C"
                             Foreground="White"
-                            FontSize="15"
+                            FontSize="14"
                             FontWeight="SemiBold"
                             FontFamily="Comic Sans MS"
                             Padding="4.5"
@@ -890,7 +892,7 @@
                             Style="{DynamicResource RoundedButtonStyle}"
                             Background="#FAB88F"
                             Foreground="White"
-                            FontSize="15"
+                            FontSize="14"
                             FontWeight="SemiBold"
                             FontFamily="Comic Sans MS"
                             Padding="4.5"
@@ -914,7 +916,7 @@
                             Style="{DynamicResource RoundedButtonStyle}"
                             Background="#4FA39C"
                             Foreground="White"
-                            FontSize="15"
+                            FontSize="14"
                             FontWeight="SemiBold"
                             FontFamily="Comic Sans MS"
                             Padding="4.5"
@@ -927,7 +929,7 @@
                             Style="{DynamicResource RoundedButtonStyle}"
                             Background="#FAB88F"
                             Foreground="White"
-                            FontSize="15"
+                            FontSize="14"
                             FontWeight="SemiBold"
                             FontFamily="Comic Sans MS"
                             Padding="4.5"
@@ -951,7 +953,7 @@
                             Style="{DynamicResource RoundedButtonStyle}"
                             Background="#4FA39C"
                             Foreground="White"
-                            FontSize="15"
+                            FontSize="14"
                             FontWeight="SemiBold"
                             FontFamily="Comic Sans MS"
                             Padding="4.5"
@@ -964,7 +966,7 @@
                             Style="{DynamicResource RoundedButtonStyle}"
                             Background="#FAB88F"
                             Foreground="White"
-                            FontSize="15"
+                            FontSize="14"
                             FontWeight="SemiBold"
                             FontFamily="Comic Sans MS"
                             Padding="4.5"
@@ -988,7 +990,7 @@
                             Style="{DynamicResource RoundedButtonStyle}"
                             Background="#4FA39C"
                             Foreground="White"
-                            FontSize="15"
+                            FontSize="14"
                             FontWeight="SemiBold"
                             FontFamily="Comic Sans MS"
                             Padding="4.5"
@@ -1001,7 +1003,7 @@
                             Style="{DynamicResource RoundedButtonStyle}"
                             Background="#FAB88F"
                             Foreground="White"
-                            FontSize="15"
+                            FontSize="14"
                             FontWeight="SemiBold"
                             FontFamily="Comic Sans MS"
                             Padding="4.5"
@@ -1057,7 +1059,7 @@
                         Background="White"
                         BorderBrush="#FCC49B" BorderThickness="3"
                         Foreground="Black"
-                        FontSize="15"
+                        FontSize="14"
                         FontWeight="SemiBold"
                         FontFamily="Comic Sans MS"
                         Padding="4.5"><TextBlock Text="МЕЛКИЕ&#x0a;ШМОТКИ"/>
@@ -1070,7 +1072,7 @@
                         Background="#4FA39C"
                         VerticalAlignment="Center"
                         Foreground="White"
-                        FontSize="15"
+                        FontSize="14"
                         FontWeight="SemiBold"
                         FontFamily="Comic Sans MS"
                         Padding="4.5">НАДЕТЬ</Button>
@@ -1080,10 +1082,10 @@
                         Grid.Column="2"
                         Margin="4.4,0,4.4,0"
                         Style="{DynamicResource RoundedButtonStyle}"
-                        Background="#4FA39C"
+                        Background="#9FD1CD"
                         VerticalAlignment="Center"
                         Foreground="White"
-                        FontSize="15"
+                        FontSize="14"
                         FontWeight="SemiBold"
                         FontFamily="Comic Sans MS"
                         Padding="4.5">ПРОДАТЬ</Button>
@@ -1096,7 +1098,7 @@
                         Background="#FAB88F"
                         VerticalAlignment="Center"
                         Foreground="White"
-                        FontSize="15"
+                        FontSize="14"
                         FontWeight="SemiBold"
                         FontFamily="Comic Sans MS"
                         Padding="4.5">ПОТЕРЯТЬ</Button>
@@ -1121,7 +1123,7 @@
                         Background="White"
                         BorderBrush="#FCC49B" BorderThickness="3"
                         Foreground="Black"
-                        FontSize="15"
+                        FontSize="14"
                         FontWeight="SemiBold"
                         FontFamily="Comic Sans MS"
                         Padding="4.5"><TextBlock Text="КРУПНЫЕ&#x0a;ШМОТКИ"/>
@@ -1134,7 +1136,7 @@
                         Background="#4FA39C"
                         VerticalAlignment="Center"
                         Foreground="White"
-                        FontSize="15"
+                        FontSize="14"
                         FontWeight="SemiBold"
                         FontFamily="Comic Sans MS"
                         Padding="4.5">НАДЕТЬ</Button>
@@ -1144,10 +1146,10 @@
                         Grid.Column="2"
                         Margin="4.4,0,4.4,0"
                         Style="{DynamicResource RoundedButtonStyle}"
-                        Background="#4FA39C"
+                        Background="#9FD1CD"
                         VerticalAlignment="Center"
                         Foreground="White"
-                        FontSize="15"
+                        FontSize="14"
                         FontWeight="SemiBold"
                         FontFamily="Comic Sans MS"
                         Padding="4.5">ПРОДАТЬ</Button>
@@ -1160,7 +1162,7 @@
                         Background="#FAB88F"
                         VerticalAlignment="Center"
                         Foreground="White"
-                        FontSize="15"
+                        FontSize="14"
                         FontWeight="SemiBold"
                         FontFamily="Comic Sans MS"
                         Padding="4.5">ПОТЕРЯТЬ</Button>
@@ -1185,10 +1187,10 @@
                         Background="White"
                         BorderBrush="#FCC49B" BorderThickness="3"
                         Foreground="Black"
-                        FontSize="15"
+                        FontSize="14"
                         FontWeight="SemiBold"
                         FontFamily="Comic Sans MS"
-                        Padding="4.5"><TextBlock Text="НАЁМИЧКИ"/>
+                        Padding="4.5"><TextBlock Text="НАЁМНИЧКИ"/>
                     </Button>
                     <Button
                         Name="GetMercenariesButton"
@@ -1198,7 +1200,7 @@
                         Background="#4FA39C"
                         VerticalAlignment="Center"
                         Foreground="White"
-                        FontSize="15"
+                        FontSize="14"
                         FontWeight="SemiBold"
                         FontFamily="Comic Sans MS"
                         Padding="4.5">ПОЛУЧИТЬ</Button>
@@ -1208,10 +1210,10 @@
                         Grid.Column="2"
                         Margin="4.4,0,4.4,0"
                         Style="{DynamicResource RoundedButtonStyle}"
-                        Background="#4FA39C"
+                        Background="#9FD1CD"
                         VerticalAlignment="Center"
                         Foreground="White"
-                        FontSize="15"
+                        FontSize="14"
                         FontWeight="SemiBold"
                         FontFamily="Comic Sans MS"
                         Padding="4.5">ПОМЕНЯТЬ</Button>
@@ -1224,7 +1226,7 @@
                         Background="#FAB88F"
                         VerticalAlignment="Center"
                         Foreground="White"
-                        FontSize="15"
+                        FontSize="14"
                         FontWeight="SemiBold"
                         FontFamily="Comic Sans MS"
                         Padding="4.5">ПОТЕРЯТЬ</Button>

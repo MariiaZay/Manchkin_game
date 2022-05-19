@@ -27,10 +27,11 @@
         <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
         <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
         <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
-        <Style x:Key="RoundedButtonStyle" TargetType="{x:Type Button}">
+        
+        <Style x:Key="RoundedGreenButtonStyle" TargetType="{x:Type Button}">
             <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
-            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
-            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Background" Value="#4FA39C"/>
+            <Setter Property="BorderBrush" Value="#4FA39C"/>
             <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -47,12 +48,12 @@
                                 <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="Background" TargetName="border" Value="#EAB01E"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="#EAB01E"/>
+                                <Setter Property="Background" TargetName="border" Value="#40847E"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#40847E"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="true">
-                                <Setter Property="Background" TargetName="border" Value="#F1CA68"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="#F1CA68"/>
+                                <Setter Property="Background" TargetName="border" Value="#3A7771"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#3A7771"/>
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="false">
                                 <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
@@ -64,6 +65,81 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style x:Key="RoundedRedButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="#E9610B"/>
+            <Setter Property="BorderBrush" Value="#E9610B"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" CornerRadius="15" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true" Margin="0,0,0,0">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="#C65209"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#C65209"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="#A84608"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#A84608"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="RoundedDarkGreenButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="#3A7771"/>
+            <Setter Property="BorderBrush" Value="#3A7771"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" CornerRadius="15" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true" Margin="0,0,0,0">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="#306460"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#306460"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="#3A7771"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#3A7771"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
     </Window.Resources>
     <Window.Background>
         <LinearGradientBrush>
@@ -81,7 +157,7 @@
         </Grid.RowDefinitions>
         
         <Grid Grid.Row="0"
-              ShowGridLines="True">
+              >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
@@ -125,7 +201,7 @@
                         <Button 
                             Name="MoveButton"
                             Grid.Column="0"
-                            Style="{DynamicResource RoundedButtonStyle}"
+                            Style="{DynamicResource RoundedGreenButtonStyle}"
                             Margin="0, 0, 3.25, 0"
                             Background="#4FA39C"
                             Foreground="White"
@@ -138,7 +214,7 @@
                         <Button 
                             Name="BattleButton"
                             Grid.Column="1"
-                            Style="{DynamicResource RoundedButtonStyle}"
+                            Style="{DynamicResource RoundedGreenButtonStyle}"
                             Margin="3.25, 0, 0, 0"
                             Background="#4FA39C"
                             Foreground="White"
@@ -197,7 +273,7 @@
         </Grid>
                                  
         <Grid
-            Grid.Row="1" Margin="15" ShowGridLines="True">
+            Grid.Row="1" Margin="15" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
@@ -215,7 +291,7 @@
                     <DropShadowEffect BlurRadius="30" Direction="-100" Color="Tan" Opacity="0.8"/>
                 </Border.Effect>
                 
-                <Grid  Margin="8.8" ShowGridLines="True">
+                <Grid  Margin="8.8" >
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
@@ -357,7 +433,7 @@
                         Grid.Row="0"
                         Grid.Column="2"
                         Margin="4.4,0,0,4.4"
-                        ShowGridLines="True">
+                        >
                         
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
@@ -368,20 +444,22 @@
                             Name="IncreaseLevelButton"
                             Grid.Column="0"
                             Margin="0,5,4.4,0"
-                            Style="{DynamicResource RoundedButtonStyle}"
+                            Style="{DynamicResource RoundedGreenButtonStyle}"
                             Background="#4FA39C"
                             Foreground="White"
                             FontSize="20"
                             FontWeight="SemiBold"
                             FontFamily="Comic Sans MS"
                             Padding="4.5"
-                            >+</Button>
+                            
+                            >+
+                        </Button>
                         
                         <Button 
                             Name="ReduceLevelButton"
                             Grid.Column="1"
                             Margin="4.4,5,0,0"
-                            Style="{DynamicResource RoundedButtonStyle}"
+                            Style="{DynamicResource RoundedRedButtonStyle}"
                             Background="#E9610B"
                             Foreground="White"
                             FontSize="20"
@@ -394,7 +472,7 @@
                     <Grid
                         Grid.Row="1"
                         Grid.Column="2"
-                        Margin="4.4,4.4,0,4.4" ShowGridLines="True">
+                        Margin="4.4,4.4,0,4.4" >
                         
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
@@ -405,7 +483,7 @@
                             Name="ChangeRaceButton"
                             Grid.Column="0"
                             Margin="0,0,4.4,0"
-                            Style="{DynamicResource RoundedButtonStyle}"
+                            Style="{DynamicResource RoundedGreenButtonStyle}"
                             Background="#4FA39C"
                             Foreground="White"
                             FontSize="14"
@@ -418,8 +496,8 @@
                             Name="LostRaceButton"
                             Grid.Column="1"
                             Margin="4.4,0,0,0"
-                            Style="{DynamicResource RoundedButtonStyle}"
-                            Background="#FAB88F"
+                            Style="{DynamicResource RoundedRedButtonStyle}"
+                            
                             Foreground="White"
                             FontSize="14"
                             FontWeight="SemiBold"
@@ -431,7 +509,7 @@
                     <Grid
                         Grid.Row="2"
                         Grid.Column="2"
-                        Margin="4.4,4.4,0,4.4" ShowGridLines="True">
+                        Margin="4.4,4.4,0,4.4" >
                         
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
@@ -442,7 +520,7 @@
                             Name="ChangeClassButton"
                             Grid.Column="0"
                             Margin="0,0,4.4,0"
-                            Style="{DynamicResource RoundedButtonStyle}"
+                            Style="{DynamicResource RoundedGreenButtonStyle}"
                             Background="#4FA39C"
                             Foreground="White"
                             FontSize="14"
@@ -455,8 +533,7 @@
                             Name="LostClassButton"
                             Grid.Column="1"
                             Margin="4.4,0,0,0"
-                            Style="{DynamicResource RoundedButtonStyle}"
-                            Background="#FAB88F"
+                            Style="{DynamicResource RoundedRedButtonStyle}"
                             Foreground="White"
                             FontSize="14"
                             FontWeight="SemiBold"
@@ -468,12 +545,12 @@
                     <Grid
                         Grid.Row="3"
                         Grid.Column="2"
-                        Margin="4.4,4.4,0,4.4" ShowGridLines="True">
+                        Margin="4.4,4.4,0,4.4" >
                         
                         <Button 
                             Name="ChangeGenderButton"
                             Grid.Column="0"
-                            Style="{DynamicResource RoundedButtonStyle}"
+                            Style="{DynamicResource RoundedGreenButtonStyle}"
                             Background="#4FA39C"
                             Foreground="White"
                             FontSize="14"
@@ -495,7 +572,7 @@
                             FontWeight="SemiBold"
                             FontFamily="Comic Sans MS"
                             Padding="4.5"
-                            Style="{DynamicResource RoundedButtonStyle}"
+                            Style="{DynamicResource RoundedRedButtonStyle}"
                             Background="#E9610B"
                         >УМЕРЕРТЬ</Button>
                     </Grid>
@@ -517,7 +594,7 @@
                         <DropShadowEffect BlurRadius="30" Direction="-100" Color="Tan" Opacity="0.8"/>
                     </Border.Effect>
                     
-                    <Grid  Margin="8.8" ShowGridLines="True">
+                    <Grid  Margin="8.8" >
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
                             <RowDefinition></RowDefinition>
@@ -586,7 +663,7 @@
                             Grid.Row="0"
                             Grid.Column="1"
                             Margin="4.4,0,0,4.4"
-                            ShowGridLines="True">
+                            >
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition></ColumnDefinition>
                                 <ColumnDefinition></ColumnDefinition>
@@ -605,7 +682,7 @@
                         <Grid Grid.Row="1"
                               Grid.Column="1"
                               Margin="4.4,4.4,0,4.4"
-                              ShowGridLines="True">
+                              >
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition></ColumnDefinition>
                                 <ColumnDefinition></ColumnDefinition>
@@ -624,7 +701,7 @@
                             Grid.Row="2"
                             Grid.Column="2"
                             Margin="4.4,4.4,0,4.4"
-                            ShowGridLines="True"
+                            
                             >
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition></ColumnDefinition>
@@ -642,7 +719,7 @@
                         <Grid
                             Grid.Row="3"
                             Grid.Column="1"
-                            Margin="4.4,4.4,0,4.4" ShowGridLines="True">
+                            Margin="4.4,4.4,0,4.4" >
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition></ColumnDefinition>
                                 <ColumnDefinition></ColumnDefinition>
@@ -661,7 +738,7 @@
                                 Name="SuperManchkinButton"
                                 Grid.Column="1"
                                 Margin="4.4,0,0, 0"
-                                Style="{DynamicResource RoundedButtonStyle}"
+                                Style="{DynamicResource RoundedGreenButtonStyle}"
                                 Background="#4FA39C"
                                 Foreground="White"
                                 Padding="4.5"
@@ -673,7 +750,7 @@
                         <Grid
                             Grid.Row="4"
                             Grid.Column="1"
-                            Margin="4.4,4.4,0,0" ShowGridLines="True">
+                            Margin="4.4,4.4,0,0" >
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition></ColumnDefinition>
                                 <ColumnDefinition></ColumnDefinition>
@@ -692,7 +769,7 @@
                                 Name="HalfBloodButton"
                                 Grid.Column="1"
                                 Margin="4.4,0,0, 4.4"
-                                Style="{DynamicResource RoundedButtonStyle}"
+                                Style="{DynamicResource RoundedGreenButtonStyle}"
                                 Background="#4FA39C"
                                 Foreground="White"
                                 Padding="4.5"
@@ -713,7 +790,7 @@
                         <DropShadowEffect BlurRadius="30" Direction="-100" Color="Tan" Opacity="0.8"/>
                     </Border.Effect>
                     
-                    <Grid  Margin="8.8" ShowGridLines="True">
+                    <Grid  Margin="8.8" >
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
@@ -723,7 +800,7 @@
                             Grid.Column="0"
                             Name = "FeaturesButton"
                             Margin="0,0,4.4,0"
-                            Style="{DynamicResource RoundedButtonStyle}"
+                            Style="{DynamicResource RoundedGreenButtonStyle}"
                             Background="#4FA39C"
                             Foreground="White"
                             FontWeight="SemiBold"
@@ -735,7 +812,7 @@
                             Grid.Column="1"
                             Name = "ActionsButton"
                             Margin="4.4,0,0,0"
-                            Style="{DynamicResource RoundedButtonStyle}"
+                            Style="{DynamicResource RoundedGreenButtonStyle}"
                             Background="#4FA39C"
                             Foreground="White"
                             FontSize="14"
@@ -749,7 +826,7 @@
         </Grid>
         <Grid 
             Grid.Row="2"
-            Margin="15,0,15,15" ShowGridLines="True">
+            Margin="15,0,15,15" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
@@ -766,9 +843,9 @@
                     <DropShadowEffect BlurRadius="30" Direction="-100" Color="Tan" Opacity="0.8"/>
                 </Border.Effect>
             
-            <Grid  Margin="8.8" ShowGridLines="True">
+            <Grid  Margin="8.8" >
                 <Grid
-                    ShowGridLines="True" >
+                     >
                     
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
@@ -865,7 +942,7 @@
                         Grid.Row="0"
                         Grid.Column="2"
                         Margin="4.4,0,0,4.4"
-                        ShowGridLines="True">
+                        >
                         
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
@@ -876,7 +953,7 @@
                             Name="ChangeArmorButton"
                             Grid.Column="0"
                             Margin="0,4.4,4.4,0"
-                            Style="{DynamicResource RoundedButtonStyle}"
+                            Style="{DynamicResource RoundedGreenButtonStyle}"
                             Background="#4FA39C"
                             Foreground="White"
                             FontSize="14"
@@ -889,8 +966,7 @@
                             Name="LostArmorButton"
                             Grid.Column="1"
                             Margin="4.4,4.4,0,0"
-                            Style="{DynamicResource RoundedButtonStyle}"
-                            Background="#FAB88F"
+                            Style="{DynamicResource RoundedRedButtonStyle}"
                             Foreground="White"
                             FontSize="14"
                             FontWeight="SemiBold"
@@ -902,7 +978,7 @@
                     <Grid
                         Grid.Row="1"
                         Grid.Column="2"
-                        Margin="4.4,4.4,0,4.4" ShowGridLines="True">
+                        Margin="4.4,4.4,0,4.4" >
                         
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
@@ -913,7 +989,7 @@
                             Name="ChangeShoesButton"
                             Grid.Column="0"
                             Margin="0,0,4.4,0"
-                            Style="{DynamicResource RoundedButtonStyle}"
+                            Style="{DynamicResource RoundedGreenButtonStyle}"
                             Background="#4FA39C"
                             Foreground="White"
                             FontSize="14"
@@ -926,8 +1002,8 @@
                             Name="LostShoesButton"
                             Grid.Column="1"
                             Margin="4.4,0,0,0"
-                            Style="{DynamicResource RoundedButtonStyle}"
-                            Background="#FAB88F"
+                            Style="{DynamicResource RoundedRedButtonStyle}"
+                            
                             Foreground="White"
                             FontSize="14"
                             FontWeight="SemiBold"
@@ -939,7 +1015,7 @@
                     <Grid
                         Grid.Row="2"
                         Grid.Column="2"
-                        Margin="4.4,4.4,0,4.4" ShowGridLines="True">
+                        Margin="4.4,4.4,0,4.4" >
                         
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
@@ -950,7 +1026,7 @@
                             Name="ChangeWeaponButton"
                             Grid.Column="0"
                             Margin="0,0,4.4,0"
-                            Style="{DynamicResource RoundedButtonStyle}"
+                            Style="{DynamicResource RoundedGreenButtonStyle}"
                             Background="#4FA39C"
                             Foreground="White"
                             FontSize="14"
@@ -963,8 +1039,8 @@
                             Name="LostWeaponButton"
                             Grid.Column="1"
                             Margin="4.4,0,0,0"
-                            Style="{DynamicResource RoundedButtonStyle}"
-                            Background="#FAB88F"
+                            Style="{DynamicResource RoundedRedButtonStyle}"
+                            
                             Foreground="White"
                             FontSize="14"
                             FontWeight="SemiBold"
@@ -976,7 +1052,7 @@
                     <Grid
                         Grid.Row="3"
                         Grid.Column="2"
-                        Margin="4.4,4.4,0,0" ShowGridLines="True">
+                        Margin="4.4,4.4,0,0" >
                         
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
@@ -987,7 +1063,7 @@
                             Name="ChangeHatButton"
                             Grid.Column="0"
                             Margin="0,0,4.4,4.4"
-                            Style="{DynamicResource RoundedButtonStyle}"
+                            Style="{DynamicResource RoundedGreenButtonStyle}"
                             Background="#4FA39C"
                             Foreground="White"
                             FontSize="14"
@@ -1000,8 +1076,7 @@
                             Name="LostHatButton"
                             Grid.Column="1"
                             Margin="4.4,0,0,4.4"
-                            Style="{DynamicResource RoundedButtonStyle}"
-                            Background="#FAB88F"
+                            Style="{DynamicResource RoundedRedButtonStyle}"
                             Foreground="White"
                             FontSize="14"
                             FontWeight="SemiBold"
@@ -1032,7 +1107,7 @@
             
             <Grid
                 Margin="8.8"
-                ShowGridLines="True"
+                
                 >
                 <Grid.RowDefinitions>
                     <RowDefinition></RowDefinition>
@@ -1042,7 +1117,7 @@
                 
                 <Grid
                     Grid.Row="0"
-                    ShowGridLines="True"
+                    
                     Margin="0,0,0,4.4">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition></ColumnDefinition>
@@ -1055,7 +1130,7 @@
                         Name="SmallStuffButton"
                         Grid.Column="0"
                         Margin="0,4.4,4.4,4.4"
-                        Style="{DynamicResource RoundedButtonStyle}"
+                        Style="{DynamicResource RoundedGreenButtonStyle}"
                         Background="White"
                         BorderBrush="#FCC49B" BorderThickness="3"
                         Foreground="Black"
@@ -1068,7 +1143,7 @@
                         Name="GetSmallStuffButton"
                         Grid.Column="1"
                         Margin="4.4,0,4.4,0"
-                        Style="{DynamicResource RoundedButtonStyle}"
+                        Style="{DynamicResource RoundedGreenButtonStyle}"
                         Background="#4FA39C"
                         VerticalAlignment="Center"
                         Foreground="White"
@@ -1081,8 +1156,8 @@
                         Name="SellSmallStuffButton"
                         Grid.Column="2"
                         Margin="4.4,0,4.4,0"
-                        Style="{DynamicResource RoundedButtonStyle}"
-                        Background="#9FD1CD"
+                        Style="{DynamicResource RoundedGreenButtonStyle}"
+                        
                         VerticalAlignment="Center"
                         Foreground="White"
                         FontSize="14"
@@ -1094,8 +1169,7 @@
                         Name="LostSmallStuffButton"
                         Grid.Column="3"
                         Margin="4.4,0,4.4,0"
-                        Style="{DynamicResource RoundedButtonStyle}"
-                        Background="#FAB88F"
+                        Style="{DynamicResource RoundedRedButtonStyle}"
                         VerticalAlignment="Center"
                         Foreground="White"
                         FontSize="14"
@@ -1106,7 +1180,7 @@
                 
                 <Grid
                     Grid.Row="1"
-                    ShowGridLines="True"
+                    
                     Margin="0,4.4,0,4.4">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition></ColumnDefinition>
@@ -1119,7 +1193,7 @@
                         Name="HugeStuffButton"
                         Grid.Column="0"
                         Margin="0,4.4,4.4,4.4"
-                        Style="{DynamicResource RoundedButtonStyle}"
+                        Style="{DynamicResource RoundedGreenButtonStyle}"
                         Background="White"
                         BorderBrush="#FCC49B" BorderThickness="3"
                         Foreground="Black"
@@ -1132,7 +1206,7 @@
                         Name="GetHugeStuffButton"
                         Grid.Column="1"
                         Margin="4.4,0,4.4,0"
-                        Style="{DynamicResource RoundedButtonStyle}"
+                        Style="{DynamicResource RoundedGreenButtonStyle}"
                         Background="#4FA39C"
                         VerticalAlignment="Center"
                         Foreground="White"
@@ -1145,8 +1219,7 @@
                         Name="SellHugeStuffButton"
                         Grid.Column="2"
                         Margin="4.4,0,4.4,0"
-                        Style="{DynamicResource RoundedButtonStyle}"
-                        Background="#9FD1CD"
+                        Style="{DynamicResource RoundedGreenButtonStyle}"
                         VerticalAlignment="Center"
                         Foreground="White"
                         FontSize="14"
@@ -1158,8 +1231,7 @@
                         Name="LostHugeStuffButton"
                         Grid.Column="3"
                         Margin="4.4,0,4.4,0"
-                        Style="{DynamicResource RoundedButtonStyle}"
-                        Background="#FAB88F"
+                        Style="{DynamicResource RoundedRedButtonStyle}"
                         VerticalAlignment="Center"
                         Foreground="White"
                         FontSize="14"
@@ -1170,7 +1242,7 @@
                 
                 <Grid
                     Grid.Row="2"
-                    ShowGridLines="True"
+                    
                     Margin="0,4.4,0,4.4">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition></ColumnDefinition>
@@ -1183,7 +1255,7 @@
                         Name="MercenariesButton"
                         Grid.Column="0"
                         Margin="0,4.4,4.4,0"
-                        Style="{DynamicResource RoundedButtonStyle}"
+                        Style="{DynamicResource RoundedGreenButtonStyle}"
                         Background="White"
                         BorderBrush="#FCC49B" BorderThickness="3"
                         Foreground="Black"
@@ -1196,7 +1268,7 @@
                         Name="GetMercenariesButton"
                         Grid.Column="1"
                         Margin="4.4,0,4.4,0"
-                        Style="{DynamicResource RoundedButtonStyle}"
+                        Style="{DynamicResource RoundedGreenButtonStyle}"
                         Background="#4FA39C"
                         VerticalAlignment="Center"
                         Foreground="White"
@@ -1209,8 +1281,7 @@
                         Name="ChangeMercenaryButton"
                         Grid.Column="2"
                         Margin="4.4,0,4.4,0"
-                        Style="{DynamicResource RoundedButtonStyle}"
-                        Background="#9FD1CD"
+                        Style="{DynamicResource RoundedGreenButtonStyle}"
                         VerticalAlignment="Center"
                         Foreground="White"
                         FontSize="14"
@@ -1222,8 +1293,7 @@
                         Name="LostMercenaryButton"
                         Grid.Column="3"
                         Margin="4.4,0,4.4,0"
-                        Style="{DynamicResource RoundedButtonStyle}"
-                        Background="#FAB88F"
+                        Style="{DynamicResource RoundedRedButtonStyle}"
                         VerticalAlignment="Center"
                         Foreground="White"
                         FontSize="14"

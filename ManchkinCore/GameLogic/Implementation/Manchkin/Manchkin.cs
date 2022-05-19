@@ -71,10 +71,6 @@ public class Manchkin : IManchkin
     public Manchkin(Genders gender)
     {
         Level = 1;
-        Race = new Human();
-        Class = new Nobody();
-        Gender = gender;
-        Damage = Level;
 
         CardsCount = 5;
         IsDead = false;
@@ -82,13 +78,23 @@ public class Manchkin : IManchkin
         DoublePrice = false;
 
         Hands = new Hands();
+        WornArmor = null;
+        WornShoes = null;
+        WornHat = null;
+
         SmallStuffs = new List<IStuff>();
         HugeStuffs = new List<IStuff>();
         Mercenaries = new List<IMercenary>();
+
         Descriptions = new List<string>();
 
         HalfBlood = null;
         SuperManchkin = null;
+
+        Race = new Human();
+        Class = new Nobody();
+        Gender = gender;
+        Damage = Level;
     }
 
 
@@ -119,10 +125,10 @@ public class Manchkin : IManchkin
         FlushingBonus = race.FlushingBonus;
         CardsCount = race.CardCount;
         DoublePrice = race.CellingByDoublePrice;
-        
+
         if (IsNull(Race)) return race;
-        
-        LostDescriptions(Race.Descriptions); 
+
+        LostDescriptions(Race.Descriptions);
         PurchaseDescriptions(race.Descriptions);
 
         return race;
@@ -193,8 +199,13 @@ public class Manchkin : IManchkin
             FlushingBonus += mer.Item.FlushingBonus;
     }
 
-    public void ToDie() => LostAllStuffs();
-    public void GetLevel() => Level++;
+    public void ToDie()
+    {
+        LostAllStuffs();
+        RecalculateParameters();
+    }
+
+    public void GetLevel(int l) => Level += l;
 
     public void LostLevel()
     {
@@ -348,7 +359,7 @@ public class Manchkin : IManchkin
     }
 
     private bool IsNull(object ob) => ob == null;
-    
+
     public string TakeStuff(IStuff stuff)
     {
         if (!CanTakeStuff(stuff)) return "невозможно взять шмотку";

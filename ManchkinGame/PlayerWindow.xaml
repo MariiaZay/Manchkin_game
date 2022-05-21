@@ -5,141 +5,268 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:ManchkinGame"
         mc:Ignorable="d"
-        Title="PlayerWindow"  
-        Height="800" 
-        Width="1000">
+        Title="PlayerWindow"
+        Height="800"
+        Width="1000"
+        ResizeMode="NoResize">
     <Window.Resources>
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
                 <Setter.Value>
                     <ControlTemplate>
-                        <Rectangle Margin="2" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                        <Rectangle Margin="2" SnapsToDevicePixels="true"
+                                   Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"
+                                   StrokeThickness="1" StrokeDashArray="1 2" />
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
-        <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
-        <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
-        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
-        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
-        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
-        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
-        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
-        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
-        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
-        
+        <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD" />
+        <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070" />
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD" />
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1" />
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6" />
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B" />
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4" />
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5" />
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383" />
+
         <Style x:Key="RoundedGreenButtonStyle" TargetType="{x:Type Button}">
-            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
-            <Setter Property="Background" Value="#4FA39C"/>
-            <Setter Property="BorderBrush" Value="#4FA39C"/>
-            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Padding" Value="1"/>
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
+            <Setter Property="Background" Value="#4FA39C" />
+            <Setter Property="BorderBrush" Value="#4FA39C" />
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Padding" Value="1" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Border x:Name="border" CornerRadius="15" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true" Margin="0,0,0,0">
-                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        <Border x:Name="border" CornerRadius="15" BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding Background}" SnapsToDevicePixels="true" Margin="0,0,0,0">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              Margin="{TemplateBinding Padding}" RecognizesAccessKey="True"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsDefaulted" Value="true">
-                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                                <Setter Property="BorderBrush" TargetName="border"
+                                        Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="Background" TargetName="border" Value="#40847E"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="#40847E"/>
+                                <Setter Property="Background" TargetName="border" Value="#40847E" />
+                                <Setter Property="BorderBrush" TargetName="border" Value="#40847E" />
                             </Trigger>
                             <Trigger Property="IsPressed" Value="true">
-                                <Setter Property="Background" TargetName="border" Value="#3A7771"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="#3A7771"/>
+                                <Setter Property="Background" TargetName="border" Value="#3A7771" />
+                                <Setter Property="BorderBrush" TargetName="border" Value="#3A7771" />
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="false">
-                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
-                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                                <Setter Property="Background" TargetName="border"
+                                        Value="{StaticResource Button.Disabled.Background}" />
+                                <Setter Property="BorderBrush" TargetName="border"
+                                        Value="{StaticResource Button.Disabled.Border}" />
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter"
+                                        Value="{StaticResource Button.Disabled.Foreground}" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <Style x:Key="RoundGreenToggleButtonStyle" TargetType="{x:Type ToggleButton}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
+            <Setter Property="Background" Value="#4FA39C" />
+            <Setter Property="BorderBrush" Value="#4FA39C" />
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Padding" Value="1" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                        <Border x:Name="border" CornerRadius="15" BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding Background}" SnapsToDevicePixels="true" Margin="0,0,0,0">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              Margin="{TemplateBinding Padding}" RecognizesAccessKey="True"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="#4FA39C" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="True">
+                                <Setter Property="Foreground" Value="#4FA39C" />
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="#40847E" />
+                                <Setter Property="BorderBrush" TargetName="border" Value="#40847E" />
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="False">
+                                <Setter Property="Background" TargetName="border" Value="#4FA39C" />
+                                <Setter Property="BorderBrush" TargetName="border" Value="#4FA39C" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+        </Style>
+
+
         <Style x:Key="RoundedRedButtonStyle" TargetType="{x:Type Button}">
-            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
-            <Setter Property="Background" Value="#E9610B"/>
-            <Setter Property="BorderBrush" Value="#E9610B"/>
-            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Padding" Value="1"/>
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Background" Value="#E9610B" />
+            <Setter Property="BorderBrush" Value="#E9610B" />
+            <Setter Property="Padding" Value="1" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Border x:Name="border" CornerRadius="15" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true" Margin="0,0,0,0">
-                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        <Border x:Name="border" CornerRadius="15" BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding Background}" SnapsToDevicePixels="true" Margin="0,0,0,0">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              Margin="{TemplateBinding Padding}" RecognizesAccessKey="True"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsDefaulted" Value="true">
-                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                                <Setter Property="BorderBrush" TargetName="border"
+                                        Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="Background" TargetName="border" Value="#C65209"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="#C65209"/>
+                                <Setter Property="Background" TargetName="border" Value="#C65209" />
+                                <Setter Property="BorderBrush" TargetName="border" Value="#C65209" />
                             </Trigger>
                             <Trigger Property="IsPressed" Value="true">
-                                <Setter Property="Background" TargetName="border" Value="#A84608"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="#A84608"/>
+                                <Setter Property="Background" TargetName="border" Value="#A84608" />
+                                <Setter Property="BorderBrush" TargetName="border" Value="#A84608" />
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="false">
-                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
-                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                                <Setter Property="Background" TargetName="border"
+                                        Value="{StaticResource Button.Disabled.Background}" />
+                                <Setter Property="BorderBrush" TargetName="border"
+                                        Value="{StaticResource Button.Disabled.Border}" />
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter"
+                                        Value="{StaticResource Button.Disabled.Foreground}" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
-        <Style x:Key="RoundedDarkGreenButtonStyle" TargetType="{x:Type Button}">
-            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
-            <Setter Property="Background" Value="#3A7771"/>
-            <Setter Property="BorderBrush" Value="#3A7771"/>
-            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Padding" Value="1"/>
+
+        <Style x:Key="RoundedNotActiveRedButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Background" Value="#FBCDAF" />
+            <Setter Property="BorderBrush" Value="#FBCDAF" />
+            <Setter Property="Padding" Value="1" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Border x:Name="border" CornerRadius="15" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true" Margin="0,0,0,0">
-                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        <Border x:Name="border" CornerRadius="15" BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding Background}" SnapsToDevicePixels="true" Margin="0,0,0,0">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              Margin="{TemplateBinding Padding}" RecognizesAccessKey="True"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsDefaulted" Value="true">
-                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                                <Setter Property="BorderBrush" TargetName="border"
+                                        Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="Background" TargetName="border" Value="#306460"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="#306460"/>
+                                <Setter Property="Background" TargetName="border" Value="#F9AB7A" />
+                                <Setter Property="BorderBrush" TargetName="border" Value="#F9AB7A" />
                             </Trigger>
                             <Trigger Property="IsPressed" Value="true">
-                                <Setter Property="Background" TargetName="border" Value="#3A7771"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="#3A7771"/>
+                                <Setter Property="Background" TargetName="border" Value="#F78E4C" />
+                                <Setter Property="BorderBrush" TargetName="border" Value="#F78E4C" />
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="false">
-                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
-                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                                <Setter Property="Background" TargetName="border"
+                                        Value="{StaticResource Button.Disabled.Background}" />
+                                <Setter Property="BorderBrush" TargetName="border"
+                                        Value="{StaticResource Button.Disabled.Border}" />
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter"
+                                        Value="{StaticResource Button.Disabled.Foreground}" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
-        
+        <Style x:Key="RoundedNotActiveGreenButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Background" Value="#C4E3E0" />
+            <Setter Property="BorderBrush" Value="#C4E3E0" />
+            <Setter Property="Padding" Value="1" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" CornerRadius="15" BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding Background}" SnapsToDevicePixels="true" Margin="0,0,0,0">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              Margin="{TemplateBinding Padding}" RecognizesAccessKey="True"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border"
+                                        Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="#9FD1CD" />
+                                <Setter Property="BorderBrush" TargetName="border" Value="#9FD1CD" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="#7FC1BC" />
+                                <Setter Property="BorderBrush" TargetName="border" Value="#7FC1BC" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border"
+                                        Value="{StaticResource Button.Disabled.Background}" />
+                                <Setter Property="BorderBrush" TargetName="border"
+                                        Value="{StaticResource Button.Disabled.Border}" />
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter"
+                                        Value="{StaticResource Button.Disabled.Foreground}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
     </Window.Resources>
     <Window.Background>
         <LinearGradientBrush>
@@ -147,117 +274,117 @@
             <GradientStop Color="#FCECDC" Offset="1" />
         </LinearGradientBrush>
     </Window.Background>
-    
+
     <Grid>
-        
+
         <Grid.RowDefinitions>
             <RowDefinition Height="0.35*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        
-        <Grid Grid.Row="0"
-              >
+
+        <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            
-            <Border 
-                Grid.Column="0" 
+
+            <Border
+                Grid.Column="0"
                 Background="#FFFFFF"
                 Margin="15,15,7.5,0"
                 CornerRadius="20"
-                BorderBrush="#FCECDC" BorderThickness="3"
-            >
-                
+                BorderBrush="#FCECDC" BorderThickness="3">
+
                 <Border.Effect>
-                    <DropShadowEffect BlurRadius="30" Direction="-100" Color="Tan" Opacity="0.8"/>
+                    <DropShadowEffect BlurRadius="30" Direction="-100" Color="Tan" Opacity="0.8" />
                 </Border.Effect>
-                
-                <Grid  Margin="8.7">
+
+                <Grid Margin="8.7">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="0.5*"></RowDefinition>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
-                    
+
                     <TextBlock
                         Margin="0,0,0,3.25"
                         TextDecorations="Underline"
                         FontFamily="Comic Sans MS"
                         Grid.Row="0"
-                        TextAlignment="Left" 
+                        TextAlignment="Left"
                         VerticalAlignment="Bottom"
                         FontWeight="Bold"
-                        FontSize="20"
-                        >Текущее состояние:</TextBlock>
-                    
+                        FontSize="20">
+                        Текущее состояние:
+                    </TextBlock>
+
                     <Grid Grid.Row="1" Margin="0,3.5,0,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        
-                        <Button 
+
+                        <ToggleButton
                             Name="MoveButton"
                             Grid.Column="0"
-                            Style="{DynamicResource RoundedGreenButtonStyle}"
                             Margin="0, 0, 3.25, 0"
-                            Background="#4FA39C"
+                            Style="{DynamicResource RoundGreenToggleButtonStyle}"
+
                             Foreground="White"
                             Padding="4.5"
                             FontSize="14"
                             FontWeight="SemiBold"
                             FontFamily="Comic Sans MS"
-                            
-                            >МОЙ ХОД</Button>
-                        <Button 
+                            Content="ЧУЖОЙ ХОД">
+                        </ToggleButton>
+                        <ToggleButton
                             Name="BattleButton"
                             Grid.Column="1"
-                            Style="{DynamicResource RoundedGreenButtonStyle}"
+                            Style="{DynamicResource RoundGreenToggleButtonStyle}"
                             Margin="3.25, 0, 0, 0"
                             Background="#4FA39C"
                             Foreground="White"
                             Padding="4.5"
                             FontSize="14"
                             FontWeight="SemiBold"
-                            FontFamily="Comic Sans MS"
-
-                            >НЕ В БОЮ</Button>
+                            FontFamily="Comic Sans MS">
+                            НЕ В БОЮ
+                        </ToggleButton>
                     </Grid>
                 </Grid>
-                
+
             </Border>
-            
+
             <Border
                 Grid.Column="1"
                 Background="White"
                 Margin="7.5,15,15,0"
                 CornerRadius="20"
                 BorderBrush="#FCECDC" BorderThickness="3"
-                Height="50"
-                >
-                
+                Height="50">
+
                 <Border.Effect>
-                    <DropShadowEffect BlurRadius="30" Direction="-100" Color="Tan" Opacity="0.8"/>
+                    <DropShadowEffect BlurRadius="30" Direction="-100" Color="Tan" Opacity="0.8" />
                 </Border.Effect>
-                
+
                 <Grid Margin="8.5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.13*"></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    
-                    <TextBlock 
+
+                    <TextBlock
                         Grid.Column="0"
                         Margin="0,0,4.25,0"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Left"
                         FontFamily="Comic Sans MS"
                         FontWeight="Bold"
-                        FontSize="20">Имя:</TextBlock>
-                    
-                    <TextBlock 
+                        FontSize="20">
+                        Имя:
+                    </TextBlock>
+
+                    <TextBlock
                         Name="NameBlock"
                         Grid.Column="1"
                         Margin="4.25,0,0,0"
@@ -266,32 +393,31 @@
                         FontFamily="Comic Sans MS"
                         FontSize="15">
                     </TextBlock>
-                    
+
                 </Grid>
             </Border>
-            
+
         </Grid>
-                                 
+
         <Grid
-            Grid.Row="1" Margin="15" >
+            Grid.Row="1" Margin="15">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            
-            <Border 
+
+            <Border
                 Grid.Column="0"
                 Margin="0,0,7.5,7.5"
                 Background="White"
                 CornerRadius="20"
-                BorderBrush="#FCECDC" BorderThickness="3"
-                >
-                
+                BorderBrush="#FCECDC" BorderThickness="3">
+
                 <Border.Effect>
-                    <DropShadowEffect BlurRadius="30" Direction="-100" Color="Tan" Opacity="0.8"/>
+                    <DropShadowEffect BlurRadius="30" Direction="-100" Color="Tan" Opacity="0.8" />
                 </Border.Effect>
-                
-                <Grid  Margin="8.8" >
+
+                <Grid Margin="8.8">
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
@@ -303,10 +429,10 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.5*"></ColumnDefinition>
                         <ColumnDefinition Width="0.5*"></ColumnDefinition>
-                        <ColumnDefinition ></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    
-                    <TextBlock 
+
+                    <TextBlock
                         Grid.Row="0"
                         Grid.Column="0"
                         Margin="0,0,4.4,4.4"
@@ -314,9 +440,11 @@
                         VerticalAlignment="Center"
                         FontFamily="Comic Sans MS"
                         FontWeight="Bold"
-                        FontSize="20">Уровень:</TextBlock>
-                    
-                    <TextBlock 
+                        FontSize="20">
+                        Уровень:
+                    </TextBlock>
+
+                    <TextBlock
                         Grid.Row="1"
                         Grid.Column="0"
                         Margin="0,4.4,4.4,4.4"
@@ -324,9 +452,11 @@
                         VerticalAlignment="Center"
                         FontFamily="Comic Sans MS"
                         FontWeight="Bold"
-                        FontSize="20">Раса:</TextBlock>
-                    
-                    <TextBlock 
+                        FontSize="20">
+                        Раса:
+                    </TextBlock>
+
+                    <TextBlock
                         Grid.Row="2"
                         Grid.Column="0"
                         Margin="0,4.4,4.4,4.4"
@@ -334,9 +464,11 @@
                         VerticalAlignment="Center"
                         FontFamily="Comic Sans MS"
                         FontWeight="Bold"
-                        FontSize="20">Класс:</TextBlock>
-                    
-                    <TextBlock 
+                        FontSize="20">
+                        Класс:
+                    </TextBlock>
+
+                    <TextBlock
                         Grid.Row="3"
                         Grid.Column="0"
                         Margin="0,4.4,4.4,4.4"
@@ -344,9 +476,11 @@
                         VerticalAlignment="Center"
                         FontFamily="Comic Sans MS"
                         FontWeight="Bold"
-                        FontSize="20">Пол:</TextBlock>
-                    
-                    <TextBlock 
+                        FontSize="20">
+                        Пол:
+                    </TextBlock>
+
+                    <TextBlock
                         Grid.Row="4"
                         Grid.Column="0"
                         Margin="0,4.4,4.4,4.4"
@@ -354,9 +488,11 @@
                         VerticalAlignment="Center"
                         FontFamily="Comic Sans MS"
                         FontWeight="Bold"
-                        FontSize="20">Урон:</TextBlock>
-                    
-                    <TextBlock 
+                        FontSize="20">
+                        Урон:
+                    </TextBlock>
+
+                    <TextBlock
                         Grid.Row="5"
                         Grid.Column="0"
                         Margin="0,4.4,4.4,0"
@@ -364,9 +500,11 @@
                         VerticalAlignment="Center"
                         FontFamily="Comic Sans MS"
                         FontWeight="Bold"
-                        FontSize="20">Жив ли:</TextBlock>
-                    
-                    <TextBlock 
+                        FontSize="20">
+                        Жив ли:
+                    </TextBlock>
+
+                    <TextBlock
                         Name="LevelBlock"
                         Grid.Row="0"
                         Grid.Column="1"
@@ -374,9 +512,10 @@
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         FontFamily="Comic Sans MS"
-                        FontSize="20"></TextBlock>
-                    
-                    <TextBlock 
+                        FontSize="20">
+                    </TextBlock>
+
+                    <TextBlock
                         Name="RaceBlock"
                         Grid.Row="1"
                         Grid.Column="1"
@@ -384,9 +523,10 @@
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         FontFamily="Comic Sans MS"
-                        FontSize="20"></TextBlock>
-                    
-                    <TextBlock 
+                        FontSize="20">
+                    </TextBlock>
+
+                    <TextBlock
                         Name="ClassBlock"
                         Grid.Row="2"
                         Grid.Column="1"
@@ -394,9 +534,10 @@
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         FontFamily="Comic Sans MS"
-                        FontSize="20"></TextBlock>
-                    
-                    <TextBlock 
+                        FontSize="20">
+                    </TextBlock>
+
+                    <TextBlock
                         Name="GenderBlock"
                         Grid.Row="3"
                         Grid.Column="1"
@@ -404,10 +545,11 @@
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         FontFamily="Comic Sans MS"
-                        
-                        FontSize="20"></TextBlock>
-                    
-                    <TextBlock 
+
+                        FontSize="20">
+                    </TextBlock>
+
+                    <TextBlock
                         Name="DamageBlock"
                         Grid.Row="4"
                         Grid.Column="1"
@@ -415,9 +557,10 @@
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         FontFamily="Comic Sans MS"
-                        FontSize="20"></TextBlock>
-                    
-                    <TextBlock 
+                        FontSize="20">
+                    </TextBlock>
+
+                    <TextBlock
                         Name="DeadBlock"
                         Grid.Row="5"
                         Grid.Column="1"
@@ -425,22 +568,21 @@
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         FontFamily="Comic Sans MS"
-                        FontSize="20"></TextBlock>
-                    
-                    
-                    
+                        FontSize="20">
+                    </TextBlock>
+
+
                     <Grid
                         Grid.Row="0"
                         Grid.Column="2"
-                        Margin="4.4,0,0,4.4"
-                        >
-                        
+                        Margin="4.4,0,0,4.4">
+
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        
-                        <Button 
+
+                        <Button
                             Name="IncreaseLevelButton"
                             Grid.Column="0"
                             Margin="0,5,4.4,0"
@@ -450,36 +592,36 @@
                             FontSize="20"
                             FontWeight="SemiBold"
                             FontFamily="Comic Sans MS"
-                            Padding="4.5"
-                            
-                            >+
+                            Padding="4.5">
+                            +
                         </Button>
-                        
-                        <Button 
+
+                        <Button
                             Name="ReduceLevelButton"
                             Grid.Column="1"
                             Margin="4.4,5,0,0"
                             Style="{DynamicResource RoundedRedButtonStyle}"
-                            Background="#E9610B"
+
                             Foreground="White"
                             FontSize="20"
                             FontWeight="SemiBold"
                             FontFamily="Comic Sans MS"
-                            Padding="4.5"
-                        >-</Button>
+                            Padding="4.5">
+                            -
+                        </Button>
                     </Grid>
-                    
+
                     <Grid
                         Grid.Row="1"
                         Grid.Column="2"
-                        Margin="4.4,4.4,0,4.4" >
-                        
+                        Margin="4.4,4.4,0,4.4">
+
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        
-                        <Button 
+
+                        <Button
                             Name="ChangeRaceButton"
                             Grid.Column="0"
                             Margin="0,0,4.4,0"
@@ -489,34 +631,35 @@
                             FontSize="14"
                             FontWeight="SemiBold"
                             FontFamily="Comic Sans MS"
-                            Padding="4.5"
-                        >СМЕНИТЬ</Button>
-                        
-                        <Button 
+                            Padding="4.5">
+                            СМЕНИТЬ
+                        </Button>
+
+                        <Button
                             Name="LostRaceButton"
                             Grid.Column="1"
                             Margin="4.4,0,0,0"
-                            Style="{DynamicResource RoundedRedButtonStyle}"
-                            
+                            Style="{DynamicResource RoundedNotActiveRedButtonStyle}"
                             Foreground="White"
                             FontSize="14"
                             FontWeight="SemiBold"
                             FontFamily="Comic Sans MS"
-                            Padding="4.5"
-                        >ПОТЕРЯТЬ</Button>
+                            Padding="4.5">
+                            ПОТЕРЯТЬ
+                        </Button>
                     </Grid>
-                    
+
                     <Grid
                         Grid.Row="2"
                         Grid.Column="2"
-                        Margin="4.4,4.4,0,4.4" >
-                        
+                        Margin="4.4,4.4,0,4.4">
+
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        
-                        <Button 
+
+                        <Button
                             Name="ChangeClassButton"
                             Grid.Column="0"
                             Margin="0,0,4.4,0"
@@ -526,28 +669,30 @@
                             FontSize="14"
                             FontWeight="SemiBold"
                             FontFamily="Comic Sans MS"
-                            Padding="4.5"
-                        >СМЕНИТЬ</Button>
-                        
-                        <Button 
+                            Padding="4.5">
+                            СМЕНИТЬ
+                        </Button>
+
+                        <Button
                             Name="LostClassButton"
                             Grid.Column="1"
                             Margin="4.4,0,0,0"
-                            Style="{DynamicResource RoundedRedButtonStyle}"
+                            Style="{DynamicResource RoundedNotActiveRedButtonStyle}"
                             Foreground="White"
                             FontSize="14"
                             FontWeight="SemiBold"
                             FontFamily="Comic Sans MS"
-                            Padding="4.5"
-                        >ПОТЕРЯТЬ</Button>
+                            Padding="4.5">
+                            ПОТЕРЯТЬ
+                        </Button>
                     </Grid>
-                    
+
                     <Grid
                         Grid.Row="3"
                         Grid.Column="2"
-                        Margin="4.4,4.4,0,4.4" >
-                        
-                        <Button 
+                        Margin="4.4,4.4,0,4.4">
+
+                        <Button
                             Name="ChangeGenderButton"
                             Grid.Column="0"
                             Style="{DynamicResource RoundedGreenButtonStyle}"
@@ -556,45 +701,46 @@
                             FontSize="14"
                             FontWeight="SemiBold"
                             FontFamily="Comic Sans MS"
-                            Padding="4.5"
-                        >СМЕНИТЬ</Button>
-                        
+                            Padding="4.5">
+                            СМЕНИТЬ
+                        </Button>
+
                     </Grid>
-                    
-                    
-                        <Button 
-                            Grid.Row="5"
-                            Grid.Column="2"
-                            Margin="4.4,4.4,0,4.4"
-                            Name="DeathButton"
-                            Foreground="White"
-                            FontSize="14"
-                            FontWeight="SemiBold"
-                            FontFamily="Comic Sans MS"
-                            Padding="4.5"
-                            Style="{DynamicResource RoundedRedButtonStyle}"
-                            Background="#E9610B"
-                        >УМЕРЕРТЬ</Button>
-                    </Grid>
-                
+
+
+                    <Button
+                        Grid.Row="5"
+                        Grid.Column="2"
+                        Margin="4.4,4.4,0,4.4"
+                        Name="DeathButton"
+                        Foreground="White"
+                        FontSize="14"
+                        FontWeight="SemiBold"
+                        FontFamily="Comic Sans MS"
+                        Padding="4.5"
+                        Style="{DynamicResource RoundedRedButtonStyle}">
+                        УМЕРЕРТЬ
+                    </Button>
+                </Grid>
+
             </Border>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition></RowDefinition>
                     <RowDefinition Height="0.3*"></RowDefinition>
                 </Grid.RowDefinitions>
-                
-                <Border 
+
+                <Border
                     Grid.Row="0"
                     Margin="7.5,0,0,7.5"
                     Background="White"
                     CornerRadius="20"
                     BorderBrush="#FCECDC" BorderThickness="3">
                     <Border.Effect>
-                        <DropShadowEffect BlurRadius="30" Direction="-100" Color="Tan" Opacity="0.8"/>
+                        <DropShadowEffect BlurRadius="30" Direction="-100" Color="Tan" Opacity="0.8" />
                     </Border.Effect>
-                    
-                    <Grid  Margin="8.8" >
+
+                    <Grid Margin="8.8">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
                             <RowDefinition></RowDefinition>
@@ -606,8 +752,8 @@
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        
-                        <TextBlock 
+
+                        <TextBlock
                             Grid.Row="0"
                             Grid.Column="0"
                             Margin="0,0,4.4,4.4"
@@ -618,8 +764,8 @@
                             FontSize="20">
                             Число карт:
                         </TextBlock>
-                    
-                        <TextBlock 
+
+                        <TextBlock
                             Grid.Row="1"
                             Grid.Column="0"
                             Margin="0,4.4,4.4,4.4"
@@ -627,9 +773,11 @@
                             VerticalAlignment="Center"
                             FontFamily="Comic Sans MS"
                             FontWeight="Bold"
-                            FontSize="20">Бонус на смывку:</TextBlock>
-                        
-                        <TextBlock 
+                            FontSize="20">
+                            Бонус на смывку:
+                        </TextBlock>
+
+                        <TextBlock
                             Grid.Row="2"
                             Grid.Column="0"
                             Margin="0,4.4,4.4,4.4"
@@ -637,9 +785,11 @@
                             VerticalAlignment="Center"
                             FontFamily="Comic Sans MS"
                             FontWeight="Bold"
-                            FontSize="20">Двойная цена:</TextBlock>
-                        
-                        <TextBlock 
+                            FontSize="20">
+                            Двойная цена:
+                        </TextBlock>
+
+                        <TextBlock
                             Grid.Row="3"
                             Grid.Column="0"
                             Margin="0,4.4,4.4,4.4"
@@ -647,9 +797,11 @@
                             VerticalAlignment="Center"
                             FontFamily="Comic Sans MS"
                             FontWeight="Bold"
-                            FontSize="20">Суперманчкин:</TextBlock>
-                        
-                        <TextBlock 
+                            FontSize="20">
+                            Суперманчкин:
+                        </TextBlock>
+
+                        <TextBlock
                             Grid.Row="4"
                             Grid.Column="0"
                             Margin="0,4.4,4.4,4.4"
@@ -657,74 +809,74 @@
                             VerticalAlignment="Center"
                             FontFamily="Comic Sans MS"
                             FontWeight="Bold"
-                            FontSize="20">Полукровка:</TextBlock>
-                        
+                            FontSize="20">
+                            Полукровка:
+                        </TextBlock>
+
                         <Grid
                             Grid.Row="0"
                             Grid.Column="1"
-                            Margin="4.4,0,0,4.4"
-                            >
+                            Margin="4.4,0,0,4.4">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition></ColumnDefinition>
                                 <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            
-                            <TextBlock 
+
+                            <TextBlock
                                 Name="CardCountBlock"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
                                 FontFamily="Comic Sans MS"
                                 FontSize="20">
                             </TextBlock>
-                            
+
                         </Grid>
-                        
+
                         <Grid Grid.Row="1"
                               Grid.Column="1"
-                              Margin="4.4,4.4,0,4.4"
-                              >
+                              Margin="4.4,4.4,0,4.4">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition></ColumnDefinition>
                                 <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            
-                            <TextBlock 
+
+                            <TextBlock
                                 Name="FlushingBonusBlock"
-                            
+
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
                                 FontFamily="Comic Sans MS"
-                                FontSize="20"></TextBlock>
+                                FontSize="20">
+                            </TextBlock>
                         </Grid>
-                        
+
                         <Grid
                             Grid.Row="2"
                             Grid.Column="2"
-                            Margin="4.4,4.4,0,4.4"
-                            
-                            >
+                            Margin="4.4,4.4,0,4.4">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition></ColumnDefinition>
                                 <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            
-                            <TextBlock 
+
+                            <TextBlock
                                 Name="DoublePriceBlock"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
                                 FontFamily="Comic Sans MS"
-                                FontSize="20"></TextBlock>
+                                FontSize="20">
+                            </TextBlock>
                         </Grid>
-                        
+
                         <Grid
                             Grid.Row="3"
                             Grid.Column="1"
-                            Margin="4.4,4.4,0,4.4" >
+                            Margin="4.4,4.4,0,4.4">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition></ColumnDefinition>
                                 <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            
+
                             <TextBlock
                                 Name="SupermanchkinBlock"
                                 Grid.Column="0"
@@ -732,8 +884,9 @@
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Center"
                                 FontFamily="Comic Sans MS"
-                                FontSize="20"></TextBlock>
-                            
+                                FontSize="20">
+                            </TextBlock>
+
                             <Button
                                 Name="SuperManchkinButton"
                                 Grid.Column="1"
@@ -744,13 +897,15 @@
                                 Padding="4.5"
                                 FontSize="14"
                                 FontWeight="SemiBold"
-                                FontFamily="Comic Sans MS">ПОЛУЧИТЬ</Button>
+                                FontFamily="Comic Sans MS">
+                                ПОЛУЧИТЬ
+                            </Button>
                         </Grid>
-                        
+
                         <Grid
                             Grid.Row="4"
                             Grid.Column="1"
-                            Margin="4.4,4.4,0,0" >
+                            Margin="4.4,4.4,0,0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition></ColumnDefinition>
                                 <ColumnDefinition></ColumnDefinition>
@@ -762,9 +917,10 @@
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Center"
                                 FontFamily="Comic Sans MS"
-                                
-                                FontSize="20"></TextBlock>
-                            
+
+                                FontSize="20">
+                            </TextBlock>
+
                             <Button
                                 Name="HalfBloodButton"
                                 Grid.Column="1"
@@ -775,30 +931,32 @@
                                 Padding="4.5"
                                 FontSize="14"
                                 FontWeight="SemiBold"
-                                FontFamily="Comic Sans MS">ПОЛУЧИТЬ</Button>
+                                FontFamily="Comic Sans MS">
+                                ПОЛУЧИТЬ
+                            </Button>
                         </Grid>
                     </Grid>
                 </Border>
-                
-                <Border 
+
+                <Border
                     Grid.Row="1"
                     Margin="7.5,7.5,0,7.7"
                     Background="White"
                     CornerRadius="20"
                     BorderBrush="#FCECDC" BorderThickness="3">
                     <Border.Effect>
-                        <DropShadowEffect BlurRadius="30" Direction="-100" Color="Tan" Opacity="0.8"/>
+                        <DropShadowEffect BlurRadius="30" Direction="-100" Color="Tan" Opacity="0.8" />
                     </Border.Effect>
-                    
-                    <Grid  Margin="8.8" >
+
+                    <Grid Margin="8.8">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        
+
                         <Button
                             Grid.Column="0"
-                            Name = "FeaturesButton"
+                            Name="FeaturesButton"
                             Margin="0,0,4.4,0"
                             Style="{DynamicResource RoundedGreenButtonStyle}"
                             Background="#4FA39C"
@@ -806,11 +964,13 @@
                             FontWeight="SemiBold"
                             FontSize="14"
                             FontFamily="Comic Sans MS"
-                            Padding="4.5">МОИ СВОЙСТВА</Button>
-                        
+                            Padding="4.5">
+                            МОИ СВОЙСТВА
+                        </Button>
+
                         <Button
                             Grid.Column="1"
-                            Name = "ActionsButton"
+                            Name="ActionsButton"
                             Margin="4.4,0,0,0"
                             Style="{DynamicResource RoundedGreenButtonStyle}"
                             Background="#4FA39C"
@@ -818,493 +978,531 @@
                             FontSize="14"
                             FontWeight="SemiBold"
                             FontFamily="Comic Sans MS"
-                            Padding="4.5">ЧТО МОГУ ДЕЛАТЬ</Button>
+                            Padding="4.5">
+                            ЧТО МОГУ ДЕЛАТЬ
+                        </Button>
                     </Grid>
-                    
+
                 </Border>
             </Grid>
         </Grid>
-        <Grid 
+        <Grid
             Grid.Row="2"
-            Margin="15,0,15,15" >
+            Margin="15,0,15,15">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            
+
             <Border
                 Margin="0,0,7.5,0"
                 Grid.Column="0"
                 Background="White"
                 CornerRadius="20"
                 BorderBrush="#FCECDC" BorderThickness="3">
-                
+
                 <Border.Effect>
-                    <DropShadowEffect BlurRadius="30" Direction="-100" Color="Tan" Opacity="0.8"/>
+                    <DropShadowEffect BlurRadius="30" Direction="-100" Color="Tan" Opacity="0.8" />
                 </Border.Effect>
-            
-            <Grid  Margin="8.8" >
+
+                <Grid Margin="8.8">
+                    <Grid>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Margin="0,0,4.4,4.4"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            FontFamily="Comic Sans MS"
+                            FontWeight="Bold"
+                            FontSize="20">
+                            Броник:
+                        </TextBlock>
+                        <TextBlock
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Margin="0,4.4,4.4,4.4"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            FontFamily="Comic Sans MS"
+                            FontWeight="Bold"
+                            FontSize="20">
+                            Обувка:
+                        </TextBlock>
+                        <TextBlock
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            Margin="0,4.4,4.4,4.4"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            FontFamily="Comic Sans MS"
+                            FontWeight="Bold"
+                            FontSize="20">
+                            Оружие:
+                        </TextBlock>
+                        <TextBlock
+                            Grid.Row="3"
+                            Grid.Column="0"
+                            Margin="0,4.4,4.4,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            FontFamily="Comic Sans MS"
+                            FontWeight="Bold"
+                            FontSize="20">
+                            Головняк:
+                        </TextBlock>
+
+                        <TextBlock
+                            Name="ArmorBlock"
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Margin="4.4,0,4.4,4.4"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontFamily="Comic Sans MS"
+                            FontSize="20">
+                        </TextBlock>
+
+                        <TextBlock
+                            Name="ShoesBlock"
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Margin="4.4,4.4,4.4,4.4"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontFamily="Comic Sans MS"
+                            FontSize="20">
+                        </TextBlock>
+
+                        <TextBlock
+                            Name="WeaponBlock"
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            Margin="4.4,4.4,4.4,4.4"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontFamily="Comic Sans MS"
+                            FontSize="20">
+                        </TextBlock>
+
+                        <TextBlock
+                            Name="HatBlock"
+                            Grid.Row="3"
+                            Grid.Column="1"
+                            Margin="4.4,4.4,4.4,4.4"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontFamily="Comic Sans MS"
+
+                            FontSize="20">
+                        </TextBlock>
+
+
+                        <Grid
+                            Grid.Row="0"
+                            Grid.Column="2"
+                            Margin="4.4,0,0,4.4">
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <Button
+                                Name="ChangeArmorButton"
+                                Grid.Column="0"
+                                Margin="0,4.4,4.4,0"
+                                Style="{DynamicResource RoundedGreenButtonStyle}"
+                                Background="#4FA39C"
+                                Foreground="White"
+                                FontSize="14"
+                                FontWeight="SemiBold"
+                                FontFamily="Comic Sans MS"
+                                Padding="4.5">
+                                НАДЕТЬ
+                            </Button>
+
+                            <Button
+                                Name="LostArmorButton"
+                                Grid.Column="1"
+                                Margin="4.4,4.4,0,0"
+                                Style="{DynamicResource RoundedNotActiveRedButtonStyle}"
+                                Foreground="White"
+                                FontSize="14"
+                                FontWeight="SemiBold"
+                                FontFamily="Comic Sans MS"
+                                Padding="4.5">
+                                ПОТЕРЯТЬ
+                            </Button>
+                        </Grid>
+
+                        <Grid
+                            Grid.Row="1"
+                            Grid.Column="2"
+                            Margin="4.4,4.4,0,4.4">
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <Button
+                                Name="ChangeShoesButton"
+                                Grid.Column="0"
+                                Margin="0,0,4.4,0"
+                                Style="{DynamicResource RoundedGreenButtonStyle}"
+                                Background="#4FA39C"
+                                Foreground="White"
+                                FontSize="14"
+                                FontWeight="SemiBold"
+                                FontFamily="Comic Sans MS"
+                                Padding="4.5">
+                                НАДЕТЬ
+                            </Button>
+
+                            <Button
+                                Name="LostShoesButton"
+                                Grid.Column="1"
+                                Margin="4.4,0,0,0"
+                                Style="{DynamicResource RoundedNotActiveRedButtonStyle}"
+
+                                Foreground="White"
+                                FontSize="14"
+                                FontWeight="SemiBold"
+                                FontFamily="Comic Sans MS"
+                                Padding="4.5">
+                                ПОТЕРЯТЬ
+                            </Button>
+                        </Grid>
+
+                        <Grid
+                            Grid.Row="2"
+                            Grid.Column="2"
+                            Margin="4.4,4.4,0,4.4">
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <Button
+                                Name="ChangeWeaponButton"
+                                Grid.Column="0"
+                                Margin="0,0,4.4,0"
+                                Style="{DynamicResource RoundedGreenButtonStyle}"
+                                Background="#4FA39C"
+                                Foreground="White"
+                                FontSize="14"
+                                FontWeight="SemiBold"
+                                FontFamily="Comic Sans MS"
+                                Padding="4.5">
+                                НАДЕТЬ
+                            </Button>
+
+                            <Button
+                                Name="LostWeaponButton"
+                                Grid.Column="1"
+                                Margin="4.4,0,0,0"
+                                Style="{DynamicResource RoundedNotActiveRedButtonStyle}"
+
+                                Foreground="White"
+                                FontSize="14"
+                                FontWeight="SemiBold"
+                                FontFamily="Comic Sans MS"
+                                Padding="4.5">
+                                ПОТЕРЯТЬ
+                            </Button>
+                        </Grid>
+
+                        <Grid
+                            Grid.Row="3"
+                            Grid.Column="2"
+                            Margin="4.4,4.4,0,0">
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <Button
+                                Name="ChangeHatButton"
+                                Grid.Column="0"
+                                Margin="0,0,4.4,4.4"
+                                Style="{DynamicResource RoundedGreenButtonStyle}"
+                                Background="#4FA39C"
+                                Foreground="White"
+                                FontSize="14"
+                                FontWeight="SemiBold"
+                                FontFamily="Comic Sans MS"
+                                Padding="4.5">
+                                НАДЕТЬ
+                            </Button>
+
+                            <Button
+                                Name="LostHatButton"
+                                Grid.Column="1"
+                                Margin="4.4,0,0,4.4"
+                                Style="{DynamicResource RoundedNotActiveRedButtonStyle}"
+                                Foreground="White"
+                                FontSize="14"
+                                FontWeight="SemiBold"
+                                FontFamily="Comic Sans MS"
+                                Padding="4.5">
+                                ПОТЕРЯТЬ
+                            </Button>
+                        </Grid>
+
+
+                    </Grid>
+
+
+                </Grid>
+            </Border>
+
+            <Border
+                Grid.Column="1"
+                Margin="7.5,0,0,0"
+
+                Background="White"
+                CornerRadius="20"
+                BorderBrush="#FCECDC" BorderThickness="3">
+
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="30" Direction="-100" Color="Tan" Opacity="0.8" />
+                </Border.Effect>
+
                 <Grid
-                     >
-                    
+                    Margin="8.8">
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.5*"></ColumnDefinition>
-                        <ColumnDefinition Width="0.5*"></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    
-                    <TextBlock 
-                        Grid.Row="0"
-                        Grid.Column="0"
-                        Margin="0,0,4.4,4.4"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Center"
-                        FontFamily="Comic Sans MS"
-                        FontWeight="Bold"
-                        FontSize="20">Броник:</TextBlock>
-                    <TextBlock 
-                        Grid.Row="1"
-                        Grid.Column="0"
-                        Margin="0,4.4,4.4,4.4"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Center"
-                        FontFamily="Comic Sans MS"
-                        FontWeight="Bold"
-                        FontSize="20">Обувка:</TextBlock>
-                    <TextBlock 
-                        Grid.Row="2"
-                        Grid.Column="0"
-                        Margin="0,4.4,4.4,4.4"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Center"
-                        FontFamily="Comic Sans MS"
-                        FontWeight="Bold"
-                        FontSize="20">Оружие:</TextBlock>
-                    <TextBlock 
-                        Grid.Row="3"
-                        Grid.Column="0"
-                        Margin="0,4.4,4.4,0"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Center"
-                        FontFamily="Comic Sans MS"
-                        FontWeight="Bold"
-                        FontSize="20">Головняк:</TextBlock>
-                    
-                    <TextBlock 
-                        Name="ArmorBlock"
-                        Grid.Row="0"
-                        Grid.Column="1"
-                        Margin="4.4,0,4.4,4.4"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        FontFamily="Comic Sans MS"
-                        FontSize="20"></TextBlock>
-                    
-                    <TextBlock 
-                        Name="ShoesBlock"
-                        Grid.Row="1"
-                        Grid.Column="1"
-                        Margin="4.4,4.4,4.4,4.4"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        FontFamily="Comic Sans MS"
-                        FontSize="20"></TextBlock>
-                    
-                    <TextBlock 
-                        Name="WeaponBlock"
-                        Grid.Row="2"
-                        Grid.Column="1"
-                        Margin="4.4,4.4,4.4,4.4"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        FontFamily="Comic Sans MS"
-                        FontSize="20"></TextBlock>
-                    
-                    <TextBlock 
-                        Name="HatBlock"
-                        Grid.Row="3"
-                        Grid.Column="1"
-                        Margin="4.4,4.4,4.4,4.4"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        FontFamily="Comic Sans MS"
-                        
-                        FontSize="20"></TextBlock>
-                    
-                    
+
                     <Grid
                         Grid.Row="0"
-                        Grid.Column="2"
-                        Margin="4.4,0,0,4.4"
-                        >
-                        
+
+                        Margin="0,0,0,4.4">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        
-                        <Button 
-                            Name="ChangeArmorButton"
+
+                        <Button
+                            Name="SmallStuffButton"
+                            Grid.Column="0"
+                            Margin="0,4.4,4.4,4.4"
+                            Style="{DynamicResource RoundedGreenButtonStyle}"
+                            Background="White"
+                            BorderBrush="#FCC49B" BorderThickness="3"
+                            Foreground="Black"
+                            FontSize="14"
+                            FontWeight="SemiBold"
+                            FontFamily="Comic Sans MS"
+                            Padding="4.5">
+                            <TextBlock Text="МЕЛКИЕ&#x0a;ШМОТКИ" />
+                        </Button>
+                        <Button
+                            Name="GetSmallStuffButton"
+                            Grid.Column="1"
+                            Margin="4.4,0,4.4,0"
+                            Style="{DynamicResource RoundedGreenButtonStyle}"
+                            Background="#4FA39C"
+                            VerticalAlignment="Center"
+                            Foreground="White"
+                            FontSize="14"
+                            FontWeight="SemiBold"
+                            FontFamily="Comic Sans MS"
+                            Padding="4.5">
+                            НАДЕТЬ
+                        </Button>
+
+                        <Button
+                            Name="SellSmallStuffButton"
+                            Grid.Column="2"
+                            Margin="4.4,0,4.4,0"
+                            Style="{DynamicResource RoundedNotActiveGreenButtonStyle}"
+
+                            VerticalAlignment="Center"
+                            Foreground="White"
+                            FontSize="14"
+                            FontWeight="SemiBold"
+                            FontFamily="Comic Sans MS"
+                            Padding="4.5">
+                            ПРОДАТЬ
+                        </Button>
+
+                        <Button
+                            Name="LostSmallStuffButton"
+                            Grid.Column="3"
+                            Margin="4.4,0,4.4,0"
+                            Style="{DynamicResource RoundedNotActiveRedButtonStyle}"
+                            VerticalAlignment="Center"
+                            Foreground="White"
+                            FontSize="14"
+                            FontWeight="SemiBold"
+                            FontFamily="Comic Sans MS"
+                            Padding="4.5">
+                            ПОТЕРЯТЬ
+                        </Button>
+                    </Grid>
+
+                    <Grid
+                        Grid.Row="1"
+
+                        Margin="0,4.4,0,4.4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <Button
+                            Name="HugeStuffButton"
+                            Grid.Column="0"
+                            Margin="0,4.4,4.4,4.4"
+                            Style="{DynamicResource RoundedGreenButtonStyle}"
+                            Background="White"
+                            BorderBrush="#FCC49B" BorderThickness="3"
+                            Foreground="Black"
+                            FontSize="14"
+                            FontWeight="SemiBold"
+                            FontFamily="Comic Sans MS"
+                            Padding="4.5">
+                            <TextBlock Text="КРУПНЫЕ&#x0a;ШМОТКИ" />
+                        </Button>
+                        <Button
+                            Name="GetHugeStuffButton"
+                            Grid.Column="1"
+                            Margin="4.4,0,4.4,0"
+                            Style="{DynamicResource RoundedGreenButtonStyle}"
+                            Background="#4FA39C"
+                            VerticalAlignment="Center"
+                            Foreground="White"
+                            FontSize="14"
+                            FontWeight="SemiBold"
+                            FontFamily="Comic Sans MS"
+                            Padding="4.5">
+                            НАДЕТЬ
+                        </Button>
+
+                        <Button
+                            Name="SellHugeStuffButton"
+                            Grid.Column="2"
+                            Margin="4.4,0,4.4,0"
+                            Style="{DynamicResource RoundedNotActiveGreenButtonStyle}"
+                            VerticalAlignment="Center"
+                            Foreground="White"
+                            FontSize="14"
+                            FontWeight="SemiBold"
+                            FontFamily="Comic Sans MS"
+                            Padding="4.5">
+                            ПРОДАТЬ
+                        </Button>
+
+                        <Button
+                            Name="LostHugeStuffButton"
+                            Grid.Column="3"
+                            Margin="4.4,0,4.4,0"
+                            Style="{DynamicResource RoundedNotActiveRedButtonStyle}"
+                            VerticalAlignment="Center"
+                            Foreground="White"
+                            FontSize="14"
+                            FontWeight="SemiBold"
+                            FontFamily="Comic Sans MS"
+                            Padding="4.5">
+                            ПОТЕРЯТЬ
+                        </Button>
+                    </Grid>
+
+                    <Grid
+                        Grid.Row="2"
+
+                        Margin="0,4.4,0,4.4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <Button
+                            Name="MercenariesButton"
                             Grid.Column="0"
                             Margin="0,4.4,4.4,0"
                             Style="{DynamicResource RoundedGreenButtonStyle}"
-                            Background="#4FA39C"
-                            Foreground="White"
+                            Background="White"
+                            BorderBrush="#FCC49B" BorderThickness="3"
+                            Foreground="Black"
                             FontSize="14"
                             FontWeight="SemiBold"
                             FontFamily="Comic Sans MS"
-                            Padding="4.5"
-                            >НАДЕТЬ</Button>
-                        
-                        <Button 
-                            Name="LostArmorButton"
+                            Padding="4.5">
+                            <TextBlock Text="НАЁМНИЧКИ" />
+                        </Button>
+                        <Button
+                            Name="GetMercenariesButton"
                             Grid.Column="1"
-                            Margin="4.4,4.4,0,0"
-                            Style="{DynamicResource RoundedRedButtonStyle}"
-                            Foreground="White"
-                            FontSize="14"
-                            FontWeight="SemiBold"
-                            FontFamily="Comic Sans MS"
-                            Padding="4.5"
-                        >ПОТЕРЯТЬ</Button>
-                    </Grid>
-                    
-                    <Grid
-                        Grid.Row="1"
-                        Grid.Column="2"
-                        Margin="4.4,4.4,0,4.4" >
-                        
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        
-                        <Button 
-                            Name="ChangeShoesButton"
-                            Grid.Column="0"
-                            Margin="0,0,4.4,0"
+                            Margin="4.4,0,4.4,0"
                             Style="{DynamicResource RoundedGreenButtonStyle}"
                             Background="#4FA39C"
+                            VerticalAlignment="Center"
                             Foreground="White"
                             FontSize="14"
                             FontWeight="SemiBold"
                             FontFamily="Comic Sans MS"
-                            Padding="4.5"
-                        >НАДЕТЬ</Button>
-                        
-                        <Button 
-                            Name="LostShoesButton"
-                            Grid.Column="1"
-                            Margin="4.4,0,0,0"
-                            Style="{DynamicResource RoundedRedButtonStyle}"
-                            
+                            Padding="4.5">
+                            ПОЛУЧИТЬ
+                        </Button>
+
+                        <Button
+                            Name="ChangeMercenaryButton"
+                            Grid.Column="2"
+                            Margin="4.4,0,4.4,0"
+                            Style="{DynamicResource RoundedNotActiveGreenButtonStyle}"
+                            VerticalAlignment="Center"
                             Foreground="White"
                             FontSize="14"
                             FontWeight="SemiBold"
                             FontFamily="Comic Sans MS"
-                            Padding="4.5"
-                        >ПОТЕРЯТЬ</Button>
+                            Padding="4.5">
+                            ПОМЕНЯТЬ
+                        </Button>
+
+                        <Button
+                            Name="LostMercenaryButton"
+                            Grid.Column="3"
+                            Margin="4.4,0,4.4,0"
+                            Style="{DynamicResource RoundedNotActiveRedButtonStyle}"
+                            VerticalAlignment="Center"
+                            Foreground="White"
+                            FontSize="14"
+                            FontWeight="SemiBold"
+                            FontFamily="Comic Sans MS"
+                            Padding="4.5">
+                            ПОТЕРЯТЬ
+                        </Button>
                     </Grid>
-                    
-                    <Grid
-                        Grid.Row="2"
-                        Grid.Column="2"
-                        Margin="4.4,4.4,0,4.4" >
-                        
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        
-                        <Button 
-                            Name="ChangeWeaponButton"
-                            Grid.Column="0"
-                            Margin="0,0,4.4,0"
-                            Style="{DynamicResource RoundedGreenButtonStyle}"
-                            Background="#4FA39C"
-                            Foreground="White"
-                            FontSize="14"
-                            FontWeight="SemiBold"
-                            FontFamily="Comic Sans MS"
-                            Padding="4.5"
-                        >НАДЕТЬ</Button>
-                        
-                        <Button 
-                            Name="LostWeaponButton"
-                            Grid.Column="1"
-                            Margin="4.4,0,0,0"
-                            Style="{DynamicResource RoundedRedButtonStyle}"
-                            
-                            Foreground="White"
-                            FontSize="14"
-                            FontWeight="SemiBold"
-                            FontFamily="Comic Sans MS"
-                            Padding="4.5"
-                        >ПОТЕРЯТЬ</Button>
-                    </Grid>
-                    
-                    <Grid
-                        Grid.Row="3"
-                        Grid.Column="2"
-                        Margin="4.4,4.4,0,0" >
-                        
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        
-                        <Button 
-                            Name="ChangeHatButton"
-                            Grid.Column="0"
-                            Margin="0,0,4.4,4.4"
-                            Style="{DynamicResource RoundedGreenButtonStyle}"
-                            Background="#4FA39C"
-                            Foreground="White"
-                            FontSize="14"
-                            FontWeight="SemiBold"
-                            FontFamily="Comic Sans MS"
-                            Padding="4.5"
-                        >НАДЕТЬ</Button>
-                        
-                        <Button 
-                            Name="LostHatButton"
-                            Grid.Column="1"
-                            Margin="4.4,0,0,4.4"
-                            Style="{DynamicResource RoundedRedButtonStyle}"
-                            Foreground="White"
-                            FontSize="14"
-                            FontWeight="SemiBold"
-                            FontFamily="Comic Sans MS"
-                            Padding="4.5"
-                        >ПОТЕРЯТЬ</Button>
-                    </Grid>
-                    
-                    
-                    
+
                 </Grid>
-                
-                
-            </Grid>
-        </Border>
-            
-        <Border
-            Grid.Column="1"
-            Margin="7.5,0,0,0"
-            
-            Background="White"
-            CornerRadius="20"
-            BorderBrush="#FCECDC" BorderThickness="3">
-            
-            <Border.Effect>
-                <DropShadowEffect BlurRadius="30" Direction="-100" Color="Tan" Opacity="0.8"/>
-            </Border.Effect>
-            
-            <Grid
-                Margin="8.8"
-                
-                >
-                <Grid.RowDefinitions>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                </Grid.RowDefinitions>
-                
-                <Grid
-                    Grid.Row="0"
-                    
-                    Margin="0,0,0,4.4">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition ></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    
-                    <Button
-                        Name="SmallStuffButton"
-                        Grid.Column="0"
-                        Margin="0,4.4,4.4,4.4"
-                        Style="{DynamicResource RoundedGreenButtonStyle}"
-                        Background="White"
-                        BorderBrush="#FCC49B" BorderThickness="3"
-                        Foreground="Black"
-                        FontSize="14"
-                        FontWeight="SemiBold"
-                        FontFamily="Comic Sans MS"
-                        Padding="4.5"><TextBlock Text="МЕЛКИЕ&#x0a;ШМОТКИ"/>
-                    </Button>
-                    <Button
-                        Name="GetSmallStuffButton"
-                        Grid.Column="1"
-                        Margin="4.4,0,4.4,0"
-                        Style="{DynamicResource RoundedGreenButtonStyle}"
-                        Background="#4FA39C"
-                        VerticalAlignment="Center"
-                        Foreground="White"
-                        FontSize="14"
-                        FontWeight="SemiBold"
-                        FontFamily="Comic Sans MS"
-                        Padding="4.5">НАДЕТЬ</Button>
-                    
-                    <Button
-                        Name="SellSmallStuffButton"
-                        Grid.Column="2"
-                        Margin="4.4,0,4.4,0"
-                        Style="{DynamicResource RoundedGreenButtonStyle}"
-                        
-                        VerticalAlignment="Center"
-                        Foreground="White"
-                        FontSize="14"
-                        FontWeight="SemiBold"
-                        FontFamily="Comic Sans MS"
-                        Padding="4.5">ПРОДАТЬ</Button>
-                    
-                    <Button
-                        Name="LostSmallStuffButton"
-                        Grid.Column="3"
-                        Margin="4.4,0,4.4,0"
-                        Style="{DynamicResource RoundedRedButtonStyle}"
-                        VerticalAlignment="Center"
-                        Foreground="White"
-                        FontSize="14"
-                        FontWeight="SemiBold"
-                        FontFamily="Comic Sans MS"
-                        Padding="4.5">ПОТЕРЯТЬ</Button>
-                </Grid>
-                
-                <Grid
-                    Grid.Row="1"
-                    
-                    Margin="0,4.4,0,4.4">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition ></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    
-                    <Button
-                        Name="HugeStuffButton"
-                        Grid.Column="0"
-                        Margin="0,4.4,4.4,4.4"
-                        Style="{DynamicResource RoundedGreenButtonStyle}"
-                        Background="White"
-                        BorderBrush="#FCC49B" BorderThickness="3"
-                        Foreground="Black"
-                        FontSize="14"
-                        FontWeight="SemiBold"
-                        FontFamily="Comic Sans MS"
-                        Padding="4.5"><TextBlock Text="КРУПНЫЕ&#x0a;ШМОТКИ"/>
-                    </Button>
-                    <Button
-                        Name="GetHugeStuffButton"
-                        Grid.Column="1"
-                        Margin="4.4,0,4.4,0"
-                        Style="{DynamicResource RoundedGreenButtonStyle}"
-                        Background="#4FA39C"
-                        VerticalAlignment="Center"
-                        Foreground="White"
-                        FontSize="14"
-                        FontWeight="SemiBold"
-                        FontFamily="Comic Sans MS"
-                        Padding="4.5">НАДЕТЬ</Button>
-                    
-                    <Button
-                        Name="SellHugeStuffButton"
-                        Grid.Column="2"
-                        Margin="4.4,0,4.4,0"
-                        Style="{DynamicResource RoundedGreenButtonStyle}"
-                        VerticalAlignment="Center"
-                        Foreground="White"
-                        FontSize="14"
-                        FontWeight="SemiBold"
-                        FontFamily="Comic Sans MS"
-                        Padding="4.5">ПРОДАТЬ</Button>
-                    
-                    <Button
-                        Name="LostHugeStuffButton"
-                        Grid.Column="3"
-                        Margin="4.4,0,4.4,0"
-                        Style="{DynamicResource RoundedRedButtonStyle}"
-                        VerticalAlignment="Center"
-                        Foreground="White"
-                        FontSize="14"
-                        FontWeight="SemiBold"
-                        FontFamily="Comic Sans MS"
-                        Padding="4.5">ПОТЕРЯТЬ</Button>
-                </Grid>
-                
-                <Grid
-                    Grid.Row="2"
-                    
-                    Margin="0,4.4,0,4.4">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition ></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    
-                    <Button
-                        Name="MercenariesButton"
-                        Grid.Column="0"
-                        Margin="0,4.4,4.4,0"
-                        Style="{DynamicResource RoundedGreenButtonStyle}"
-                        Background="White"
-                        BorderBrush="#FCC49B" BorderThickness="3"
-                        Foreground="Black"
-                        FontSize="14"
-                        FontWeight="SemiBold"
-                        FontFamily="Comic Sans MS"
-                        Padding="4.5"><TextBlock Text="НАЁМНИЧКИ"/>
-                    </Button>
-                    <Button
-                        Name="GetMercenariesButton"
-                        Grid.Column="1"
-                        Margin="4.4,0,4.4,0"
-                        Style="{DynamicResource RoundedGreenButtonStyle}"
-                        Background="#4FA39C"
-                        VerticalAlignment="Center"
-                        Foreground="White"
-                        FontSize="14"
-                        FontWeight="SemiBold"
-                        FontFamily="Comic Sans MS"
-                        Padding="4.5">ПОЛУЧИТЬ</Button>
-                    
-                    <Button
-                        Name="ChangeMercenaryButton"
-                        Grid.Column="2"
-                        Margin="4.4,0,4.4,0"
-                        Style="{DynamicResource RoundedGreenButtonStyle}"
-                        VerticalAlignment="Center"
-                        Foreground="White"
-                        FontSize="14"
-                        FontWeight="SemiBold"
-                        FontFamily="Comic Sans MS"
-                        Padding="4.5">ПОМЕНЯТЬ</Button>
-                    
-                    <Button
-                        Name="LostMercenaryButton"
-                        Grid.Column="3"
-                        Margin="4.4,0,4.4,0"
-                        Style="{DynamicResource RoundedRedButtonStyle}"
-                        VerticalAlignment="Center"
-                        Foreground="White"
-                        FontSize="14"
-                        FontWeight="SemiBold"
-                        FontFamily="Comic Sans MS"
-                        Padding="4.5">ПОТЕРЯТЬ</Button>
-                </Grid>
-                
-            </Grid>
-        </Border>
-    </Grid>
-        
+            </Border>
+        </Grid>
+
     </Grid>
 </Window>

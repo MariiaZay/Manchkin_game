@@ -11,8 +11,4 @@
       <ProjectReference Include="..\ManchkinCore\ManchkinCore.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Windows" />
-    </ItemGroup>
-
 </Project>

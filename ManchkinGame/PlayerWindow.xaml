@@ -5,10 +5,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:ManchkinGame"
         mc:Ignorable="d"
-        Title="PlayerWindow"
+        Title="Игровое окно"
         Height="800"
         Width="1000"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
@@ -276,7 +277,6 @@
     </Window.Background>
 
     <Grid>
-
         <Grid.RowDefinitions>
             <RowDefinition Height="0.35*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
@@ -1006,7 +1006,7 @@
                 </Border.Effect>
 
                 <Grid Margin="8.8">
-                    <Grid>
+                    <Grid >
 
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
@@ -1015,8 +1015,8 @@
                             <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.5*"></ColumnDefinition>
-                            <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.37*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.3*"></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
 
@@ -1114,9 +1114,11 @@
                         <Grid
                             Grid.Row="0"
                             Grid.Column="2"
-                            Margin="4.4,0,0,4.4">
+                            Margin="4.4,0,0,4.4"
+                            >
 
                             <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
                                 <ColumnDefinition></ColumnDefinition>
                                 <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
@@ -1134,17 +1136,28 @@
                                 Padding="4.5">
                                 НАДЕТЬ
                             </Button>
-
+                            <Button
+                                Name="SellArmorButton"
+                                Grid.Column="1"
+                                Margin="4.4,4.4,4.4,0"
+                                Style="{DynamicResource RoundedNotActiveGreenButtonStyle}"
+                                Foreground="White"
+                                FontSize="14"
+                                FontWeight="SemiBold"
+                                FontFamily="Comic Sans MS"
+                                Padding="4.5">
+                                ПРОДАТЬ
+                            </Button>
                             <Button
                                 Name="LostArmorButton"
-                                Grid.Column="1"
+                                Grid.Column="2"
                                 Margin="4.4,4.4,0,0"
                                 Style="{DynamicResource RoundedNotActiveRedButtonStyle}"
                                 Foreground="White"
                                 FontSize="14"
                                 FontWeight="SemiBold"
                                 FontFamily="Comic Sans MS"
-                                Padding="4.5">
+                                Padding="4">
                                 ПОТЕРЯТЬ
                             </Button>
                         </Grid>
@@ -1155,6 +1168,7 @@
                             Margin="4.4,4.4,0,4.4">
 
                             <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
                                 <ColumnDefinition></ColumnDefinition>
                                 <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
@@ -1172,10 +1186,21 @@
                                 Padding="4.5">
                                 НАДЕТЬ
                             </Button>
-
+                            <Button
+                                Name="SellShoesButton"
+                                Grid.Column="1"
+                                Margin="4.4,4.4,4.4,0"
+                                Style="{DynamicResource RoundedNotActiveGreenButtonStyle}"
+                                Foreground="White"
+                                FontSize="14"
+                                FontWeight="SemiBold"
+                                FontFamily="Comic Sans MS"
+                                Padding="4.5">
+                                ПРОДАТЬ
+                            </Button>
                             <Button
                                 Name="LostShoesButton"
-                                Grid.Column="1"
+                                Grid.Column="2"
                                 Margin="4.4,0,0,0"
                                 Style="{DynamicResource RoundedNotActiveRedButtonStyle}"
 
@@ -1183,7 +1208,7 @@
                                 FontSize="14"
                                 FontWeight="SemiBold"
                                 FontFamily="Comic Sans MS"
-                                Padding="4.5">
+                                Padding="4">
                                 ПОТЕРЯТЬ
                             </Button>
                         </Grid>
@@ -1194,6 +1219,7 @@
                             Margin="4.4,4.4,0,4.4">
 
                             <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
                                 <ColumnDefinition></ColumnDefinition>
                                 <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
@@ -1211,10 +1237,23 @@
                                 Padding="4.5">
                                 НАДЕТЬ
                             </Button>
+                            
+                            <Button
+                                Name="SellWeaponButton"
+                                Grid.Column="1"
+                                Margin="4.4,4.4,4.4,0"
+                                Style="{DynamicResource RoundedNotActiveGreenButtonStyle}"
+                                Foreground="White"
+                                FontSize="14"
+                                FontWeight="SemiBold"
+                                FontFamily="Comic Sans MS"
+                                Padding="4.5">
+                                ПРОДАТЬ
+                            </Button>
 
                             <Button
                                 Name="LostWeaponButton"
-                                Grid.Column="1"
+                                Grid.Column="2"
                                 Margin="4.4,0,0,0"
                                 Style="{DynamicResource RoundedNotActiveRedButtonStyle}"
 
@@ -1222,7 +1261,7 @@
                                 FontSize="14"
                                 FontWeight="SemiBold"
                                 FontFamily="Comic Sans MS"
-                                Padding="4.5">
+                                Padding="4">
                                 ПОТЕРЯТЬ
                             </Button>
                         </Grid>
@@ -1233,6 +1272,7 @@
                             Margin="4.4,4.4,0,0">
 
                             <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
                                 <ColumnDefinition></ColumnDefinition>
                                 <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
@@ -1250,17 +1290,28 @@
                                 Padding="4.5">
                                 НАДЕТЬ
                             </Button>
-
+                            <Button
+                                Name="SellHatButton"
+                                Grid.Column="1"
+                                Margin="4.4,4.4,4.4,4.4"
+                                Style="{DynamicResource RoundedNotActiveGreenButtonStyle}"
+                                Foreground="White"
+                                FontSize="14"
+                                FontWeight="SemiBold"
+                                FontFamily="Comic Sans MS"
+                                Padding="4.5">
+                                ПРОДАТЬ
+                            </Button>
                             <Button
                                 Name="LostHatButton"
-                                Grid.Column="1"
+                                Grid.Column="2"
                                 Margin="4.4,0,0,4.4"
                                 Style="{DynamicResource RoundedNotActiveRedButtonStyle}"
                                 Foreground="White"
                                 FontSize="14"
                                 FontWeight="SemiBold"
                                 FontFamily="Comic Sans MS"
-                                Padding="4.5">
+                                Padding="4">
                                 ПОТЕРЯТЬ
                             </Button>
                         </Grid>

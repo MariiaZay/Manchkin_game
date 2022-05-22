@@ -17,6 +17,7 @@ public abstract class Weapon : IStuff
     public abstract bool CanBeUsed(IClass _class);
     public abstract bool CanBeUsed(Genders gender);
     public List<string> Descriptions { get; protected set; }
+    public string TextRepresentation { get; protected set; }
 }
 
 public class Buckler : Weapon
@@ -29,6 +30,7 @@ public class Buckler : Weapon
         Fullness = Arms.SINGLE;
         Descriptions = new List<string>();
         FlushingBonus = 0;
+        TextRepresentation = "Баклер бахвала";
     }
 
     public override bool CanBeUsed(IRace race) => true;
@@ -46,6 +48,7 @@ public class Hammer : Weapon
         Fullness = Arms.SINGLE;
         Descriptions = new List<string>();
         FlushingBonus = 0;
+        TextRepresentation = "Коленоотбойный молот";
     }
 
     public override bool CanBeUsed(IRace race) => race is Dwarf || ActiveCheat;
@@ -63,6 +66,7 @@ public class ProgressiveSword : Weapon
         Fullness = Arms.SINGLE;
         Descriptions = new List<string>();
         FlushingBonus = 0;
+        TextRepresentation = "Меч широты взглядов";
     }
 
     public override bool CanBeUsed(IRace race) => true;
@@ -80,6 +84,7 @@ public class BastardSword : Weapon
         Fullness = Arms.SINGLE;
         Descriptions = new List<string>();
         FlushingBonus = 0;
+        TextRepresentation = "Меч коварного ублюдка";
     }
 
     public override bool CanBeUsed(IRace race) => true;
@@ -97,10 +102,11 @@ public class CheeseGrater : Weapon
         Fullness = Arms.SINGLE;
         Descriptions = new List<string>();
         FlushingBonus = 0;
+        TextRepresentation = "Сыротерка умиротворения";
     }
 
     public override bool CanBeUsed(IRace race) => true;
-    public override bool CanBeUsed(IClass _class) => true;
+    public override bool CanBeUsed(IClass _class) => _class is Cleric;
     public override bool CanBeUsed(Genders gender) => true;
 }
 
@@ -114,6 +120,7 @@ public class NapalmStuff : Weapon
         Fullness = Arms.SINGLE;
         Descriptions = new List<string>();
         FlushingBonus = 0;
+        TextRepresentation = "Посох напалма";
     }
 
     public override bool CanBeUsed(IRace race) => true;
@@ -133,6 +140,7 @@ public class Rapier : Weapon
         Fullness = Arms.SINGLE;
         Descriptions = new List<string>();
         FlushingBonus = 0;
+        TextRepresentation = "Рапира такнечестности";
     }
 
     public override bool CanBeUsed(IRace race) => true;
@@ -152,6 +160,7 @@ public class Dagger : Weapon
         Fullness = Arms.SINGLE;
         Descriptions = new List<string>();
         FlushingBonus = 0;
+        TextRepresentation = "Кинжал измены";
     }
 
     public override bool CanBeUsed(IRace race) => true;
@@ -161,9 +170,9 @@ public class Dagger : Weapon
     public override bool CanBeUsed(Genders gender) => true;
 }
 
-public class Club : Weapon
+public class Mace : Weapon
 {
-    public Club()
+    public Mace()
     {
         Price = 600;
         Damage = 4;
@@ -171,6 +180,7 @@ public class Club : Weapon
         Fullness = Arms.SINGLE;
         Descriptions = new List<string>();
         FlushingBonus = 0;
+        TextRepresentation = "Палица остроы";
     }
 
     public override bool CanBeUsed(IRace race) => true;
@@ -190,6 +200,7 @@ public class Shild : Weapon
         Fullness = Arms.SINGLE;
         Descriptions = new List<string>();
         FlushingBonus = 0;
+        TextRepresentation = "Вездешний щит";
     }
 
     public override bool CanBeUsed(IRace race) => true;
@@ -199,9 +210,9 @@ public class Shild : Weapon
     public override bool CanBeUsed(Genders gender) => true;
 }
 
-public class Oak : Weapon
+public class Club : Weapon
 {
-    public Oak()
+    public Club()
     {
         Price = 400;
         Damage = 3;
@@ -209,6 +220,7 @@ public class Oak : Weapon
         Fullness = Arms.SINGLE;
         Descriptions = new List<string>();
         FlushingBonus = 0;
+        TextRepresentation = "Дуб джентельменов";
     }
 
     public override bool CanBeUsed(IRace race) => true;
@@ -228,6 +240,7 @@ public class Chainsaw : Weapon
         Fullness = Arms.BOTH;
         Descriptions = new List<string>();
         FlushingBonus = 0;
+        TextRepresentation = "Бензопила кровавого расчленения";
     }
 
     public override bool CanBeUsed(IRace race) => true;
@@ -237,9 +250,9 @@ public class Chainsaw : Weapon
     public override bool CanBeUsed(Genders gender) => true;
 }
 
-public class Halberd : Weapon
+public class Polearm : Weapon
 {
-    public Halberd()
+    public Polearm()
     {
         Price = 600;
         Damage = 4;
@@ -247,9 +260,11 @@ public class Halberd : Weapon
         Fullness = Arms.BOTH;
         Descriptions = new List<string>();
         FlushingBonus = 0;
+        TextRepresentation = "Швейцарская армейская алебарда";
+        
     }
 
-    public override bool CanBeUsed(IRace race) => true;
+    public override bool CanBeUsed(IRace race) => race is Human;
 
     public override bool CanBeUsed(IClass _class) => true;
 
@@ -266,6 +281,7 @@ public class HugeRock : Weapon
         Fullness = Arms.BOTH;
         Descriptions = new List<string>();
         FlushingBonus = 0;
+        TextRepresentation = "Огромный камень";
     }
 
     public override bool CanBeUsed(IRace race) => true;
@@ -285,6 +301,7 @@ public class Pole : Weapon
         Fullness = Arms.BOTH;
         Descriptions = new List<string>();
         FlushingBonus = 0;
+        TextRepresentation = "Одиннадцатифутовый шест";
     }
 
     public override bool CanBeUsed(IRace race) => true;
@@ -304,6 +321,7 @@ public class Bow : Weapon
         Fullness = Arms.BOTH;
         Descriptions = new List<string>();
         FlushingBonus = 0;
+        TextRepresentation = "Лучок с ленточками";
     }
 
     public override bool CanBeUsed(IRace race) => race is Elf || ActiveCheat;
@@ -323,6 +341,7 @@ public class RatOnStick : Weapon
         Fullness = Arms.SINGLE;
         Descriptions = new List<string> {FirstFeature};
         FlushingBonus = 0;
+        TextRepresentation = "Крыса на палочке";
     }
 
     private const string FirstFeature = "Лучше, чем ничего! Можешь сбросить крысу, даже если не используешь ее, "
@@ -345,6 +364,7 @@ public class TubeOfCharm : Weapon
         Fullness = Arms.SINGLE;
         Descriptions = new List<string> {FirstFeature};
         FlushingBonus = 3;
+        TextRepresentation = "Чарующая дуда";
     }
 
     private const string FirstFeature = "Успешно смывшись, можешь взять одно сокровище в закрытую (один раз в ход)";

@@ -50,6 +50,7 @@ public class Manchkin : IManchkin
 
     public int Damage { get; private set; }
     public List<string> Descriptions { get; }
+    public string TextRepresentation { get; }
     public bool IsDead { get; }
 
     #endregion
@@ -95,6 +96,7 @@ public class Manchkin : IManchkin
         Class = new Nobody();
         Gender = gender;
         Damage = Level;
+        TextRepresentation = "Манчкин";
     }
 
 

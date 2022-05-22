@@ -15,6 +15,8 @@ public class Cleric : IClass
         => "Можешь сбросить всю руку (не меньше трех карт!), чтобы усмирить одного монстра " +
            "в бою. Сбрось его. Он отдаст тебе свои сокровища, но не даст уровень. " +
            "С другими монстрами этого боя придется биться";
+
+    public string TextRepresentation => "клирик";
 }
 
 public class Warrior : IClass
@@ -27,6 +29,7 @@ public class Warrior : IClass
     private static string FirstFeature => "Можешь сбросить до трех карт в бою. Каждая даст тебе бонус +1";
 
     private static string SecondFeature => "ты побеждаешь при равенстве сил в бою";
+    public string TextRepresentation => "воин";
 }
 
 public class Thief : IClass
@@ -43,6 +46,7 @@ public class Thief : IClass
     private static string SecondFeature
         => "Можешь сбросить карту и бросить кубик, чтобы попытаться украсть у соперника мелкую шмотку. На 4 и больше " +
            "кража удалась. На три и меньше теб мутузят, потеряй уровень";
+    public string TextRepresentation => "вор";
 }
 
 public class Wizard : IClass
@@ -58,10 +62,12 @@ public class Wizard : IClass
 
     private static string SecondFeature
         => "Можешь сбросить до трех карт в бою против андеда (андедов). Получи бонус +3 за каждую сброшенную карту";
+    public string TextRepresentation => "волшебник";
 }
 
 public class Nobody : IClass
 {
     public List<string> Descriptions{ get; } = new List<string>();
+    public string TextRepresentation => "никто";
 }
 

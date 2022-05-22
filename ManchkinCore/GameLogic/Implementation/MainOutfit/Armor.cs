@@ -13,6 +13,7 @@ public abstract class Armor : IStuff
     public int FlushingBonus { get; protected set; }
     public bool Cheat { get; set; } = false;
     public List<string> Descriptions { get; protected set; }
+    public string TextRepresentation { get; protected set; }
 
     public abstract bool CanBeUsed(IRace race);
     public abstract bool CanBeUsed(IClass _class);
@@ -30,6 +31,7 @@ public class MithrilArmor : Armor
         Fullness = Arms.NO;
         Descriptions = new List<string>();
         FlushingBonus = 0;
+        TextRepresentation = "Мифрильная броня";
     }
 
     public override bool CanBeUsed(IRace race) => true;
@@ -49,6 +51,7 @@ public class DwarfArmor : Armor
         Fullness = Arms.NO;
         Descriptions = new List<string>();
         FlushingBonus = 0;
+        TextRepresentation = "Коротышкинские латы";
     }
 
     public override bool CanBeUsed(IRace race) => race is Dwarf || ActiveCheat;
@@ -68,6 +71,7 @@ public class LeatherArmor : Armor
         Fullness = Arms.NO;
         Descriptions = new List<string>();
         FlushingBonus = 0;
+        TextRepresentation = "Кожаный прикид";
     }
 
     public override bool CanBeUsed(IRace race) => true;
@@ -87,6 +91,7 @@ public class MucousMembrane : Armor
         Fullness = Arms.NO;
         Descriptions = new List<string>();
         FlushingBonus = 0;
+        TextRepresentation = "Слизистая оболочка";
     }
 
     public override bool CanBeUsed(IRace race) => true;
@@ -106,6 +111,7 @@ public class FlamingArmor : Armor
         Fullness = Arms.NO;
         Descriptions = new List<string>();
         FlushingBonus = 0;
+        TextRepresentation = "Пламенные латы";
     }
 
     public override bool CanBeUsed(IRace race) => true;

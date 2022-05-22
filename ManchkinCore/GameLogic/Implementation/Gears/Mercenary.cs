@@ -17,4 +17,6 @@ public class Mercenary : IMercenary
 
     private const string SecondFeature = "Можешь сбросить наемничка вместо броска на смывку, " +
                                          "чтобы автоматически смыться от всех монстров в бою";
+
+    public string TextRepresentation => "наемничек";
 }

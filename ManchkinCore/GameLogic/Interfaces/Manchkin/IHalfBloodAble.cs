@@ -7,5 +7,4 @@ public interface IHalfBloodAble
     public void BecameHalfBlood(IRace? second);
     public void BecameHalfBlood();
     public void RefuseHalfblood();
-
 }

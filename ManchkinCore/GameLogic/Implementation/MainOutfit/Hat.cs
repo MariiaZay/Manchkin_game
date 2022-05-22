@@ -14,6 +14,7 @@ public abstract class Hat : IStuff
     public int FlushingBonus { get; protected set; }
     public bool Cheat { get; set; } = false;
     public List<string> Descriptions { get; protected set; }
+    public string TextRepresentation { get; protected set; }
 
     public abstract bool CanBeUsed(IRace race);
     public abstract bool CanBeUsed(IClass _class);
@@ -31,6 +32,7 @@ public class HornedHelmet : Hat
         Fullness = Arms.NO;
         Descriptions = new List<string>();
         FlushingBonus = 0;
+        TextRepresentation = "Шлем-рогач";
     }
 
     public override bool CanBeUsed(IRace race) => race is Elf || ActiveCheat;
@@ -50,6 +52,7 @@ public class BandanaOfBastartism : Hat
         Fullness = Arms.NO;
         Descriptions = new List<string>();
         FlushingBonus = 0;
+        TextRepresentation = "Бандана сволочизма";
     }
 
     public override bool CanBeUsed(IRace race) => race is Human || ActiveCheat;
@@ -69,6 +72,7 @@ public class HatOfPower : Hat
         Fullness = Arms.NO;
         Descriptions = new List<string>();
         FlushingBonus = 0;
+        TextRepresentation = "Остроконечная шляпа могущества";
     }
 
     public override bool CanBeUsed(IRace race) => true;
@@ -88,6 +92,7 @@ public class HelmetOfCourage : Hat
         Fullness = Arms.NO;
         Descriptions = new List<string>();
         FlushingBonus = 0;
+        TextRepresentation = "Шлем отваги";
     }
 
     public override bool CanBeUsed(IRace race) => true;

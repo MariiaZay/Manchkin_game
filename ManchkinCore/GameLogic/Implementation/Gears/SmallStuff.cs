@@ -15,6 +15,8 @@ public abstract class SmallStuff : IStuff, IDescriptable
     public bool Cheat { get; set; } = false;
 
     public List<string> Descriptions { get; protected set; }
+    
+    public string TextRepresentation { get; protected set; }
 
     public abstract bool CanBeUsed(IRace race);
     public abstract bool CanBeUsed(IClass _class);
@@ -32,6 +34,7 @@ public class Stepladder : SmallStuff
         Fullness = Arms.NO;
         Descriptions = new List<string>();
         FlushingBonus = 0;
+        TextRepresentation = "Боевая стремянка";
     }
 
     public override bool CanBeUsed(IRace race) => race is Halfling || ActiveCheat;
@@ -51,6 +54,7 @@ public class GreatTitle : SmallStuff
         Fullness = Arms.NO;
         Descriptions = new List<string>();
         FlushingBonus = 0;
+        TextRepresentation = "Реально впечатляющий титул";
     }
 
     public override bool CanBeUsed(IRace race) => true;
@@ -70,6 +74,7 @@ public class SpikedKnees : SmallStuff
         Fullness = Arms.NO;
         Descriptions = new List<string>();
         FlushingBonus = 0;
+        TextRepresentation = "Шипастые коленки";
     }
 
     public override bool CanBeUsed(IRace race) => true;
@@ -89,6 +94,7 @@ public class SingingSword : SmallStuff
         Fullness = Arms.NO;
         Descriptions = new List<string>();
         FlushingBonus = 0;
+        TextRepresentation = "Меч песни и пляски";
     }
 
     public override bool CanBeUsed(IRace race) => true;
@@ -108,6 +114,7 @@ public class Sandwich : SmallStuff
         Fullness = Arms.NO;
         Descriptions = new List<string>();
         FlushingBonus = 0;
+        TextRepresentation = "Сэндвич \"Душитая смерть\"";
     }
 
     public override bool CanBeUsed(IRace race) => race is Halfling || ActiveCheat;
@@ -127,6 +134,7 @@ public class Cloack : SmallStuff
         Fullness = Arms.NO;
         Descriptions = new List<string>();
         FlushingBonus = 0;
+        TextRepresentation = "Плащ замутнености";
     }
 
     public override bool CanBeUsed(IRace race) => true;
@@ -146,6 +154,7 @@ public class Pantyhose : SmallStuff
         Fullness = Arms.NO;
         Descriptions = new List<string>();
         FlushingBonus = 0;
+        TextRepresentation = "Колготы великанской силы";
     }
 
     public override bool CanBeUsed(IRace race) => true;
@@ -168,6 +177,7 @@ public class KneepadsOfAllure : SmallStuff, IDescriptable
             " Ты не можешь получить победнй уровень за бой, в котором твой помощник разведен наколенниками."
         };
         FlushingBonus = 0;
+        TextRepresentation = "Наколенники развода";
     }
 
     public override bool CanBeUsed(IRace race) => true;

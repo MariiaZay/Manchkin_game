@@ -17,6 +17,7 @@ public abstract class Shoes : IStuff
     public abstract bool CanBeUsed(IClass race);
     public abstract bool CanBeUsed(Genders gender);
     public List<string> Descriptions { get; protected set; }
+    public string TextRepresentation { get; protected set; }
 }
 
 public class MightyShoes : Shoes
@@ -35,6 +36,7 @@ public class MightyShoes : Shoes
         Fullness = Arms.NO;
         Descriptions = new List<string>();
         FlushingBonus = 0;
+        TextRepresentation = "Башмаки могучего пенделя";
     }
 }
 
@@ -48,6 +50,7 @@ public class ReallyFastBoots : Shoes
         Fullness = Arms.NO;
         Descriptions = new List<string>();
         FlushingBonus = 2;
+        TextRepresentation = "Башмаки реально быстрого бега";
     }
 
     public override bool CanBeUsed(IRace _class) => true;
@@ -67,6 +70,7 @@ public class SandalsOfProtection : Shoes
         Fullness = Arms.NO;
         Descriptions = new List<string> {FirstFeature};
         FlushingBonus = 0;
+        TextRepresentation = "Сандалеты-протекторы";
     }
 
     private const string FirstFeature = "Защищают тебя от проклятий, которые ты вытягиваешь, вышибая двери. Не спасут "

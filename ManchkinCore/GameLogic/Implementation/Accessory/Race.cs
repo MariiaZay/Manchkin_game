@@ -12,6 +12,7 @@ public class Elf : IRace
     {
         FirstFeature, SecondFeature
     };
+    public string TextRepresentation => "эльф";
 
     private static string FirstFeature => "Получай уровень за каждого монстра, которого помог убить";
 
@@ -23,6 +24,7 @@ public class Human : IRace
     public int FlushingBonus => 0;
     public int CardCount => 5;
     public bool CellingByDoublePrice => false;
+    public string TextRepresentation => "человек";
     public List<string> Descriptions { get; } = new List<string>();
 }
 
@@ -31,6 +33,7 @@ public class Dwarf : IRace
     public int FlushingBonus => 0;
     public int CardCount => 6;
     public bool CellingByDoublePrice => false;
+    public string TextRepresentation => "дворф";
     public List<string> Descriptions { get; } = new List<string>
     {
         FirstFeature, SecondFeature
@@ -43,6 +46,7 @@ public class Halfling : IRace
     public int FlushingBonus => 0;
     public int CardCount => 5;
     public bool CellingByDoublePrice => true;
+    public string TextRepresentation => "хаффлинг";
     public List<string> Descriptions { get; } = new List<string>
     {
         FirstFeature, SecondFeature
@@ -50,6 +54,6 @@ public class Halfling : IRace
     
     private static string FirstFeature => "Раз в ход можешь продать одну шмотку за двойную цену(и другие по обычной)";
 
-    private static string SecondFeature => "Провалив первый бросок смывки, можешь сбросить карту для второйпопытки";
+    private static string SecondFeature => "Провалив первый бросок смывки, можешь сбросить карту для второй попытки";
 }
 

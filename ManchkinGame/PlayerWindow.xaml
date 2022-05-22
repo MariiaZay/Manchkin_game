@@ -219,6 +219,53 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style x:Key="RoundedStuffButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Background" Value="White" />
+            <Setter Property="BorderBrush" Value="#FCC49B" />
+            <Setter Property="Padding" Value="1" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" CornerRadius="15" BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding Background}" SnapsToDevicePixels="true" Margin="0,0,0,0">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              Margin="{TemplateBinding Padding}" RecognizesAccessKey="True"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border"
+                                        Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="#FEF3EC" />
+                                <Setter Property="BorderBrush" TargetName="border" Value="#F9AB7A" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="#FBCDAF" />
+                                <Setter Property="BorderBrush" TargetName="border" Value="#F78E4C" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border"
+                                        Value="{StaticResource Button.Disabled.Background}" />
+                                <Setter Property="BorderBrush" TargetName="border"
+                                        Value="{StaticResource Button.Disabled.Border}" />
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter"
+                                        Value="{StaticResource Button.Disabled.Foreground}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
         <Style x:Key="RoundedNotActiveGreenButtonStyle" TargetType="{x:Type Button}">
             <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
             <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
@@ -956,10 +1003,9 @@
 
                         <Button
                             Grid.Column="0"
-                            Name="FeaturesButton"
+                            Name="DescriptionButton"
                             Margin="0,0,4.4,0"
-                            Style="{DynamicResource RoundedGreenButtonStyle}"
-                            Background="#4FA39C"
+                            Style="{DynamicResource RoundedNotActiveGreenButtonStyle}"
                             Foreground="White"
                             FontWeight="SemiBold"
                             FontSize="14"
@@ -1358,9 +1404,9 @@
                             Name="SmallStuffButton"
                             Grid.Column="0"
                             Margin="0,4.4,4.4,4.4"
-                            Style="{DynamicResource RoundedGreenButtonStyle}"
-                            Background="White"
-                            BorderBrush="#FCC49B" BorderThickness="3"
+                            Style="{DynamicResource RoundedStuffButtonStyle}"
+                            
+                             BorderThickness="3"
                             Foreground="Black"
                             FontSize="14"
                             FontWeight="SemiBold"
@@ -1428,9 +1474,8 @@
                             Name="HugeStuffButton"
                             Grid.Column="0"
                             Margin="0,4.4,4.4,4.4"
-                            Style="{DynamicResource RoundedGreenButtonStyle}"
-                            Background="White"
-                            BorderBrush="#FCC49B" BorderThickness="3"
+                            Style="{DynamicResource RoundedStuffButtonStyle}"
+                            BorderThickness="3"
                             Foreground="Black"
                             FontSize="14"
                             FontWeight="SemiBold"
@@ -1497,9 +1542,8 @@
                             Name="MercenariesButton"
                             Grid.Column="0"
                             Margin="0,4.4,4.4,0"
-                            Style="{DynamicResource RoundedGreenButtonStyle}"
-                            Background="White"
-                            BorderBrush="#FCC49B" BorderThickness="3"
+                            Style="{DynamicResource RoundedStuffButtonStyle}"
+                            BorderThickness="3"
                             Foreground="Black"
                             FontSize="14"
                             FontWeight="SemiBold"

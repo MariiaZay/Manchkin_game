@@ -11,8 +11,6 @@
         ResizeMode="NoResize"
         WindowStyle="None"
         WindowStartupLocation="CenterOwner"
-        
-        
         AllowsTransparency="True"
         Background="Transparent"
         >
@@ -116,12 +114,12 @@
     </Window.Resources>
     <Border CornerRadius="20"
             BorderBrush="#FCECDC" BorderThickness="3"
-            Margin="15">
+            Margin="15"
+            Background = "White">
         <Border.Effect>
             <DropShadowEffect BlurRadius="15" Direction="-100" Color="Tan" Opacity="0.8" />
         </Border.Effect>
-        <Border.Background>White</Border.Background>
-            <Grid Margin="8.8">
+        <Grid Margin="8.8">
                 <Grid.RowDefinitions>
                     <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
@@ -165,7 +163,7 @@
                     </Grid.ColumnDefinitions>
                     <Button
                         Grid.Column="0"
-                        Name="DoneButton"
+                        Name="ApplyButton"
                         Margin="0,0,4.4,0"
                         Style="{DynamicResource RoundedGreenButtonStyle}"
                         Foreground="White"

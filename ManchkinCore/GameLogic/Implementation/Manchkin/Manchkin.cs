@@ -17,7 +17,7 @@ public class Manchkin : IManchkin
     public IRace Race
     {
         get => _race;
-        private set
+        set
         {
             _race = ChangeRace(value);
             RecalculateParameters();
@@ -29,7 +29,7 @@ public class Manchkin : IManchkin
     public IClass Class
     {
         get => _class;
-        private set
+        set
         {
             _class = ChangeClass(value);
             RecalculateParameters();

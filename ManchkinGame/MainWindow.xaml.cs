@@ -36,26 +36,22 @@ namespace ManchkinGame
         private void StartButtonClick(object sender, RoutedEventArgs e)
         {
             var userName = NameBox.Text;
-            if (userName.Length == 0)
+            switch (userName.Length)
             {
-                CreateMessageForUser("Пожалуйста введите имя", "Недостаточно данных",
-                    MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
-            else
-            {
-                if (userName.Length > 59)
-                {
+                case 0:
+                    UserMessage.CreateNotChosenItemMessage("имя");
+                    break;
+                case > 59:
                     CreateMessageForUser(String.Format("Ваше имя слишком длинное!\n" +
                                                        "Пожалуйста, введите имя на {0} символа короче",
                             userName.Length - 59), "Некорректный ввод",
                         MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                else
+                    break;
+                default:
                 {
                     if (MaleButton.IsChecked == false && FemaleBottun.IsChecked == false)
                     {
-                        CreateMessageForUser("Пожалуйста укажите пол", "Недостаточно данных",
-                            MessageBoxButton.OK, MessageBoxImage.Warning);
+                        UserMessage.CreateNotChosenItemMessage("пол");
                     }
                     else
                     {
@@ -68,6 +64,7 @@ namespace ManchkinGame
                         PlayWin.Show();
                         Close();
                     }
+                    break;
                 }
             }
         }

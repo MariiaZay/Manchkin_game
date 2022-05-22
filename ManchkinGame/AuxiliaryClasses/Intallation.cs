@@ -9,26 +9,12 @@ public static class Intallation
 {
     #region Base parameters
 
-    public static string Race(Player player) 
-        => player.Manchkin.Race switch
-        {
-            Human => RaceEnums.человек.ToString(),
-            Elf => RaceEnums.эльф.ToString(),
-            Dwarf => RaceEnums.дворф.ToString(),
-            Halfling => RaceEnums.хаффлинг.ToString(),
-            _ => RaceEnums.человек.ToString()
-        };
+    public static string Race(Player player)
+        => player.Manchkin.Race.TextRepresentation;
+
     
     public static string Class(Player player)
-        =>  player.Manchkin.Class switch
-        {
-            Nobody => ClassEnums.никто.ToString(),
-            Warrior => ClassEnums.воин.ToString(),
-            Wizard => ClassEnums.волшебник.ToString(),
-            Thief => ClassEnums.вор.ToString(),
-            Cleric => ClassEnums.клирик.ToString(),
-            _ => ClassEnums.никто.ToString()
-        };
+        => player.Manchkin.Class.TextRepresentation;
 
     public static string Gender(Player player)
         => player.Manchkin.Gender == Genders.MALE ? "мужчина" : "женщина";

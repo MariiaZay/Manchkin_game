@@ -27,8 +27,12 @@ public partial class ChooseWindow : Window
         };
         ChooseBlock.Text = String.Format("Выберите {0}", _typeOfVariants);
         VariantsComboBox.Loaded += VariantsComboBoxLoaded;
+
+        ApplyButton.Click += ApplyButtonClick;
         CancelButton.Click += CancelButtonClick;
     }
+
+    
 
     private void VariantsComboBoxLoaded(object sender, RoutedEventArgs e)
     {
@@ -38,9 +42,22 @@ public partial class ChooseWindow : Window
             VariantsComboBox.Items.Add(variant.TextRepresentation);
         }
     }
-
+    
+    private void ApplyButtonClick(object sender, RoutedEventArgs e)
+    {
+        if(VariantsComboBox.Text == "")
+            UserMessage.CreateNotChosenItemMessage("новую рассу");
+        foreach (var variant in _variants.Where(variant => variant.TextRepresentation == VariantsComboBox.Text))
+        {
+            App.Current.Resources["NEW"] = variant;
+            break;
+        }
+        Close();
+    }
+    
     private void CancelButtonClick(object sender, RoutedEventArgs e)
     {
+        App.Current.Resources["NEW"] = null;
         Close();
     }
 }

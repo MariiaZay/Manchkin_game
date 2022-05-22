@@ -6,6 +6,7 @@ using System.Windows.Media;
 using ManchkinCore.Enums;
 using ManchkinCore.Enums.Accessory;
 using ManchkinCore.Implementation;
+using ManchkinCore.Interfaces;
 
 namespace ManchkinGame.Windows;
 
@@ -15,7 +16,6 @@ public partial class PlayerWindow
     public PlayerWindow()
     {
         InitializeComponent();
-        
         
         var name = Application.Current.Resources["USER_NAME"].ToString();
         var sex = Application.Current.Resources["SEX"].ToString() == "мужcкой" ? Genders.MALE : Genders.FEMALE;
@@ -38,11 +38,21 @@ public partial class PlayerWindow
         ChangeClassButton.Click += ChangeClassButtonClick;
         
         DeathButton.Click += DeathButtonClick;
+        
         LostArmorButton.Click += LostArmorButtonClick;
+        SellArmorButton.Click += ChangeArmorButtonClick;
+        
+        
         LostShoesButton.Click += LostShoesButtonCLick;
+        SellShoesButton.Click += SellShoesButtonClick;
+        
         LostWeaponButton.Click += LostWeaponButtonClick;
+        SellWeaponButton.Click += SellWeaponButtonClick;
+        
         LostHatButton.Click += LostHatButtonClick;
-        FeaturesButton.Click += FeaturesButtonClick;
+        SellHatButton.Click += SellHatButtonClick;
+        
+        DescriptionButton.Click += DescriptionButtonClick;
         SellSmallStuffButton.Click += SellSmallStuffButtonClick;
         LostSmallStuffButton.Click += LostSmallStuffButtonClick;
         SellHugeStuffButton.Click += SellHugeStuffButtonClick;
@@ -51,11 +61,53 @@ public partial class PlayerWindow
         LostMercenaryButton.Click += LostMercenaryButtonClick;
     }
 
-    private void ChangeClassButtonClick(object sender, RoutedEventArgs e)
+    #region Level
+    private void ReduceLevelButtonClick(object sender, RoutedEventArgs e)
     {
-        App.Current.Resources["TYPE_OF_VARIANTS"] = "класс";
-        App.Current.Resources["CURRENT"] = ClassBlock.Text;
-        DialogWindow.Show(new ChooseWindow(), this);
+        _player.Manchkin.LostLevel();
+        LevelBlock.Text = Intallation.Level(_player);
+        DamageBlock.Text = Intallation.Damage(_player);
+    }
+
+    private void IncreaseLevelButtonClick(object sender, RoutedEventArgs e)
+    {
+        _player.Manchkin.GetLevel();
+        LevelBlock.Text = Intallation.Level(_player);
+        DamageBlock.Text = Intallation.Damage(_player);
+    }
+    #endregion
+
+    #region Management
+
+    private void BattleButtonClick(object sender, RoutedEventArgs e)
+    {
+        BattleButton.Content = ReferenceEquals(BattleButton.Content, "БОЙ") ? "НЕ В БОЮ" : "БОЙ";
+    }
+
+    private void MoveButtonClick(object sender, RoutedEventArgs e)
+    {
+        MoveButton.Content = ReferenceEquals(MoveButton.Content, "МОЙ ХОД") ? "ЧУЖОЙ ХОД" : "МОЙ ХОД";
+    }
+
+    #endregion
+    
+    private void ChangeGenderButtonClick(object sender, RoutedEventArgs e)
+    {
+        _player.Manchkin.ChangeGender();
+        Refresh();
+    }
+    
+    #region Race
+
+    private void LostRaceButtonClick(object sender, RoutedEventArgs e)
+    {
+        if(_player.Manchkin.Race is Human)
+            UserMessage.CreateImpossibleLostMessage("расу");
+        _player.Manchkin.Race = new Human();
+        LostRaceButton.Style = (Style) FindResource("RoundedNotActiveRedButtonStyle");
+        if(_player.Manchkin.Descriptions.Count == 0)
+            DescriptionButton.Style = (Style) FindResource("RoundedNotActiveRedButtonStyle");
+        Refresh();
     }
     
     private void ChangeRaceButtonClick(object sender, RoutedEventArgs e)
@@ -63,6 +115,85 @@ public partial class PlayerWindow
         App.Current.Resources["TYPE_OF_VARIANTS"] = "расу";
         App.Current.Resources["CURRENT"] = RaceBlock.Text;
         DialogWindow.Show(new ChooseWindow(), this);
+
+        if (App.Current.Resources["NEW"] == null) return;
+        
+        var newRace = App.Current.Resources["NEW"] as IRace;
+        _player.Manchkin.Race = newRace;
+        LostRaceButton.Style = (Style) FindResource("RoundedRedButtonStyle");
+        DescriptionButton.Style = (Style) FindResource("RoundedGreenButtonStyle");
+        Refresh();
+    }
+
+    #endregion
+
+    #region Class
+    
+    private void LostClassButtonClick(object sender, RoutedEventArgs e)
+    {
+        if(_player.Manchkin.Class is Nobody)
+            UserMessage.CreateImpossibleLostMessage("класс");
+        _player.Manchkin.Class = new Nobody();
+        LostClassButton.Style = (Style) FindResource("RoundedNotActiveRedButtonStyle");
+        if(_player.Manchkin.Descriptions.Count == 0)
+            DescriptionButton.Style = (Style) FindResource("RoundedNotActiveRedButtonStyle");
+        Refresh();
+    }
+    
+    private void ChangeClassButtonClick(object sender, RoutedEventArgs e)
+    {
+        App.Current.Resources["TYPE_OF_VARIANTS"] = "класс";
+        App.Current.Resources["CURRENT"] = ClassBlock.Text;
+        DialogWindow.Show(new ChooseWindow(), this);
+        
+        if (App.Current.Resources["NEW"] == null) return;
+        var newClass = App.Current.Resources["NEW"] as IClass;
+        _player.Manchkin.Class = newClass;
+        LostClassButton.Style = (Style) FindResource("RoundedRedButtonStyle");
+        DescriptionButton.Style = (Style) FindResource("RoundedGreenButtonStyle");
+        Refresh();
+    }
+
+    #endregion
+    
+    private void SellHatButtonClick(object sender, RoutedEventArgs e)
+    {
+        if(_player.Manchkin.WornHat == null)
+            UserMessage.CreateEmptyStuffMessage();
+    }
+
+    private void SellWeaponButtonClick(object sender, RoutedEventArgs e)
+    {
+        if(_player.Manchkin.Hands.LeftHand == null && _player.Manchkin.Hands.RightHand == null)
+            UserMessage.CreateEmptyStuffMessage();
+    }
+
+
+    private void SellShoesButtonClick(object sender, RoutedEventArgs e)
+    {
+        if(_player.Manchkin.WornShoes == null)
+            UserMessage.CreateEmptyStuffMessage();
+    }
+
+    private void ChangeArmorButtonClick(object sender, RoutedEventArgs e)
+    {
+        if(_player.Manchkin.WornArmor == null)
+            UserMessage.CreateEmptyStuffMessage();
+    }
+    
+    private void Refresh()
+    {
+        RaceBlock.Text = Intallation.Race(_player);
+        ClassBlock.Text = Intallation.Class(_player);
+        GenderBlock.Text = Intallation.Gender(_player);
+        DamageBlock.Text = Intallation.Damage(_player);
+        CardCountBlock.Text = Intallation.CardCount(_player);
+        FlushingBonusBlock.Text = Intallation.FlushingBonus(_player);
+        DoublePriceBlock.Text = Intallation.DoublePrice(_player);
+        ArmorBlock.Text = Intallation.Armor(_player);
+        ShoesBlock.Text = Intallation.Shoes(_player);
+        WeaponBlock.Text = Intallation.Weapon(_player);
+        HatBlock.Text = Intallation.Hat(_player);
     }
 
     private void LostMercenaryButtonClick(object sender, RoutedEventArgs e)
@@ -101,34 +232,38 @@ public partial class PlayerWindow
             UserMessage.CreateEmptyStuffMessage();
     }
 
-    private void FeaturesButtonClick(object sender, RoutedEventArgs e)
+    private void DescriptionButtonClick(object sender, RoutedEventArgs e)
     {
         if (_player.Manchkin.Descriptions.Count == 0)
             UserMessage.CreateEmptyStuffMessage();
+        else
+        {
+            DialogWindow.Show(new DescriptionWindow(_player.Manchkin.Descriptions), this);
+        }
     }
 
     private void LostHatButtonClick(object sender, RoutedEventArgs e)
     {
         if(_player.Manchkin.WornHat == null)
-            UserMessage.CreateImpossibleLostEquipmentMessage();
+            UserMessage.CreateEmptyStuffMessage();
     }
 
     private void LostWeaponButtonClick(object sender, RoutedEventArgs e)
     {
         if(_player.Manchkin.Hands.LeftHand == null && _player.Manchkin.Hands.RightHand == null)
-            UserMessage.CreateImpossibleLostEquipmentMessage();
+            UserMessage.CreateEmptyStuffMessage();
     }
 
     private void LostShoesButtonCLick(object sender, RoutedEventArgs e)
     {
         if(_player.Manchkin.WornShoes == null)
-            UserMessage.CreateImpossibleLostEquipmentMessage();
+            UserMessage.CreateEmptyStuffMessage();
     }
 
     private void LostArmorButtonClick(object sender, RoutedEventArgs e)
     {
         if(_player.Manchkin.WornArmor == null)
-            UserMessage.CreateImpossibleLostEquipmentMessage();
+            UserMessage.CreateEmptyStuffMessage();
     }
 
     private void DeathButtonClick(object sender, RoutedEventArgs e)
@@ -139,49 +274,7 @@ public partial class PlayerWindow
             (Style)FindResource("RoundedRedButtonStyle");
         
     }
-
-    private void LostClassButtonClick(object sender, RoutedEventArgs e)
-    {
-        if(_player.Manchkin.Class is Nobody)
-            UserMessage.CreateImpossibleLostMessage("класс");
-    }
-
-    private void LostRaceButtonClick(object sender, RoutedEventArgs e)
-    {
-        if(_player.Manchkin.Race is Human)
-            UserMessage.CreateImpossibleLostMessage("расу");
-    }
-
-    private void ChangeGenderButtonClick(object sender, RoutedEventArgs e)
-    {
-        _player.Manchkin.ChangeGender();
-        GenderBlock.Text = Intallation.Gender(_player);
-    }
-
-    private void BattleButtonClick(object sender, RoutedEventArgs e)
-    {
-        BattleButton.Content = ReferenceEquals(BattleButton.Content, "БОЙ") ? "НЕ В БОЮ" : "БОЙ";
-    }
-
-    private void MoveButtonClick(object sender, RoutedEventArgs e)
-    {
-        MoveButton.Content = ReferenceEquals(MoveButton.Content, "МОЙ ХОД") ? "ЧУЖОЙ ХОД" : "МОЙ ХОД";
-    }
-
-    private void ReduceLevelButtonClick(object sender, RoutedEventArgs e)
-    {
-        _player.Manchkin.LostLevel();
-        LevelBlock.Text = Intallation.Level(_player);
-        DamageBlock.Text = Intallation.Damage(_player);
-    }
-
-    private void IncreaseLevelButtonClick(object sender, RoutedEventArgs e)
-    {
-        _player.Manchkin.GetLevel();
-        LevelBlock.Text = Intallation.Level(_player);
-        DamageBlock.Text = Intallation.Damage(_player);
-    }
-
+    
     private void InstallBaseManchkinParameters()
     {
         NameBlock.Text = _player.Name;

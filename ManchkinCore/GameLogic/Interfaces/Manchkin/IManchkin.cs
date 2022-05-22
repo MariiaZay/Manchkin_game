@@ -9,8 +9,8 @@ public interface IManchkin : IOwnStuffs, IDescriptable, IHalfBloodAble, ISuper
     #region Main properties
 
         public int Level { get; }
-        public IRace Race { get; }
-        public IClass Class { get; }
+        public IRace Race { get; set; }
+        public IClass Class { get; set; }
         public Genders Gender { get;}
         public int Damage { get;}
         public int CardsCount { get; }

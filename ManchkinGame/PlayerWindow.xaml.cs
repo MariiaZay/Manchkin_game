@@ -16,18 +16,27 @@ public partial class PlayerWindow
     {
         InitializeComponent();
         
+        
         var name = Application.Current.Resources["USER_NAME"].ToString();
         var sex = Application.Current.Resources["SEX"].ToString() == "мужcкой" ? Genders.MALE : Genders.FEMALE;
         
         _player= new Player(name, sex);
         InstallBaseManchkinParameters();
+        
         IncreaseLevelButton.Click += IncreaseLevelButtonClick;
         ReduceLevelButton.Click += ReduceLevelButtonClick;
+        
         MoveButton.Click += MoveButtonClick;
         BattleButton.Click += BattleButtonClick;
+        
         ChangeGenderButton.Click += ChangeGenderButtonClick;
+        
         LostRaceButton.Click += LostRaceButtonClick;
+        ChangeRaceButton.Click += ChangeRaceButtonClick;
+        
         LostClassButton.Click += LostClassButtonClick;
+        ChangeClassButton.Click += ChangeClassButtonClick;
+        
         DeathButton.Click += DeathButtonClick;
         LostArmorButton.Click += LostArmorButtonClick;
         LostShoesButton.Click += LostShoesButtonCLick;
@@ -40,6 +49,20 @@ public partial class PlayerWindow
         LostHugeStuffButton.Click += LostHugeStuffButtonClick;
         ChangeMercenaryButton.Click += ChangeMercenaryButtonClick;
         LostMercenaryButton.Click += LostMercenaryButtonClick;
+    }
+
+    private void ChangeClassButtonClick(object sender, RoutedEventArgs e)
+    {
+        App.Current.Resources["TYPE_OF_VARIANTS"] = "класс";
+        App.Current.Resources["CURRENT"] = ClassBlock.Text;
+        DialogWindow.Show(new ChooseWindow(), this);
+    }
+    
+    private void ChangeRaceButtonClick(object sender, RoutedEventArgs e)
+    {
+        App.Current.Resources["TYPE_OF_VARIANTS"] = "расу";
+        App.Current.Resources["CURRENT"] = RaceBlock.Text;
+        DialogWindow.Show(new ChooseWindow(), this);
     }
 
     private void LostMercenaryButtonClick(object sender, RoutedEventArgs e)

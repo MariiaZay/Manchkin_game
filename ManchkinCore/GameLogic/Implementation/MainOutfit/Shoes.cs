@@ -13,8 +13,8 @@ public abstract class Shoes : IStuff
     public int FlushingBonus { get; protected set; }
     public bool Cheat { get; set; } = false;
 
-    public abstract bool CanBeUsed(IRace _class);
-    public abstract bool CanBeUsed(IClass race);
+    public abstract bool CanBeUsed(IRace? _class);
+    public abstract bool CanBeUsed(IClass? race);
     public abstract bool CanBeUsed(Genders gender);
     public List<string> Descriptions { get; protected set; }
     public string TextRepresentation { get; protected set; }
@@ -22,9 +22,9 @@ public abstract class Shoes : IStuff
 
 public class MightyShoes : Shoes
 {
-    public override bool CanBeUsed(IRace race) => true;
+    public override bool CanBeUsed(IRace? race) => true;
 
-    public override bool CanBeUsed(IClass _class) => true;
+    public override bool CanBeUsed(IClass? _class) => true;
 
     public override bool CanBeUsed(Genders gender) => true;
 
@@ -53,9 +53,9 @@ public class ReallyFastBoots : Shoes
         TextRepresentation = "Башмаки реально быстрого бега";
     }
 
-    public override bool CanBeUsed(IRace _class) => true;
+    public override bool CanBeUsed(IRace? _class) => true;
 
-    public override bool CanBeUsed(IClass race) => true;
+    public override bool CanBeUsed(IClass? race) => true;
 
     public override bool CanBeUsed(Genders gender) => true;
 }
@@ -76,9 +76,9 @@ public class SandalsOfProtection : Shoes
     private const string FirstFeature = "Защищают тебя от проклятий, которые ты вытягиваешь, вышибая двери. Не спасут "
                                         + "от проклятий, сыгранных на тебя другими игроками";
 
-    public override bool CanBeUsed(IRace _class) => true;
+    public override bool CanBeUsed(IRace? _class) => true;
 
-    public override bool CanBeUsed(IClass race) => true;
+    public override bool CanBeUsed(IClass? race) => true;
 
     public override bool CanBeUsed(Genders gender) => true;
 }

@@ -17,8 +17,8 @@ public abstract class SmallStuff : IStuff, IDescriptable
     
     public string TextRepresentation { get; protected set; }
 
-    public abstract bool CanBeUsed(IRace race);
-    public abstract bool CanBeUsed(IClass _class);
+    public abstract bool CanBeUsed(IRace? race);
+    public abstract bool CanBeUsed(IClass? _class);
     public abstract bool CanBeUsed(Genders gender);
     
 }
@@ -36,9 +36,9 @@ public class Stepladder : SmallStuff
         TextRepresentation = "Боевая стремянка";
     }
 
-    public override bool CanBeUsed(IRace race) => race is Halfling || Cheat;
+    public override bool CanBeUsed(IRace? race) => race is Halfling || Cheat;
 
-    public override bool CanBeUsed(IClass _class) => true;
+    public override bool CanBeUsed(IClass? _class) => true;
 
     public override bool CanBeUsed(Genders gender) => true;
 }
@@ -56,9 +56,9 @@ public class GreatTitle : SmallStuff
         TextRepresentation = "Реально впечатляющий титул";
     }
 
-    public override bool CanBeUsed(IRace race) => true;
+    public override bool CanBeUsed(IRace? race) => true;
 
-    public override bool CanBeUsed(IClass _class) => true;
+    public override bool CanBeUsed(IClass? _class) => true;
 
     public override bool CanBeUsed(Genders gender) => true;
 }
@@ -76,9 +76,9 @@ public class SpikedKnees : SmallStuff
         TextRepresentation = "Шипастые коленки";
     }
 
-    public override bool CanBeUsed(IRace race) => true;
+    public override bool CanBeUsed(IRace? race) => true;
 
-    public override bool CanBeUsed(IClass _class) => true;
+    public override bool CanBeUsed(IClass? _class) => true;
 
     public override bool CanBeUsed(Genders gender) => true;
 }
@@ -96,9 +96,9 @@ public class SingingSword : SmallStuff
         TextRepresentation = "Меч песни и пляски";
     }
 
-    public override bool CanBeUsed(IRace race) => true;
+    public override bool CanBeUsed(IRace? race) => true;
 
-    public override bool CanBeUsed(IClass _class) => _class is not Thief || Cheat;
+    public override bool CanBeUsed(IClass? _class) => _class is not Thief || Cheat;
 
     public override bool CanBeUsed(Genders gender) => true;
 }
@@ -116,9 +116,9 @@ public class Sandwich : SmallStuff
         TextRepresentation = "Сэндвич \"Душитая смерть\"";
     }
 
-    public override bool CanBeUsed(IRace race) => race is Halfling || Cheat;
+    public override bool CanBeUsed(IRace? race) => race is Halfling || Cheat;
 
-    public override bool CanBeUsed(IClass _class) => true;
+    public override bool CanBeUsed(IClass? _class) => true;
 
     public override bool CanBeUsed(Genders gender) => true;
 }
@@ -136,9 +136,9 @@ public class Cloack : SmallStuff
         TextRepresentation = "Плащ замутнености";
     }
 
-    public override bool CanBeUsed(IRace race) => true;
+    public override bool CanBeUsed(IRace? race) => true;
 
-    public override bool CanBeUsed(IClass _class) => _class is Thief || Cheat;
+    public override bool CanBeUsed(IClass? _class) => _class is Thief || Cheat;
 
     public override bool CanBeUsed(Genders gender) => true;
 }
@@ -156,9 +156,9 @@ public class Pantyhose : SmallStuff
         TextRepresentation = "Колготы великанской силы";
     }
 
-    public override bool CanBeUsed(IRace race) => true;
+    public override bool CanBeUsed(IRace? race) => true;
 
-    public override bool CanBeUsed(IClass _class) => _class is not Warrior || Cheat;
+    public override bool CanBeUsed(IClass? _class) => _class is not Warrior || Cheat;
 
     public override bool CanBeUsed(Genders gender) => true;
 }
@@ -179,9 +179,9 @@ public class KneepadsOfAllure : SmallStuff, IDescriptable
         TextRepresentation = "Наколенники развода";
     }
 
-    public override bool CanBeUsed(IRace race) => true;
+    public override bool CanBeUsed(IRace? race) => true;
 
-    public override bool CanBeUsed(IClass _class) => true;
+    public override bool CanBeUsed(IClass? _class) => true;
 
     public override bool CanBeUsed(Genders gender) => true;
 }

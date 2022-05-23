@@ -12,9 +12,9 @@ public class Manchkin : IManchkin
 
     public int Level { get; private set; }
 
-    private IRace _race;
+    private IRace? _race;
 
-    public IRace Race
+    public IRace? Race
     {
         get => _race;
         set
@@ -24,9 +24,9 @@ public class Manchkin : IManchkin
         }
     }
 
-    private IClass _class;
+    private IClass? _class;
 
-    public IClass Class
+    public IClass? Class
     {
         get => _class;
         set
@@ -108,7 +108,7 @@ public class Manchkin : IManchkin
         RecalculateParameters();
     }
 
-    public IClass ChangeClass(IClass manClass)
+    public IClass? ChangeClass(IClass? manClass)
     {
         if (IsNull(_class)) return manClass;
         
@@ -120,12 +120,12 @@ public class Manchkin : IManchkin
 
     private void RecalculateParameters()
     {
-        CheckStuffsForСompatibility();
+        RemoveUnsuitableStuff();
         RecalculateDamage();
         RecalculateFlushingBonus();
     }
 
-    public IRace ChangeRace(IRace race)
+    public IRace? ChangeRace(IRace? race)
     {
         FlushingBonus = race.FlushingBonus;
         CardsCount = race.CardCount;
@@ -307,37 +307,70 @@ public class Manchkin : IManchkin
         return mainRight || additionalRaceRight || additionalClassRight;
     }
 
-    public void CheckStuffsForСompatibility()
+    public bool CheckStuffBeforeChanging(IDescriptable descriptable)
     {
-        if (!CanHaveStuff(WornHat))
-            LostStuff(WornHat);
-
-        if (!CanHaveStuff(WornArmor))
-            LostStuff(WornArmor);
-
-        if (!CanHaveStuff(WornShoes))
-            LostStuff(WornShoes);
-
-        if (!IsNull(Hands) && Hands.LeftHand == Hands.RightHand)
-            LostStuff(Hands.LeftHand);
-
-        else
-        {
-            if (!IsNull(Hands) && !CanHaveStuff(Hands.LeftHand))
-                LostStuff(Hands.LeftHand);
-
-            if (!IsNull(Hands) && !CanHaveStuff(Hands.RightHand))
-                LostStuff(Hands.RightHand);
-        }
-
-        foreach (var stuff in SmallStuffs.Where(stuff => !CanHaveStuff(stuff)))
-            LostStuff(stuff);
-
-        foreach (var stuff in HugeStuffs.Where(stuff => !CanHaveStuff(stuff)))
-            LostStuff(stuff);
+        var stuff = GetAllWornStuffs();
+        return descriptable is IClass ? 
+            stuff.All(s => CanHaveStuff(s, descriptable as IClass, Race, Gender)) 
+            : stuff.All(s => CanHaveStuff(s, Class, descriptable as IRace, Gender));
+    }
+    
+    public bool CheckStuffBeforeChanging(Genders gender)
+    {
+        var stuff = GetAllWornStuffs();
+        return stuff.All(s => CanHaveStuff(s, Class,Race,gender));
     }
 
-    private bool IsNull(object ob) => ob == null;
+    private bool CanHaveStuff(IStuff? stuff ,IClass? cl, IRace? race, Genders gender)
+    {
+        bool mainRight;
+        bool additionalRaceRight;
+        var additionalClassRight = false;
+
+
+        if (IsNull(stuff))
+            mainRight = additionalRaceRight = additionalClassRight = true;
+        else
+        {
+            if (stuff.Cheat)
+                mainRight = true;
+            else
+                mainRight = stuff.CanBeUsed(cl) && stuff.CanBeUsed(race) && stuff.CanBeUsed(gender);
+
+            if (IsHalfBlood)
+            {
+                if (HalfBlood.HalfType == HalfTypes.BOTH)
+                    additionalRaceRight = stuff.CanBeUsed(Class) && stuff.CanBeUsed(HalfBlood.SecondRace)
+                                                                 && stuff.CanBeUsed(Gender);
+                else
+                    additionalRaceRight = stuff.CanBeUsed(cl) && stuff.CanBeUsed(gender);
+            }
+            else
+                additionalRaceRight = false;
+
+            if (IsSuperManchkin)
+            {
+                if (SuperManchkin.HalfType == HalfTypes.BOTH)
+                    additionalRaceRight = stuff.CanBeUsed(SuperManchkin.SecondClass) && stuff.CanBeUsed(race)
+                        && stuff.CanBeUsed(gender);
+                else
+                    additionalRaceRight = stuff.CanBeUsed(Race) && stuff.CanBeUsed(gender);
+            }
+            else
+                additionalClassRight = false;
+        }
+
+        return mainRight || additionalRaceRight || additionalClassRight;
+    }
+
+    public void RemoveUnsuitableStuff()
+    {
+        var stuff = GetAllWornStuffs();
+        foreach (var s in stuff)
+            if (!CanHaveStuff(s)) LostStuff(s);
+    }
+
+    private bool IsNull(object? ob) => ob == null;
 
     public void TakeStuff(IStuff? stuff)
     {
@@ -453,10 +486,20 @@ public class Manchkin : IManchkin
     public void LostAllStuffs()
     {
         foreach (var stuff in SmallStuffs)
+        {
             LostStuff(stuff);
-
+            if(SmallStuffs.Count == 0)
+                break;
+        }
+        
         foreach (var stuff in HugeStuffs)
+        {
             LostStuff(stuff);
+            if(HugeStuffs.Count == 0)
+                break;
+        }
+        RecalculateDamage();
+        RecalculateFlushingBonus();
     }
 
     public void SellStuffs(List<IStuff?> stuffs)

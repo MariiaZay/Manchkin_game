@@ -14,8 +14,8 @@ public abstract class Armor : IStuff
     public List<string> Descriptions { get; protected set; }
     public string TextRepresentation { get; protected set; }
 
-    public abstract bool CanBeUsed(IRace race);
-    public abstract bool CanBeUsed(IClass _class);
+    public abstract bool CanBeUsed(IRace? race);
+    public abstract bool CanBeUsed(IClass? _class);
     public abstract bool CanBeUsed(Genders gender);
     
 }
@@ -33,9 +33,9 @@ public class MithrilArmor : Armor
         TextRepresentation = "Мифрильная броня";
     }
 
-    public override bool CanBeUsed(IRace race) => true;
+    public override bool CanBeUsed(IRace? race) => true;
 
-    public override bool CanBeUsed(IClass _class) => _class is not Wizard || Cheat;
+    public override bool CanBeUsed(IClass? _class) => _class is not Wizard || Cheat;
 
     public override bool CanBeUsed(Genders gender) => true;
 }
@@ -53,9 +53,9 @@ public class DwarfArmor : Armor
         TextRepresentation = "Коротышкинские латы";
     }
 
-    public override bool CanBeUsed(IRace race) => race is Dwarf || Cheat;
+    public override bool CanBeUsed(IRace? race) => race is Dwarf || Cheat;
 
-    public override bool CanBeUsed(IClass _class) => true;
+    public override bool CanBeUsed(IClass? _class) => true;
 
     public override bool CanBeUsed(Genders gender) => true;
 }
@@ -73,9 +73,9 @@ public class LeatherArmor : Armor
         TextRepresentation = "Кожаный прикид";
     }
 
-    public override bool CanBeUsed(IRace race) => true;
+    public override bool CanBeUsed(IRace? race) => true;
 
-    public override bool CanBeUsed(IClass _class) => true;
+    public override bool CanBeUsed(IClass? _class) => true;
 
     public override bool CanBeUsed(Genders gender) => true;
 }
@@ -93,9 +93,9 @@ public class MucousMembrane : Armor
         TextRepresentation = "Слизистая оболочка";
     }
 
-    public override bool CanBeUsed(IRace race) => true;
+    public override bool CanBeUsed(IRace? race) => true;
 
-    public override bool CanBeUsed(IClass _class) => true;
+    public override bool CanBeUsed(IClass? _class) => true;
 
     public override bool CanBeUsed(Genders gender) => true;
 }
@@ -113,9 +113,9 @@ public class FlamingArmor : Armor
         TextRepresentation = "Пламенные латы";
     }
 
-    public override bool CanBeUsed(IRace race) => true;
+    public override bool CanBeUsed(IRace? race) => true;
 
-    public override bool CanBeUsed(IClass _class) => true;
+    public override bool CanBeUsed(IClass? _class) => true;
 
     public override bool CanBeUsed(Genders gender) => true;
 }

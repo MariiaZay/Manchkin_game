@@ -28,11 +28,24 @@ public static class UserMessage
             "Смэрть",
             MessageBoxButton.OK,
             MessageBoxImage.Information);
-    public static void CreateImpossibleTakingStuff()
+    public static void CreateImpossibleTakingStuffMessage()
         => MessageBox.Show("Ты не можешь надеть эту шмотку. Если у тебя есть ЧИТ! Можешь использовать его",
             "ОЙ!",
             MessageBoxButton.OK,
             MessageBoxImage.Information);
+
+    public static bool CreateAskingMessage(string mess)
+    {
+        var caption = mess switch
+        {
+            "класс" => "класса",
+            "расу" => "расы",
+            "пол" => "пола"
+        };
+        var answer = MessageBox.Show(String.Format("Ты уверен, что хочешь сменить {0}", mess),
+            String.Format("Смена {0}", caption), MessageBoxButton.YesNo, MessageBoxImage.Warning);
+        return answer == MessageBoxResult.Yes;
+    }
     
 
     public static void CreateImpossibleLostMessage(string mess)

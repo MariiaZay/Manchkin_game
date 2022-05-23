@@ -52,20 +52,19 @@ public partial class WearingWindow : Window
             UserMessage.CreateNotChosenItemMessage("новую шмотку");
         else
         {
-            foreach (var variant in _variants.Where(variant => variant.TextRepresentation == VariantsComboBox.Text))
+            var variant = _variants.FirstOrDefault(vari => vari.TextRepresentation == VariantsComboBox.Text);
+
+            if (ReferenceEquals(CheatButton.Content, "НЕ ЧИТ!"))
+                _manchkin.UseCheat(variant as IStuff);
+            
+            var v = variant as IStuff;
+            if (!_manchkin.CanTakeStuff(v))
+                UserMessage.CreateImpossibleTakingStuffMessage();
+            else
             {
-                if (ReferenceEquals(CheatButton.Content, "НЕ ЧИТ!"))
-                    _manchkin.UseCheat(variant as IStuff);
-                var v = variant as IStuff;
-                if (!_manchkin.CanTakeStuff(v))
-                    UserMessage.CreateImpossibleTakingStuff();
-                else
-                {
-                    App.Current.Resources["NEW"] = variant;
-                    break;
-                }
+                App.Current.Resources["NEW"] = variant;
+                Close();
             }
-            Close();
         }
     }
 

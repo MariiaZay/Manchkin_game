@@ -9,8 +9,8 @@ public interface IManchkin : IOwnStuffs, IDescriptable, IHalfBloodAble, ISuper
     #region Main properties
 
         public int Level { get; }
-        public IRace Race { get; set; }
-        public IClass Class { get; set; }
+        public IRace? Race { get; set; }
+        public IClass? Class { get; set; }
         public Genders Gender { get;}
         public int Damage { get;}
         public int CardsCount { get; }
@@ -19,8 +19,8 @@ public interface IManchkin : IOwnStuffs, IDescriptable, IHalfBloodAble, ISuper
     #endregion
     
     public void ChangeGender();
-    public IRace ChangeRace(IRace race);
-    public IClass ChangeClass(IClass manCLass);
+    public IRace? ChangeRace(IRace? race);
+    public IClass? ChangeClass(IClass? manCLass);
     public void RecalculateDamage();
     public void RecalculateFlushingBonus();
     public void ToDie();

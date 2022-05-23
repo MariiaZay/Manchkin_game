@@ -14,7 +14,7 @@ public interface IStuff : IDescriptable
     public int FlushingBonus { get; }
     public bool Cheat { get; set; }
     
-    public bool CanBeUsed(IRace race);
-    public bool CanBeUsed(IClass _class);
+    public bool CanBeUsed(IRace? race);
+    public bool CanBeUsed(IClass? _class);
     public bool CanBeUsed(Genders gender);
 }

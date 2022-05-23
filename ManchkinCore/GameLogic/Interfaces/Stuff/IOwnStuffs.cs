@@ -29,7 +29,9 @@ public interface IOwnStuffs
     
     public bool CanTakeStuff(IStuff? stuff);
     public bool CanHaveStuff(IStuff stuff);
-    public void CheckStuffsForСompatibility();
+    public void RemoveUnsuitableStuff();
+    public bool CheckStuffBeforeChanging(IDescriptable descriptable);
+    public bool CheckStuffBeforeChanging(Genders gender);
     public void TakeStuff(IStuff? stuff);
 
     #region Lost Stuff

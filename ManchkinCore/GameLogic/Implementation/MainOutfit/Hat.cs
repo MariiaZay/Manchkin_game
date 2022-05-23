@@ -15,8 +15,8 @@ public abstract class Hat : IStuff
     public List<string> Descriptions { get; protected set; }
     public string TextRepresentation { get; protected set; }
 
-    public abstract bool CanBeUsed(IRace race);
-    public abstract bool CanBeUsed(IClass _class);
+    public abstract bool CanBeUsed(IRace? race);
+    public abstract bool CanBeUsed(IClass? _class);
     public abstract bool CanBeUsed(Genders gender);
     
 }
@@ -34,9 +34,9 @@ public class HornedHelmet : Hat
         TextRepresentation = "Шлем-рогач";
     }
 
-    public override bool CanBeUsed(IRace race) => race is Elf || Cheat;
+    public override bool CanBeUsed(IRace? race) => race is Elf || Cheat;
 
-    public override bool CanBeUsed(IClass _class) => true;
+    public override bool CanBeUsed(IClass? _class) => true;
 
     public override bool CanBeUsed(Genders gender) => true;
 }
@@ -54,9 +54,9 @@ public class BandanaOfBastartism : Hat
         TextRepresentation = "Бандана сволочизма";
     }
 
-    public override bool CanBeUsed(IRace race) => race is Human || Cheat;
+    public override bool CanBeUsed(IRace? race) => race is Human || Cheat;
 
-    public override bool CanBeUsed(IClass _class) => true;
+    public override bool CanBeUsed(IClass? _class) => true;
 
     public override bool CanBeUsed(Genders gender) => true;
 }
@@ -74,9 +74,9 @@ public class HatOfPower : Hat
         TextRepresentation = "Остроконечная шляпа могущества";
     }
 
-    public override bool CanBeUsed(IRace race) => true;
+    public override bool CanBeUsed(IRace? race) => true;
 
-    public override bool CanBeUsed(IClass _class) => _class is Wizard || Cheat;
+    public override bool CanBeUsed(IClass? _class) => _class is Wizard || Cheat;
 
     public override bool CanBeUsed(Genders gender) => true;
 }
@@ -94,9 +94,9 @@ public class HelmetOfCourage : Hat
         TextRepresentation = "Шлем отваги";
     }
 
-    public override bool CanBeUsed(IRace race) => true;
+    public override bool CanBeUsed(IRace? race) => true;
 
-    public override bool CanBeUsed(IClass _class) => true;
+    public override bool CanBeUsed(IClass? _class) => true;
 
     public override bool CanBeUsed(Genders gender) => true;
 }

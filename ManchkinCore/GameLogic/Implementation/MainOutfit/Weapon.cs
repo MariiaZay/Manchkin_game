@@ -12,8 +12,8 @@ public abstract class Weapon : IStuff
     public int FlushingBonus { get; protected set; }
     public bool Cheat { get; set; } = false;
 
-    public abstract bool CanBeUsed(IRace race);
-    public abstract bool CanBeUsed(IClass _class);
+    public abstract bool CanBeUsed(IRace? race);
+    public abstract bool CanBeUsed(IClass? _class);
     public abstract bool CanBeUsed(Genders gender);
     public List<string> Descriptions { get; protected set; }
     public string TextRepresentation { get; protected set; }
@@ -32,8 +32,8 @@ public class Buckler : Weapon
         TextRepresentation = "Баклер бахвала";
     }
 
-    public override bool CanBeUsed(IRace race) => true;
-    public override bool CanBeUsed(IClass _class) => true;
+    public override bool CanBeUsed(IRace? race) => true;
+    public override bool CanBeUsed(IClass? _class) => true;
     public override bool CanBeUsed(Genders gender) => true;
 }
 
@@ -50,8 +50,8 @@ public class Hammer : Weapon
         TextRepresentation = "Коленоотбойный молот";
     }
 
-    public override bool CanBeUsed(IRace race) => race is Dwarf || Cheat;
-    public override bool CanBeUsed(IClass _class) => true;
+    public override bool CanBeUsed(IRace? race) => race is Dwarf || Cheat;
+    public override bool CanBeUsed(IClass? _class) => true;
     public override bool CanBeUsed(Genders gender) => true;
 }
 
@@ -68,8 +68,8 @@ public class ProgressiveSword : Weapon
         TextRepresentation = "Меч широты взглядов";
     }
 
-    public override bool CanBeUsed(IRace race) => true;
-    public override bool CanBeUsed(IClass _class) => true;
+    public override bool CanBeUsed(IRace? race) => true;
+    public override bool CanBeUsed(IClass? _class) => true;
     public override bool CanBeUsed(Genders gender) => gender is Genders.FEMALE || Cheat;
 }
 
@@ -86,8 +86,8 @@ public class BastardSword : Weapon
         TextRepresentation = "Меч коварного ублюдка";
     }
 
-    public override bool CanBeUsed(IRace race) => true;
-    public override bool CanBeUsed(IClass _class) => true;
+    public override bool CanBeUsed(IRace? race) => true;
+    public override bool CanBeUsed(IClass? _class) => true;
     public override bool CanBeUsed(Genders gender) => true;
 }
 
@@ -104,8 +104,8 @@ public class CheeseGrater : Weapon
         TextRepresentation = "Сыротерка умиротворения";
     }
 
-    public override bool CanBeUsed(IRace race) => true;
-    public override bool CanBeUsed(IClass _class) => _class is Cleric;
+    public override bool CanBeUsed(IRace? race) => true;
+    public override bool CanBeUsed(IClass? _class) => _class is Cleric;
     public override bool CanBeUsed(Genders gender) => true;
 }
 
@@ -122,9 +122,9 @@ public class NapalmStuff : Weapon
         TextRepresentation = "Посох напалма";
     }
 
-    public override bool CanBeUsed(IRace race) => true;
+    public override bool CanBeUsed(IRace? race) => true;
 
-    public override bool CanBeUsed(IClass _class) => _class is Wizard || Cheat;
+    public override bool CanBeUsed(IClass? _class) => _class is Wizard || Cheat;
 
     public override bool CanBeUsed(Genders gender) => true;
 }
@@ -142,9 +142,9 @@ public class Rapier : Weapon
         TextRepresentation = "Рапира такнечестности";
     }
 
-    public override bool CanBeUsed(IRace race) => true;
+    public override bool CanBeUsed(IRace? race) => true;
 
-    public override bool CanBeUsed(IClass _class) => true;
+    public override bool CanBeUsed(IClass? _class) => true;
 
     public override bool CanBeUsed(Genders gender) => true;
 }
@@ -162,9 +162,9 @@ public class Dagger : Weapon
         TextRepresentation = "Кинжал измены";
     }
 
-    public override bool CanBeUsed(IRace race) => true;
+    public override bool CanBeUsed(IRace? race) => true;
 
-    public override bool CanBeUsed(IClass _class) => _class is Thief || Cheat;
+    public override bool CanBeUsed(IClass? _class) => _class is Thief || Cheat;
 
     public override bool CanBeUsed(Genders gender) => true;
 }
@@ -182,9 +182,9 @@ public class Mace : Weapon
         TextRepresentation = "Палица остроы";
     }
 
-    public override bool CanBeUsed(IRace race) => true;
+    public override bool CanBeUsed(IRace? race) => true;
 
-    public override bool CanBeUsed(IClass _class) => _class is Cleric || Cheat;
+    public override bool CanBeUsed(IClass? _class) => _class is Cleric || Cheat;
 
     public override bool CanBeUsed(Genders gender) => true;
 }
@@ -202,9 +202,9 @@ public class Shild : Weapon
         TextRepresentation = "Вездешний щит";
     }
 
-    public override bool CanBeUsed(IRace race) => true;
+    public override bool CanBeUsed(IRace? race) => true;
 
-    public override bool CanBeUsed(IClass _class) => true;
+    public override bool CanBeUsed(IClass? _class) => true;
 
     public override bool CanBeUsed(Genders gender) => true;
 }
@@ -222,9 +222,9 @@ public class Club : Weapon
         TextRepresentation = "Дуб джентельменов";
     }
 
-    public override bool CanBeUsed(IRace race) => true;
+    public override bool CanBeUsed(IRace? race) => true;
 
-    public override bool CanBeUsed(IClass _class) => true;
+    public override bool CanBeUsed(IClass? _class) => true;
 
     public override bool CanBeUsed(Genders gender) => gender is Genders.MALE || Cheat;
 }
@@ -242,9 +242,9 @@ public class Chainsaw : Weapon
         TextRepresentation = "Бензопила кровавого расчленения";
     }
 
-    public override bool CanBeUsed(IRace race) => true;
+    public override bool CanBeUsed(IRace? race) => true;
 
-    public override bool CanBeUsed(IClass _class) => true;
+    public override bool CanBeUsed(IClass? _class) => true;
 
     public override bool CanBeUsed(Genders gender) => true;
 }
@@ -263,9 +263,9 @@ public class Polearm : Weapon
         
     }
 
-    public override bool CanBeUsed(IRace race) => race is Human;
+    public override bool CanBeUsed(IRace? race) => race is Human;
 
-    public override bool CanBeUsed(IClass _class) => true;
+    public override bool CanBeUsed(IClass? _class) => true;
 
     public override bool CanBeUsed(Genders gender) => true;
 }
@@ -283,9 +283,9 @@ public class HugeRock : Weapon
         TextRepresentation = "Огромный камень";
     }
 
-    public override bool CanBeUsed(IRace race) => true;
+    public override bool CanBeUsed(IRace? race) => true;
 
-    public override bool CanBeUsed(IClass _class) => true;
+    public override bool CanBeUsed(IClass? _class) => true;
 
     public override bool CanBeUsed(Genders gender) => true;
 }
@@ -303,9 +303,9 @@ public class Pole : Weapon
         TextRepresentation = "Одиннадцатифутовый шест";
     }
 
-    public override bool CanBeUsed(IRace race) => true;
+    public override bool CanBeUsed(IRace? race) => true;
 
-    public override bool CanBeUsed(IClass _class) => true;
+    public override bool CanBeUsed(IClass? _class) => true;
 
     public override bool CanBeUsed(Genders gender) => true;
 }
@@ -323,9 +323,9 @@ public class Bow : Weapon
         TextRepresentation = "Лучок с ленточками";
     }
 
-    public override bool CanBeUsed(IRace race) => race is Elf || Cheat;
+    public override bool CanBeUsed(IRace? race) => race is Elf || Cheat;
 
-    public override bool CanBeUsed(IClass _class) => true;
+    public override bool CanBeUsed(IClass? _class) => true;
 
     public override bool CanBeUsed(Genders gender) => true;
 }
@@ -346,9 +346,9 @@ public class RatOnStick : Weapon
     private const string FirstFeature = "Лучше, чем ничего! Можешь сбросить крысу, даже если не используешь ее, "
                                         + "чтобы автоматически смыться от любого монстра не выше 8 уровня";
 
-    public override bool CanBeUsed(IRace race) => true;
+    public override bool CanBeUsed(IRace? race) => true;
 
-    public override bool CanBeUsed(IClass _class) => true;
+    public override bool CanBeUsed(IClass? _class) => true;
 
     public override bool CanBeUsed(Genders gender) => true;
 }
@@ -367,9 +367,9 @@ public class TubeOfCharm : Weapon
     }
 
     private const string FirstFeature = "Успешно смывшись, можешь взять одно сокровище в закрытую (один раз в ход)";
-    public override bool CanBeUsed(IRace race) => true;
+    public override bool CanBeUsed(IRace? race) => true;
 
-    public override bool CanBeUsed(IClass _class) => true;
+    public override bool CanBeUsed(IClass? _class) => true;
 
     public override bool CanBeUsed(Genders gender) => true;
 }

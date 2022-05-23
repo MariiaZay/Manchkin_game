@@ -12,6 +12,25 @@
         AllowsTransparency="True"
         Background="Transparent">
         <Window.Resources>
+            <Style x:Key="EllipseStyle" TargetType="{x:Type Ellipse}">
+                <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+                <Setter Property="Margin" Value="2.2,0,0,0"></Setter>
+                <Setter Property="Height" Value="10"></Setter>
+                <Setter Property="Width" Value="10"></Setter>
+                <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+                <Setter Property="VerticalAlignment" Value="Top"></Setter>
+                <Setter Property= "Margin" Value="0,7"></Setter>
+                <Setter Property="Fill" Value="Black"></Setter>
+            </Style>
+            <Style x:Key="TextStyle" TargetType="{x:Type TextBlock}">
+                <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+                <Setter Property="TextAlignment" Value="Left"></Setter>
+                <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                <Setter Property="FontSize" Value="20"></Setter>
+                <Setter Property="FontFamily" Value="Comic Sans MS"></Setter>
+                <Setter Property="Margin" Value="2.2,0,0,0"></Setter>
+                <Setter Property="TextWrapping" Value="Wrap"></Setter>
+            </Style>
             <Style x:Key="RoundedGreenButtonStyle" TargetType="{x:Type Button}">
                 <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
                 <Setter Property="Background" Value="#4FA39C" />
@@ -68,7 +87,7 @@
         <Border.Effect>
             <DropShadowEffect BlurRadius="15" Direction="-100" Color="Tan" Opacity="0.8" />
         </Border.Effect>
-        <Grid Margin="8.8" ShowGridLines="True">
+        <Grid Margin="8.8" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.25*"></RowDefinition>
                 <RowDefinition></RowDefinition>
@@ -76,17 +95,16 @@
             <TextBlock
                 Grid.Row="0"
                 Margin="0,0,0,4.4"
-                TextAlignment="Left"
-                VerticalAlignment="Center"
+                Style="{DynamicResource TextStyle}"
                 FontWeight="Bold"
                 FontSize="26"
                 TextDecorations="Underline"
+                
             >Мои свойства:</TextBlock>
             <Grid
                 Grid.Row="1"
                 Margin="0,4.4,0,0"
-                ShowGridLines="True"
-                >
+            >
                 <Grid.RowDefinitions>
                     <RowDefinition></RowDefinition>
                     <RowDefinition Height="0.25*"></RowDefinition>
@@ -96,7 +114,12 @@
                     Name="DescriptionScrollView"
                     Grid.Row="0"
                     Margin="0,0,0,4.4"
-                    CanContentScroll="True"></ScrollViewer>
+                    CanContentScroll="True">
+                    <StackPanel Name = "DescriptionStackPanel" Margin="0,0,4.4,0">
+                        
+                    </StackPanel>
+                    
+                </ScrollViewer>
                 
                 <Button 
                     Name="OkButton"

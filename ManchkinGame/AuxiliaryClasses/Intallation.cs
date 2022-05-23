@@ -90,8 +90,14 @@ public static class Intallation
                 else weapon = "обе";
             }
         }
-
         return weapon;
     }
+
+    public static string SmallStuff(Player player)
+        => player.Manchkin.SmallStuffs.Count == 0 ? "нет" : "есть";
+    
+    public static string HugeStuff(Player player)
+        => player.Manchkin.HugeStuffs.Count == 0 ? "нет" : "есть";
+
     #endregion
 }

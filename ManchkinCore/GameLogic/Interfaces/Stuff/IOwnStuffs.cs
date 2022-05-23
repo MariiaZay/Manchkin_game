@@ -6,8 +6,8 @@ public interface IOwnStuffs
 {
     #region Stuffs
     
-    public List<IStuff> SmallStuffs { get; }
-    public List<IStuff> HugeStuffs { get; }
+    public List<IStuff?> SmallStuffs { get; }
+    public List<IStuff?> HugeStuffs { get; }
     public  List<IMercenary> Mercenaries { get; }
     public IStuff? WornArmor { get; }
     public IStuff? WornShoes { get; }
@@ -18,8 +18,8 @@ public interface IOwnStuffs
     
     public bool HasHugeStuff { get; }
     public bool HasMercenary { get; }
-    public void UseCheat(IStuff stuff);
-    public void CancelCheat(IStuff stuff);
+    public void UseCheat(IStuff? stuff);
+    public void CancelCheat(IStuff? stuff);
 
     public void GetMercenary();
     public void GetMercenary(IStuff stuff);
@@ -27,18 +27,18 @@ public interface IOwnStuffs
     public void KillMercenary(IMercenary mercenary);
     public void LostMercenary(IMercenary mercenary);
     
-    public bool CanTakeStuff(IStuff stuff);
+    public bool CanTakeStuff(IStuff? stuff);
     public bool CanHaveStuff(IStuff stuff);
     public void CheckStuffsForСompatibility();
-    public string TakeStuff(IStuff stuff);
+    public void TakeStuff(IStuff? stuff);
 
     #region Lost Stuff
 
     public void LostMostPowerfulStuff();
-    public void LostStuff(IStuff stuff);
+    public void LostStuff(IStuff? stuff);
     public void LostAllStuffs();
 
     #endregion
-    public void SellStuffs(List<IStuff> stuffs);
-    public void SellByDoublePrice(IStuff stuff);
+    public void SellStuffs(List<IStuff?> stuffs);
+    public void SellByDoublePrice(IStuff? stuff);
 }

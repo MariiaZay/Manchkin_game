@@ -83,8 +83,8 @@ public class Manchkin : IManchkin
         WornShoes = null;
         WornHat = null;
 
-        SmallStuffs = new List<IStuff>();
-        HugeStuffs = new List<IStuff>();
+        SmallStuffs = new List<IStuff?>();
+        HugeStuffs = new List<IStuff?>();
         Mercenaries = new List<IMercenary>();
 
         Descriptions = new List<string>();
@@ -139,48 +139,14 @@ public class Manchkin : IManchkin
         return race;
     }
 
-    private int GetEquipmentDamage()
-    {
-        var equipment = new List<IStuff>() {WornHat, WornArmor, WornShoes};
-        var damage = equipment.Where(eq => !IsNull(eq)).Sum(eq => eq.Damage);
-        if (!IsNull(Hands.LeftHand))
-        {
-            damage += Hands.LeftHand.Damage;
-            if (!IsNull(Hands.RightHand) && Hands.LeftHand != Hands.RightHand)
-                damage += Hands.RightHand.Damage;
-        }
-        else
-        {
-            if (!IsNull(Hands.RightHand))
-                damage += Hands.RightHand.Damage;
-        }
+    
 
-        return damage;
-    }
-
-    private int GetEquipmentFlushingBonus()
-    {
-        var equipment = new List<IStuff>() {WornHat, WornArmor, WornShoes};
-        var flushingBonus = equipment.Where(eq => !IsNull(eq)).Sum(eq => eq.FlushingBonus);
-        ;
-
-        if (!IsNull(Hands.LeftHand))
-        {
-            flushingBonus += Hands.LeftHand.FlushingBonus;
-            if (!IsNull(Hands.RightHand) && Hands.LeftHand != Hands.RightHand)
-                flushingBonus += Hands.RightHand.FlushingBonus;
-        }
-        else if (!IsNull(Hands.RightHand))
-            flushingBonus += Hands.RightHand.FlushingBonus;
-
-        return flushingBonus;
-    }
+    
 
     public void RecalculateDamage()
     {
         Damage = 0;
-        Damage = Level + SmallStuffs.Sum(stuff => stuff.Damage) + HugeStuffs.Sum(stuff => stuff.Damage)
-                 + GetEquipmentDamage();
+        Damage = Level + SmallStuffs.Sum(stuff => stuff.Damage) + HugeStuffs.Sum(stuff => stuff.Damage);
 
         foreach (var mer in Mercenaries)
         {
@@ -197,8 +163,7 @@ public class Manchkin : IManchkin
             FlushingBonus = 1;
 
         FlushingBonus += SmallStuffs.Sum(stuff => stuff.FlushingBonus) +
-                         HugeStuffs.Sum(stuff => stuff.FlushingBonus) +
-                         GetEquipmentFlushingBonus();
+                         HugeStuffs.Sum(stuff => stuff.FlushingBonus);
 
         foreach (var mer in Mercenaries.Where(mer => mer.Item != null))
             FlushingBonus += mer.Item.FlushingBonus;
@@ -228,8 +193,8 @@ public class Manchkin : IManchkin
 
     #region Own stuff
 
-    public List<IStuff> SmallStuffs { get; }
-    public List<IStuff> HugeStuffs { get; }
+    public List<IStuff?> SmallStuffs { get; }
+    public List<IStuff?> HugeStuffs { get; }
 
     public List<IMercenary> Mercenaries { get; }
     public IStuff? WornArmor { get; private set; }
@@ -286,15 +251,18 @@ public class Manchkin : IManchkin
 
     public bool HasHugeStuff => HugeStuffs.Count != 0;
 
-    public void UseCheat(IStuff stuff) => stuff.Cheat = true;
-    public void CancelCheat(IStuff stuff) => stuff.Cheat = false;
+    public void UseCheat(IStuff? stuff) => stuff.Cheat = true;
+    public void CancelCheat(IStuff? stuff) => stuff.Cheat = false;
 
-    public bool CanTakeStuff(IStuff stuff)
+    public bool CanTakeStuff(IStuff? stuff)
     {
-        CanHaveStuff(stuff);
-        return Race is not Dwarf && !HasHugeStuff || Race is Dwarf
-                                                  || IsHalfBlood && HalfBlood.HalfType == HalfTypes.BOTH
-                                                                 && HalfBlood.SecondRace is Dwarf;
+        var can = CanHaveStuff(stuff);
+        if (!can) return can;
+        if (stuff.Weight == Bulkiness.HUGE)
+            return Race is not Dwarf && !HasHugeStuff || Race is Dwarf
+                                                      || IsHalfBlood && HalfBlood.HalfType == HalfTypes.BOTH
+                                                                     && HalfBlood.SecondRace is Dwarf;
+        return can;
     }
 
     public bool CanHaveStuff(IStuff? stuff)
@@ -371,9 +339,9 @@ public class Manchkin : IManchkin
 
     private bool IsNull(object ob) => ob == null;
 
-    public string TakeStuff(IStuff stuff)
+    public void TakeStuff(IStuff? stuff)
     {
-        if (!CanTakeStuff(stuff)) return "невозможно взять шмотку";
+        if (!CanTakeStuff(stuff)) return;
         PurchaseDescriptions(stuff.Descriptions);
         switch (stuff)
         {
@@ -399,27 +367,21 @@ public class Manchkin : IManchkin
                     else
                         Hands.TakeInLeftHand(stuff);
                 }
-
                 break;
-            default:
-            {
-                if (stuff.Weight == Bulkiness.HUGE)
-                    HugeStuffs.Add(stuff);
-                else
-                    SmallStuffs.Add(stuff);
-                break;
-            }
         }
-
-        RecalculateParameters();
-        return "шмотка успешно добавлена";
+        if (stuff.Weight == Bulkiness.HUGE)
+            HugeStuffs.Add(stuff);
+        else
+            SmallStuffs.Add(stuff);
+        RecalculateDamage();
+        RecalculateFlushingBonus();
     }
 
     private bool IsNull(IStuff? stuff) => stuff == null;
 
-    private IEnumerable<IStuff> GetAllWornStuffs()
+    private IEnumerable<IStuff?> GetAllWornStuffs()
     {
-        var wornStuffs = new List<IStuff>();
+        var wornStuffs = new List<IStuff?>();
         if (!IsNull(WornHat))
             wornStuffs.Add(WornHat);
         if (!IsNull(WornArmor))
@@ -450,7 +412,7 @@ public class Manchkin : IManchkin
             LostStuff(maxPowerStuff);
     }
 
-    public void LostStuff(IStuff stuff)
+    public void LostStuff(IStuff? stuff)
     {
         if (IsNull(stuff)) return;
         CancelCheat(stuff);
@@ -480,15 +442,12 @@ public class Manchkin : IManchkin
                             Hands.TakeInRightHand(stuff);
                         break;
                 }
-
-                break;
-            default:
-                if (stuff.Weight == Bulkiness.HUGE)
-                    HugeStuffs.Remove(stuff);
-                else
-                    SmallStuffs.Remove(stuff);
                 break;
         }
+        if (stuff.Weight == Bulkiness.HUGE)
+            HugeStuffs.Remove(stuff);
+        else
+            SmallStuffs.Remove(stuff);
     }
 
     public void LostAllStuffs()
@@ -498,15 +457,9 @@ public class Manchkin : IManchkin
 
         foreach (var stuff in HugeStuffs)
             LostStuff(stuff);
-
-        LostStuff(WornArmor);
-        LostStuff(WornHat);
-        LostStuff(WornShoes);
-        LostStuff(Hands.LeftHand);
-        LostStuff(Hands.RightHand);
     }
 
-    public void SellStuffs(List<IStuff> stuffs)
+    public void SellStuffs(List<IStuff?> stuffs)
     {
         var price = 0;
         foreach (var stuff in stuffs)
@@ -518,7 +471,7 @@ public class Manchkin : IManchkin
         Level += price / 1000;
     }
 
-    public void SellByDoublePrice(IStuff stuff)
+    public void SellByDoublePrice(IStuff? stuff)
     {
         Level += stuff.Price * 2 / 1000;
         LostStuff(stuff);

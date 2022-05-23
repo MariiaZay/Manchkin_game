@@ -22,16 +22,6 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD" />
-        <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070" />
-        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD" />
-        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1" />
-        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6" />
-        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B" />
-        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4" />
-        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5" />
-        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383" />
-
         <Style x:Key="RoundedGreenButtonStyle" TargetType="{x:Type Button}">
             <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
             <Setter Property="Background" Value="#4FA39C" />
@@ -43,7 +33,6 @@
             <Setter Property="FontWeight" Value="SemiBold"></Setter>
             <Setter Property="FontFamily" Value="Comic Sans MS"></Setter>
             <Setter Property="FontSize" Value="13.5"></Setter>
-            <Setter Property="VerticalAlignment" Value="Center"></Setter>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
@@ -86,12 +75,14 @@
         <Style x:Key="RoundGreenToggleButtonStyle" TargetType="{x:Type ToggleButton}">
             <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
             <Setter Property="Background" Value="#4FA39C" />
-            <Setter Property="BorderBrush" Value="#4FA39C" />
-            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="Foreground" Value="White" />
             <Setter Property="BorderThickness" Value="0" />
             <Setter Property="HorizontalContentAlignment" Value="Center" />
             <Setter Property="VerticalContentAlignment" Value="Center" />
-            <Setter Property="Padding" Value="1" />
+            <Setter Property="Padding" Value="4.5" />
+            <Setter Property="FontWeight" Value="SemiBold"></Setter>
+            <Setter Property="FontFamily" Value="Comic Sans MS"></Setter>
+            <Setter Property="FontSize" Value="13.5"></Setter>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type ToggleButton}">
@@ -138,7 +129,7 @@
             <Setter Property="FontWeight" Value="SemiBold"></Setter>
             <Setter Property="FontFamily" Value="Comic Sans MS"></Setter>
             <Setter Property="FontSize" Value="13.5"></Setter>
-            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
@@ -185,7 +176,6 @@
             <Setter Property="BorderThickness" Value="0" />
             <Setter Property="HorizontalContentAlignment" Value="Center" />
             <Setter Property="VerticalContentAlignment" Value="Center" />
-            <Setter Property="VerticalAlignment" Value="Center"></Setter>
             <Setter Property="Padding" Value="4.5" />
             <Setter Property="FontWeight" Value="SemiBold"></Setter>
             <Setter Property="FontFamily" Value="Comic Sans MS"></Setter>
@@ -392,10 +382,6 @@
                             Style="{DynamicResource RoundGreenToggleButtonStyle}"
 
                             Foreground="White"
-                            Padding="4.5"
-                            FontSize="14"
-                            FontWeight="SemiBold"
-                            FontFamily="Comic Sans MS"
                             Content="ЧУЖОЙ ХОД">
                         </ToggleButton>
                         <ToggleButton
@@ -403,12 +389,8 @@
                             Grid.Column="1"
                             Style="{DynamicResource RoundGreenToggleButtonStyle}"
                             Margin="3.25, 0, 0, 0"
-                            Background="#4FA39C"
                             Foreground="White"
-                            Padding="4.5"
-                            FontSize="14"
-                            FontWeight="SemiBold"
-                            FontFamily="Comic Sans MS">
+                            >
                             НЕ В БОЮ
                         </ToggleButton>
                     </Grid>
@@ -934,7 +916,7 @@
                             <Button
                                 Name="HalfBloodButton"
                                 Grid.Column="1"
-                                Margin="4.4,0,0, 4.4"
+                                Margin="4.4,4.4,0, 4.4"
                                 Style="{DynamicResource RoundedGreenButtonStyle}">
                                 ПОЛУЧИТЬ
                             </Button>
@@ -1267,9 +1249,7 @@
                             Name="GetSmallStuffButton"
                             Grid.Column="2"
                             Margin="4.4,0,4.4,0"
-                            Style="{DynamicResource RoundedGreenButtonStyle}"
-                            
-                            VerticalAlignment="Center">
+                            Style="{DynamicResource RoundedGreenButtonStyle}">
                             НАДЕТЬ
                         </Button>
                         
@@ -1278,8 +1258,7 @@
                             Grid.Column="3"
                             Margin="4.4,0,4.4,0"
                             Style="{DynamicResource RoundedNotActiveRedButtonStyle}"
-                            VerticalAlignment="Center"
-                            >
+                        >
                             ПОТЕРЯТЬ
                         </Button>
                     </Grid>
@@ -1319,8 +1298,7 @@
                             Name="GetHugeStuffButton"
                             Grid.Column="2"
                             Margin="4.4,0,4.4,0"
-                            Style="{DynamicResource RoundedGreenButtonStyle}"
-                            VerticalAlignment="Center">
+                            Style="{DynamicResource RoundedGreenButtonStyle}">
                             НАДЕТЬ
                         </Button>
                         
@@ -1328,13 +1306,7 @@
                             Name="LostHugeStuffButton"
                             Grid.Column="3"
                             Margin="4.4,0,4.4,0"
-                            Style="{DynamicResource RoundedNotActiveRedButtonStyle}"
-                            VerticalAlignment="Center"
-                            Foreground="White"
-                            FontSize="14"
-                            FontWeight="SemiBold"
-                            FontFamily="Comic Sans MS"
-                            Padding="4.5">
+                            Style="{DynamicResource RoundedNotActiveRedButtonStyle}">
                             ПОТЕРЯТЬ
                         </Button>
                     </Grid>
@@ -1365,43 +1337,24 @@
                         <Button
                             Name="GetMercenariesButton"
                             Grid.Column="1"
-                            Margin="4.4,0,4.4,0"
-                            Style="{DynamicResource RoundedGreenButtonStyle}"
-                            Background="#4FA39C"
-                            VerticalAlignment="Center"
-                            Foreground="White"
-                            FontSize="14"
-                            FontWeight="SemiBold"
-                            FontFamily="Comic Sans MS"
-                            Padding="4.5">
+                            Margin="4.4,4.4,4.4,0"
+                            Style="{DynamicResource RoundedGreenButtonStyle}">
                             ПОЛУЧИТЬ
                         </Button>
 
                         <Button
                             Name="ChangeMercenaryButton"
                             Grid.Column="2"
-                            Margin="4.4,0,4.4,0"
-                            Style="{DynamicResource RoundedNotActiveGreenButtonStyle}"
-                            VerticalAlignment="Center"
-                            Foreground="White"
-                            FontSize="14"
-                            FontWeight="SemiBold"
-                            FontFamily="Comic Sans MS"
-                            Padding="4.5">
+                            Margin="4.4,4.4,4.4,0"
+                            Style="{DynamicResource RoundedNotActiveGreenButtonStyle}">
                             ПОМЕНЯТЬ
                         </Button>
 
                         <Button
                             Name="LostMercenaryButton"
                             Grid.Column="3"
-                            Margin="4.4,0,4.4,0"
-                            Style="{DynamicResource RoundedNotActiveRedButtonStyle}"
-                            VerticalAlignment="Center"
-                            Foreground="White"
-                            FontSize="14"
-                            FontWeight="SemiBold"
-                            FontFamily="Comic Sans MS"
-                            Padding="4.5">
+                            Margin="4.4,4.4,4.4,0"
+                            Style="{DynamicResource RoundedNotActiveRedButtonStyle}">
                             ПОТЕРЯТЬ
                         </Button>
                     </Grid>

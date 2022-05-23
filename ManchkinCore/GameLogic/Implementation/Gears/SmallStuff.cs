@@ -8,7 +8,6 @@ public abstract class SmallStuff : IStuff, IDescriptable
 {
     public int Price { get; protected set; }
     public int Damage { get; protected set; }
-    public bool ActiveCheat { get; set; }
     public Bulkiness Weight { get; protected set; }
     public Arms Fullness { get; protected set; }
     public int FlushingBonus { get; protected set; }
@@ -37,7 +36,7 @@ public class Stepladder : SmallStuff
         TextRepresentation = "Боевая стремянка";
     }
 
-    public override bool CanBeUsed(IRace race) => race is Halfling || ActiveCheat;
+    public override bool CanBeUsed(IRace race) => race is Halfling || Cheat;
 
     public override bool CanBeUsed(IClass _class) => true;
 
@@ -99,7 +98,7 @@ public class SingingSword : SmallStuff
 
     public override bool CanBeUsed(IRace race) => true;
 
-    public override bool CanBeUsed(IClass _class) => _class is not Thief || ActiveCheat;
+    public override bool CanBeUsed(IClass _class) => _class is not Thief || Cheat;
 
     public override bool CanBeUsed(Genders gender) => true;
 }
@@ -117,7 +116,7 @@ public class Sandwich : SmallStuff
         TextRepresentation = "Сэндвич \"Душитая смерть\"";
     }
 
-    public override bool CanBeUsed(IRace race) => race is Halfling || ActiveCheat;
+    public override bool CanBeUsed(IRace race) => race is Halfling || Cheat;
 
     public override bool CanBeUsed(IClass _class) => true;
 
@@ -139,7 +138,7 @@ public class Cloack : SmallStuff
 
     public override bool CanBeUsed(IRace race) => true;
 
-    public override bool CanBeUsed(IClass _class) => _class is Thief || ActiveCheat;
+    public override bool CanBeUsed(IClass _class) => _class is Thief || Cheat;
 
     public override bool CanBeUsed(Genders gender) => true;
 }
@@ -159,7 +158,7 @@ public class Pantyhose : SmallStuff
 
     public override bool CanBeUsed(IRace race) => true;
 
-    public override bool CanBeUsed(IClass _class) => _class is not Warrior || ActiveCheat;
+    public override bool CanBeUsed(IClass _class) => _class is not Warrior || Cheat;
 
     public override bool CanBeUsed(Genders gender) => true;
 }

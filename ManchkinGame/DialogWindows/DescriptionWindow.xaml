@@ -18,7 +18,8 @@
                 <Setter Property="Height" Value="10"></Setter>
                 <Setter Property="Width" Value="10"></Setter>
                 <Setter Property="HorizontalAlignment" Value="Center"></Setter>
-                <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                <Setter Property="VerticalAlignment" Value="Top"></Setter>
+                <Setter Property= "Margin" Value="0,7"></Setter>
                 <Setter Property="Fill" Value="Black"></Setter>
             </Style>
             <Style x:Key="TextStyle" TargetType="{x:Type TextBlock}">

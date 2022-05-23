@@ -6,13 +6,19 @@ namespace ManchkinGame;
 
 public static class UserMessage
 {
-    public static void CreateEmptyStuffMessage()
+    public static void CreateEmptyActionStuffMessage()
         => MessageBox.Show("У тебя пока что нет этого, чтобы с этим что-то делать",
             "Пока пусто",
             MessageBoxButton.OK,
             MessageBoxImage.Information);
-    
-    public static void CreateImpossibleLostMessage(string mess)
+
+    public static void CreateEmptyStuffmessage()
+        => MessageBox.Show("У тебя пока что нет этого",
+            "Пока пусто",
+            MessageBoxButton.OK,
+            MessageBoxImage.Information);
+
+        public static void CreateImpossibleLostMessage(string mess)
     {
         var pronoun = mess == "класс" ? "его" : "её";
         var caption = mess == "класс" ? "Смена класса" : "Смена расы";

@@ -35,12 +35,15 @@
         <Style x:Key="RoundedGreenButtonStyle" TargetType="{x:Type Button}">
             <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
             <Setter Property="Background" Value="#4FA39C" />
-            <Setter Property="BorderBrush" Value="#4FA39C" />
-            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="Foreground" Value="White" />
             <Setter Property="BorderThickness" Value="0" />
             <Setter Property="HorizontalContentAlignment" Value="Center" />
             <Setter Property="VerticalContentAlignment" Value="Center" />
-            <Setter Property="Padding" Value="1" />
+            <Setter Property="Padding" Value="4.5" />
+            <Setter Property="FontWeight" Value="SemiBold"></Setter>
+            <Setter Property="FontFamily" Value="Comic Sans MS"></Setter>
+            <Setter Property="FontSize" Value="13.5"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
@@ -126,13 +129,16 @@
 
         <Style x:Key="RoundedRedButtonStyle" TargetType="{x:Type Button}">
             <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
-            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="Background" Value="#E9610B" />
+            <Setter Property="Foreground" Value="White" />
             <Setter Property="BorderThickness" Value="0" />
             <Setter Property="HorizontalContentAlignment" Value="Center" />
             <Setter Property="VerticalContentAlignment" Value="Center" />
-            <Setter Property="Background" Value="#E9610B" />
-            <Setter Property="BorderBrush" Value="#E9610B" />
-            <Setter Property="Padding" Value="1" />
+            <Setter Property="Padding" Value="4.5" />
+            <Setter Property="FontWeight" Value="SemiBold"></Setter>
+            <Setter Property="FontFamily" Value="Comic Sans MS"></Setter>
+            <Setter Property="FontSize" Value="13.5"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
@@ -174,13 +180,16 @@
 
         <Style x:Key="RoundedNotActiveRedButtonStyle" TargetType="{x:Type Button}">
             <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
-            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="Background" Value="#FBCDAF" />
+            <Setter Property="Foreground" Value="White" />
             <Setter Property="BorderThickness" Value="0" />
             <Setter Property="HorizontalContentAlignment" Value="Center" />
             <Setter Property="VerticalContentAlignment" Value="Center" />
-            <Setter Property="Background" Value="#FBCDAF" />
-            <Setter Property="BorderBrush" Value="#FBCDAF" />
-            <Setter Property="Padding" Value="1" />
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="Padding" Value="4.5" />
+            <Setter Property="FontWeight" Value="SemiBold"></Setter>
+            <Setter Property="FontFamily" Value="Comic Sans MS"></Setter>
+            <Setter Property="FontSize" Value="13.5"></Setter>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
@@ -221,13 +230,16 @@
         </Style>
         <Style x:Key="RoundedStuffButtonStyle" TargetType="{x:Type Button}">
             <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
-            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
-            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="BorderThickness" Value="3" />
             <Setter Property="HorizontalContentAlignment" Value="Center" />
             <Setter Property="VerticalContentAlignment" Value="Center" />
             <Setter Property="Background" Value="White" />
             <Setter Property="BorderBrush" Value="#FCC49B" />
-            <Setter Property="Padding" Value="1" />
+            <Setter Property="Padding" Value="4.5" />
+            <Setter Property="FontSize" Value="14"></Setter>
+            <Setter Property="FontWeight" Value="SemiBold"></Setter>
+            <Setter Property="FontFamily" Value="Comic Sans MS"></Setter>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
@@ -268,13 +280,15 @@
         </Style>
         <Style x:Key="RoundedNotActiveGreenButtonStyle" TargetType="{x:Type Button}">
             <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
-            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="Background" Value="#C4E3E0" />
+            <Setter Property="Foreground" Value="White" />
             <Setter Property="BorderThickness" Value="0" />
             <Setter Property="HorizontalContentAlignment" Value="Center" />
             <Setter Property="VerticalContentAlignment" Value="Center" />
-            <Setter Property="Background" Value="#C4E3E0" />
-            <Setter Property="BorderBrush" Value="#C4E3E0" />
-            <Setter Property="Padding" Value="1" />
+            <Setter Property="Padding" Value="4.5" />
+            <Setter Property="FontWeight" Value="SemiBold"></Setter>
+            <Setter Property="FontFamily" Value="Comic Sans MS"></Setter>
+            <Setter Property="FontSize" Value="13.5"></Setter>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
@@ -633,13 +647,7 @@
                             Name="IncreaseLevelButton"
                             Grid.Column="0"
                             Margin="0,5,4.4,0"
-                            Style="{DynamicResource RoundedGreenButtonStyle}"
-                            Background="#4FA39C"
-                            Foreground="White"
-                            FontSize="20"
-                            FontWeight="SemiBold"
-                            FontFamily="Comic Sans MS"
-                            Padding="4.5">
+                            Style="{DynamicResource RoundedGreenButtonStyle}">
                             +
                         </Button>
 
@@ -647,13 +655,7 @@
                             Name="ReduceLevelButton"
                             Grid.Column="1"
                             Margin="4.4,5,0,0"
-                            Style="{DynamicResource RoundedRedButtonStyle}"
-
-                            Foreground="White"
-                            FontSize="20"
-                            FontWeight="SemiBold"
-                            FontFamily="Comic Sans MS"
-                            Padding="4.5">
+                            Style="{DynamicResource RoundedRedButtonStyle}">
                             -
                         </Button>
                     </Grid>
@@ -672,13 +674,7 @@
                             Name="ChangeRaceButton"
                             Grid.Column="0"
                             Margin="0,0,4.4,0"
-                            Style="{DynamicResource RoundedGreenButtonStyle}"
-                            Background="#4FA39C"
-                            Foreground="White"
-                            FontSize="14"
-                            FontWeight="SemiBold"
-                            FontFamily="Comic Sans MS"
-                            Padding="4.5">
+                            Style="{DynamicResource RoundedGreenButtonStyle}">
                             СМЕНИТЬ
                         </Button>
 
@@ -686,12 +682,7 @@
                             Name="LostRaceButton"
                             Grid.Column="1"
                             Margin="4.4,0,0,0"
-                            Style="{DynamicResource RoundedNotActiveRedButtonStyle}"
-                            Foreground="White"
-                            FontSize="14"
-                            FontWeight="SemiBold"
-                            FontFamily="Comic Sans MS"
-                            Padding="4.5">
+                            Style="{DynamicResource RoundedNotActiveRedButtonStyle}">
                             ПОТЕРЯТЬ
                         </Button>
                     </Grid>
@@ -710,13 +701,7 @@
                             Name="ChangeClassButton"
                             Grid.Column="0"
                             Margin="0,0,4.4,0"
-                            Style="{DynamicResource RoundedGreenButtonStyle}"
-                            Background="#4FA39C"
-                            Foreground="White"
-                            FontSize="14"
-                            FontWeight="SemiBold"
-                            FontFamily="Comic Sans MS"
-                            Padding="4.5">
+                            Style="{DynamicResource RoundedGreenButtonStyle}">
                             СМЕНИТЬ
                         </Button>
 
@@ -724,12 +709,7 @@
                             Name="LostClassButton"
                             Grid.Column="1"
                             Margin="4.4,0,0,0"
-                            Style="{DynamicResource RoundedNotActiveRedButtonStyle}"
-                            Foreground="White"
-                            FontSize="14"
-                            FontWeight="SemiBold"
-                            FontFamily="Comic Sans MS"
-                            Padding="4.5">
+                            Style="{DynamicResource RoundedNotActiveRedButtonStyle}">
                             ПОТЕРЯТЬ
                         </Button>
                     </Grid>
@@ -742,13 +722,7 @@
                         <Button
                             Name="ChangeGenderButton"
                             Grid.Column="0"
-                            Style="{DynamicResource RoundedGreenButtonStyle}"
-                            Background="#4FA39C"
-                            Foreground="White"
-                            FontSize="14"
-                            FontWeight="SemiBold"
-                            FontFamily="Comic Sans MS"
-                            Padding="4.5">
+                            Style="{DynamicResource RoundedGreenButtonStyle}">
                             СМЕНИТЬ
                         </Button>
 
@@ -760,11 +734,6 @@
                         Grid.Column="2"
                         Margin="4.4,4.4,0,4.4"
                         Name="DeathButton"
-                        Foreground="White"
-                        FontSize="14"
-                        FontWeight="SemiBold"
-                        FontFamily="Comic Sans MS"
-                        Padding="4.5"
                         Style="{DynamicResource RoundedRedButtonStyle}">
                         УМЕРЕРТЬ
                     </Button>
@@ -938,13 +907,7 @@
                                 Name="SuperManchkinButton"
                                 Grid.Column="1"
                                 Margin="4.4,0,0, 0"
-                                Style="{DynamicResource RoundedGreenButtonStyle}"
-                                Background="#4FA39C"
-                                Foreground="White"
-                                Padding="4.5"
-                                FontSize="14"
-                                FontWeight="SemiBold"
-                                FontFamily="Comic Sans MS">
+                                Style="{DynamicResource RoundedGreenButtonStyle}">
                                 ПОЛУЧИТЬ
                             </Button>
                         </Grid>
@@ -972,13 +935,7 @@
                                 Name="HalfBloodButton"
                                 Grid.Column="1"
                                 Margin="4.4,0,0, 4.4"
-                                Style="{DynamicResource RoundedGreenButtonStyle}"
-                                Background="#4FA39C"
-                                Foreground="White"
-                                Padding="4.5"
-                                FontSize="14"
-                                FontWeight="SemiBold"
-                                FontFamily="Comic Sans MS">
+                                Style="{DynamicResource RoundedGreenButtonStyle}">
                                 ПОЛУЧИТЬ
                             </Button>
                         </Grid>
@@ -1005,12 +962,7 @@
                             Grid.Column="0"
                             Name="DescriptionButton"
                             Margin="0,0,4.4,0"
-                            Style="{DynamicResource RoundedNotActiveGreenButtonStyle}"
-                            Foreground="White"
-                            FontWeight="SemiBold"
-                            FontSize="14"
-                            FontFamily="Comic Sans MS"
-                            Padding="4.5">
+                            Style="{DynamicResource RoundedNotActiveGreenButtonStyle}">
                             МОИ СВОЙСТВА
                         </Button>
 
@@ -1018,13 +970,7 @@
                             Grid.Column="1"
                             Name="ActionsButton"
                             Margin="4.4,0,0,0"
-                            Style="{DynamicResource RoundedGreenButtonStyle}"
-                            Background="#4FA39C"
-                            Foreground="White"
-                            FontSize="14"
-                            FontWeight="SemiBold"
-                            FontFamily="Comic Sans MS"
-                            Padding="4.5">
+                            Style="{DynamicResource RoundedGreenButtonStyle}">
                             ЧТО МОГУ ДЕЛАТЬ
                         </Button>
                     </Grid>
@@ -1066,50 +1012,38 @@
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock
+                        <Button
+                            Name="ArmorButton"
                             Grid.Row="0"
                             Grid.Column="0"
                             Margin="0,0,4.4,4.4"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Center"
-                            FontFamily="Comic Sans MS"
-                            FontWeight="Bold"
-                            FontSize="20">
-                            Броник:
-                        </TextBlock>
-                        <TextBlock
+                            Style="{DynamicResource RoundedStuffButtonStyle}">
+                            <TextBlock Text="БРОНИК" />
+                        </Button>
+                        <Button
+                            Name="ShoesButton"
                             Grid.Row="1"
                             Grid.Column="0"
                             Margin="0,4.4,4.4,4.4"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Center"
-                            FontFamily="Comic Sans MS"
-                            FontWeight="Bold"
-                            FontSize="20">
-                            Обувка:
-                        </TextBlock>
-                        <TextBlock
+                            Style="{DynamicResource RoundedStuffButtonStyle}">
+                            <TextBlock Text="ОБУВКА"/>
+                        </Button>
+                        <Button
+                            Name="WeaponButton"
                             Grid.Row="2"
                             Grid.Column="0"
                             Margin="0,4.4,4.4,4.4"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Center"
-                            FontFamily="Comic Sans MS"
-                            FontWeight="Bold"
-                            FontSize="20">
-                            Оружие:
-                        </TextBlock>
-                        <TextBlock
+                            Style="{DynamicResource RoundedStuffButtonStyle}">
+                            <TextBlock Text="ОРУЖИЕ"/>
+                        </Button>
+                        <Button
+                            Name="HatButton"
                             Grid.Row="3"
                             Grid.Column="0"
                             Margin="0,4.4,4.4,0"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Center"
-                            FontFamily="Comic Sans MS"
-                            FontWeight="Bold"
-                            FontSize="20">
-                            Головняк:
-                        </TextBlock>
+                            Style="{DynamicResource RoundedStuffButtonStyle}">
+                            <TextBlock Text="ГОЛОВНЯК"/>
+                        </Button>
 
                         <TextBlock
                             Name="ArmorBlock"
@@ -1165,7 +1099,7 @@
 
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition></ColumnDefinition>
-                                <ColumnDefinition></ColumnDefinition>
+                                
                                 <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
 
@@ -1173,30 +1107,13 @@
                                 Name="ChangeArmorButton"
                                 Grid.Column="0"
                                 Margin="0,4.4,4.4,0"
-                                Style="{DynamicResource RoundedGreenButtonStyle}"
-                                Background="#4FA39C"
-                                Foreground="White"
-                                FontSize="14"
-                                FontWeight="SemiBold"
-                                FontFamily="Comic Sans MS"
-                                Padding="4.5">
+                                Style="{DynamicResource RoundedGreenButtonStyle}">
                                 НАДЕТЬ
                             </Button>
-                            <Button
-                                Name="SellArmorButton"
-                                Grid.Column="1"
-                                Margin="4.4,4.4,4.4,0"
-                                Style="{DynamicResource RoundedNotActiveGreenButtonStyle}"
-                                Foreground="White"
-                                FontSize="14"
-                                FontWeight="SemiBold"
-                                FontFamily="Comic Sans MS"
-                                Padding="4.5">
-                                ПРОДАТЬ
-                            </Button>
+                            
                             <Button
                                 Name="LostArmorButton"
-                                Grid.Column="2"
+                                Grid.Column="1"
                                 Margin="4.4,4.4,0,0"
                                 Style="{DynamicResource RoundedNotActiveRedButtonStyle}"
                                 Foreground="White"
@@ -1215,7 +1132,7 @@
 
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition></ColumnDefinition>
-                                <ColumnDefinition></ColumnDefinition>
+                                
                                 <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
 
@@ -1223,38 +1140,14 @@
                                 Name="ChangeShoesButton"
                                 Grid.Column="0"
                                 Margin="0,0,4.4,0"
-                                Style="{DynamicResource RoundedGreenButtonStyle}"
-                                Background="#4FA39C"
-                                Foreground="White"
-                                FontSize="14"
-                                FontWeight="SemiBold"
-                                FontFamily="Comic Sans MS"
-                                Padding="4.5">
+                                Style="{DynamicResource RoundedGreenButtonStyle}">
                                 НАДЕТЬ
                             </Button>
                             <Button
-                                Name="SellShoesButton"
-                                Grid.Column="1"
-                                Margin="4.4,4.4,4.4,0"
-                                Style="{DynamicResource RoundedNotActiveGreenButtonStyle}"
-                                Foreground="White"
-                                FontSize="14"
-                                FontWeight="SemiBold"
-                                FontFamily="Comic Sans MS"
-                                Padding="4.5">
-                                ПРОДАТЬ
-                            </Button>
-                            <Button
                                 Name="LostShoesButton"
-                                Grid.Column="2"
+                                Grid.Column="1"
                                 Margin="4.4,0,0,0"
-                                Style="{DynamicResource RoundedNotActiveRedButtonStyle}"
-
-                                Foreground="White"
-                                FontSize="14"
-                                FontWeight="SemiBold"
-                                FontFamily="Comic Sans MS"
-                                Padding="4">
+                                Style="{DynamicResource RoundedNotActiveRedButtonStyle}">
                                 ПОТЕРЯТЬ
                             </Button>
                         </Grid>
@@ -1267,47 +1160,20 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition></ColumnDefinition>
                                 <ColumnDefinition></ColumnDefinition>
-                                <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
 
                             <Button
                                 Name="ChangeWeaponButton"
                                 Grid.Column="0"
                                 Margin="0,0,4.4,0"
-                                Style="{DynamicResource RoundedGreenButtonStyle}"
-                                Background="#4FA39C"
-                                Foreground="White"
-                                FontSize="14"
-                                FontWeight="SemiBold"
-                                FontFamily="Comic Sans MS"
-                                Padding="4.5">
+                                Style="{DynamicResource RoundedGreenButtonStyle}">
                                 НАДЕТЬ
                             </Button>
-                            
-                            <Button
-                                Name="SellWeaponButton"
-                                Grid.Column="1"
-                                Margin="4.4,4.4,4.4,0"
-                                Style="{DynamicResource RoundedNotActiveGreenButtonStyle}"
-                                Foreground="White"
-                                FontSize="14"
-                                FontWeight="SemiBold"
-                                FontFamily="Comic Sans MS"
-                                Padding="4.5">
-                                ПРОДАТЬ
-                            </Button>
-
                             <Button
                                 Name="LostWeaponButton"
-                                Grid.Column="2"
+                                Grid.Column="1"
                                 Margin="4.4,0,0,0"
-                                Style="{DynamicResource RoundedNotActiveRedButtonStyle}"
-
-                                Foreground="White"
-                                FontSize="14"
-                                FontWeight="SemiBold"
-                                FontFamily="Comic Sans MS"
-                                Padding="4">
+                                Style="{DynamicResource RoundedNotActiveRedButtonStyle}">
                                 ПОТЕРЯТЬ
                             </Button>
                         </Grid>
@@ -1320,44 +1186,21 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition></ColumnDefinition>
                                 <ColumnDefinition></ColumnDefinition>
-                                <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
 
                             <Button
                                 Name="ChangeHatButton"
                                 Grid.Column="0"
                                 Margin="0,0,4.4,4.4"
-                                Style="{DynamicResource RoundedGreenButtonStyle}"
-                                Background="#4FA39C"
-                                Foreground="White"
-                                FontSize="14"
-                                FontWeight="SemiBold"
-                                FontFamily="Comic Sans MS"
-                                Padding="4.5">
+                                Style="{DynamicResource RoundedGreenButtonStyle}">
                                 НАДЕТЬ
                             </Button>
-                            <Button
-                                Name="SellHatButton"
-                                Grid.Column="1"
-                                Margin="4.4,4.4,4.4,4.4"
-                                Style="{DynamicResource RoundedNotActiveGreenButtonStyle}"
-                                Foreground="White"
-                                FontSize="14"
-                                FontWeight="SemiBold"
-                                FontFamily="Comic Sans MS"
-                                Padding="4.5">
-                                ПРОДАТЬ
-                            </Button>
+                            
                             <Button
                                 Name="LostHatButton"
-                                Grid.Column="2"
+                                Grid.Column="1"
                                 Margin="4.4,0,0,4.4"
-                                Style="{DynamicResource RoundedNotActiveRedButtonStyle}"
-                                Foreground="White"
-                                FontSize="14"
-                                FontWeight="SemiBold"
-                                FontFamily="Comic Sans MS"
-                                Padding="4">
+                                Style="{DynamicResource RoundedNotActiveRedButtonStyle}">
                                 ПОТЕРЯТЬ
                             </Button>
                         </Grid>
@@ -1386,12 +1229,12 @@
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
+                        <RowDefinition Height="0.5*"></RowDefinition>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
 
                     <Grid
                         Grid.Row="0"
-
                         Margin="0,0,0,4.4">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
@@ -1404,57 +1247,39 @@
                             Name="SmallStuffButton"
                             Grid.Column="0"
                             Margin="0,4.4,4.4,4.4"
-                            Style="{DynamicResource RoundedStuffButtonStyle}"
-                            
-                             BorderThickness="3"
-                            Foreground="Black"
-                            FontSize="14"
-                            FontWeight="SemiBold"
-                            FontFamily="Comic Sans MS"
-                            Padding="4.5">
-                            <TextBlock Text="МЕЛКИЕ&#x0a;ШМОТКИ" />
+                            Style="{DynamicResource RoundedStuffButtonStyle}">
+                            <TextBlock Text="МЕЛКИЕ ШМОТКИ" TextWrapping="Wrap" HorizontalAlignment="Center" 
+                                       VerticalAlignment="Center"/>
                         </Button>
+                        
+                        <TextBlock 
+                            Grid.Column="1"
+                            Name="SmallStuffBlock"
+                            Margin="4.4,0,4.4,4.4"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontFamily="Comic Sans MS"
+                            FontSize="20">
+                            efef
+                        </TextBlock>
+                        
                         <Button
                             Name="GetSmallStuffButton"
-                            Grid.Column="1"
-                            Margin="4.4,0,4.4,0"
-                            Style="{DynamicResource RoundedGreenButtonStyle}"
-                            Background="#4FA39C"
-                            VerticalAlignment="Center"
-                            Foreground="White"
-                            FontSize="14"
-                            FontWeight="SemiBold"
-                            FontFamily="Comic Sans MS"
-                            Padding="4.5">
-                            НАДЕТЬ
-                        </Button>
-
-                        <Button
-                            Name="SellSmallStuffButton"
                             Grid.Column="2"
                             Margin="4.4,0,4.4,0"
-                            Style="{DynamicResource RoundedNotActiveGreenButtonStyle}"
-
-                            VerticalAlignment="Center"
-                            Foreground="White"
-                            FontSize="14"
-                            FontWeight="SemiBold"
-                            FontFamily="Comic Sans MS"
-                            Padding="4.5">
-                            ПРОДАТЬ
+                            Style="{DynamicResource RoundedGreenButtonStyle}"
+                            
+                            VerticalAlignment="Center">
+                            НАДЕТЬ
                         </Button>
-
+                        
                         <Button
                             Name="LostSmallStuffButton"
                             Grid.Column="3"
                             Margin="4.4,0,4.4,0"
                             Style="{DynamicResource RoundedNotActiveRedButtonStyle}"
                             VerticalAlignment="Center"
-                            Foreground="White"
-                            FontSize="14"
-                            FontWeight="SemiBold"
-                            FontFamily="Comic Sans MS"
-                            Padding="4.5">
+                            >
                             ПОТЕРЯТЬ
                         </Button>
                     </Grid>
@@ -1474,44 +1299,31 @@
                             Name="HugeStuffButton"
                             Grid.Column="0"
                             Margin="0,4.4,4.4,4.4"
-                            Style="{DynamicResource RoundedStuffButtonStyle}"
-                            BorderThickness="3"
-                            Foreground="Black"
-                            FontSize="14"
-                            FontWeight="SemiBold"
-                            FontFamily="Comic Sans MS"
-                            Padding="4.5">
-                            <TextBlock Text="КРУПНЫЕ&#x0a;ШМОТКИ" />
+                            Style="{DynamicResource RoundedStuffButtonStyle}">
+                            <TextBlock Text="КРУПНЫЕ ШМОТКИ" TextWrapping="Wrap" HorizontalAlignment="Center" 
+                                       VerticalAlignment="Center"/>
                         </Button>
+                        
+                        <TextBlock 
+                            Name="HugeStuffBlock"
+                            Grid.Column="1"
+                            Margin="4.4,0,4.4,4.4"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontFamily="Comic Sans MS"
+                            FontSize="20">
+                            efef
+                        </TextBlock>
+                        
                         <Button
                             Name="GetHugeStuffButton"
-                            Grid.Column="1"
-                            Margin="4.4,0,4.4,0"
-                            Style="{DynamicResource RoundedGreenButtonStyle}"
-                            Background="#4FA39C"
-                            VerticalAlignment="Center"
-                            Foreground="White"
-                            FontSize="14"
-                            FontWeight="SemiBold"
-                            FontFamily="Comic Sans MS"
-                            Padding="4.5">
-                            НАДЕТЬ
-                        </Button>
-
-                        <Button
-                            Name="SellHugeStuffButton"
                             Grid.Column="2"
                             Margin="4.4,0,4.4,0"
-                            Style="{DynamicResource RoundedNotActiveGreenButtonStyle}"
-                            VerticalAlignment="Center"
-                            Foreground="White"
-                            FontSize="14"
-                            FontWeight="SemiBold"
-                            FontFamily="Comic Sans MS"
-                            Padding="4.5">
-                            ПРОДАТЬ
+                            Style="{DynamicResource RoundedGreenButtonStyle}"
+                            VerticalAlignment="Center">
+                            НАДЕТЬ
                         </Button>
-
+                        
                         <Button
                             Name="LostHugeStuffButton"
                             Grid.Column="3"
@@ -1526,10 +1338,15 @@
                             ПОТЕРЯТЬ
                         </Button>
                     </Grid>
-
-                    <Grid
+                    <Button 
+                        Name = "SellStuffButton"
                         Grid.Row="2"
-
+                        Margin="0,4.4"
+                        Style="{DynamicResource RoundedNotActiveGreenButtonStyle}">
+                        ПРОДАТЬ ШМОТКИ
+                    </Button>
+                    <Grid
+                        Grid.Row="3"
                         Margin="0,4.4,0,4.4">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
@@ -1542,13 +1359,7 @@
                             Name="MercenariesButton"
                             Grid.Column="0"
                             Margin="0,4.4,4.4,0"
-                            Style="{DynamicResource RoundedStuffButtonStyle}"
-                            BorderThickness="3"
-                            Foreground="Black"
-                            FontSize="14"
-                            FontWeight="SemiBold"
-                            FontFamily="Comic Sans MS"
-                            Padding="4.5">
+                            Style="{DynamicResource RoundedStuffButtonStyle}">
                             <TextBlock Text="НАЁМНИЧКИ" />
                         </Button>
                         <Button

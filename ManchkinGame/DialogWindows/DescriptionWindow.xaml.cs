@@ -54,7 +54,6 @@ public partial class DescriptionWindow : Window
             grid.Children.Add(text);
             DescriptionStackPanel.Children.Add(grid);
         }
-
         DescriptionScrollView.Content = DescriptionStackPanel;
     }
 

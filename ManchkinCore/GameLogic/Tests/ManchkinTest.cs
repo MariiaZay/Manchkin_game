@@ -29,7 +29,7 @@ public class ManchkinTest
         Assert.IsEmpty(manchkin.Descriptions);
         Assert.AreEqual(false,manchkin.HasMercenary);
     }
-
+    
     [Test]
     public void Manchkin_GetLevel_IncreasesLevel()
     {
@@ -52,6 +52,7 @@ public class ManchkinTest
         Assert.Greater(manchkin.Damage, originDamage);
     }
 
+    [Test]
     public void Manchkin_GetLevel_HasUpperBound10()
     {
         var manchkin = new Manchkin(Genders.MALE);
@@ -62,6 +63,76 @@ public class ManchkinTest
         manchkin.GetLevel();
         
         Assert.AreEqual(originLevel, manchkin.Level);
+    }
+
+    [Test]
+    public void Manchin_BecomeSuperManchkin_Became()
+    {
+        var manchkin = new Manchkin(Genders.FEMALE);
+        
+        manchkin.BecameSuperManchkin();
+        
+        Assert.True(manchkin.IsSuperManchkin);
+    }
+    
+    public void Manchin_BecomeHalfblood_Became()
+    {
+        var manchkin = new Manchkin(Genders.FEMALE);
+        
+        manchkin.BecameHalfBlood();
+        
+        Assert.True(manchkin.IsHalfBlood);
+    }
+
+    [Test]
+    public void Manchkin_RefuseHalfblood_Works()
+    {
+        var manchkin = new Manchkin(Genders.MALE);
+        manchkin.BecameHalfBlood();
+
+        manchkin.RefuseHalfblood();
+        
+        Assert.False(manchkin.IsHalfBlood);
+    }
+    
+    [Test]
+    public void Manchin_GetMercenary_GetMercenaryTrue()
+    {
+        var manchkin = new Manchkin(Genders.FEMALE);
+        
+        manchkin.GetMercenary();
+        
+        Assert.True(manchkin.HasMercenary);
+    }
+    
+    [Test]
+    public void Manchkin_ChangeGender_Works()
+    {
+        var trapikFromRtf = new Manchkin(Genders.MALE);
+        
+        trapikFromRtf.ChangeGender();
+        
+        Assert.AreEqual(Genders.FEMALE, trapikFromRtf.Gender);
+    }
+
+    [Test]
+    public void Manchkin_ChangeRace_Works()
+    {
+        var manchkin = new Manchkin(Genders.MALE);
+
+        manchkin.Race = new Elf();
+        
+        Assert.IsInstanceOf<Elf>(manchkin.Race);
+    }
+
+    [Test]
+    public void Manchkin_ChangeClass_Works()
+    {
+        var manchkin = new Manchkin(Genders.FEMALE);
+        
+        manchkin.Class = new Thief();
+        
+        Assert.IsInstanceOf<Thief>(manchkin.Class);
     }
 
     [Test]

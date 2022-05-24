@@ -13,7 +13,7 @@ public static class CardsBase
         new Cleric(), new Thief(),
         new Warrior(), new Wizard()
     };
-
+        //TODO: сделать DIY - контейнер
     public static List<IDescriptable> SmallStuffs = new List<IDescriptable>()
     {
         new Stepladder(), new GreatTitle(), new SpikedKnees(),

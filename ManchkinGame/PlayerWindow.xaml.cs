@@ -130,19 +130,11 @@ public partial class PlayerWindow
             {
                 if (!UserMessage.CreateAskingMessage("расу")) return;
                 _player.Manchkin.Race = new Human();
-                
-                LostRaceButton.Style = (Style) FindResource("RoundedNotActiveRedButtonStyle");
-                
-                if (_player.Manchkin.Descriptions.Count == 0)
-                    DescriptionButton.Style = (Style) FindResource("RoundedNotActiveRedButtonStyle");
                 Refresh();
             }
             else
             {
                 _player.Manchkin.Race = new Human();
-                LostRaceButton.Style = (Style) FindResource("RoundedNotActiveRedButtonStyle");
-                if (_player.Manchkin.Descriptions.Count == 0)
-                    DescriptionButton.Style = (Style) FindResource("RoundedNotActiveRedButtonStyle");
                 Refresh();
             }
         }
@@ -157,12 +149,8 @@ public partial class PlayerWindow
         DialogWindow.Show(new ChooseWindow(), this);
 
         if (App.Current.Resources["NEW"] == null || App.Current.Resources["NEW"] as IRace == _player.Manchkin.Race) return;
-
-        var newRace = App.Current.Resources["NEW"] as IRace;
         
-        _player.Manchkin.Race = newRace;
-        LostRaceButton.Style = (Style) FindResource("RoundedRedButtonStyle");
-        DescriptionButton.Style = (Style) FindResource("RoundedGreenButtonStyle");
+        _player.Manchkin.Race = App.Current.Resources["NEW"] as IRace;
         Refresh();
     }
 
@@ -188,11 +176,10 @@ public partial class PlayerWindow
         DialogWindow.Show(new ChooseWindow(), this);
 
         if (App.Current.Resources["NEW"] == null) return;
-        _player.Manchkin.Class = App.Current.Resources["NEW"] as IClass;
-        LostClassButton.Style = (Style) FindResource("RoundedRedButtonStyle");
-        DescriptionButton.Style = (Style) FindResource("RoundedGreenButtonStyle");
-        Refresh();
         
+        _player.Manchkin.Class = App.Current.Resources["NEW"] as IClass;
+        
+        Refresh();
     }
 
     #endregion
@@ -429,6 +416,23 @@ public partial class PlayerWindow
         if(_player.Manchkin.Level < 2)
             ReduceLevelButton.Style = (Style) FindResource("RoundedNotActiveRedButtonStyle");
         else ReduceLevelButton.Style = (Style) FindResource("RoundedRedButtonStyle");
+        
+        
+        if(_player.Manchkin.Descriptions.Count == 0)
+            DescriptionButton.Style = (Style) FindResource("RoundedNotActiveGreenButtonStyle");
+        else
+            DescriptionButton.Style = (Style) FindResource("RoundedGreenButtonStyle");
+        
+        if(_player.Manchkin.Race is Human)
+            LostRaceButton.Style = (Style) FindResource("RoundedNotActiveRedButtonStyle");
+        else
+            LostRaceButton.Style = (Style) FindResource("RoundedRedButtonStyle");
+        
+        if(_player.Manchkin.Class is Nobody)
+            LostClassButton.Style = (Style) FindResource("RoundedNotActiveRedButtonStyle");
+        else
+            LostClassButton.Style = (Style) FindResource("RoundedRedButtonStyle");
+        
         
         if (_player.Manchkin.WornArmor == null)
         {

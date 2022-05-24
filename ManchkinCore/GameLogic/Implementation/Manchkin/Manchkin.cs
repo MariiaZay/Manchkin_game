@@ -307,7 +307,7 @@ public class Manchkin : IManchkin
         return mainRight || additionalRaceRight || additionalClassRight;
     }
 
-    public bool CheckStuffBeforeChanging(IDescriptable descriptable)
+    public bool CheckStuffBeforeChanging(IDescriptable? descriptable)
     {
         var stuff = GetAllWornStuffs();
         return descriptable is IClass ? 
@@ -379,27 +379,21 @@ public class Manchkin : IManchkin
         switch (stuff)
         {
             case Hat:
+                if(!IsNull(WornHat))
+                    LostStuff(WornHat);
                 WornHat = stuff;
                 break;
 
             case Armor:
+                if(!IsNull(WornArmor))
+                    LostStuff(WornArmor);
                 WornArmor = stuff;
                 break;
 
             case Shoes:
+                if(!IsNull(WornShoes))
+                    LostStuff(WornShoes);
                 WornShoes = stuff;
-                break;
-
-            case Weapon:
-                if (stuff.Fullness == Arms.BOTH)
-                    Hands.TakeInBothHands(stuff);
-                else
-                {
-                    if (Hands.RightHand == null)
-                        Hands.TakeInRightHand(stuff);
-                    else
-                        Hands.TakeInLeftHand(stuff);
-                }
                 break;
         }
         if (stuff.Weight == Bulkiness.HUGE)
@@ -481,6 +475,8 @@ public class Manchkin : IManchkin
             HugeStuffs.Remove(stuff);
         else
             SmallStuffs.Remove(stuff);
+        RecalculateDamage();
+        RecalculateFlushingBonus();
     }
 
     public void LostAllStuffs()
@@ -498,8 +494,6 @@ public class Manchkin : IManchkin
             if(HugeStuffs.Count == 0)
                 break;
         }
-        RecalculateDamage();
-        RecalculateFlushingBonus();
     }
 
     public void SellStuffs(List<IStuff?> stuffs)

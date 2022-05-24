@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Documents;
 using ManchkinCore.GameLogic;
+using ManchkinCore.GameLogic.Implementation;
 using ManchkinCore.Interfaces;
 using Microsoft.VisualBasic;
 
@@ -14,6 +15,7 @@ public partial class ChooseWindow : Window
     private string _typeOfVariants;
     private List<IDescriptable> _variants;
     private string _current;
+
     public ChooseWindow()
     {
         InitializeComponent();
@@ -32,29 +34,46 @@ public partial class ChooseWindow : Window
         CancelButton.Click += CancelButtonClick;
     }
 
-    
 
     private void VariantsComboBoxLoaded(object sender, RoutedEventArgs e)
     {
-        foreach (var variant in 
+        foreach (var variant in
                  _variants.Where(variant => _current != variant.TextRepresentation))
         {
             VariantsComboBox.Items.Add(variant.TextRepresentation);
         }
     }
-    
+
     private void ApplyButtonClick(object sender, RoutedEventArgs e)
     {
-        if(VariantsComboBox.Text == "")
-            UserMessage.CreateNotChosenItemMessage("новую рассу");
-        foreach (var variant in _variants.Where(variant => variant.TextRepresentation == VariantsComboBox.Text))
+        if (VariantsComboBox.Text == "")
+            switch (_typeOfVariants)
+            {
+                case "расу":
+                    UserMessage.CreateNotChosenItemMessage("новую расу");
+                    break;
+                case "класс":
+                    UserMessage.CreateNotChosenItemMessage("новый класс");
+                    break;
+            }
+        
+        var variant = _variants.Where(variant => variant.TextRepresentation == VariantsComboBox.Text).FirstOrDefault();
+
+        var manchkin = App.Current.Resources["MANCHKIN"] as IManchkin;
+
+        if (!manchkin.CheckStuffBeforeChanging(variant))
+        {
+            if (!UserMessage.CreateAskingMessage(_typeOfVariants)) return;
+            App.Current.Resources["NEW"] = variant;
+            Close();
+        }
+        else
         {
             App.Current.Resources["NEW"] = variant;
-            break;
+            Close();
         }
-        Close();
     }
-    
+
     private void CancelButtonClick(object sender, RoutedEventArgs e)
     {
         App.Current.Resources["NEW"] = null;

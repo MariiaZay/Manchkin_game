@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using Accessibility;
 using ManchkinCore;
 using ManchkinCore.Enums;
 using ManchkinCore.Enums.Accessory;
@@ -58,7 +59,8 @@ public partial class PlayerWindow
         DescriptionButton.Click += DescriptionButtonClick;
 
         SmallStuffButton.Click += SmallStuffButtonClick;
-        GetHugeStuffButton.Click += GetSmallStuffButtonClick;
+        GetSmallStuffButton.Click += GetSmallStuffButtonClick;
+        GetHugeStuffButton.Click += GetHugeStuffButtonClick;
         LostSmallStuffButton.Click += LostSmallStuffButtonClick;
         HugeStuffButton.Click += HugeStuffButtonClick;
         LostHugeStuffButton.Click += LostHugeStuffButtonClick;
@@ -75,15 +77,13 @@ public partial class PlayerWindow
     private void ReduceLevelButtonClick(object sender, RoutedEventArgs e)
     {
         _player.Manchkin.LostLevel();
-        LevelBlock.Text = Intallation.Level(_player);
-        DamageBlock.Text = Intallation.Damage(_player);
+        Refresh();
     }
 
     private void IncreaseLevelButtonClick(object sender, RoutedEventArgs e)
     {
         _player.Manchkin.GetLevel();
-        LevelBlock.Text = Intallation.Level(_player);
-        DamageBlock.Text = Intallation.Damage(_player);
+        Refresh();
     }
 
     #endregion
@@ -124,22 +124,42 @@ public partial class PlayerWindow
     {
         if (_player.Manchkin.Race is Human)
             UserMessage.CreateImpossibleLostMessage("расу");
-        _player.Manchkin.Race = new Human();
-        LostRaceButton.Style = (Style) FindResource("RoundedNotActiveRedButtonStyle");
-        if (_player.Manchkin.Descriptions.Count == 0)
-            DescriptionButton.Style = (Style) FindResource("RoundedNotActiveRedButtonStyle");
-        Refresh();
+        else
+        {
+            if (!_player.Manchkin.CheckStuffBeforeChanging(new Human()))
+            {
+                if (!UserMessage.CreateAskingMessage("расу")) return;
+                _player.Manchkin.Race = new Human();
+                
+                LostRaceButton.Style = (Style) FindResource("RoundedNotActiveRedButtonStyle");
+                
+                if (_player.Manchkin.Descriptions.Count == 0)
+                    DescriptionButton.Style = (Style) FindResource("RoundedNotActiveRedButtonStyle");
+                Refresh();
+            }
+            else
+            {
+                _player.Manchkin.Race = new Human();
+                LostRaceButton.Style = (Style) FindResource("RoundedNotActiveRedButtonStyle");
+                if (_player.Manchkin.Descriptions.Count == 0)
+                    DescriptionButton.Style = (Style) FindResource("RoundedNotActiveRedButtonStyle");
+                Refresh();
+            }
+        }
     }
 
     private void ChangeRaceButtonClick(object sender, RoutedEventArgs e)
     {
         App.Current.Resources["TYPE_OF_VARIANTS"] = "расу";
         App.Current.Resources["CURRENT"] = RaceBlock.Text;
+        App.Current.Resources["MANCHKIN"] = _player.Manchkin;
+        
         DialogWindow.Show(new ChooseWindow(), this);
 
-        if (App.Current.Resources["NEW"] == null) return;
+        if (App.Current.Resources["NEW"] == null || App.Current.Resources["NEW"] as IRace == _player.Manchkin.Race) return;
 
         var newRace = App.Current.Resources["NEW"] as IRace;
+        
         _player.Manchkin.Race = newRace;
         LostRaceButton.Style = (Style) FindResource("RoundedRedButtonStyle");
         DescriptionButton.Style = (Style) FindResource("RoundedGreenButtonStyle");
@@ -154,10 +174,9 @@ public partial class PlayerWindow
     {
         if (_player.Manchkin.Class is Nobody)
             UserMessage.CreateImpossibleLostMessage("класс");
+        
         _player.Manchkin.Class = new Nobody();
-        LostClassButton.Style = (Style) FindResource("RoundedNotActiveRedButtonStyle");
-        if (_player.Manchkin.Descriptions.Count == 0)
-            DescriptionButton.Style = (Style) FindResource("RoundedNotActiveRedButtonStyle");
+        
         Refresh();
     }
 
@@ -165,6 +184,7 @@ public partial class PlayerWindow
     {
         App.Current.Resources["TYPE_OF_VARIANTS"] = "класс";
         App.Current.Resources["CURRENT"] = ClassBlock.Text;
+        App.Current.Resources["MANCHKIN"] = _player.Manchkin;
         DialogWindow.Show(new ChooseWindow(), this);
 
         if (App.Current.Resources["NEW"] == null) return;
@@ -172,6 +192,7 @@ public partial class PlayerWindow
         LostClassButton.Style = (Style) FindResource("RoundedRedButtonStyle");
         DescriptionButton.Style = (Style) FindResource("RoundedGreenButtonStyle");
         Refresh();
+        
     }
 
     #endregion
@@ -236,7 +257,9 @@ public partial class PlayerWindow
                 App.Current.Resources["CURRENT"] = _player.Manchkin.WornArmor.TextRepresentation;
 
             DialogWindow.Show(new WearingWindow(), this);
-
+            
+            if(App.Current.Resources["NEW"] == null) return;
+            
             var stuff = App.Current.Resources["NEW"] as IStuff;
             _player.Manchkin.TakeStuff(stuff);
 
@@ -249,6 +272,7 @@ public partial class PlayerWindow
                 LostSmallStuffButton.Style = (Style) FindResource("RoundedRedButtonStyle");
             SellStuffButton.Style = (Style) FindResource("RoundedGreenButtonStyle");
             Refresh();
+            
         }
     }
 
@@ -257,6 +281,9 @@ public partial class PlayerWindow
     {
         if (_player.Manchkin.WornArmor == null)
             UserMessage.CreateEmptyActionStuffMessage();
+        
+        _player.Manchkin.LostStuff(_player.Manchkin.WornArmor);
+        Refresh();
     }
 
     #endregion
@@ -393,8 +420,63 @@ public partial class PlayerWindow
         }
     }
 
+    private void ButtonRefresh()
+    {
+        if(_player.Manchkin.Level > 9)
+            IncreaseLevelButton.Style = (Style) FindResource("RoundedNotActiveGreenButtonStyle");
+        else IncreaseLevelButton.Style = (Style) FindResource("RoundedGreenButtonStyle");
+        
+        if(_player.Manchkin.Level < 2)
+            ReduceLevelButton.Style = (Style) FindResource("RoundedNotActiveRedButtonStyle");
+        else ReduceLevelButton.Style = (Style) FindResource("RoundedRedButtonStyle");
+        
+        if (_player.Manchkin.WornArmor == null)
+        {
+            ChangeArmorButton.Content = "НАДЕТЬ";
+            LostArmorButton.Style = (Style) FindResource("RoundedNotActiveRedButtonStyle");
+        }
+        
+        if (_player.Manchkin.WornHat == null)
+        {
+            ChangeHatButton.Content = "НАДЕТЬ";
+            LostHatButton.Style = (Style) FindResource("RoundedNotActiveRedButtonStyle");
+        }
+        
+        if (_player.Manchkin.WornShoes == null)
+        {
+            ChangeShoesButton.Content = "НАДЕТЬ";
+            LostShoesButton.Style = (Style) FindResource("RoundedNotActiveRedButtonStyle");
+        }
+
+        if (_player.Manchkin.Hands.LeftHand == null && _player.Manchkin.Hands.RightHand == null)
+        {
+            ChangeWeaponButton.Content = "НАДЕТЬ";
+            LostWeaponButton.Style = (Style) FindResource("RoundedNotActiveRedButtonStyle");
+        }
+        
+        if(_player.Manchkin.Descriptions.Count == 0)
+            DescriptionButton.Style = (Style) FindResource("RoundedNotActiveGreenButtonStyle");
+
+        if (_player.Manchkin.SmallStuffs.Count == 0)
+        {
+            GetSmallStuffButton.Content = "НАДЕТЬ";
+            LostSmallStuffButton.Style = (Style) FindResource("RoundedNotActiveRedButtonStyle");
+        }
+        
+        if (_player.Manchkin.HugeStuffs.Count == 0)
+        {
+            GetHugeStuffButton.Content = "НАДЕТЬ";
+            LostHugeStuffButton.Style = (Style) FindResource("RoundedNotActiveRedButtonStyle");
+        }
+        
+        if(_player.Manchkin.SmallStuffs.Count == 0 && _player.Manchkin.HugeStuffs.Count == 0)
+            SellStuffButton.Style = (Style) FindResource("RoundedNotActiveGreenButtonStyle");
+    }
+
     private void Refresh()
     {
+        ButtonRefresh();
+        LevelBlock.Text = Intallation.Level(_player);
         RaceBlock.Text = Intallation.Race(_player);
         ClassBlock.Text = Intallation.Class(_player);
         GenderBlock.Text = Intallation.Gender(_player);

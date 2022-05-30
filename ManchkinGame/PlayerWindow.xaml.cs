@@ -1,11 +1,4 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
-using System.Windows.Media;
-using Accessibility;
-using ManchkinCore;
-using ManchkinCore.Enums;
+﻿using System.Windows;
 using ManchkinCore.Enums.Accessory;
 using ManchkinCore.Implementation;
 using ManchkinCore.Interfaces;
@@ -15,7 +8,7 @@ namespace ManchkinGame.Windows;
 
 public partial class PlayerWindow
 {
-    private Player _player;
+    private Player Player { get;}
 
     public PlayerWindow()
     {
@@ -24,7 +17,7 @@ public partial class PlayerWindow
         var name = Application.Current.Resources["USER_NAME"].ToString();
         var sex = Application.Current.Resources["SEX"].ToString() == "мужcкой" ? Genders.MALE : Genders.FEMALE;
 
-        _player = new Player(name, sex);
+        Player = new Player(name, sex);
         InstallBaseManchkinParameters();
 
         IncreaseLevelButton.Click += IncreaseLevelButtonClick;
@@ -79,22 +72,22 @@ public partial class PlayerWindow
 
     private void ReduceLevelButtonClick(object sender, RoutedEventArgs e)
     {
-        if (_player.Manchkin.IsDead)
+        if (Player.Manchkin.IsDead)
             UserMessage.CreateDeathActionMessage();
         else
         {
-            _player.Manchkin.LostLevel();
+            Player.Manchkin.LostLevel();
             Refresh();
         }
     }
 
     private void IncreaseLevelButtonClick(object sender, RoutedEventArgs e)
     {
-        if (_player.Manchkin.IsDead)
+        if (Player.Manchkin.IsDead)
             UserMessage.CreateDeathActionMessage();
         else
         {
-            _player.Manchkin.GetLevel();
+            Player.Manchkin.GetLevel();
             Refresh();
         }
     }
@@ -102,7 +95,7 @@ public partial class PlayerWindow
     #endregion
 
     #region Management
-
+    //TODO: прописать кнопки
     private void BattleButtonClick(object sender, RoutedEventArgs e)
     {
         BattleButton.Content = ReferenceEquals(BattleButton.Content, "БОЙ") ? "НЕ В БОЮ" : "БОЙ";
@@ -117,20 +110,20 @@ public partial class PlayerWindow
 
     private void ChangeGenderButtonClick(object sender, RoutedEventArgs e)
     {
-        if (_player.Manchkin.IsDead)
+        if (Player.Manchkin.IsDead)
             UserMessage.CreateDeathActionMessage();
         else
         {
-            var gen = _player.Manchkin.Gender == Genders.MALE ? Genders.FEMALE : Genders.MALE;
-            if (!_player.Manchkin.CheckStuffBeforeChanging(gen))
+            var gen = Player.Manchkin.Gender == Genders.MALE ? Genders.FEMALE : Genders.MALE;
+            if (!Player.Manchkin.CheckStuffBeforeChanging(gen))
             {
                 if (!UserMessage.CreateAskingMessage("пол")) return;
-                _player.Manchkin.ChangeGender();
+                Player.Manchkin.ChangeGender();
                 Refresh();
             }
             else
             {
-                _player.Manchkin.ChangeGender();
+                Player.Manchkin.ChangeGender();
                 Refresh();
             }
         }
@@ -140,23 +133,23 @@ public partial class PlayerWindow
 
     private void LostRaceButtonClick(object sender, RoutedEventArgs e)
     {
-        if (_player.Manchkin.IsDead)
+        if (Player.Manchkin.IsDead)
             UserMessage.CreateDeathActionMessage();
         else
         {
-            if (_player.Manchkin.Race is Human)
+            if (Player.Manchkin.Race is Human)
                 UserMessage.CreateImpossibleLostMessage("расу");
             else
             {
-                if (!_player.Manchkin.CheckStuffBeforeChanging(new Human()))
+                if (!Player.Manchkin.CheckStuffBeforeChanging(new Human()))
                 {
                     if (!UserMessage.CreateAskingMessage("расу")) return;
-                    _player.Manchkin.Race = new Human();
+                    Player.Manchkin.Race = new Human();
                     Refresh();
                 }
                 else
                 {
-                    _player.Manchkin.Race = new Human();
+                    Player.Manchkin.Race = new Human();
                     Refresh();
                 }
             }
@@ -165,20 +158,20 @@ public partial class PlayerWindow
 
     private void ChangeRaceButtonClick(object sender, RoutedEventArgs e)
     {
-        if (_player.Manchkin.IsDead)
+        if (Player.Manchkin.IsDead)
             UserMessage.CreateDeathActionMessage();
         else
         {
-            App.Current.Resources["TYPE_OF_VARIANTS"] = "расу";
-            App.Current.Resources["CURRENT"] = RaceBlock.Text;
-            App.Current.Resources["MANCHKIN"] = _player.Manchkin;
+            Application.Current.Resources["TYPE_OF_VARIANTS"] = "расу";
+            Application.Current.Resources["CURRENT"] = RaceBlock.Text;
+            Application.Current.Resources["MANCHKIN"] = Player.Manchkin;
 
             DialogWindow.Show(new ChooseWindow(), this);
 
-            if (App.Current.Resources["NEW"] == null ||
-                App.Current.Resources["NEW"] as IRace == _player.Manchkin.Race) return;
+            if (Application.Current.Resources["NEW"] == null ||
+                Application.Current.Resources["NEW"] as IRace == Player.Manchkin.Race) return;
 
-            _player.Manchkin.Race = App.Current.Resources["NEW"] as IRace;
+            Player.Manchkin.Race = Application.Current.Resources["NEW"] as IRace;
             Refresh();
         }
     }
@@ -189,38 +182,43 @@ public partial class PlayerWindow
 
     private void LostClassButtonClick(object sender, RoutedEventArgs e)
     {
-        if (_player.Manchkin.IsDead)
+        if (Player.Manchkin.IsDead)
             UserMessage.CreateDeathActionMessage();
         else
         {
-            if (!_player.Manchkin.CheckStuffBeforeChanging(new Nobody()))
-            {
-                if (!UserMessage.CreateAskingMessage("класс")) return;
-                _player.Manchkin.Class = new Nobody();
-                Refresh();
-            }
+            if(Player.Manchkin.Class is Nobody)
+                UserMessage.CreateImpossibleLostMessage("класс");
             else
             {
-                _player.Manchkin.Class = new Nobody();
-                Refresh();
+                if (!Player.Manchkin.CheckStuffBeforeChanging(new Nobody()))
+                {
+                    if (!UserMessage.CreateAskingMessage("класс")) return;
+                    Player.Manchkin.Class = new Nobody();
+                    Refresh();
+                }
+                else
+                {
+                    Player.Manchkin.Class = new Nobody();
+                    Refresh();
+                }
             }
         }
     }
 
     private void ChangeClassButtonClick(object sender, RoutedEventArgs e)
     {
-        if (_player.Manchkin.IsDead)
+        if (Player.Manchkin.IsDead)
             UserMessage.CreateDeathActionMessage();
         else
         {
             App.Current.Resources["TYPE_OF_VARIANTS"] = "класс";
             App.Current.Resources["CURRENT"] = ClassBlock.Text;
-            App.Current.Resources["MANCHKIN"] = _player.Manchkin;
+            App.Current.Resources["MANCHKIN"] = Player.Manchkin;
             DialogWindow.Show(new ChooseWindow(), this);
 
             if (App.Current.Resources["NEW"] == null) return;
 
-            _player.Manchkin.Class = App.Current.Resources["NEW"] as IClass;
+            Player.Manchkin.Class = App.Current.Resources["NEW"] as IClass;
             //TODO: вынести в отдельный метод
             Refresh();
         }
@@ -236,9 +234,9 @@ public partial class PlayerWindow
         else
         {
             DeathButton.Content = ReferenceEquals(DeathButton.Content, "MЁРТВ") ? "УМЕРЕРТЬ" : "MЁРТВ";
-            if (_player.Manchkin.SmallStuffs.Count is not (0 and 0))
-                _player.Manchkin.LostAllStuffs();
-            _player.Manchkin.IsDead = true;
+            if (Player.Manchkin.SmallStuffs.Count is not (0 and 0))
+                Player.Manchkin.LostAllStuffs();
+            Player.Manchkin.IsDead = true;
             Refresh();
         }
     }
@@ -247,34 +245,34 @@ public partial class PlayerWindow
 
     private void ArmorButtonClick(object sender, RoutedEventArgs e)
     {
-        if (_player.Manchkin.IsDead)
+        if (Player.Manchkin.IsDead)
             UserMessage.CreateDeathWearingMessage();
         else
         {
-            if (_player.Manchkin.WornArmor == null)
+            if (Player.Manchkin.WornArmor == null)
                 UserMessage.CreateEmptyStuffMessage();
         }
     }
 
     private void ChangeArmorButtonClick(object sender, RoutedEventArgs e)
     {
-        if (_player.Manchkin.IsDead)
+        if (Player.Manchkin.IsDead)
             UserMessage.CreateDeathActionMessage();
         else
-            ChangeStuff("броник", _player.Manchkin.WornArmor);
+            ChangeStuff("броник", Player.Manchkin.WornArmor);
     }
 
     private void LostArmorButtonClick(object sender, RoutedEventArgs e)
     {
-        if (_player.Manchkin.IsDead)
+        if (Player.Manchkin.IsDead)
             UserMessage.CreateDeathActionMessage();
         else
         {
-            if (_player.Manchkin.WornArmor == null)
+            if (Player.Manchkin.WornArmor == null)
                 UserMessage.CreateEmptyActionStuffMessage();
             else
             {
-                _player.Manchkin.LostStuff(_player.Manchkin.WornArmor);
+                Player.Manchkin.LostStuff(Player.Manchkin.WornArmor);
                 Refresh();
             }
         }
@@ -286,34 +284,34 @@ public partial class PlayerWindow
 
     private void ShoesButtonClick(object sender, RoutedEventArgs e)
     {
-        if (_player.Manchkin.IsDead)
+        if (Player.Manchkin.IsDead)
             UserMessage.CreateDeathWearingMessage();
         else
         {
-            if (_player.Manchkin.WornShoes == null)
+            if (Player.Manchkin.WornShoes == null)
                 UserMessage.CreateEmptyStuffMessage();
         }
     }
 
     private void ChangeShoesButtonClick(object sender, RoutedEventArgs e)
     {
-        if (_player.Manchkin.IsDead)
+        if (Player.Manchkin.IsDead)
             UserMessage.CreateDeathActionMessage();
         else
-            ChangeStuff("обувка", _player.Manchkin.WornShoes);
+            ChangeStuff("обувка", Player.Manchkin.WornShoes);
     }
 
     private void LostShoesButtonClick(object sender, RoutedEventArgs e)
     {
-        if (_player.Manchkin.IsDead)
+        if (Player.Manchkin.IsDead)
             UserMessage.CreateDeathActionMessage();
         else
         {
-            if (_player.Manchkin.WornShoes == null)
+            if (Player.Manchkin.WornShoes == null)
                 UserMessage.CreateEmptyActionStuffMessage();
             else
             {
-                _player.Manchkin.LostStuff(_player.Manchkin.WornShoes);
+                Player.Manchkin.LostStuff(Player.Manchkin.WornShoes);
                 Refresh();
             }
         }
@@ -325,22 +323,22 @@ public partial class PlayerWindow
 
     private void WeaponButtonClick(object sender, RoutedEventArgs e)
     {
-        if (_player.Manchkin.IsDead)
+        if (Player.Manchkin.IsDead)
             UserMessage.CreateDeathWearingMessage();
         else
         {
-            if (_player.Manchkin.Hands.LeftHand == null && _player.Manchkin.Hands.RightHand == null)
+            if (Player.Manchkin.Hands.LeftHand == null && Player.Manchkin.Hands.RightHand == null)
                 UserMessage.CreateEmptyStuffMessage();
         }
     }
 
     private void LostWeaponButtonClick(object sender, RoutedEventArgs e)
     {
-        if (_player.Manchkin.IsDead)
+        if (Player.Manchkin.IsDead)
             UserMessage.CreateDeathWearingMessage();
         else
         {
-            if (_player.Manchkin.Hands.LeftHand == null && _player.Manchkin.Hands.RightHand == null)
+            if (Player.Manchkin.Hands.LeftHand == null && Player.Manchkin.Hands.RightHand == null)
                 UserMessage.CreateEmptyActionStuffMessage();
         }
     }
@@ -351,34 +349,34 @@ public partial class PlayerWindow
 
     private void HatButtonClick(object sender, RoutedEventArgs e)
     {
-        if (_player.Manchkin.IsDead)
+        if (Player.Manchkin.IsDead)
             UserMessage.CreateDeathWearingMessage();
         else
         {
-            if (_player.Manchkin.WornHat == null)
+            if (Player.Manchkin.WornHat == null)
                 UserMessage.CreateEmptyStuffMessage();
         }
     }
 
     private void ChangeHatButtonClick(object sender, RoutedEventArgs e)
     {
-        if (_player.Manchkin.IsDead)
+        if (Player.Manchkin.IsDead)
             UserMessage.CreateDeathActionMessage();
         else
-            ChangeStuff("головняк", _player.Manchkin.WornHat);
+            ChangeStuff("головняк", Player.Manchkin.WornHat);
     }
 
     private void LostHatButtonClick(object sender, RoutedEventArgs e)
     {
-        if (_player.Manchkin.IsDead)
+        if (Player.Manchkin.IsDead)
             UserMessage.CreateDeathActionMessage();
         else
         {
-            if (_player.Manchkin.WornHat == null)
+            if (Player.Manchkin.WornHat == null)
                 UserMessage.CreateEmptyActionStuffMessage();
             else
             {
-                _player.Manchkin.LostStuff(_player.Manchkin.WornHat);
+                Player.Manchkin.LostStuff(Player.Manchkin.WornHat);
                 Refresh();
             }
         }
@@ -390,67 +388,67 @@ public partial class PlayerWindow
 
     private void SmallStuffButtonClick(object sender, RoutedEventArgs e)
     {
-        if (_player.Manchkin.IsDead)
+        if (Player.Manchkin.IsDead)
             UserMessage.CreateDeathWearingMessage();
         else
         {
-            if (_player.Manchkin.SmallStuffs.Count == 0)
+            if (Player.Manchkin.SmallStuffs.Count == 0)
                 UserMessage.CreateEmptyStuffMessage();
         }
     }
 
     private void GetSmallStuffButtonClick(object sender, RoutedEventArgs e)
     {
-        if (_player.Manchkin.IsDead)
+        if (Player.Manchkin.IsDead)
             UserMessage.CreateDeathActionMessage();
     }
 
     private void LostSmallStuffButtonClick(object sender, RoutedEventArgs e)
     {
-        if (_player.Manchkin.IsDead)
+        if (Player.Manchkin.IsDead)
             UserMessage.CreateDeathWearingMessage();
         else
         {
-            if (_player.Manchkin.SmallStuffs.Count == 0)
+            if (Player.Manchkin.SmallStuffs.Count == 0)
                 UserMessage.CreateEmptyActionStuffMessage();
         }
     }
 
     private void HugeStuffButtonClick(object sender, RoutedEventArgs e)
     {
-        if (_player.Manchkin.IsDead)
+        if (Player.Manchkin.IsDead)
             UserMessage.CreateDeathWearingMessage();
         else
         {
-            if (_player.Manchkin.SmallStuffs.Count == 0)
+            if (Player.Manchkin.SmallStuffs.Count == 0)
                 UserMessage.CreateEmptyStuffMessage();
         }
     }
 
     private void GetHugeStuffButtonClick(object sender, RoutedEventArgs e)
     {
-        if (_player.Manchkin.IsDead)
+        if (Player.Manchkin.IsDead)
             UserMessage.CreateDeathActionMessage();
     }
 
     private void LostHugeStuffButtonClick(object sender, RoutedEventArgs e)
     {
-        if (_player.Manchkin.IsDead)
+        if (Player.Manchkin.IsDead)
             UserMessage.CreateDeathWearingMessage();
         else
         {
-            if (_player.Manchkin.HugeStuffs.Count == 0)
+            if (Player.Manchkin.HugeStuffs.Count == 0)
                 UserMessage.CreateEmptyStuffMessage();
         }
     }
 
     private void SellStuffButtonClick(object sender, RoutedEventArgs e)
     {
-        if (_player.Manchkin.IsDead)
+        if (Player.Manchkin.IsDead)
             UserMessage.CreateDeathWearingMessage();
         else
         {
-            if (_player.Manchkin.HugeStuffs.Count == 0 && _player.Manchkin.SmallStuffs.Count == 0)
+            if (Player.Manchkin.HugeStuffs.Count == 0 && Player.Manchkin.SmallStuffs.Count == 0)
                 UserMessage.CreateEmptyActionStuffMessage();
         }
     }
@@ -461,29 +459,29 @@ public partial class PlayerWindow
 
     private void MercenariesButtonClick(object sender, RoutedEventArgs e)
     {
-        if (_player.Manchkin.Mercenaries.Count == 0)
+        if (Player.Manchkin.Mercenaries.Count == 0)
             UserMessage.CreateEmptyStuffMessage();
     }
 
     private void GetMersernariesButtonClick(object sender, RoutedEventArgs e)
     {
-        if (_player.Manchkin.IsDead)
+        if (Player.Manchkin.IsDead)
             UserMessage.CreateDeathActionMessage();
     }
 
     private void LostMercenaryButtonClick(object sender, RoutedEventArgs e)
     {
-        if (_player.Manchkin.Mercenaries.Count == 0)
+        if (Player.Manchkin.Mercenaries.Count == 0)
             UserMessage.CreateEmptyActionStuffMessage();
     }
 
     private void ChangeMercenaryButtonClick(object sender, RoutedEventArgs e)
     {
-        if (_player.Manchkin.IsDead)
+        if (Player.Manchkin.IsDead)
             UserMessage.CreateDeathWearingMessage();
         else
         {
-            if (_player.Manchkin.Mercenaries.Count == 0)
+            if (Player.Manchkin.Mercenaries.Count == 0)
                 UserMessage.CreateEmptyActionStuffMessage();
         }
     }
@@ -492,18 +490,18 @@ public partial class PlayerWindow
 
     private void DescriptionButtonClick(object sender, RoutedEventArgs e)
     {
-        if (_player.Manchkin.Descriptions.Count == 0)
+        if (Player.Manchkin.Descriptions.Count == 0)
             UserMessage.CreateEmptyActionStuffMessage();
         else
         {
-            DialogWindow.Show(new DescriptionWindow(_player.Manchkin.Descriptions), this);
+            DialogWindow.Show(new DescriptionWindow(Player.Manchkin.Descriptions), this);
         }
     }
 
 
     private void ChangeStuff(string variantType, IStuff? currentStuff)
     {
-        App.Current.Resources["MANCHKIN"] = _player.Manchkin;
+        App.Current.Resources["MANCHKIN"] = Player.Manchkin;
         App.Current.Resources["TYPE_OF_VARIANTS"] = variantType;
 
         if (currentStuff == null)
@@ -516,13 +514,13 @@ public partial class PlayerWindow
         if (App.Current.Resources["NEW"] == null) return;
 
         var stuff = App.Current.Resources["NEW"] as IStuff;
-        _player.Manchkin.TakeStuff(stuff);
+        Player.Manchkin.TakeStuff(stuff);
         Refresh();
     }
 
     private void ButtonRefresh()
     {
-        if (_player.Manchkin.IsDead)
+        if (Player.Manchkin.IsDead)
         {
             IncreaseLevelButton.Style = (Style) FindResource("RoundedNotActiveGreenButtonStyle");
             ReduceLevelButton.Style = (Style) FindResource("RoundedNotActiveRedButtonStyle");
@@ -559,7 +557,7 @@ public partial class PlayerWindow
             else
                 HalfBloodButton.Style = (Style) FindResource("RoundedNotActiveRedButtonStyle");
 
-            if (_player.Manchkin.Descriptions.Count == 0)
+            if (Player.Manchkin.Descriptions.Count == 0)
                 DescriptionButton.Style = (Style) FindResource("RoundedNotActiveGreenButtonStyle");
 
             GetSmallStuffButton.Style = (Style) FindResource("RoundedNotActiveGreenButtonStyle");
@@ -576,32 +574,32 @@ public partial class PlayerWindow
         }
         else
         {
-            if (_player.Manchkin.Level > 9)
+            if (Player.Manchkin.Level > 9)
                 IncreaseLevelButton.Style = (Style) FindResource("RoundedNotActiveGreenButtonStyle");
             else IncreaseLevelButton.Style = (Style) FindResource("RoundedGreenButtonStyle");
 
-            if (_player.Manchkin.Level < 2)
+            if (Player.Manchkin.Level < 2)
                 ReduceLevelButton.Style = (Style) FindResource("RoundedNotActiveRedButtonStyle");
             else ReduceLevelButton.Style = (Style) FindResource("RoundedRedButtonStyle");
 
 
-            if (_player.Manchkin.Descriptions.Count == 0)
+            if (Player.Manchkin.Descriptions.Count == 0)
                 DescriptionButton.Style = (Style) FindResource("RoundedNotActiveGreenButtonStyle");
             else
                 DescriptionButton.Style = (Style) FindResource("RoundedGreenButtonStyle");
 
-            if (_player.Manchkin.Race is Human)
+            if (Player.Manchkin.Race is Human)
                 LostRaceButton.Style = (Style) FindResource("RoundedNotActiveRedButtonStyle");
             else
                 LostRaceButton.Style = (Style) FindResource("RoundedRedButtonStyle");
 
-            if (_player.Manchkin.Class is Nobody)
+            if (Player.Manchkin.Class is Nobody)
                 LostClassButton.Style = (Style) FindResource("RoundedNotActiveRedButtonStyle");
             else
                 LostClassButton.Style = (Style) FindResource("RoundedRedButtonStyle");
 
 
-            if (_player.Manchkin.WornArmor == null)
+            if (Player.Manchkin.WornArmor == null)
             {
                 ChangeArmorButton.Content = "НАДЕТЬ";
                 LostArmorButton.Style = (Style) FindResource("RoundedNotActiveRedButtonStyle");
@@ -612,7 +610,7 @@ public partial class PlayerWindow
                 LostArmorButton.Style = (Style) FindResource("RoundedRedButtonStyle");
             }
 
-            if (_player.Manchkin.WornHat == null)
+            if (Player.Manchkin.WornHat == null)
             {
                 ChangeHatButton.Content = "НАДЕТЬ";
                 LostHatButton.Style = (Style) FindResource("RoundedNotActiveRedButtonStyle");
@@ -623,7 +621,7 @@ public partial class PlayerWindow
                 LostHatButton.Style = (Style) FindResource("RoundedRedButtonStyle");
             }
 
-            if (_player.Manchkin.WornShoes == null)
+            if (Player.Manchkin.WornShoes == null)
             {
                 ChangeShoesButton.Content = "НАДЕТЬ";
                 LostShoesButton.Style = (Style) FindResource("RoundedNotActiveRedButtonStyle");
@@ -634,7 +632,7 @@ public partial class PlayerWindow
                 LostShoesButton.Style = (Style) FindResource("RoundedRedButtonStyle");
             }
 
-            if (_player.Manchkin.Hands.LeftHand == null && _player.Manchkin.Hands.RightHand == null)
+            if (Player.Manchkin.Hands.LeftHand == null && Player.Manchkin.Hands.RightHand == null)
             {
                 ChangeWeaponButton.Content = "НАДЕТЬ";
                 LostWeaponButton.Style = (Style) FindResource("RoundedNotActiveRedButtonStyle");
@@ -645,19 +643,19 @@ public partial class PlayerWindow
                 LostWeaponButton.Style = (Style) FindResource("RoundedRedButtonStyle");
             }
 
-            if (_player.Manchkin.SmallStuffs.Count == 0)
+            if (Player.Manchkin.SmallStuffs.Count == 0)
                 LostSmallStuffButton.Style = (Style) FindResource("RoundedNotActiveRedButtonStyle");
             else
                 LostSmallStuffButton.Style = (Style) FindResource("RoundedRedButtonStyle");
 
 
-            if (_player.Manchkin.HugeStuffs.Count == 0)
+            if (Player.Manchkin.HugeStuffs.Count == 0)
                 LostHugeStuffButton.Style = (Style) FindResource("RoundedNotActiveRedButtonStyle");
             else
                 LostHugeStuffButton.Style = (Style) FindResource("RoundedRedButtonStyle");
 
 
-            if (_player.Manchkin.SmallStuffs.Count == 0 && _player.Manchkin.HugeStuffs.Count == 0)
+            if (Player.Manchkin.SmallStuffs.Count == 0 && Player.Manchkin.HugeStuffs.Count == 0)
                 SellStuffButton.Style = (Style) FindResource("RoundedNotActiveGreenButtonStyle");
             else
                 SellStuffButton.Style = (Style) FindResource("RoundedGreenButtonStyle");
@@ -667,45 +665,45 @@ public partial class PlayerWindow
     private void Refresh()
     {
         ButtonRefresh();
-        LevelBlock.Text = Intallation.Level(_player);
-        RaceBlock.Text = Intallation.Race(_player);
-        ClassBlock.Text = Intallation.Class(_player);
-        GenderBlock.Text = Intallation.Gender(_player);
-        DamageBlock.Text = Intallation.Damage(_player);
-        CardCountBlock.Text = Intallation.CardCount(_player);
-        FlushingBonusBlock.Text = Intallation.FlushingBonus(_player);
-        DoublePriceBlock.Text = Intallation.DoublePrice(_player);
-        ArmorBlock.Text = Intallation.Armor(_player);
-        ShoesBlock.Text = Intallation.Shoes(_player);
-        WeaponBlock.Text = Intallation.Weapon(_player);
-        HatBlock.Text = Intallation.Hat(_player);
-        SmallStuffBlock.Text = Intallation.SmallStuff(_player);
-        HugeStuffBlock.Text = Intallation.HugeStuff(_player);
+        LevelBlock.Text = Intallation.Level(Player);
+        RaceBlock.Text = Intallation.Race(Player);
+        ClassBlock.Text = Intallation.Class(Player);
+        GenderBlock.Text = Intallation.Gender(Player);
+        DamageBlock.Text = Intallation.Damage(Player);
+        CardCountBlock.Text = Intallation.CardCount(Player);
+        FlushingBonusBlock.Text = Intallation.FlushingBonus(Player);
+        DoublePriceBlock.Text = Intallation.DoublePrice(Player);
+        ArmorBlock.Text = Intallation.Armor(Player);
+        ShoesBlock.Text = Intallation.Shoes(Player);
+        WeaponBlock.Text = Intallation.Weapon(Player);
+        HatBlock.Text = Intallation.Hat(Player);
+        SmallStuffBlock.Text = Intallation.SmallStuff(Player);
+        HugeStuffBlock.Text = Intallation.HugeStuff(Player);
     }
 
     private void InstallBaseManchkinParameters()
     {
-        NameBlock.Text = _player.Name;
+        NameBlock.Text = Player.Name;
 
-        LevelBlock.Text = Intallation.Level(_player);
-        RaceBlock.Text = Intallation.Race(_player);
-        ClassBlock.Text = Intallation.Class(_player);
-        GenderBlock.Text = Intallation.Gender(_player);
-        DamageBlock.Text = Intallation.Damage(_player);
-        DeadBlock.Text = Intallation.Life(_player);
+        LevelBlock.Text = Intallation.Level(Player);
+        RaceBlock.Text = Intallation.Race(Player);
+        ClassBlock.Text = Intallation.Class(Player);
+        GenderBlock.Text = Intallation.Gender(Player);
+        DamageBlock.Text = Intallation.Damage(Player);
+        DeadBlock.Text = Intallation.Life(Player);
 
-        CardCountBlock.Text = Intallation.CardCount(_player);
-        FlushingBonusBlock.Text = Intallation.FlushingBonus(_player);
-        DoublePriceBlock.Text = Intallation.DoublePrice(_player);
-        SupermanchkinBlock.Text = Intallation.SuperManchkin(_player);
-        HalfBloodBlock.Text = Intallation.HalfBlood(_player);
+        CardCountBlock.Text = Intallation.CardCount(Player);
+        FlushingBonusBlock.Text = Intallation.FlushingBonus(Player);
+        DoublePriceBlock.Text = Intallation.DoublePrice(Player);
+        SupermanchkinBlock.Text = Intallation.SuperManchkin(Player);
+        HalfBloodBlock.Text = Intallation.HalfBlood(Player);
 
-        ArmorBlock.Text = Intallation.Armor(_player);
-        ShoesBlock.Text = Intallation.Shoes(_player);
-        WeaponBlock.Text = Intallation.Weapon(_player);
-        HatBlock.Text = Intallation.Hat(_player);
+        ArmorBlock.Text = Intallation.Armor(Player);
+        ShoesBlock.Text = Intallation.Shoes(Player);
+        WeaponBlock.Text = Intallation.Weapon(Player);
+        HatBlock.Text = Intallation.Hat(Player);
 
-        SmallStuffBlock.Text = Intallation.SmallStuff(_player);
-        HugeStuffBlock.Text = Intallation.HugeStuff(_player);
+        SmallStuffBlock.Text = Intallation.SmallStuff(Player);
+        HugeStuffBlock.Text = Intallation.HugeStuff(Player);
     }
 }

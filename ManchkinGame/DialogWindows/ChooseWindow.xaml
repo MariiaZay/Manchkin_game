@@ -15,7 +15,17 @@
         Background="Transparent">
     
     <Window.Resources>
-       <Style x:Key="RoundedGreenButtonStyle" TargetType="{x:Type Button}">
+        <Style x:Key="TextStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Padding" Value="4.5" />
+            <Setter Property="FontWeight" Value="SemiBold"></Setter>
+            <Setter Property="FontFamily" Value="Comic Sans MS"></Setter>
+            <Setter Property="FontSize" Value="13.5"></Setter>
+        </Style>
+        <Style x:Key="RoundedGreenButtonStyle" TargetType="{x:Type Button}">
             <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
             <Setter Property="Background" Value="#4FA39C" />
             <Setter Property="Foreground" Value="White" />
@@ -131,8 +141,7 @@
                     Name="ChooseBlock"
                     Grid.Row="0"
                     Margin="0,0,0,4.4"
-                    TextAlignment="Left"
-                    VerticalAlignment="Center"
+                    Style="{DynamicResource TextStyle}"
                     FontWeight="Bold"
                     FontSize="26"
                     TextDecorations="Underline"

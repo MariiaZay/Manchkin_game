@@ -1,13 +1,13 @@
-﻿<Window x:Class="ManchkinGame.DialogWindows.WearingWindow"
+﻿<Window x:Class="ManchkinGame.DialogWindows.SingleWeaponWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:ManchkinGame.DialogWindows"
         mc:Ignorable="d"
-        Title="WearingWindow"
-        Height="200"
-        Width="800"
+        Title="SingleWeaponWindow"
+        Height="250"
+        Width="1000"
         ResizeMode="NoResize"
         WindowStyle="None"
         WindowStartupLocation="CenterOwner"
@@ -114,17 +114,18 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        
         <Style x:Key="TextStyle" TargetType="{x:Type TextBlock}">
             <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
             <Setter Property="Foreground" Value="Black" />
             <Setter Property="HorizontalContentAlignment" Value="Left" />
             <Setter Property="VerticalContentAlignment" Value="Center" />
             <Setter Property="Padding" Value="4.5" />
-            <Setter Property="FontWeight" Value="SemiBold"></Setter>
+            <Setter Property="FontWeight" Value="Normal"></Setter>
             <Setter Property="FontFamily" Value="Comic Sans MS"></Setter>
-            <Setter Property="FontSize" Value="13.5"></Setter>
+            <Setter Property="FontSize" Value="23"></Setter>
         </Style>
-
+        
         <Style x:Key="RoundedNotActiveGreenButtonStyle" TargetType="{x:Type Button}">
             <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
             <Setter Property="Background" Value="#C4E3E0" />
@@ -187,6 +188,7 @@
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             
             <TextBlock
@@ -201,14 +203,18 @@
             <Grid
                 Grid.Row="1" Margin="0,4.4">
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.25*"></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition Width="0.2*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                
-                <ComboBox
-                    Name = "VariantsComboBox"
+                <TextBlock
                     Grid.Column="0"
-                    Margin="0,0,4.4,0"
+                    Style="{DynamicResource TextStyle}"
+                    Margin="0,0,4.4,0">Левая рука:</TextBlock>
+                <ComboBox
+                    Name = "LeftVariantsComboBox"
+                    Grid.Column="1"
+                    Margin="4.4,0,4.4,0"
                     BorderThickness="0"
                     Foreground="Black"
                     FontSize="14"
@@ -217,13 +223,42 @@
                 </ComboBox>
                 
                 <Button
-                    Name="CheatButton"
-                    Grid.Column="1"
+                    Name="LeftCheatButton"
+                    Grid.Column="2"
                     Margin="4.4,0,0,0"
                     Style="{DynamicResource RoundedGreenButtonStyle}">ЧИТ!</Button>
             </Grid>
             
-            <Grid Grid.Row="2" Margin="0,4.4,0,0">
+            <Grid
+                Grid.Row="2" Margin="0,4.4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.25*"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="0.2*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock
+                    Grid.Column="0"
+                    Style="{DynamicResource TextStyle}"
+                    Margin="0,0,4.4,0">Правая рука:</TextBlock>
+                <ComboBox
+                    Name = "RightVariantsComboBox"
+                    Grid.Column="1"
+                    Margin="4.4,0,4.4,0"
+                    BorderThickness="0"
+                    Foreground="Black"
+                    FontSize="14"
+                    FontFamily="Comic Sans MS"
+                    Padding="4.5">
+                </ComboBox>
+                
+                <Button
+                    Name="RightCheatButton"
+                    Grid.Column="2"
+                    Margin="4.4,0,0,0"
+                    Style="{DynamicResource RoundedGreenButtonStyle}">ЧИТ!</Button>
+            </Grid>
+            
+            <Grid Grid.Row="3" Margin="0,4.4,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
@@ -239,6 +274,7 @@
                     Name="CancelButton"
                     Margin="4.4,0,0,0"
                     Style="{DynamicResource RoundedRedButtonStyle}"
+                    
                 >НАЗАД</Button>
             </Grid>
             

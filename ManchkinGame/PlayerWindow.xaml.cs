@@ -211,14 +211,14 @@ public partial class PlayerWindow
             UserMessage.CreateDeathActionMessage();
         else
         {
-            App.Current.Resources["TYPE_OF_VARIANTS"] = "класс";
-            App.Current.Resources["CURRENT"] = ClassBlock.Text;
-            App.Current.Resources["MANCHKIN"] = Player.Manchkin;
+            Application.Current.Resources["TYPE_OF_VARIANTS"] = "класс";
+            Application.Current.Resources["CURRENT"] = ClassBlock.Text;
+            Application.Current.Resources["MANCHKIN"] = Player.Manchkin;
             DialogWindow.Show(new ChooseWindow(), this);
 
-            if (App.Current.Resources["NEW"] == null) return;
+            if (Application.Current.Resources["NEW"] == null) return;
 
-            Player.Manchkin.Class = App.Current.Resources["NEW"] as IClass;
+            Player.Manchkin.Class = Application.Current.Resources["NEW"] as IClass;
             //TODO: вынести в отдельный метод
             Refresh();
         }

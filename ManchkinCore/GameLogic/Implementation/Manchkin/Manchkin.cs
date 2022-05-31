@@ -51,7 +51,7 @@ public class Manchkin : IManchkin
     public int Damage { get; private set; }
     public List<string> Descriptions { get; }
     public string TextRepresentation { get; }
-    public bool IsDead { get; }
+    public bool IsDead { get; set; }
 
     #endregion
 
@@ -481,18 +481,16 @@ public class Manchkin : IManchkin
 
     public void LostAllStuffs()
     {
-        foreach (var stuff in SmallStuffs)
+        while (SmallStuffs.Count != 0)
         {
+            var stuff = SmallStuffs.Last();
             LostStuff(stuff);
-            if(SmallStuffs.Count == 0)
-                break;
         }
-        
-        foreach (var stuff in HugeStuffs)
+
+        while (HugeStuffs.Count != 0)
         {
+            var stuff = HugeStuffs.Last();
             LostStuff(stuff);
-            if(HugeStuffs.Count == 0)
-                break;
         }
     }
 

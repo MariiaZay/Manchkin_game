@@ -23,11 +23,18 @@ public static class UserMessage
             "Смэрть",
             MessageBoxButton.OK,
             MessageBoxImage.Information);
-    public static void CreateImpossibleWearingMessage()
-        => MessageBox.Show("Ты не можешь надевать шмотки, так как ты мёртв! Закончи ход, чтобы воскреснуть",
+    public static void CreateDeathActionMessage()
+        => MessageBox.Show("Ты не можешь делать это, так как ты мёртв! Закончи ход, чтобы воскреснуть",
             "Смэрть",
             MessageBoxButton.OK,
             MessageBoxImage.Information);
+
+    public static void CreateDeathWearingMessage()
+        => MessageBox.Show("Ты умер и потерял все шмотки! Закончи ход, чтобы воскреснуть",
+            "Смэрть",
+            MessageBoxButton.OK,
+            MessageBoxImage.Information);
+
     public static void CreateImpossibleTakingStuffMessage()
         => MessageBox.Show("Ты не можешь надеть эту шмотку. Если у тебя есть ЧИТ! Можешь использовать его",
             "ОЙ!",
@@ -46,6 +53,11 @@ public static class UserMessage
             String.Format("Смена {0}", caption), MessageBoxButton.YesNo, MessageBoxImage.Warning);
         return answer == MessageBoxResult.Yes;
     }
+
+    public static MessageBoxResult CreateWeaponAskingMessage()
+        => MessageBox.Show("Оружие, которое ты хочень надеть одноручное?",
+            "Смена шмотки", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+    
     
 
     public static void CreateImpossibleLostMessage(string mess)

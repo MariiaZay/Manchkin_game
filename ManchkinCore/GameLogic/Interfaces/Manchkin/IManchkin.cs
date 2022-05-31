@@ -14,9 +14,9 @@ public interface IManchkin : IOwnStuffs, IDescriptable, IHalfBloodAble, ISuper
         public Genders Gender { get;}
         public int Damage { get;}
         public int CardsCount { get; }
-        public bool IsDead { get; }
+        public bool IsDead { get; set; }
 
-    #endregion
+        #endregion
     
     public void ChangeGender();
     public IRace? ChangeRace(IRace? race);

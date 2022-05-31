@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
-using System.Windows.Documents;
+using ManchkinCore;
 using ManchkinCore.GameLogic;
 using ManchkinCore.GameLogic.Implementation;
 using ManchkinCore.Interfaces;
@@ -27,14 +27,19 @@ public partial class WearingWindow : Window
             "броник" => _variants = CardsBase.Armors,
             "обувка" => _variants = CardsBase.Shoeses,
             "головняк" => _variants = CardsBase.Hats,
-            "мелкие шмотки" => _variants = CardsBase.SmallStuffs
+            "мелкие шмотки" => _variants = CardsBase.SmallStuffs,
+            "оружие" => _variants = GetHugeWeapon()
         };
-        //TODO: сделать для оружия отдельную формочку
         VariantsComboBox.Loaded += VariantsComboBoxLoaded;
+        
         WearingButton.Click += WearingButtonClick;
         CancelButton.Click += CancelButtonClick;
         CheatButton.Click += CheatButtonClick;
     }
+
+    private List<IDescriptable> GetHugeWeapon()
+        => (from variant in CardsBase.Weapons let v = variant as IStuff where v.Fullness == Arms.BOTH select variant).ToList();
+    
 
     private void CheatButtonClick(object sender, RoutedEventArgs e)
     {
@@ -53,16 +58,16 @@ public partial class WearingWindow : Window
         else
         {
             var variant = _variants.FirstOrDefault(vari => vari.TextRepresentation == VariantsComboBox.Text);
-
-            if (ReferenceEquals(CheatButton.Content, "НЕ ЧИТ!"))
-                _manchkin.UseCheat(variant as IStuff);
-            
             var v = variant as IStuff;
-            if (!_manchkin.CanTakeStuff(v))
+            
+            if (ReferenceEquals(CheatButton.Content, "НЕ ЧИТ!"))
+                _manchkin.UseCheat(v);
+            
+            if (!_manchkin.TakeStuff(v))
                 UserMessage.CreateImpossibleTakingStuffMessage();
             else
             {
-                App.Current.Resources["NEW"] = variant;
+                Application.Current.Resources["NEW"] = variant;
                 Close();
             }
         }
@@ -77,7 +82,7 @@ public partial class WearingWindow : Window
 
     private void CancelButtonClick(object sender, RoutedEventArgs e)
     {
-        App.Current.Resources["NEW"] = null;
+        Application.Current.Resources["NEW"] = null;
         Close();
     }
 }

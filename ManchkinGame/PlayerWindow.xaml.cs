@@ -343,10 +343,38 @@ public partial class PlayerWindow
             switch (answer)
             {
                 case MessageBoxResult.Yes:
+                    Application.Current.Resources["MANCHKIN"] = Player.Manchkin;
+                    Application.Current.Resources["CURRENT_RIGHT_HAND"] = Player.Manchkin.Hands.RightHand == null
+                        ? ""
+                        : Player.Manchkin.Hands.RightHand.TextRepresentation;
+                    
+                    Application.Current.Resources["CURRENT_LEFT_HAND"] = Player.Manchkin.Hands.LeftHand == null
+                        ? ""
+                        : Player.Manchkin.Hands.LeftHand.TextRepresentation;
+                    
+                    DialogWindow.Show(new SingleWeaponWindow(), this);
                     break;
+                
+                
+                
                 case MessageBoxResult.No:
+                    
+                    Application.Current.Resources["MANCHKIN"] = Player.Manchkin;
+                    Application.Current.Resources["TYPE_OF_VARIANTS"] = "оружие";
+
+                    if (Player.Manchkin.Hands.LeftHand == null || Player.Manchkin.Hands.RightHand == null ||
+                        Player.Manchkin.Hands.LeftHand != Player.Manchkin.Hands.RightHand)
+                        Application.Current.Resources["CURRENT"] = "";
+                    else
+                        Application.Current.Resources["CURRENT"] = Player.Manchkin.Hands.LeftHand.TextRepresentation;
+
+                    DialogWindow.Show(new WearingWindow(), this);
+
+                    if (Application.Current.Resources["NEW"] is not IStuff stuff) return;
+                    Player.Manchkin.TakeStuff(stuff);
                     break;
             }
+            Refresh();
         }
     }
     
@@ -359,6 +387,7 @@ public partial class PlayerWindow
             if (Player.Manchkin.Hands.LeftHand == null && Player.Manchkin.Hands.RightHand == null)
                 UserMessage.CreateEmptyActionStuffMessage();
         }
+        //TODO: написать потерю оружия
     }
 
     #endregion

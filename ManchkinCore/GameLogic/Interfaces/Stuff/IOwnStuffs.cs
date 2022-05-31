@@ -32,7 +32,7 @@ public interface IOwnStuffs
     public void RemoveUnsuitableStuff();
     public bool CheckStuffBeforeChanging(IDescriptable descriptable);
     public bool CheckStuffBeforeChanging(Genders gender);
-    public void TakeStuff(IStuff? stuff);
+    public bool TakeStuff(IStuff? stuff);
 
     #region Lost Stuff
 

@@ -1,4 +1,5 @@
-﻿using System.Reflection.PortableExecutable;
+﻿using System.Data;
+using System.Reflection.PortableExecutable;
 using ManchkinCore.Enums;
 using ManchkinCore.Enums.Accessory;
 using ManchkinCore.Implementation;
@@ -256,11 +257,12 @@ public class Manchkin : IManchkin
 
     public bool CanTakeStuff(IStuff? stuff)
     {
+        //TODO: пометь так, чтоб большие шмотки можно было менять на большие шмотки того же типа
         var can = CanHaveStuff(stuff);
         if (!can) return can;
         if (stuff.Weight == Bulkiness.HUGE)
             return Race is not Dwarf && !HasHugeStuff || Race is Dwarf
-                                                      || IsHalfBlood && HalfBlood.HalfType == HalfTypes.BOTH
+                                                      || IsHalfBlood && HalfBlood.HalfType == HalfTypes.BOTH 
                                                                      && HalfBlood.SecondRace is Dwarf;
         return can;
     }
@@ -307,6 +309,7 @@ public class Manchkin : IManchkin
         return mainRight || additionalRaceRight || additionalClassRight;
     }
 
+    //TODO:возможно, тут тоже нуно будет переписать
     public bool CheckStuffBeforeChanging(IDescriptable? descriptable)
     {
         var stuff = GetAllWornStuffs();
@@ -364,44 +367,174 @@ public class Manchkin : IManchkin
     }
 
     public void RemoveUnsuitableStuff()
-    {
+    {//TODO: возможно, придетя переписать
         var stuff = GetAllWornStuffs();
         foreach (var s in stuff)
             if (!CanHaveStuff(s)) LostStuff(s);
     }
 
     private bool IsNull(object? ob) => ob == null;
-
-    public void TakeStuff(IStuff? stuff)
+    
+    
+    
+    //TODO: придумать, как вынести повторяющиеся куски в отдельный метод
+    //TODO: проверить, что это стабильно и правильно работает
+    public bool TakeStuff(IStuff? stuff)
     {
-        if (!CanTakeStuff(stuff)) return;
-        PurchaseDescriptions(stuff.Descriptions);
+        IStuff? st;
+        var ok = false;
         switch (stuff)
         {
             case Hat:
                 if(!IsNull(WornHat))
+                {
+                    st = WornHat;
                     LostStuff(WornHat);
-                WornHat = stuff;
+                }
+                else
+                    st = null;
+                
+
+                if (!CanTakeStuff(stuff))
+                {
+                    WornHat = st;
+                    ok = false;
+                }
+                else
+                {
+                    PurchaseDescriptions(stuff.Descriptions);
+                    WornHat = stuff;
+                    if (stuff.Weight == Bulkiness.HUGE)
+                        HugeStuffs.Add(stuff);
+                    else
+                        SmallStuffs.Add(stuff);
+                    ok = true;
+                }
                 break;
+                
 
             case Armor:
                 if(!IsNull(WornArmor))
+                {
+                    st = WornHat;
                     LostStuff(WornArmor);
-                WornArmor = stuff;
+                }
+                else
+                    st = null;
+                
+
+                if (!CanTakeStuff(stuff))
+                {
+                    WornArmor = st;
+                    ok = false;
+                }
+                else
+                {
+                    PurchaseDescriptions(stuff.Descriptions);
+                    WornArmor = stuff;
+                    if (stuff.Weight == Bulkiness.HUGE)
+                        HugeStuffs.Add(stuff);
+                    else
+                        SmallStuffs.Add(stuff);
+                    ok = true;
+                }
                 break;
+                
 
             case Shoes:
                 if(!IsNull(WornShoes))
+                {
+                    st = WornShoes;
                     LostStuff(WornShoes);
-                WornShoes = stuff;
+                }
+                else
+                    st = null;
+                
+
+                if (!CanTakeStuff(stuff))
+                {
+                    WornShoes = st;
+                    ok = false;
+                }
+                else
+                {
+                    PurchaseDescriptions(stuff.Descriptions);
+                    WornShoes = stuff;
+                    if (stuff.Weight == Bulkiness.HUGE)
+                        HugeStuffs.Add(stuff);
+                    else
+                        SmallStuffs.Add(stuff);
+                    ok = true;
+                }
+                break;
+            
+            case Weapon:
+                IStuff? w = null;
+                if(!IsNull(Hands.LeftHand) && Hands.LeftHand.Fullness == Arms.BOTH)
+                {
+                    st = Hands.LeftHand;
+                    LostStuff(Hands.LeftHand);
+                }
+                else
+                {
+                    if (!IsNull(Hands.LeftHand))
+                    {
+                        st = Hands.LeftHand;
+                        LostStuff(Hands.LeftHand);
+                    }
+                    else
+                        st = null;
+
+                    if (!IsNull(Hands.RightHand))
+                    {
+                        w = Hands.RightHand;
+                        LostStuff(Hands.RightHand);
+                    }
+                    else
+                        w = null;
+                }
+
+                if (!CanTakeStuff(stuff))
+                {
+                    if(st.Fullness == Arms.BOTH)
+                        Hands.TakeInBothHands(st);
+                    
+                    else
+                    {
+                        Hands.TakeInLeftHand(st);
+                        Hands.TakeInRightHand(w);
+                    }
+
+                    ok = false;
+                }
+                else
+                {
+                    PurchaseDescriptions(stuff.Descriptions);
+                    Hands.TakeInBothHands(stuff);
+                    if (stuff.Weight == Bulkiness.HUGE)
+                        HugeStuffs.Add(stuff);
+                    else
+                        SmallStuffs.Add(stuff);
+                    ok = true;
+                }
+                break;
+
+            default:
+                if (CanTakeStuff(stuff))
+                {
+                    if (stuff.Weight == Bulkiness.HUGE)
+                        HugeStuffs.Add(stuff);
+                    else
+                        SmallStuffs.Add(stuff);
+                    ok = true;
+                }
+                else
+                    ok = false;
                 break;
         }
-        if (stuff.Weight == Bulkiness.HUGE)
-            HugeStuffs.Add(stuff);
-        else
-            SmallStuffs.Add(stuff);
         RecalculateDamage();
         RecalculateFlushingBonus();
+        return ok;
     }
 
     private bool IsNull(IStuff? stuff) => stuff == null;

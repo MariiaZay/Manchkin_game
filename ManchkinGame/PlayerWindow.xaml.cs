@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using ManchkinCore.Enums.Accessory;
 using ManchkinCore.Implementation;
 using ManchkinCore.Interfaces;
@@ -45,7 +46,7 @@ public partial class PlayerWindow
         LostShoesButton.Click += LostShoesButtonClick;
 
         WeaponButton.Click += WeaponButtonClick;
-        //TODO: сделать обработчик потери и смены оружия
+        ChangeWeaponButton.Click += ChangeWeaponButtonClick;
         LostWeaponButton.Click += LostWeaponButtonClick;
 
         HatButton.Click += HatButtonClick;
@@ -332,6 +333,23 @@ public partial class PlayerWindow
         }
     }
 
+    private void ChangeWeaponButtonClick(object sender, RoutedEventArgs e)
+    {
+        if (Player.Manchkin.IsDead)
+            UserMessage.CreateDeathActionMessage();
+        else
+        {
+            var answer = UserMessage.CreateWeaponAskingMessage();
+            switch (answer)
+            {
+                case MessageBoxResult.Yes:
+                    break;
+                case MessageBoxResult.No:
+                    break;
+            }
+        }
+    }
+    
     private void LostWeaponButtonClick(object sender, RoutedEventArgs e)
     {
         if (Player.Manchkin.IsDead)

@@ -53,6 +53,11 @@ public static class UserMessage
             String.Format("Смена {0}", caption), MessageBoxButton.YesNo, MessageBoxImage.Warning);
         return answer == MessageBoxResult.Yes;
     }
+
+    public static MessageBoxResult CreateWeaponAskingMessage()
+        => MessageBox.Show("Оружие, которое ты хочень надеть одноручное?",
+            "Смена шмотки", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+    
     
 
     public static void CreateImpossibleLostMessage(string mess)

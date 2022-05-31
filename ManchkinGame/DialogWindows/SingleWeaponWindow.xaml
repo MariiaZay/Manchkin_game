@@ -118,8 +118,8 @@
         <Style x:Key="TextStyle" TargetType="{x:Type TextBlock}">
             <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
             <Setter Property="Foreground" Value="Black" />
-            <Setter Property="HorizontalContentAlignment" Value="Left" />
-            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="Padding" Value="4.5" />
             <Setter Property="FontWeight" Value="Normal"></Setter>
             <Setter Property="FontFamily" Value="Comic Sans MS"></Setter>

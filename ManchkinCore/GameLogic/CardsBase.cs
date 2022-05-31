@@ -16,9 +16,14 @@ public static class CardsBase
         //TODO: сделать DIY - контейнер
     public static List<IDescriptable> SmallStuffs = new List<IDescriptable>()
     {
-        new Stepladder(), new GreatTitle(), new SpikedKnees(),
+        new GreatTitle(), new SpikedKnees(),
         new SingingSword(), new Sandwich(), new Cloack(),
         new Pantyhose(), new KneepadsOfAllure() 
+    };
+
+    public static List<IDescriptable> HugeStuffs = new List<IDescriptable>()
+    {
+        new Stepladder()
     };
 
     public static List<IDescriptable> Armors = new List<IDescriptable>()

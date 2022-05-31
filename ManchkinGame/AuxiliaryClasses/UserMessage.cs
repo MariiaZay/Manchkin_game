@@ -6,40 +6,29 @@ namespace ManchkinGame;
 
 public static class UserMessage
 {
+    public static void CreateOneWeaponInBothHandsMessage()
+        => CreateInfoMessage("Ты не можешь держать одно и то же одноручное оружие в обеих руках",
+            "ОЙ");
     public static void CreateEmptyActionStuffMessage()
-        => MessageBox.Show("У тебя пока что нет этого, чтобы с этим что-то делать",
-            "Пока пусто",
-            MessageBoxButton.OK,
-            MessageBoxImage.Information);
+        => CreateInfoMessage("У тебя пока что нет этого, чтобы с этим что-то делать", "Пока пусто");
 
     public static void CreateEmptyStuffMessage()
-        => MessageBox.Show("У тебя пока что нет этого",
-            "Пока пусто",
-            MessageBoxButton.OK,
-            MessageBoxImage.Information);
+        => CreateInfoMessage("У тебя пока что нет этого", "Пока пусто");
 
     public static void CreateDeathMessage()
-        => MessageBox.Show("Ты и так мертв, закончи ход, чтобы воскреснуть",
-            "Смэрть",
-            MessageBoxButton.OK,
-            MessageBoxImage.Information);
+        => CreateInfoMessage("Ты и так мертв, закончи ход, чтобы воскреснуть", "Смэрть");
+
     public static void CreateDeathActionMessage()
-        => MessageBox.Show("Ты не можешь делать это, так как ты мёртв! Закончи ход, чтобы воскреснуть",
-            "Смэрть",
-            MessageBoxButton.OK,
-            MessageBoxImage.Information);
+        => CreateInfoMessage("Ты не можешь делать это, так как ты мёртв! Закончи ход, чтобы воскреснуть", 
+            "Смэрть");
 
     public static void CreateDeathWearingMessage()
-        => MessageBox.Show("Ты умер и потерял все шмотки! Закончи ход, чтобы воскреснуть",
-            "Смэрть",
-            MessageBoxButton.OK,
-            MessageBoxImage.Information);
+        => CreateInfoMessage("Ты умер и потерял все шмотки! Закончи ход, чтобы воскреснуть",
+            "Смэрть");
 
     public static void CreateImpossibleTakingStuffMessage()
-        => MessageBox.Show("Ты не можешь надеть эту шмотку. Если у тебя есть ЧИТ! Можешь использовать его",
-            "ОЙ!",
-            MessageBoxButton.OK,
-            MessageBoxImage.Information);
+        => CreateInfoMessage("Ты не можешь надеть эту шмотку. Если у тебя есть ЧИТ! Можешь использовать его",
+            "ОЙ!");
 
     public static bool CreateAskingMessage(string mess)
     {
@@ -55,23 +44,19 @@ public static class UserMessage
     }
 
     public static MessageBoxResult CreateWeaponAskingMessage()
-        => MessageBox.Show("Оружие, которое ты хочень надеть одноручное?",
+        => MessageBox.Show("Оружие, которое ты хочень надеть, одноручное?",
             "Смена шмотки", MessageBoxButton.YesNo, MessageBoxImage.Warning);
     
-    
-
     public static void CreateImpossibleLostMessage(string mess)
     {
         var pronoun = mess == "класс" ? "его" : "её";
         var caption = mess == "класс" ? "Смена класса" : "Смена расы";
-        MessageBox.Show(String.Format("Ты не можешь потерять {0}, так как у тебя {1} нет", mess, pronoun)
-            , caption, MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.Yes);
+        CreateInfoMessage(String.Format("Ты не можешь потерять {0}, так как у тебя {1} нет", mess, pronoun),caption);
     }
 
     public static void CreateNotChosenItemMessage(string mess)
-    {
-        MessageBox.Show(String.Format("Ты не указал {0}", mess), "Недостаточно данных",
-            MessageBoxButton.OK,
-            MessageBoxImage.Information);
-    }
+        => CreateInfoMessage(String.Format("Ты не указал {0}", mess), "Недостаточно данных");
+
+    private static void CreateInfoMessage(string mess, string caption)
+        => MessageBox.Show(mess, caption, MessageBoxButton.OK, MessageBoxImage.Information);
 }

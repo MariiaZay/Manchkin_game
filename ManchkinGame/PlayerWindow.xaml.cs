@@ -343,7 +343,20 @@ public partial class PlayerWindow
             switch (answer)
             {
                 case MessageBoxResult.Yes:
+                    Application.Current.Resources["MANCHKIN"] = Player.Manchkin;
+                    Application.Current.Resources["CURRENT_RIGHT_HAND"] = Player.Manchkin.Hands.RightHand == null
+                        ? ""
+                        : Player.Manchkin.Hands.RightHand.TextRepresentation;
+                    
+                    Application.Current.Resources["CURRENT_LEFT_HAND"] = Player.Manchkin.Hands.LeftHand == null
+                        ? ""
+                        : Player.Manchkin.Hands.LeftHand.TextRepresentation;
+                    
+                    DialogWindow.Show(new SingleWeaponWindow(), this);
                     break;
+                
+                
+                
                 case MessageBoxResult.No:
                     
                     Application.Current.Resources["MANCHKIN"] = Player.Manchkin;

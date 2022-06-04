@@ -4,7 +4,15 @@ using ManchkinCore.Interfaces;
 
 namespace ManchkinCore.Implementation.Gears;
 
-public abstract class SmallStuff : IStuff, IDescriptable
+public abstract class SmallStuff : Stuff
+{ // these are marker classes needed for DI to distinguish types of stuff 
+}
+
+public abstract class HugeStuff : Stuff
+{ // (странно, что у тебя HugeStuff были шмотками типа SmallStuff
+} // у меня DI контейнер аж настока офигел от этого, что пихал мелкие шмотки в список больших)
+
+public abstract class Stuff : IStuff, IDescriptable
 {
     public int Price { get; protected set; }
     public int Damage { get; protected set; }
@@ -23,7 +31,7 @@ public abstract class SmallStuff : IStuff, IDescriptable
     
 }
 
-public class Stepladder : SmallStuff
+public class Stepladder : HugeStuff
 {
     public Stepladder()
     {

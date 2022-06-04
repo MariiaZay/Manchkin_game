@@ -6,4 +6,9 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Ninject" Version="3.3.6" />
+      <PackageReference Include="Ninject.Extensions.Conventions" Version="3.3.0" />
+    </ItemGroup>
+
 </Project>

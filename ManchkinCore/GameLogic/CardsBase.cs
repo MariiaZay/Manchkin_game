@@ -1,58 +1,75 @@
 ﻿using ManchkinCore.Implementation;
 using ManchkinCore.Implementation.Gears;
 using ManchkinCore.Interfaces;
+using Ninject;
+using Ninject.Extensions.Conventions;
 
 namespace ManchkinCore.GameLogic;
 
 public static class CardsBase
 {
-    public static List<IDescriptable> Races = new List<IDescriptable>() {new Dwarf(), new Halfling(), new Elf()};
+    public static List<IDescriptable> Races;
+    public static List<IDescriptable> Classes;
+    public static List<IDescriptable> SmallStuffs;
+    public static List<IDescriptable> HugeStuffs;
+    public static List<IDescriptable> Armors;
+    public static List<IDescriptable> Hats;
+    public static List<IDescriptable> Shoeses;
+    public static List<IDescriptable> Weapons;
 
-    public static List<IDescriptable> Classes = new List<IDescriptable>()
+    static CardsBase()
     {
-        new Cleric(), new Thief(),
-        new Warrior(), new Wizard()
-    };
-        //TODO: сделать DIY - контейнер
-    public static List<IDescriptable> SmallStuffs = new List<IDescriptable>()
-    {
-        new GreatTitle(), new SpikedKnees(),
-        new SingingSword(), new Sandwich(), new Cloack(),
-        new Pantyhose(), new KneepadsOfAllure() 
-    };
+        var kernel = new StandardKernel();
 
-    public static List<IDescriptable> HugeStuffs = new List<IDescriptable>()
-    {
-        new Stepladder()
-    };
-
-    public static List<IDescriptable> Armors = new List<IDescriptable>()
-    {
-        new MithrilArmor(),
-        new LeatherArmor(),
-        new DwarfArmor(),
-        new MucousMembrane(),
-        new FlamingArmor()
-    };
-
-    public static List<IDescriptable> Hats = new List<IDescriptable>()
-    {
-        new HornedHelmet(), new BandanaOfBastartism(), 
-        new HatOfPower(), new HelmetOfCourage()
-    };
-
-    public static List<IDescriptable> Shoeses = new List<IDescriptable>()
-    {
-        new MightyShoes(), new SandalsOfProtection(), new ReallyFastBoots()
-    };
-
-    public static List<IDescriptable> Weapons = new List<IDescriptable>()
-    {
-        new Buckler(), new Hammer(), new ProgressiveSword(),
-        new BastardSword(), new Chainsaw(), new CheeseGrater(),
-        new NapalmStuff(), new Rapier(), new Dagger(), new Mace(),
-        new Shild(), new Club(), new Polearm(), new HugeRock(),
-        new Pole(), new Bow(), new RatOnStick(), new TubeOfCharm()
-    };
-
+        kernel.Bind(x => x.FromThisAssembly()
+            .SelectAllClasses()
+            .InheritedFrom<IDescriptable>()
+            .BindAllInterfaces()
+            .Configure(x => x.InSingletonScope()));
+        kernel.Bind(x => x.FromThisAssembly()
+            .SelectAllClasses()
+            .InheritedFrom<IDescriptable>()
+            .BindAllBaseClasses()
+            .Configure(x => x.InSingletonScope()));
+        
+        Races = kernel
+            .GetAll<IRace>()
+            .Select(x => (IDescriptable) x)
+            .ToList();
+        
+        Classes = kernel
+            .GetAll<IClass>()
+            .Select(x => (IDescriptable) x)
+            .ToList();
+        
+        HugeStuffs = kernel
+            .GetAll<HugeStuff>()
+            .Select(x => (IDescriptable) x)
+            .ToList();
+        
+        SmallStuffs = kernel
+            .GetAll<SmallStuff>()
+            .Select(x => (IDescriptable) x)
+            .ToList();
+        
+        Armors = kernel
+            .GetAll<Armor>()
+            .Select(x => (IDescriptable) x)
+            .ToList();
+        
+        Hats = kernel
+            .GetAll<Hat>()
+            .Select(x => (IDescriptable) x)
+            .ToList();
+        
+        Shoeses = kernel
+            .GetAll<Shoes>()
+            .Select(x => (IDescriptable) x)
+            .ToList();
+        
+        Weapons = kernel
+            .GetAll<Weapon>()
+            .Select(x => (IDescriptable) x)
+            .ToList();
+    }
 }

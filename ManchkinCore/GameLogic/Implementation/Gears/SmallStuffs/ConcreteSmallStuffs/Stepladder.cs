@@ -3,7 +3,7 @@ using ManchkinCore.Interfaces;
 
 namespace ManchkinCore.Implementation.Gears;
 
-public class Stepladder : SmallStuff
+public class Stepladder : HugeStuff
 {
     public Stepladder()
     {

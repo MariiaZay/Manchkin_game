@@ -9,18 +9,10 @@ public class EmptyWeapon: Weapon
     {
         TextRepresentation = "";
     }
-    public override bool CanBeUsed(IRace? race)
-    {
-        throw new NotImplementedException();
-    }
 
-    public override bool CanBeUsed(IClass? _class)
-    {
-        throw new NotImplementedException();
-    }
+    public override bool CanBeUsed(IRace? race) => true;
 
-    public override bool CanBeUsed(Genders gender)
-    {
-        throw new NotImplementedException();
-    }
+    public override bool CanBeUsed(IClass? _class) => true;
+
+    public override bool CanBeUsed(Genders gender) => true;
 }

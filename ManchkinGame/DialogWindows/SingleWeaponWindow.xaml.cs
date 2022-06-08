@@ -6,6 +6,7 @@ using System.Windows.Input;
 using ManchkinCore;
 using ManchkinCore.GameLogic;
 using ManchkinCore.GameLogic.Implementation;
+using ManchkinCore.Implementation;
 using ManchkinCore.Interfaces;
 
 namespace ManchkinGame.DialogWindows;
@@ -41,6 +42,7 @@ public partial class SingleWeaponWindow : Window
             UserMessage.CreateNotChosenItemMessage("оружия");
         else if(LeftVariantsComboBox.Text == RightVariantsComboBox.Text)
             UserMessage.CreateOneWeaponInBothHandsMessage();
+        //TODO: дописать функционал
         
     }
 
@@ -71,6 +73,8 @@ public partial class SingleWeaponWindow : Window
                      .Where(variant => _currentLeft != variant.TextRepresentation 
                                        && _currentRight != variant.TextRepresentation))
             LeftVariantsComboBox.Items.Add(variant.TextRepresentation);
+
+        LeftVariantsComboBox.Items.Add(new EmptyWeapon().TextRepresentation);
         LeftVariantsComboBox.Text = _currentLeft;
     }
     
@@ -80,6 +84,7 @@ public partial class SingleWeaponWindow : Window
                      .Where(variant => _currentLeft != variant.TextRepresentation 
                                        && _currentRight != variant.TextRepresentation))
             RightVariantsComboBox.Items.Add(variant.TextRepresentation);
+        RightVariantsComboBox.Items.Add(new EmptyWeapon().TextRepresentation);
         RightVariantsComboBox.Text = _currentRight;
     }
 

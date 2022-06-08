@@ -252,6 +252,8 @@ public partial class PlayerWindow
         {
             if (Player.Manchkin.WornArmor == null)
                 UserMessage.CreateEmptyStuffMessage();
+            else
+                ShowStuff(Player.Manchkin.WornArmor);
         }
     }
 
@@ -291,6 +293,8 @@ public partial class PlayerWindow
         {
             if (Player.Manchkin.WornShoes == null)
                 UserMessage.CreateEmptyStuffMessage();
+            else
+                ShowStuff(Player.Manchkin.WornShoes);
         }
     }
 
@@ -330,6 +334,7 @@ public partial class PlayerWindow
         {
             if (Player.Manchkin.Hands.LeftHand == null && Player.Manchkin.Hands.RightHand == null)
                 UserMessage.CreateEmptyStuffMessage();
+            //TODO: прописать описание оружия
         }
     }
 
@@ -353,6 +358,8 @@ public partial class PlayerWindow
                         : Player.Manchkin.Hands.LeftHand.TextRepresentation;
                     
                     DialogWindow.Show(new SingleWeaponWindow(), this);
+                    
+                    //TODO: дописать взятие
                     break;
                 
                 
@@ -402,6 +409,8 @@ public partial class PlayerWindow
         {
             if (Player.Manchkin.WornHat == null)
                 UserMessage.CreateEmptyStuffMessage();
+            else
+                ShowStuff(Player.Manchkin.WornHat);
         }
     }
 
@@ -545,6 +554,19 @@ public partial class PlayerWindow
         }
     }
 
+    private void ShowStuff(IStuff stuff)
+    {
+        Application.Current.Resources["STUFF"] = stuff;
+        Application.Current.Resources["STUFF_TYPE"] = stuff switch
+        {
+            Armor => "броник",
+            Hat => "головняк",
+            Shoes => "обувка",
+            Weapon => "оружие",
+            _ => "просто шмотка"
+        };
+        DialogWindow.Show(new StuffWindow(), this);
+    }
 
     private void ChangeStuff(string variantType, IStuff? currentStuff)
     {
@@ -558,10 +580,6 @@ public partial class PlayerWindow
 
         DialogWindow.Show(new WearingWindow(), this);
 
-        if (App.Current.Resources["NEW"] == null) return;
-
-        var stuff = App.Current.Resources["NEW"] as IStuff;
-        Player.Manchkin.TakeStuff(stuff);
         Refresh();
     }
 

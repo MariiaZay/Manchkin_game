@@ -4,7 +4,7 @@ using ManchkinCore.Interfaces;
 
 namespace ManchkinCore.Implementation.Gears;
 
-public abstract class SmallStuff : IStuff, IDescriptable
+public abstract class SmallStuff : IStuff
 {
     public int Price { get; protected set; }
     public int Damage { get; protected set; }

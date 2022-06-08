@@ -416,7 +416,7 @@ public class Manchkin : IManchkin
             case Armor:
                 if(!IsNull(WornArmor))
                 {
-                    st = WornHat;
+                    st = WornArmor;
                     LostStuff(WornArmor);
                 }
                 else

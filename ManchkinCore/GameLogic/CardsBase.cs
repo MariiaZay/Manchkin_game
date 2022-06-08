@@ -6,19 +6,20 @@ namespace ManchkinCore.GameLogic;
 
 public static class CardsBase
 {
-    public static List<IDescriptable> Races = new List<IDescriptable>() {new Dwarf(), new Halfling(), new Elf()};
+    public static List<IDescriptable> Races = new List<IDescriptable>() { new Dwarf(), new Halfling(), new Elf() };
 
     public static List<IDescriptable> Classes = new List<IDescriptable>()
     {
         new Cleric(), new Thief(),
         new Warrior(), new Wizard()
     };
-        //TODO: сделать DIY - контейнер
+
+    //TODO: сделать DIY - контейнер
     public static List<IDescriptable> SmallStuffs = new List<IDescriptable>()
     {
         new GreatTitle(), new SpikedKnees(),
         new SingingSword(), new Sandwich(), new Cloack(),
-        new Pantyhose(), new KneepadsOfAllure() 
+        new Pantyhose(), new KneepadsOfAllure()
     };
 
     public static List<IDescriptable> HugeStuffs = new List<IDescriptable>()
@@ -37,7 +38,7 @@ public static class CardsBase
 
     public static List<IDescriptable> Hats = new List<IDescriptable>()
     {
-        new HornedHelmet(), new BandanaOfBastartism(), 
+        new HornedHelmet(), new BandanaOfBastartism(),
         new HatOfPower(), new HelmetOfCourage()
     };
 
@@ -54,5 +55,4 @@ public static class CardsBase
         new Shild(), new Club(), new Polearm(), new HugeRock(),
         new Pole(), new Bow(), new RatOnStick(), new TubeOfCharm()
     };
-
 }

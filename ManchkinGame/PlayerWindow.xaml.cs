@@ -360,7 +360,6 @@ public partial class PlayerWindow
                     
                     DialogWindow.Show(new SingleWeaponWindow(), this);
                     
-                    //TODO: дописать взятие
                     break;
                 
                 

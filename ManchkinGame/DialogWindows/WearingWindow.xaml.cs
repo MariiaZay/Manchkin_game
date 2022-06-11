@@ -62,13 +62,10 @@ public partial class WearingWindow : Window
             if (ReferenceEquals(CheatButton.Content, "НЕ ЧИТ!"))
                 _manchkin.UseCheat(v);
             
-            if (!_manchkin.TakeStuff(v)) //TODO: здесь работает неправилно
+            if (!_manchkin.TakeStuff(v)) 
                 UserMessage.CreateImpossibleTakingStuffMessage();
             else
-            {
-                Application.Current.Resources["NEW"] = v;
                 Close();
-            }
         }
     }
 

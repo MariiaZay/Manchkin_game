@@ -3,7 +3,7 @@ using ManchkinCore.Interfaces;
 
 namespace ManchkinCore.Implementation;
 
-public class TubeOfCharm : Weapon
+public class TubeOfCharm : SingleHandWeapon
 {
     public TubeOfCharm()
     {

@@ -3,7 +3,7 @@ using ManchkinCore.Interfaces;
 
 namespace ManchkinCore.Implementation;
 
-public class Buckler : Weapon
+public class Buckler : SingleHandWeapon
 {
     public Buckler()
     {

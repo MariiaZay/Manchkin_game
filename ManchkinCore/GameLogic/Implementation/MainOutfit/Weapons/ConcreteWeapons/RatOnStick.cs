@@ -3,7 +3,7 @@ using ManchkinCore.Interfaces;
 
 namespace ManchkinCore.Implementation;
 
-public class RatOnStick : Weapon
+public class RatOnStick : SingleHandWeapon
 {
     public RatOnStick()
     {

@@ -3,7 +3,7 @@ using ManchkinCore.Interfaces;
 
 namespace ManchkinCore.Implementation;
 
-public class Shild : Weapon
+public class Shild : SingleHandWeapon
 {
     public Shild()
     {

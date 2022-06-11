@@ -17,33 +17,33 @@ public partial class SingleWeaponWindow : Window
     private string _currentRight;
     private string _currentLeft;
     private IManchkin _manchkin;
-    
+
     public SingleWeaponWindow()
     {
         InitializeComponent();
         _manchkin = App.Current.Resources["MANCHKIN"] as Manchkin;
-        _variants = GetSmallWeapon();
+        _variants = CardsBase.SingleHandWeapons;
         _currentRight = Application.Current.Resources["CURRENT_RIGHT_HAND"].ToString();
         _currentLeft = Application.Current.Resources["CURRENT_LEFT_HAND"].ToString();
-        
+
         LeftVariantsComboBox.Loaded += LeftVariantsComboBoxStartLoaded;
         RightVariantsComboBox.Loaded += RightVariantsComboBoxStartLoaded;
 
         LeftCheatButton.Click += LeftCheatButtonClick;
         RightCheatButton.Click += RightCheatButtonClick;
-        
+
         WearingButton.Click += WearingButtonClick;
         CancelButton.Click += CancelButtonClick;
     }
 
     private void WearingButtonClick(object sender, RoutedEventArgs e)
     {
-        if(LeftVariantsComboBox.Text == "" && RightVariantsComboBox.Text == "")
+        if (LeftVariantsComboBox.Text == "" && RightVariantsComboBox.Text == "")
             UserMessage.CreateNotChosenItemMessage("оружия");
-        else if(LeftVariantsComboBox.Text == RightVariantsComboBox.Text)
+        else if (LeftVariantsComboBox.Text == RightVariantsComboBox.Text)
             UserMessage.CreateOneWeaponInBothHandsMessage();
         //TODO: дописать функционал
-        
+
     }
 
     private void RightCheatButtonClick(object sender, RoutedEventArgs e)
@@ -55,8 +55,8 @@ public partial class SingleWeaponWindow : Window
         else
             RightCheatButton.Style = (Style) FindResource("RoundedGreenButtonStyle");
     }
-    
-    
+
+
     private void LeftCheatButtonClick(object sender, RoutedEventArgs e)
     {
         LeftCheatButton.Content = ReferenceEquals(LeftCheatButton.Content, "НЕ ЧИТ!") ? "ЧИТ" : "НЕ ЧИТ!";
@@ -66,22 +66,22 @@ public partial class SingleWeaponWindow : Window
         else
             LeftCheatButton.Style = (Style) FindResource("RoundedGreenButtonStyle");
     }
-    
+
     private void LeftVariantsComboBoxStartLoaded(object sender, RoutedEventArgs e)
     {
         foreach (var variant in _variants
-                     .Where(variant => _currentLeft != variant.TextRepresentation 
+                     .Where(variant => _currentLeft != variant.TextRepresentation
                                        && _currentRight != variant.TextRepresentation))
             LeftVariantsComboBox.Items.Add(variant.TextRepresentation);
 
         LeftVariantsComboBox.Items.Add(new EmptyWeapon().TextRepresentation);
         LeftVariantsComboBox.Text = _currentLeft;
     }
-    
+
     private void RightVariantsComboBoxStartLoaded(object sender, RoutedEventArgs e)
     {
         foreach (var variant in _variants
-                     .Where(variant => _currentLeft != variant.TextRepresentation 
+                     .Where(variant => _currentLeft != variant.TextRepresentation
                                        && _currentRight != variant.TextRepresentation))
             RightVariantsComboBox.Items.Add(variant.TextRepresentation);
         RightVariantsComboBox.Items.Add(new EmptyWeapon().TextRepresentation);
@@ -95,7 +95,5 @@ public partial class SingleWeaponWindow : Window
         Application.Current.Resources["NEW_LEFT"] = null;
         Close();
     }
-    
-    private List<IDescriptable> GetSmallWeapon()
-        => (from variant in CardsBase.Weapons let v = variant as IStuff where v.Fullness == Arms.SINGLE select variant).ToList();
+
 }

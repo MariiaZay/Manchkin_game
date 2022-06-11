@@ -3,7 +3,7 @@ using ManchkinCore.Interfaces;
 
 namespace ManchkinCore.Implementation;
 
-public class Chainsaw : Weapon
+public class Chainsaw : BothHandWeapon
 {
     public Chainsaw()
     {

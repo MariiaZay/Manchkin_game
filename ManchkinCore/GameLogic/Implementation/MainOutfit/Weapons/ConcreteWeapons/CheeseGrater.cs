@@ -3,7 +3,7 @@ using ManchkinCore.Interfaces;
 
 namespace ManchkinCore.Implementation;
 
-public class CheeseGrater : Weapon
+public class CheeseGrater : SingleHandWeapon
 {
     public CheeseGrater()
     {

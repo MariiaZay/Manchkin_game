@@ -18,3 +18,8 @@ public abstract class Weapon : IStuff
     public List<string> Descriptions { get; protected set; }
     public string TextRepresentation { get; protected set; }
 }
+
+public abstract class BothHandWeapon: Weapon
+{}
+public abstract class SingleHandWeapon : Weapon
+{}

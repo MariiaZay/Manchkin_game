@@ -3,7 +3,7 @@ using ManchkinCore.Interfaces;
 
 namespace ManchkinCore.Implementation;
 
-public class NapalmStuff : Weapon
+public class NapalmStuff : SingleHandWeapon
 {
     public NapalmStuff()
     {

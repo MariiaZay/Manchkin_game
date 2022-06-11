@@ -28,7 +28,7 @@ public partial class WearingWindow : Window
             "обувка" => _variants = CardsBase.Shoeses,
             "головняк" => _variants = CardsBase.Hats,
             "мелкие шмотки" => _variants = CardsBase.SmallStuffs,
-            "оружие" => _variants = GetHugeWeapon()
+            "оружие" => _variants = CardsBase.BothHandWeapons
         };
         VariantsComboBox.Loaded += VariantsComboBoxLoaded;
         
@@ -37,8 +37,7 @@ public partial class WearingWindow : Window
         CheatButton.Click += CheatButtonClick;
     }
 
-    private List<IDescriptable> GetHugeWeapon()
-        => (from variant in CardsBase.Weapons let v = variant as IStuff where v.Fullness == Arms.BOTH select variant).ToList();
+    
     
 
     private void CheatButtonClick(object sender, RoutedEventArgs e)

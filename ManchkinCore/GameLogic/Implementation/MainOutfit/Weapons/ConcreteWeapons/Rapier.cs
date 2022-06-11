@@ -3,7 +3,7 @@ using ManchkinCore.Interfaces;
 
 namespace ManchkinCore.Implementation;
 
-public class Rapier : Weapon
+public class Rapier : SingleHandWeapon
 {
     public Rapier()
     {

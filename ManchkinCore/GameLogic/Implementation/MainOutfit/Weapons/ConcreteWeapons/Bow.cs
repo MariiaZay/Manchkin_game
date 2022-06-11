@@ -16,7 +16,7 @@ public class Bow : BothHandWeapon
         TextRepresentation = "Лучок с ленточками";
     }
 
-    public override bool CanBeUsed(IRace? race) => race is Elf || Cheat;
+    public override bool CanBeUsed(IRace race) => race is Elf || Cheat;
 
     public override bool CanBeUsed(IClass? _class) => true;
 

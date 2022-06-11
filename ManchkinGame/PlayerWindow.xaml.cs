@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using ManchkinCore;
 using ManchkinCore.Enums.Accessory;
 using ManchkinCore.Implementation;
 using ManchkinCore.Interfaces;
@@ -376,9 +377,6 @@ public partial class PlayerWindow
                         Application.Current.Resources["CURRENT"] = Player.Manchkin.Hands.LeftHand.TextRepresentation;
 
                     DialogWindow.Show(new WearingWindow(), this);
-
-                    if (Application.Current.Resources["NEW"] is not IStuff stuff) return;
-                    Player.Manchkin.TakeStuff(stuff);
                     break;
             }
             Refresh();
@@ -393,8 +391,15 @@ public partial class PlayerWindow
         {
             if (Player.Manchkin.Hands.LeftHand == null && Player.Manchkin.Hands.RightHand == null)
                 UserMessage.CreateEmptyActionStuffMessage();
+            else
+            {
+                if(Player.Manchkin.Hands != null && Player.Manchkin.Hands.LeftHand.Fullness == Arms.BOTH)
+                    Player.Manchkin.LostStuff(Player.Manchkin.Hands.LeftHand);
+                
+                
+                Refresh();
+            }
         }
-        //TODO: написать потерю оружия
     }
 
     #endregion

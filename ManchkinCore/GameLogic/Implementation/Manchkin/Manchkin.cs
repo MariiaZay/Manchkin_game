@@ -112,10 +112,10 @@ public class Manchkin : IManchkin
     public IClass? ChangeClass(IClass? manClass)
     {
         if (IsNull(_class)) return manClass;
-        
+
         LostDescriptions(Class.Descriptions);
         PurchaseDescriptions(manClass.Descriptions);
-        
+
         return manClass;
     }
 
@@ -140,9 +140,6 @@ public class Manchkin : IManchkin
         return race;
     }
 
-    
-
-    
 
     public void RecalculateDamage()
     {
@@ -178,11 +175,11 @@ public class Manchkin : IManchkin
 
     public void GetLevel()
     {
-        if(Level < 10) Level ++;
+        if (Level < 10) Level++;
         RecalculateDamage();
-    } 
-    
-    
+    }
+
+
     public void LostLevel()
     {
         if (Level > 1)
@@ -262,7 +259,7 @@ public class Manchkin : IManchkin
         if (!can) return can;
         if (stuff.Weight == Bulkiness.HUGE)
             return Race is not Dwarf && !HasHugeStuff || Race is Dwarf
-                                                      || IsHalfBlood && HalfBlood.HalfType == HalfTypes.BOTH 
+                                                      || IsHalfBlood && HalfBlood.HalfType == HalfTypes.BOTH
                                                                      && HalfBlood.SecondRace is Dwarf;
         return can;
     }
@@ -313,18 +310,18 @@ public class Manchkin : IManchkin
     public bool CheckStuffBeforeChanging(IDescriptable? descriptable)
     {
         var stuff = GetAllWornStuffs();
-        return descriptable is IClass ? 
-            stuff.All(s => CanHaveStuff(s, descriptable as IClass, Race, Gender)) 
+        return descriptable is IClass
+            ? stuff.All(s => CanHaveStuff(s, descriptable as IClass, Race, Gender))
             : stuff.All(s => CanHaveStuff(s, Class, descriptable as IRace, Gender));
     }
-    
+
     public bool CheckStuffBeforeChanging(Genders gender)
     {
         var stuff = GetAllWornStuffs();
-        return stuff.All(s => CanHaveStuff(s, Class,Race,gender));
+        return stuff.All(s => CanHaveStuff(s, Class, Race, gender));
     }
 
-    private bool CanHaveStuff(IStuff? stuff ,IClass? cl, IRace? race, Genders gender)
+    private bool CanHaveStuff(IStuff? stuff, IClass? cl, IRace? race, Genders gender)
     {
         bool mainRight;
         bool additionalRaceRight;
@@ -367,61 +364,73 @@ public class Manchkin : IManchkin
     }
 
     public void RemoveUnsuitableStuff()
-    {//TODO: возможно, придетя переписать
+    {
+        //TODO: возможно, придетя переписать
         var stuff = GetAllWornStuffs();
         foreach (var s in stuff)
-            if (!CanHaveStuff(s)) LostStuff(s);
+            if (!CanHaveStuff(s))
+                LostStuff(s);
     }
 
     private bool IsNull(object? ob) => ob == null;
-    
-    
-    
+
+
     //TODO: придумать, как вынести повторяющиеся куски в отдельный метод
     //TODO: проверить, что это стабильно и правильно работает
-    public bool TakeStuff(IStuff? stuff)
+
+    private void ReturnStuff(IStuff? stuff)
+    {
+        if (IsNull(stuff)) return;
+        PurchaseDescriptions(stuff.Descriptions);
+        if (stuff.Weight == Bulkiness.HUGE)
+            HugeStuffs.Add(stuff);
+        else
+            SmallStuffs.Add(stuff);
+    }
+
+    private void AddStuff(IStuff? stuff)
+    {
+        if(IsNull(stuff)) return;
+        PurchaseDescriptions(stuff.Descriptions);
+        if (stuff.Weight == Bulkiness.HUGE)
+            HugeStuffs.Add(stuff);
+        else
+            SmallStuffs.Add(stuff);
+    }
+
+
+    public bool TakeStuff(IStuff? stuff) //это говнокод, но оно работает
     {
         IStuff? st;
         var ok = false;
         switch (stuff)
         {
             case Hat:
-                if(!IsNull(WornHat))
-                {
-                    st = WornHat;
-                    LostStuff(WornHat);
-                }
-                else
-                    st = null;
-                
+
+                st = WornHat; //TODO: вынести в отдельный метод
+                LostStuff(WornHat);
 
                 if (!CanTakeStuff(stuff))
                 {
                     WornHat = st;
+                    ReturnStuff(st);
                     ok = false;
                 }
                 else
                 {
-                    PurchaseDescriptions(stuff.Descriptions);
                     WornHat = stuff;
-                    if (stuff.Weight == Bulkiness.HUGE)
-                        HugeStuffs.Add(stuff);
-                    else
-                        SmallStuffs.Add(stuff);
+                    AddStuff(stuff);
                     ok = true;
                 }
+
                 break;
-                
+
 
             case Armor:
-                if(!IsNull(WornArmor))
-                {
-                    st = WornArmor;
-                    LostStuff(WornArmor);
-                }
-                else
-                    st = null;
-                
+
+                st = WornArmor;
+                LostStuff(WornArmor);
+
 
                 if (!CanTakeStuff(stuff))
                 {
@@ -430,26 +439,19 @@ public class Manchkin : IManchkin
                 }
                 else
                 {
-                    PurchaseDescriptions(stuff.Descriptions);
                     WornArmor = stuff;
-                    if (stuff.Weight == Bulkiness.HUGE)
-                        HugeStuffs.Add(stuff);
-                    else
-                        SmallStuffs.Add(stuff);
+                    AddStuff(stuff);
                     ok = true;
                 }
+
                 break;
-                
+
 
             case Shoes:
-                if(!IsNull(WornShoes))
-                {
-                    st = WornShoes;
-                    LostStuff(WornShoes);
-                }
-                else
-                    st = null;
-                
+
+                st = WornShoes;
+                LostStuff(WornShoes);
+
 
                 if (!CanTakeStuff(stuff))
                 {
@@ -458,19 +460,16 @@ public class Manchkin : IManchkin
                 }
                 else
                 {
-                    PurchaseDescriptions(stuff.Descriptions);
                     WornShoes = stuff;
-                    if (stuff.Weight == Bulkiness.HUGE)
-                        HugeStuffs.Add(stuff);
-                    else
-                        SmallStuffs.Add(stuff);
+                    AddStuff(stuff);
                     ok = true;
                 }
+
                 break;
-            
-            case Weapon:
-                IStuff? w = null;
-                if(!IsNull(Hands.LeftHand) && Hands.LeftHand.Fullness == Arms.BOTH)
+
+            case Weapon: //TODO: придумать, как переписать эту хуйню
+                IStuff? right = null;
+                if (!IsNull(Hands.LeftHand) && Hands.LeftHand.Fullness == Arms.BOTH)
                 {
                     st = Hands.LeftHand;
                     LostStuff(Hands.LeftHand);
@@ -487,22 +486,30 @@ public class Manchkin : IManchkin
 
                     if (!IsNull(Hands.RightHand))
                     {
-                        w = Hands.RightHand;
+                        right = Hands.RightHand;
                         LostStuff(Hands.RightHand);
                     }
                     else
-                        w = null;
+                        right = null;
                 }
 
                 if (!CanTakeStuff(stuff))
                 {
-                    if(st.Fullness == Arms.BOTH)
+                    if (!IsNull(st) && st.Fullness == Arms.BOTH)
+                    {
                         Hands.TakeInBothHands(st);
-                    
+                        PurchaseDescriptions(st.Descriptions);
+                    }
+
+
                     else
                     {
                         Hands.TakeInLeftHand(st);
-                        Hands.TakeInRightHand(w);
+                        if (!IsNull(st))
+                            PurchaseDescriptions(st.Descriptions);
+                        Hands.TakeInRightHand(right);
+                        if (!IsNull(right))
+                            PurchaseDescriptions(right.Descriptions);
                     }
 
                     ok = false;
@@ -517,6 +524,7 @@ public class Manchkin : IManchkin
                         SmallStuffs.Add(stuff);
                     ok = true;
                 }
+
                 break;
 
             default:
@@ -530,10 +538,36 @@ public class Manchkin : IManchkin
                 }
                 else
                     ok = false;
+
                 break;
         }
+
         RecalculateDamage();
         RecalculateFlushingBonus();
+        return ok;
+    }
+
+
+    public bool TakeSingleWeaponRight(IStuff? stuff)
+    {
+        IStuff? last;
+        bool ok;
+        
+        last = Hands.RightHand;
+        LostStuff(Hands.RightHand);
+        
+        if (!CanTakeStuff(stuff))
+        {
+            Hands.TakeInRightHand(last);
+            ok = false;
+        }
+        else
+        {
+            Hands.TakeInRightHand(stuff);
+            AddStuff(stuff);
+            ok = true;
+        }
+
         return ok;
     }
 
@@ -602,8 +636,10 @@ public class Manchkin : IManchkin
                             Hands.TakeInRightHand(stuff);
                         break;
                 }
+
                 break;
         }
+
         if (stuff.Weight == Bulkiness.HUGE)
             HugeStuffs.Remove(stuff);
         else

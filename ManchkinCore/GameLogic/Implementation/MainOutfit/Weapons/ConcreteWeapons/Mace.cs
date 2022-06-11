@@ -3,7 +3,7 @@ using ManchkinCore.Interfaces;
 
 namespace ManchkinCore.Implementation;
 
-public class Mace : Weapon
+public class Mace : SingleHandWeapon
 {
     public Mace()
     {

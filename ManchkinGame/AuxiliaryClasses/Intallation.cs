@@ -77,15 +77,15 @@ public static class Intallation
     public static string Weapon(Player player)
     {
         var weapon = "";
-        if (player.Manchkin.Hands.LeftHand == null && player.Manchkin.Hands.LeftHand == null)
+        if (player.Manchkin.Hands.LeftHand == null && player.Manchkin.Hands.RightHand == null)
             weapon = "нет";
         else
         {
-            if (player.Manchkin.Hands.LeftHand != null && player.Manchkin.Hands.LeftHand == null)
+            if (player.Manchkin.Hands.LeftHand != null && player.Manchkin.Hands.RightHand == null)
                 weapon = "левая";
             else
             {
-                if (player.Manchkin.Hands.LeftHand == null && player.Manchkin.Hands.LeftHand != null)
+                if (player.Manchkin.Hands.LeftHand == null && player.Manchkin.Hands.RightHand != null)
                     weapon = "правая";
                 else weapon = "обе";
             }

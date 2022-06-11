@@ -3,7 +3,7 @@ using ManchkinCore.Interfaces;
 
 namespace ManchkinCore.Implementation;
 
-public class Pole : Weapon
+public class Pole : SingleHandWeapon
 {
     public Pole()
     {

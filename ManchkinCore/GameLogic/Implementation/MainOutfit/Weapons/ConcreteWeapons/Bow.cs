@@ -3,7 +3,7 @@ using ManchkinCore.Interfaces;
 
 namespace ManchkinCore.Implementation;
 
-public class Bow : Weapon
+public class Bow : BothHandWeapon
 {
     public Bow()
     {
@@ -16,7 +16,7 @@ public class Bow : Weapon
         TextRepresentation = "Лучок с ленточками";
     }
 
-    public override bool CanBeUsed(IRace? race) => race is Elf || Cheat;
+    public override bool CanBeUsed(IRace race) => race is Elf || Cheat;
 
     public override bool CanBeUsed(IClass? _class) => true;
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using ManchkinCore;
 using ManchkinCore.GameLogic;
@@ -17,33 +18,69 @@ public partial class SingleWeaponWindow : Window
     private string _currentRight;
     private string _currentLeft;
     private IManchkin _manchkin;
-    
+
     public SingleWeaponWindow()
     {
         InitializeComponent();
         _manchkin = App.Current.Resources["MANCHKIN"] as Manchkin;
-        _variants = GetSmallWeapon();
-        _currentRight = Application.Current.Resources["CURRENT_RIGHT_HAND"].ToString();
-        _currentLeft = Application.Current.Resources["CURRENT_LEFT_HAND"].ToString();
+        _variants = CardsBase.SingleHandWeapons;
         
+        var right = Application.Current.Resources["CURRENT_RIGHT_HAND"] as IStuff;
+        _currentRight = right == null ? "" : right.TextRepresentation;
+
+        var left = Application.Current.Resources["CURRENT_LEFT_HAND"] as IStuff;
+        _currentLeft = left == null ? "" : left.TextRepresentation;
+
         LeftVariantsComboBox.Loaded += LeftVariantsComboBoxStartLoaded;
         RightVariantsComboBox.Loaded += RightVariantsComboBoxStartLoaded;
 
         LeftCheatButton.Click += LeftCheatButtonClick;
         RightCheatButton.Click += RightCheatButtonClick;
-        
+
         WearingButton.Click += WearingButtonClick;
         CancelButton.Click += CancelButtonClick;
     }
 
     private void WearingButtonClick(object sender, RoutedEventArgs e)
     {
-        if(LeftVariantsComboBox.Text == "" && RightVariantsComboBox.Text == "")
+        //TODO: еще поработать на взаимодействием и сменой оружия
+        if (LeftVariantsComboBox.Text == "" && RightVariantsComboBox.Text == "")
             UserMessage.CreateNotChosenItemMessage("оружия");
-        else if(LeftVariantsComboBox.Text == RightVariantsComboBox.Text)
+        else if (LeftVariantsComboBox.Text == RightVariantsComboBox.Text)
             UserMessage.CreateOneWeaponInBothHandsMessage();
-        //TODO: дописать функционал
-        
+        else
+        {
+            var ok = true;
+            if (LeftVariantsComboBox.Text != "")
+            {
+                var stuff = ProcessChoice(LeftVariantsComboBox, LeftCheatButton);
+                if (!_manchkin.TakeSingleWeaponLeftHand(stuff))
+                {
+                    UserMessage.CreateImpossibleTakingStuffMessage();
+                    ok = false;
+                }
+            }
+            if (RightVariantsComboBox.Text != "")
+            {
+                var stuff = ProcessChoice(RightVariantsComboBox, RightCheatButton);
+                if (!_manchkin.TakeSingleWeaponRightHand(stuff))
+                {
+                    UserMessage.CreateImpossibleTakingStuffMessage();
+                    ok = false;
+                }
+            }
+            if(ok)
+                Close();
+        }
+    }
+
+    private IStuff ProcessChoice(ComboBox comboBox, Button cheatButton)
+    {
+        var variant = _variants.FirstOrDefault(vari => vari.TextRepresentation == comboBox.Text);
+        var v = variant as IStuff;
+        if (ReferenceEquals(cheatButton.Content, "НЕ ЧИТ!"))
+            _manchkin.UseCheat(v);
+        return v;
     }
 
     private void RightCheatButtonClick(object sender, RoutedEventArgs e)
@@ -55,8 +92,8 @@ public partial class SingleWeaponWindow : Window
         else
             RightCheatButton.Style = (Style) FindResource("RoundedGreenButtonStyle");
     }
-    
-    
+
+
     private void LeftCheatButtonClick(object sender, RoutedEventArgs e)
     {
         LeftCheatButton.Content = ReferenceEquals(LeftCheatButton.Content, "НЕ ЧИТ!") ? "ЧИТ" : "НЕ ЧИТ!";
@@ -66,22 +103,25 @@ public partial class SingleWeaponWindow : Window
         else
             LeftCheatButton.Style = (Style) FindResource("RoundedGreenButtonStyle");
     }
-    
+
     private void LeftVariantsComboBoxStartLoaded(object sender, RoutedEventArgs e)
     {
+        //TODO: придумать, как установить текст в комбо боксы
+        
         foreach (var variant in _variants
-                     .Where(variant => _currentLeft != variant.TextRepresentation 
+                     .Where(variant => _currentLeft != variant.TextRepresentation
                                        && _currentRight != variant.TextRepresentation))
             LeftVariantsComboBox.Items.Add(variant.TextRepresentation);
 
         LeftVariantsComboBox.Items.Add(new EmptyWeapon().TextRepresentation);
         LeftVariantsComboBox.Text = _currentLeft;
     }
-    
+
     private void RightVariantsComboBoxStartLoaded(object sender, RoutedEventArgs e)
     {
+        RightVariantsComboBox.Text = _currentRight;
         foreach (var variant in _variants
-                     .Where(variant => _currentLeft != variant.TextRepresentation 
+                     .Where(variant => _currentLeft != variant.TextRepresentation
                                        && _currentRight != variant.TextRepresentation))
             RightVariantsComboBox.Items.Add(variant.TextRepresentation);
         RightVariantsComboBox.Items.Add(new EmptyWeapon().TextRepresentation);
@@ -95,7 +135,5 @@ public partial class SingleWeaponWindow : Window
         Application.Current.Resources["NEW_LEFT"] = null;
         Close();
     }
-    
-    private List<IDescriptable> GetSmallWeapon()
-        => (from variant in CardsBase.Weapons let v = variant as IStuff where v.Fullness == Arms.SINGLE select variant).ToList();
+
 }

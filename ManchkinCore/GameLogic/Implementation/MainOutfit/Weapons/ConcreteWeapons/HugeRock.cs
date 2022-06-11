@@ -3,7 +3,7 @@ using ManchkinCore.Interfaces;
 
 namespace ManchkinCore.Implementation;
 
-public class HugeRock : Weapon
+public class HugeRock : BothHandWeapon
 {
     public HugeRock()
     {

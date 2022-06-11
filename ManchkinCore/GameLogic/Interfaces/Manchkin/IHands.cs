@@ -2,7 +2,7 @@
 
 public interface IHands
 {
-    public IStuff? RightHand { get; }
+    public IStuff? RightHand { get;}
     public IStuff? LeftHand { get; }
 
     public void TakeInRightHand(IStuff? weapon);

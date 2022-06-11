@@ -33,6 +33,9 @@ public interface IOwnStuffs
     public bool CheckStuffBeforeChanging(IDescriptable descriptable);
     public bool CheckStuffBeforeChanging(Genders gender);
     public bool TakeStuff(IStuff? stuff);
+    public bool TakeSingleWeaponRightHand(IStuff? stuff);
+    public bool TakeSingleWeaponLeftHand(IStuff? stuff);
+    
 
     #region Lost Stuff
 

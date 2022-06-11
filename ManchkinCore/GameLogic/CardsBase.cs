@@ -15,7 +15,8 @@ public static class CardsBase
     public static List<IDescriptable> Armors;
     public static List<IDescriptable> Hats;
     public static List<IDescriptable> Shoeses;
-    public static List<IDescriptable> Weapons;
+    public static List<IDescriptable> SingleHandWeapons;
+    public static List<IDescriptable> BothHandWeapons;
 
     static CardsBase()
     {
@@ -67,8 +68,13 @@ public static class CardsBase
             .Select(x => (IDescriptable) x)
             .ToList();
         
-        Weapons = kernel
-            .GetAll<Weapon>()
+        SingleHandWeapons = kernel
+            .GetAll<SingleHandWeapon>()
+            .Select(x => (IDescriptable) x)
+            .ToList();
+        
+        BothHandWeapons = kernel
+            .GetAll<BothHandWeapon>()
             .Select(x => (IDescriptable) x)
             .ToList();
     }

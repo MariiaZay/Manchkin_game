@@ -3,7 +3,7 @@ using ManchkinCore.Interfaces;
 
 namespace ManchkinCore.Implementation;
 
-public class Hammer : Weapon
+public class Hammer : SingleHandWeapon
 {
     public Hammer()
     {

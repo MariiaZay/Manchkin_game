@@ -3,7 +3,7 @@ using ManchkinCore.Interfaces;
 
 namespace ManchkinCore.Implementation;
 
-public class Club : Weapon
+public class Club : SingleHandWeapon
 {
     public Club()
     {

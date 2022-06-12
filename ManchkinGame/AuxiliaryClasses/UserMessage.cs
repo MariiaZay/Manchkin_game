@@ -82,6 +82,9 @@ public static class UserMessage
 
     public static void CreateNotChosenItemMessage(string mess)
         => CreateInfoMessage(String.Format("Ты не указал {0}", mess), "Недостаточно данных");
+    
+    public static void CreateAlreadyLostWeapon()
+        => CreateInfoMessage("Ты уже потерял оруие в этой руке!", "ОЙ!");
 
     private static void CreateInfoMessage(string mess, string caption)
         => MessageBox.Show(mess, caption, MessageBoxButton.OK, MessageBoxImage.Information);

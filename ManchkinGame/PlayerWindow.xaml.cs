@@ -411,7 +411,11 @@ public partial class PlayerWindow
                     Player.Manchkin.LostStuff(Player.Manchkin.Hands.LeftHand);
                 else if  (Player.Manchkin.Hands.LeftHand == null && Player.Manchkin.Hands.RightHand != null)
                     Player.Manchkin.LostStuff(Player.Manchkin.Hands.RightHand);
-                
+                else
+                {
+                    App.Current.Resources["MANCHKIN"] = Player.Manchkin;
+                    DialogWindow.Show(new LostSingleWeaponWindow(), this);
+                }
                 
                 Refresh();
             }

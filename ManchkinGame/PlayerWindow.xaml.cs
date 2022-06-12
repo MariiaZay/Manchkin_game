@@ -332,17 +332,29 @@ public partial class PlayerWindow
             UserMessage.CreateDeathWearingMessage();
         else
         {
-            if (Player.Manchkin.Hands.LeftHand == null && Player.Manchkin.Hands.RightHand == null)
-                UserMessage.CreateEmptyStuffMessage();
-            else if (Player.Manchkin.Hands.LeftHand is {Fullness: Arms.BOTH})
-                ShowStuff(Player.Manchkin.Hands.LeftHand );
-            else if(Player.Manchkin.Hands.LeftHand != null && Player.Manchkin.Hands.RightHand == null)
-                ShowStuff(Player.Manchkin.Hands.LeftHand );
-            else if (Player.Manchkin.Hands.LeftHand == null && Player.Manchkin.Hands.RightHand != null)
-                ShowStuff(Player.Manchkin.Hands.RightHand);
-            else
-                DialogWindow.Show(new BothWeaponWindow(
-                    Player.Manchkin.Hands.LeftHand, Player.Manchkin.Hands.RightHand), this);
+            switch (Player.Manchkin.Hands.LeftHand)
+            {
+                case null when Player.Manchkin.Hands.RightHand == null:
+                    UserMessage.CreateEmptyStuffMessage();
+                    break;
+                case {Fullness: Arms.BOTH}:
+                    ShowStuff(Player.Manchkin.Hands.LeftHand );
+                    break;
+                default:
+                {
+                    if(Player.Manchkin.Hands.LeftHand != null && Player.Manchkin.Hands.RightHand == null)
+                        ShowStuff(Player.Manchkin.Hands.LeftHand );
+                    else if (Player.Manchkin.Hands.LeftHand == null && Player.Manchkin.Hands.RightHand != null)
+                        ShowStuff(Player.Manchkin.Hands.RightHand);
+                    else
+                    {
+                        App.Current.Resources["LEFT"] = Player.Manchkin.Hands.LeftHand;
+                        App.Current.Resources["RIGHT"] = Player.Manchkin.Hands.RightHand;
+                        DialogWindow.Show(new BothWeaponWindow(), this);
+                    }
+                    break;
+                }
+            }
         }
     }
 

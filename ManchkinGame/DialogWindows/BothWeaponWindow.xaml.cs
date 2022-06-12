@@ -8,11 +8,11 @@ public partial class BothWeaponWindow : Window
     private IStuff _right;
     private IStuff _left;
     
-    public BothWeaponWindow(IStuff? left, IStuff? right)
+    public BothWeaponWindow()
     {
         InitializeComponent();
-        _right = left;
-        _left = right;
+        _right = App.Current.Resources["RIGHT"] as IStuff;
+        _left = App.Current.Resources["LEFT"] as IStuff;
         SetParameters();
         OkButton.Click += OkButtonClick;
     }

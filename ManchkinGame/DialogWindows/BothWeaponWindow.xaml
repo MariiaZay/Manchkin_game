@@ -105,9 +105,6 @@
                 Width="200"
                 Style="{DynamicResource RoundedGreenButtonStyle}"
                 FontSize="24"
-                
-                
-                
             >ОК</Button>
             
             <Grid Grid.Row="1" Margin="0, 4.4">

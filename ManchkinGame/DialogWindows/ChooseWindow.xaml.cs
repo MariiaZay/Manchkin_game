@@ -61,17 +61,12 @@ public partial class ChooseWindow : Window
 
         var manchkin = App.Current.Resources["MANCHKIN"] as IManchkin;
 
-        if (!manchkin.CheckStuffBeforeChanging(variant))
-        {
-            if (!UserMessage.CreateAskingMessage(_typeOfVariants)) return;
-            App.Current.Resources["NEW"] = variant;
-            Close();
-        }
-        else
-        {
-            App.Current.Resources["NEW"] = variant;
-            Close();
-        }
+        if (!manchkin.CheckStuffBeforeChanging(variant) && !UserMessage.CreateAskingMessage(_typeOfVariants))
+            return;
+        
+        App.Current.Resources["NEW"] = variant;
+        Close();
+        
     }
 
     private void CancelButtonClick(object sender, RoutedEventArgs e)

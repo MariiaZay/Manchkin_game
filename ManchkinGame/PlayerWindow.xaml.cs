@@ -170,9 +170,8 @@ public partial class PlayerWindow
 
             DialogWindow.Show(new ChooseWindow(), this);
 
-            if (Application.Current.Resources["NEW"] == null ||
-                Application.Current.Resources["NEW"] as IRace == Player.Manchkin.Race) return;
-
+            if (Application.Current.Resources["NEW"] == null) return;
+            
             Player.Manchkin.Race = Application.Current.Resources["NEW"] as IRace;
             Refresh();
         }
@@ -337,6 +336,10 @@ public partial class PlayerWindow
                 UserMessage.CreateEmptyStuffMessage();
             else if (Player.Manchkin.Hands.LeftHand is {Fullness: Arms.BOTH})
                 ShowStuff(Player.Manchkin.Hands.LeftHand );
+            else if(Player.Manchkin.Hands.LeftHand != null && Player.Manchkin.Hands.RightHand == null)
+                ShowStuff(Player.Manchkin.Hands.LeftHand );
+            else if(Player.Manchkin.Hands.LeftHand == null && Player.Manchkin.Hands.RightHand != null)
+                ShowStuff(Player.Manchkin.Hands.RightHand );
                 
         }
     }

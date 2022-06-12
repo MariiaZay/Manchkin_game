@@ -1,11 +1,41 @@
 ﻿using System;
 using System.Windows;
+using ManchkinCore;
+using ManchkinCore.Implementation;
 using Microsoft.VisualBasic;
 
 namespace ManchkinGame;
 
 public static class UserMessage
 {
+    public static bool CreateChangeSingleWeaponMessage(string currentWeapon, string takenWeapon,string hand)
+    {
+        var answer = MessageBox.Show(
+            String.Format("Ты уверен, что хочешь взять {0} в {1}? У тебя уже в ней {2}", 
+                takenWeapon, hand, currentWeapon),
+            "Смена оружия", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+        return answer == MessageBoxResult.Yes;
+    }
+    
+    public static bool CreateChangeBothWeaponMessage(string takenWeapon)
+    {
+        
+        var answer = MessageBox.Show(
+            String.Format("Ты уверен, что хочешь взять {0} в обе руки? У тебя уже руки заняты", 
+                takenWeapon),
+            "Смена оружия", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+        return answer == MessageBoxResult.Yes;
+    }
+
+    public static bool CreateChangeEquipmentMessage(string current, string taken)
+    {
+        var answer = MessageBox.Show(
+            String.Format("Ты уверен, что хочешь взять {0}? У тебя уже есть {1}", 
+                taken, current),
+            "Смена экипировки", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+        return answer == MessageBoxResult.Yes;
+    }
+
     public static void CreateOneWeaponInBothHandsMessage()
         => CreateInfoMessage("Ты не можешь держать одно и то же одноручное оружие в обеих руках",
             "ОЙ");
@@ -42,10 +72,7 @@ public static class UserMessage
             String.Format("Смена {0}", caption), MessageBoxButton.YesNo, MessageBoxImage.Warning);
         return answer == MessageBoxResult.Yes;
     }
-
-    public static MessageBoxResult CreateWeaponAskingMessage()
-        => MessageBox.Show("Оружие, которое ты хочень надеть, одноручное?",
-            "Смена шмотки", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+    
     
     public static void CreateImpossibleLostMessage(string mess)
     {

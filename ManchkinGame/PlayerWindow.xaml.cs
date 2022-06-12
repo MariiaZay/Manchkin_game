@@ -335,7 +335,9 @@ public partial class PlayerWindow
         {
             if (Player.Manchkin.Hands.LeftHand == null && Player.Manchkin.Hands.RightHand == null)
                 UserMessage.CreateEmptyStuffMessage();
-            //TODO: прописать описание оружия
+            else if (Player.Manchkin.Hands.LeftHand is {Fullness: Arms.BOTH})
+                ShowStuff(Player.Manchkin.Hands.LeftHand );
+                
         }
     }
 
@@ -345,26 +347,20 @@ public partial class PlayerWindow
             UserMessage.CreateDeathActionMessage();
         else
         {
-            var answer = UserMessage.CreateWeaponAskingMessage();
-            switch (answer)
+            DialogWindow.Show(new AskingChangeWeaponWindow(), this);
+            switch (App.Current.Resources["ANSWER"].ToString())
             {
-                case MessageBoxResult.Yes:
+                case "SINGLE":
                     Application.Current.Resources["MANCHKIN"] = Player.Manchkin;
-                    Application.Current.Resources["CURRENT_RIGHT_HAND"] = Player.Manchkin.Hands.RightHand == null
-                        ? ""
-                        : Player.Manchkin.Hands.RightHand.TextRepresentation;
-                    
-                    Application.Current.Resources["CURRENT_LEFT_HAND"] = Player.Manchkin.Hands.LeftHand == null
-                        ? ""
-                        : Player.Manchkin.Hands.LeftHand.TextRepresentation;
+                    Application.Current.Resources["CURRENT_RIGHT_HAND"] = Player.Manchkin.Hands.RightHand;
+
+                    Application.Current.Resources["CURRENT_LEFT_HAND"] = Player.Manchkin.Hands.LeftHand;
                     
                     DialogWindow.Show(new SingleWeaponWindow(), this);
                     
                     break;
                 
-                
-                
-                case MessageBoxResult.No:
+                case "BOTH":
                     
                     Application.Current.Resources["MANCHKIN"] = Player.Manchkin;
                     Application.Current.Resources["TYPE_OF_VARIANTS"] = "оружие";

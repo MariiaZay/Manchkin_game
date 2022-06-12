@@ -566,9 +566,10 @@ public class Manchkin : IManchkin
             Hands.TakeInRightHand(stuff);
             AddStuff(stuff);
             ok = true;
+            RecalculateDamage();
+            RecalculateFlushingBonus();
         }
-        RecalculateDamage();
-        RecalculateFlushingBonus();
+        
         return ok;
     }
     

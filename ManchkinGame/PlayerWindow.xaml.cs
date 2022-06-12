@@ -388,8 +388,12 @@ public partial class PlayerWindow
                 UserMessage.CreateEmptyActionStuffMessage();
             else
             {
-                if(Player.Manchkin.Hands != null && Player.Manchkin.Hands.LeftHand.Fullness == Arms.BOTH)
+                if(Player.Manchkin.Hands.LeftHand is {Fullness: Arms.BOTH})
                     Player.Manchkin.LostStuff(Player.Manchkin.Hands.LeftHand);
+                else if (Player.Manchkin.Hands.LeftHand != null && Player.Manchkin.Hands.RightHand == null)
+                    Player.Manchkin.LostStuff(Player.Manchkin.Hands.LeftHand);
+                else if  (Player.Manchkin.Hands.LeftHand == null && Player.Manchkin.Hands.RightHand != null)
+                    Player.Manchkin.LostStuff(Player.Manchkin.Hands.RightHand);
                 
                 
                 Refresh();

@@ -45,7 +45,7 @@ public partial class SingleWeaponWindow : Window
 
     private void WearingButtonClick(object sender, RoutedEventArgs e)
     {
-        //TODO: еще поработать на взаимодействием и сменой оружия
+        
         if (LeftVariantsComboBox.Text == "" && RightVariantsComboBox.Text == "")
             UserMessage.CreateNotChosenItemMessage("оружия");
         else if (LeftVariantsComboBox.Text == RightVariantsComboBox.Text)

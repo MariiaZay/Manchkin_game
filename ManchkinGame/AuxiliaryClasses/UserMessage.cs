@@ -72,8 +72,7 @@ public static class UserMessage
             String.Format("Смена {0}", caption), MessageBoxButton.YesNo, MessageBoxImage.Warning);
         return answer == MessageBoxResult.Yes;
     }
-    
-    
+
     public static void CreateImpossibleLostMessage(string mess)
     {
         var pronoun = mess == "класс" ? "его" : "её";

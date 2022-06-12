@@ -65,7 +65,7 @@ public partial class SingleWeaponWindow : Window
                     var stuff = ProcessChoice(LeftVariantsComboBox, LeftCheatButton);
                     if (!_manchkin.TakeSingleWeaponLeftHand(stuff))
                     {
-                        UserMessage.CreateImpossibleTakingStuffMessage();
+                        UserMessage.CreateImpossibleTakingStuffMessage(stuff.TextRepresentation);
                         ok = false;
                     }
                 }
@@ -83,7 +83,7 @@ public partial class SingleWeaponWindow : Window
                     var stuff = ProcessChoice(RightVariantsComboBox, RightCheatButton);
                     if (!_manchkin.TakeSingleWeaponRightHand(stuff))
                     {
-                        UserMessage.CreateImpossibleTakingStuffMessage();
+                        UserMessage.CreateImpossibleTakingStuffMessage(stuff.TextRepresentation);
                         ok = false;
                     }
                 }

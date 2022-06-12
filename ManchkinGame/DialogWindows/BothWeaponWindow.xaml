@@ -5,7 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:ManchkinGame.DialogWindows"
         mc:Ignorable="d"
-        Title="BothWeaponWindow" Height="1500" Width="1200"
+        Title="BothWeaponWindow" Height="700" Width="600"
         ResizeMode="NoResize"
         WindowStyle="None"
         WindowStartupLocation="CenterOwner"
@@ -71,7 +71,7 @@
             <Setter Property="Padding" Value="4.5" />
             <Setter Property="FontWeight" Value="SemiBold"></Setter>
             <Setter Property="FontFamily" Value="Comic Sans MS"></Setter>
-            <Setter Property="FontSize" Value="35"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
             <Setter Property="TextWrapping" Value="Wrap"></Setter>
         </Style>
     </Window.Resources>
@@ -83,11 +83,11 @@
             <DropShadowEffect BlurRadius="15" Direction="-100" Color="Tan" Opacity="0.8" />
         </Border.Effect>
         
-        <Grid Margin="8.8" ShowGridLines="True">
+        <Grid Margin="8.8">
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.1*"></RowDefinition>
                 <RowDefinition></RowDefinition>
-                <RowDefinition Height="0.08*"></RowDefinition>
+                <RowDefinition Height="0.1*"></RowDefinition>
             </Grid.RowDefinitions>
             <TextBlock
                 Name="NameLabel"
@@ -95,7 +95,7 @@
                 Grid.Row="0"
                 Style="{DynamicResource TextStyle}"
                 FontWeight="ExtraBold"
-                FontSize = "50"> Оружие в руках
+                FontSize = "35"> Оружие в руках
             </TextBlock>
             
             <Button 
@@ -105,12 +105,12 @@
                 Width="200"
                 Style="{DynamicResource RoundedGreenButtonStyle}"
                 FontSize="24"
-                Height="80"
+                
                 
                 
             >ОК</Button>
             
-            <Grid Grid.Row="1" Margin="0, 4.4" ShowGridLines="True">
+            <Grid Grid.Row="1" Margin="0, 4.4">
                 <Grid.RowDefinitions>
                     <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>

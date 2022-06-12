@@ -56,8 +56,8 @@ public static class UserMessage
         => CreateInfoMessage("Ты умер и потерял все шмотки! Закончи ход, чтобы воскреснуть",
             "Смэрть");
 
-    public static void CreateImpossibleTakingStuffMessage()
-        => CreateInfoMessage("Ты не можешь надеть эту шмотку. Если у тебя есть ЧИТ! Можешь использовать его",
+    public static void CreateImpossibleTakingStuffMessage(string stuff)
+        => CreateInfoMessage(String.Format("Ты не можешь надеть {0}. Если у тебя есть ЧИТ! Можешь использовать его", stuff),
             "ОЙ!");
 
     public static bool CreateAskingMessage(string mess)

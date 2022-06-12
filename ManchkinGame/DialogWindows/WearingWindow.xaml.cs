@@ -63,7 +63,7 @@ public partial class WearingWindow : Window
                 _manchkin.UseCheat(v);
             
             if (!_manchkin.TakeStuff(v)) 
-                UserMessage.CreateImpossibleTakingStuffMessage();
+                UserMessage.CreateImpossibleTakingStuffMessage(v.TextRepresentation);
             else
                 Close();
         }

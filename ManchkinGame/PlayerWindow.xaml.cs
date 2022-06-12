@@ -338,9 +338,11 @@ public partial class PlayerWindow
                 ShowStuff(Player.Manchkin.Hands.LeftHand );
             else if(Player.Manchkin.Hands.LeftHand != null && Player.Manchkin.Hands.RightHand == null)
                 ShowStuff(Player.Manchkin.Hands.LeftHand );
-            else if(Player.Manchkin.Hands.LeftHand == null && Player.Manchkin.Hands.RightHand != null)
-                ShowStuff(Player.Manchkin.Hands.RightHand );
-                
+            else if (Player.Manchkin.Hands.LeftHand == null && Player.Manchkin.Hands.RightHand != null)
+                ShowStuff(Player.Manchkin.Hands.RightHand);
+            else
+                DialogWindow.Show(new BothWeaponWindow(
+                    Player.Manchkin.Hands.LeftHand, Player.Manchkin.Hands.RightHand), this);
         }
     }
 

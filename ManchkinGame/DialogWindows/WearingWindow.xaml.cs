@@ -54,7 +54,7 @@ public partial class WearingWindow : Window
     {
         if(VariantsComboBox.Text == "")
             UserMessage.CreateNotChosenItemMessage("новую шмотку");
-        else
+        else if (AskBeforeChanging())
         {
             var variant = _variants.FirstOrDefault(vari => vari.TextRepresentation == VariantsComboBox.Text);
             var v = variant as IStuff;
@@ -63,10 +63,35 @@ public partial class WearingWindow : Window
                 _manchkin.UseCheat(v);
             
             if (!_manchkin.TakeStuff(v)) 
-                UserMessage.CreateImpossibleTakingStuffMessage();
+                UserMessage.CreateImpossibleTakingStuffMessage(v.TextRepresentation);
             else
                 Close();
         }
+    }
+
+    private bool AskBeforeChanging()
+    {
+        bool ok;
+        switch (_typeOfVariants)
+        {
+            case "броник": case "обувка": case "головняк":
+                if (_current == "")
+                    ok = true;
+                else
+                    ok = UserMessage.CreateChangeEquipmentMessage(_current, VariantsComboBox.Text);
+                break;
+            case "оружие":
+                if (_manchkin.Hands.LeftHand == null && _manchkin.Hands.RightHand == null)
+                    ok = true;
+                else
+                    ok = UserMessage.CreateChangeBothWeaponMessage(VariantsComboBox.Text);
+                break;
+            default:
+                ok = true;
+                break;
+        }
+
+        return ok;
     }
 
     private void VariantsComboBoxLoaded(object sender, RoutedEventArgs e)

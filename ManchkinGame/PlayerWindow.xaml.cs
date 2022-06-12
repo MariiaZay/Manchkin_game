@@ -170,9 +170,8 @@ public partial class PlayerWindow
 
             DialogWindow.Show(new ChooseWindow(), this);
 
-            if (Application.Current.Resources["NEW"] == null ||
-                Application.Current.Resources["NEW"] as IRace == Player.Manchkin.Race) return;
-
+            if (Application.Current.Resources["NEW"] == null) return;
+            
             Player.Manchkin.Race = Application.Current.Resources["NEW"] as IRace;
             Refresh();
         }
@@ -333,9 +332,29 @@ public partial class PlayerWindow
             UserMessage.CreateDeathWearingMessage();
         else
         {
-            if (Player.Manchkin.Hands.LeftHand == null && Player.Manchkin.Hands.RightHand == null)
-                UserMessage.CreateEmptyStuffMessage();
-            //TODO: прописать описание оружия
+            switch (Player.Manchkin.Hands.LeftHand)
+            {
+                case null when Player.Manchkin.Hands.RightHand == null:
+                    UserMessage.CreateEmptyStuffMessage();
+                    break;
+                case {Fullness: Arms.BOTH}:
+                    ShowStuff(Player.Manchkin.Hands.LeftHand );
+                    break;
+                default:
+                {
+                    if(Player.Manchkin.Hands.LeftHand != null && Player.Manchkin.Hands.RightHand == null)
+                        ShowStuff(Player.Manchkin.Hands.LeftHand );
+                    else if (Player.Manchkin.Hands.LeftHand == null && Player.Manchkin.Hands.RightHand != null)
+                        ShowStuff(Player.Manchkin.Hands.RightHand);
+                    else
+                    {
+                        App.Current.Resources["LEFT"] = Player.Manchkin.Hands.LeftHand;
+                        App.Current.Resources["RIGHT"] = Player.Manchkin.Hands.RightHand;
+                        DialogWindow.Show(new BothWeaponWindow(), this);
+                    }
+                    break;
+                }
+            }
         }
     }
 
@@ -345,26 +364,20 @@ public partial class PlayerWindow
             UserMessage.CreateDeathActionMessage();
         else
         {
-            var answer = UserMessage.CreateWeaponAskingMessage();
-            switch (answer)
+            DialogWindow.Show(new AskingChangeWeaponWindow(), this);
+            switch (App.Current.Resources["ANSWER"].ToString())
             {
-                case MessageBoxResult.Yes:
+                case "SINGLE":
                     Application.Current.Resources["MANCHKIN"] = Player.Manchkin;
-                    Application.Current.Resources["CURRENT_RIGHT_HAND"] = Player.Manchkin.Hands.RightHand == null
-                        ? ""
-                        : Player.Manchkin.Hands.RightHand.TextRepresentation;
-                    
-                    Application.Current.Resources["CURRENT_LEFT_HAND"] = Player.Manchkin.Hands.LeftHand == null
-                        ? ""
-                        : Player.Manchkin.Hands.LeftHand.TextRepresentation;
+                    Application.Current.Resources["CURRENT_RIGHT_HAND"] = Player.Manchkin.Hands.RightHand;
+
+                    Application.Current.Resources["CURRENT_LEFT_HAND"] = Player.Manchkin.Hands.LeftHand;
                     
                     DialogWindow.Show(new SingleWeaponWindow(), this);
                     
                     break;
                 
-                
-                
-                case MessageBoxResult.No:
+                case "BOTH":
                     
                     Application.Current.Resources["MANCHKIN"] = Player.Manchkin;
                     Application.Current.Resources["TYPE_OF_VARIANTS"] = "оружие";
@@ -392,9 +405,17 @@ public partial class PlayerWindow
                 UserMessage.CreateEmptyActionStuffMessage();
             else
             {
-                if(Player.Manchkin.Hands != null && Player.Manchkin.Hands.LeftHand.Fullness == Arms.BOTH)
+                if(Player.Manchkin.Hands.LeftHand is {Fullness: Arms.BOTH})
                     Player.Manchkin.LostStuff(Player.Manchkin.Hands.LeftHand);
-                
+                else if (Player.Manchkin.Hands.LeftHand != null && Player.Manchkin.Hands.RightHand == null)
+                    Player.Manchkin.LostStuff(Player.Manchkin.Hands.LeftHand);
+                else if  (Player.Manchkin.Hands.LeftHand == null && Player.Manchkin.Hands.RightHand != null)
+                    Player.Manchkin.LostStuff(Player.Manchkin.Hands.RightHand);
+                else
+                {
+                    App.Current.Resources["MANCHKIN"] = Player.Manchkin;
+                    DialogWindow.Show(new LostSingleWeaponWindow(), this);
+                }
                 
                 Refresh();
             }

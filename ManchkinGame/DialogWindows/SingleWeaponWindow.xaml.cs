@@ -15,8 +15,10 @@ namespace ManchkinGame.DialogWindows;
 public partial class SingleWeaponWindow : Window
 {
     private List<IDescriptable> _variants;
-    private string _currentRight;
-    private string _currentLeft;
+    private string _currentRightText;
+    private string _currentLeftText;
+    private IStuff? _currentLeft;
+    private IStuff? _currentRight;
     private IManchkin _manchkin;
 
     public SingleWeaponWindow()
@@ -24,12 +26,12 @@ public partial class SingleWeaponWindow : Window
         InitializeComponent();
         _manchkin = App.Current.Resources["MANCHKIN"] as Manchkin;
         _variants = CardsBase.SingleHandWeapons;
-        
-        var right = Application.Current.Resources["CURRENT_RIGHT_HAND"] as IStuff;
-        _currentRight = right == null ? "" : right.TextRepresentation;
 
-        var left = Application.Current.Resources["CURRENT_LEFT_HAND"] as IStuff;
-        _currentLeft = left == null ? "" : left.TextRepresentation;
+        _currentRight = Application.Current.Resources["CURRENT_RIGHT_HAND"] as IStuff;
+        _currentRightText = _currentRight == null ? "" : _currentRight.TextRepresentation;
+
+        _currentLeft = Application.Current.Resources["CURRENT_LEFT_HAND"] as IStuff;
+        _currentLeftText = _currentLeft == null ? "" : _currentLeft.TextRepresentation;
 
         LeftVariantsComboBox.Loaded += LeftVariantsComboBoxStartLoaded;
         RightVariantsComboBox.Loaded += RightVariantsComboBoxStartLoaded;
@@ -43,7 +45,7 @@ public partial class SingleWeaponWindow : Window
 
     private void WearingButtonClick(object sender, RoutedEventArgs e)
     {
-        //TODO: еще поработать на взаимодействием и сменой оружия
+        
         if (LeftVariantsComboBox.Text == "" && RightVariantsComboBox.Text == "")
             UserMessage.CreateNotChosenItemMessage("оружия");
         else if (LeftVariantsComboBox.Text == RightVariantsComboBox.Text)
@@ -53,23 +55,41 @@ public partial class SingleWeaponWindow : Window
             var ok = true;
             if (LeftVariantsComboBox.Text != "")
             {
-                var stuff = ProcessChoice(LeftVariantsComboBox, LeftCheatButton);
-                if (!_manchkin.TakeSingleWeaponLeftHand(stuff))
+                var change = true;
+                
+                if (_currentLeftText != "")
+                    change = UserMessage
+                        .CreateChangeSingleWeaponMessage(_currentLeftText, LeftVariantsComboBox.Text, "левую руку");
+                if (change)
                 {
-                    UserMessage.CreateImpossibleTakingStuffMessage();
-                    ok = false;
+                    var stuff = ProcessChoice(LeftVariantsComboBox, LeftCheatButton);
+                    if (!_manchkin.TakeSingleWeaponLeftHand(stuff))
+                    {
+                        UserMessage.CreateImpossibleTakingStuffMessage(stuff.TextRepresentation);
+                        ok = false;
+                    }
                 }
             }
+
             if (RightVariantsComboBox.Text != "")
             {
-                var stuff = ProcessChoice(RightVariantsComboBox, RightCheatButton);
-                if (!_manchkin.TakeSingleWeaponRightHand(stuff))
+                var change = true;
+                if (_currentRightText != "")
+                    change = UserMessage
+                        .CreateChangeSingleWeaponMessage(_currentRightText, RightVariantsComboBox.Text, "правую руку");
+                
+                if(change)
                 {
-                    UserMessage.CreateImpossibleTakingStuffMessage();
-                    ok = false;
+                    var stuff = ProcessChoice(RightVariantsComboBox, RightCheatButton);
+                    if (!_manchkin.TakeSingleWeaponRightHand(stuff))
+                    {
+                        UserMessage.CreateImpossibleTakingStuffMessage(stuff.TextRepresentation);
+                        ok = false;
+                    }
                 }
             }
-            if(ok)
+
+            if (ok)
                 Close();
         }
     }
@@ -78,7 +98,7 @@ public partial class SingleWeaponWindow : Window
     {
         var variant = _variants.FirstOrDefault(vari => vari.TextRepresentation == comboBox.Text);
         var v = variant as IStuff;
-        if (ReferenceEquals(cheatButton.Content, "НЕ ЧИТ!"))
+        if (ReferenceEquals(cheatButton.Content, "НЕ ЧИТ!") && v != null)
             _manchkin.UseCheat(v);
         return v;
     }
@@ -106,26 +126,21 @@ public partial class SingleWeaponWindow : Window
 
     private void LeftVariantsComboBoxStartLoaded(object sender, RoutedEventArgs e)
     {
-        //TODO: придумать, как установить текст в комбо боксы
-        
         foreach (var variant in _variants
-                     .Where(variant => _currentLeft != variant.TextRepresentation
-                                       && _currentRight != variant.TextRepresentation))
+                     .Where(variant => _currentLeftText != variant.TextRepresentation
+                                       && _currentRightText != variant.TextRepresentation))
             LeftVariantsComboBox.Items.Add(variant.TextRepresentation);
 
         LeftVariantsComboBox.Items.Add(new EmptyWeapon().TextRepresentation);
-        LeftVariantsComboBox.Text = _currentLeft;
     }
 
     private void RightVariantsComboBoxStartLoaded(object sender, RoutedEventArgs e)
     {
-        RightVariantsComboBox.Text = _currentRight;
         foreach (var variant in _variants
-                     .Where(variant => _currentLeft != variant.TextRepresentation
-                                       && _currentRight != variant.TextRepresentation))
+                     .Where(variant => _currentLeftText != variant.TextRepresentation
+                                       && _currentRightText != variant.TextRepresentation))
             RightVariantsComboBox.Items.Add(variant.TextRepresentation);
         RightVariantsComboBox.Items.Add(new EmptyWeapon().TextRepresentation);
-        RightVariantsComboBox.Text = _currentRight;
     }
 
 
@@ -135,5 +150,4 @@ public partial class SingleWeaponWindow : Window
         Application.Current.Resources["NEW_LEFT"] = null;
         Close();
     }
-
 }

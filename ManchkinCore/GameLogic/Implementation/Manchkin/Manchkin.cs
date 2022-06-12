@@ -371,7 +371,11 @@ public class Manchkin : IManchkin
         {
             var s = stuff.Last();
             if (!CanHaveStuff(s))
+            {
                 LostStuff(s);
+                stuff.Remove(s);
+                stuff = GetAllWornStuffs();
+            }
         }
     }
 
@@ -566,9 +570,10 @@ public class Manchkin : IManchkin
             Hands.TakeInRightHand(stuff);
             AddStuff(stuff);
             ok = true;
+            RecalculateDamage();
+            RecalculateFlushingBonus();
         }
-        RecalculateDamage();
-        RecalculateFlushingBonus();
+        
         return ok;
     }
     
@@ -600,7 +605,7 @@ public class Manchkin : IManchkin
 
     private bool IsNull(IStuff? stuff) => stuff == null;
 
-    private IEnumerable<IStuff?> GetAllWornStuffs()
+    private List<IStuff> GetAllWornStuffs()
     {
         var wornStuffs = SmallStuffs.ToList();
         wornStuffs.AddRange(HugeStuffs);
@@ -642,7 +647,7 @@ public class Manchkin : IManchkin
                         if (Hands.LeftHand == stuff)
                             Hands.TakeInLeftHand(null);
                         else if (Hands.RightHand == stuff)
-                            Hands.TakeInRightHand(stuff);
+                            Hands.TakeInRightHand(null);
                         break;
                 }
 

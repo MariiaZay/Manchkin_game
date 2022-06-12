@@ -1,11 +1,41 @@
 ﻿using System;
 using System.Windows;
+using ManchkinCore;
+using ManchkinCore.Implementation;
 using Microsoft.VisualBasic;
 
 namespace ManchkinGame;
 
 public static class UserMessage
 {
+    public static bool CreateChangeSingleWeaponMessage(string currentWeapon, string takenWeapon,string hand)
+    {
+        var answer = MessageBox.Show(
+            String.Format("Ты уверен, что хочешь взять {0} в {1}? У тебя уже в ней {2}", 
+                takenWeapon, hand, currentWeapon),
+            "Смена оружия", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+        return answer == MessageBoxResult.Yes;
+    }
+    
+    public static bool CreateChangeBothWeaponMessage(string takenWeapon)
+    {
+        
+        var answer = MessageBox.Show(
+            String.Format("Ты уверен, что хочешь взять {0} в обе руки? У тебя уже руки заняты", 
+                takenWeapon),
+            "Смена оружия", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+        return answer == MessageBoxResult.Yes;
+    }
+
+    public static bool CreateChangeEquipmentMessage(string current, string taken)
+    {
+        var answer = MessageBox.Show(
+            String.Format("Ты уверен, что хочешь взять {0}? У тебя уже есть {1}", 
+                taken, current),
+            "Смена экипировки", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+        return answer == MessageBoxResult.Yes;
+    }
+
     public static void CreateOneWeaponInBothHandsMessage()
         => CreateInfoMessage("Ты не можешь держать одно и то же одноручное оружие в обеих руках",
             "ОЙ");
@@ -26,8 +56,8 @@ public static class UserMessage
         => CreateInfoMessage("Ты умер и потерял все шмотки! Закончи ход, чтобы воскреснуть",
             "Смэрть");
 
-    public static void CreateImpossibleTakingStuffMessage()
-        => CreateInfoMessage("Ты не можешь надеть эту шмотку. Если у тебя есть ЧИТ! Можешь использовать его",
+    public static void CreateImpossibleTakingStuffMessage(string stuff)
+        => CreateInfoMessage(String.Format("Ты не можешь надеть {0}. Если у тебя есть ЧИТ! Можешь использовать его", stuff),
             "ОЙ!");
 
     public static bool CreateAskingMessage(string mess)
@@ -43,10 +73,6 @@ public static class UserMessage
         return answer == MessageBoxResult.Yes;
     }
 
-    public static MessageBoxResult CreateWeaponAskingMessage()
-        => MessageBox.Show("Оружие, которое ты хочень надеть, одноручное?",
-            "Смена шмотки", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-    
     public static void CreateImpossibleLostMessage(string mess)
     {
         var pronoun = mess == "класс" ? "его" : "её";
@@ -56,6 +82,9 @@ public static class UserMessage
 
     public static void CreateNotChosenItemMessage(string mess)
         => CreateInfoMessage(String.Format("Ты не указал {0}", mess), "Недостаточно данных");
+    
+    public static void CreateAlreadyLostWeapon()
+        => CreateInfoMessage("Ты уже потерял оруие в этой руке!", "ОЙ!");
 
     private static void CreateInfoMessage(string mess, string caption)
         => MessageBox.Show(mess, caption, MessageBoxButton.OK, MessageBoxImage.Information);

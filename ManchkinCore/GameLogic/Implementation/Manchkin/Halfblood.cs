@@ -8,15 +8,15 @@ public class Halfblood: IHulfblood
     public HalfTypes HalfType { get; }
     public IRace? SecondRace { get; }
 
-    public Halfblood(HalfTypes halfType, IRace? race)
+    public Halfblood(IRace? race)
     {
-        HalfType = halfType;
+        HalfType = HalfTypes.BOTH;
         SecondRace = race;
     }
 
-    public Halfblood(HalfTypes halfType)
+    public Halfblood()
     {
-        HalfType = halfType;
+        HalfType = HalfTypes.SINGLE_CLEAN;
         SecondRace = null;
     }
 }

@@ -113,6 +113,8 @@ public class Manchkin : IManchkin
     {
         if (IsNull(_class)) return manClass;
 
+        if(IsSuperManchkin)
+            RefuseSuperManchkin();
         LostDescriptions(Class.Descriptions);
         PurchaseDescriptions(manClass.Descriptions);
 
@@ -133,7 +135,8 @@ public class Manchkin : IManchkin
         DoublePrice = race.CellingByDoublePrice;
 
         if (IsNull(Race)) return race;
-
+        
+        if(IsHalfBlood) RefuseHalfblood();
         LostDescriptions(Race.Descriptions);
         PurchaseDescriptions(race.Descriptions);
 
@@ -298,6 +301,7 @@ public class Manchkin : IManchkin
                         && stuff.CanBeUsed(Gender);
                 else
                     additionalRaceRight = stuff.CanBeUsed(Race) && stuff.CanBeUsed(Gender);
+                //TODO: переделать это место
             }
             else
                 additionalClassRight = false;
@@ -373,9 +377,8 @@ public class Manchkin : IManchkin
             if (!CanHaveStuff(s))
             {
                 LostStuff(s);
-                stuff.Remove(s);
-                stuff = GetAllWornStuffs();
             }
+            stuff.Remove(s);
         }
     }
 
@@ -721,12 +724,12 @@ public class Manchkin : IManchkin
 
     public void BecameHalfBlood(IRace second)
     {
-        HalfBlood = new Halfblood(HalfTypes.BOTH, second);
+        HalfBlood = new Halfblood(second);
         PurchaseDescriptions(second.Descriptions);
     }
 
     public void BecameHalfBlood()
-        => HalfBlood = new Halfblood(HalfTypes.SINGLE_CLEAN);
+        => HalfBlood = new Halfblood();
 
 
     public void RefuseHalfblood()

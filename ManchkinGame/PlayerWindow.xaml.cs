@@ -488,8 +488,19 @@ public partial class PlayerWindow
         }
         else
         {
-            Player.Manchkin.RefuseHalfblood();
-            Refresh();
+            if (!Player.Manchkin.CheckStuffBeforeChangingHalfblood())
+            {
+                if (!UserMessage.CreateAskingMessage("расу")) return;
+                Player.Manchkin.RefuseHalfblood();
+                Player.Manchkin.RecalculateParameters();
+                Refresh();
+            }
+            else
+            {
+                Player.Manchkin.RefuseHalfblood();
+                Player.Manchkin.RecalculateParameters();
+                Refresh();
+            }
         }
     }
 

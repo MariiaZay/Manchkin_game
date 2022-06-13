@@ -121,7 +121,7 @@ public class Manchkin : IManchkin
         return manClass;
     }
 
-    private void RecalculateParameters()
+    public void RecalculateParameters()
     {
         RemoveUnsuitableStuff();
         RecalculateDamage();
@@ -319,6 +319,33 @@ public class Manchkin : IManchkin
             : stuff.All(s => CanHaveStuff(s, Class, descriptable as IRace, Gender));
     }
 
+    public bool CheckStuffBeforeChangingHalfblood()
+    {
+        var last = HalfBlood.SecondRace;
+        RefuseHalfblood();
+        var stuff = GetAllWornStuffs();
+        var ok = stuff.All(s => CanHaveStuff(s, Class, Race, Gender));
+        if(last == null)
+            BecameHalfBlood();
+        else
+            BecameHalfBlood(last);
+
+        return ok;
+    }
+
+    public bool CheckStuffBeforeChangingSuperManchkin()
+    {
+        var last = SuperManchkin.SecondClass;
+        RefuseSuperManchkin();
+        var stuff = GetAllWornStuffs();
+        var ok = stuff.All(s => CanHaveStuff(s, Class, Race, Gender));
+        if(last == null)
+            BecameSuperManchkin();
+        else
+            BecameSuperManchkin(last);
+        return ok;
+    }
+    
     public bool CheckStuffBeforeChanging(Genders gender)
     {
         var stuff = GetAllWornStuffs();

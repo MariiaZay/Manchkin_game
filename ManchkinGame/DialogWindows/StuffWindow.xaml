@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ManchkinGame.DialogWindows"
         mc:Ignorable="d"
         Title="StuffWindow"
-        Height="500"
+        Height="600"
         Width="400"
         ResizeMode="NoResize"
         WindowStyle="None"
@@ -90,11 +90,11 @@
         <Grid Margin="8.8" >
             
             <Grid.RowDefinitions>
-                <RowDefinition Height="0.4*"></RowDefinition>
                 <RowDefinition Height="0.2*"></RowDefinition>
+                <RowDefinition Height="0.1*"></RowDefinition>
                 <RowDefinition></RowDefinition>
                 <RowDefinition Height="0.5*"></RowDefinition>
-                <RowDefinition Height="0.2*"></RowDefinition>
+                <RowDefinition Height="0.15*"></RowDefinition>
             </Grid.RowDefinitions>
             
             <TextBlock

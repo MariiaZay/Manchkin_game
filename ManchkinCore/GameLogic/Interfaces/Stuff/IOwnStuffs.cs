@@ -30,6 +30,8 @@ public interface IOwnStuffs
     public bool CanTakeStuff(IStuff? stuff);
     public bool CanHaveStuff(IStuff stuff);
     public void RemoveUnsuitableStuff();
+    public bool CheckStuffBeforeChangingSuperManchkin();
+    public bool CheckStuffBeforeChangingHalfblood();
     public bool CheckStuffBeforeChanging(IDescriptable descriptable);
     public bool CheckStuffBeforeChanging(Genders gender);
     public bool TakeStuff(IStuff? stuff);

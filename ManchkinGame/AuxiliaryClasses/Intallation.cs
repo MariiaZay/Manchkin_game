@@ -44,8 +44,8 @@ public static class Intallation
             halfBlood = "неактивно";
         else
             halfBlood = player.Manchkin.HalfBlood.HalfType == HalfTypes.BOTH
-                ? player.Manchkin.HalfBlood.SecondRace.ToString()
-                : "чистая раса";
+                ? player.Manchkin.HalfBlood.SecondRace.TextRepresentation
+                : "чистый";
         
         return halfBlood;
     }
@@ -57,8 +57,8 @@ public static class Intallation
             superManchkin = "неактивно";
         else
             superManchkin = player.Manchkin.SuperManchkin.HalfType == HalfTypes.BOTH
-                ? player.Manchkin.SuperManchkin.SecondClass.ToString()
-                : "чистый класс";
+                ? player.Manchkin.SuperManchkin.SecondClass.TextRepresentation
+                : "чистый";
         return superManchkin;
     }
     #endregion

@@ -86,6 +86,9 @@ public static class UserMessage
     public static void CreateAlreadyLostWeapon()
         => CreateInfoMessage("Ты уже потерял оруие в этой руке!", "ОЙ!");
 
+    public static void CreateHalfCleanMessage(string mess)
+        => CreateInfoMessage(String.Format("Ты уже чистый {0}", mess), mess);
+
     private static void CreateInfoMessage(string mess, string caption)
         => MessageBox.Show(mess, caption, MessageBoxButton.OK, MessageBoxImage.Information);
 }

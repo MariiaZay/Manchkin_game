@@ -61,10 +61,14 @@ public partial class ChooseWindow : Window
 
         var manchkin = App.Current.Resources["MANCHKIN"] as IManchkin;
 
-        if (!manchkin.CheckStuffBeforeChanging(variant) && !UserMessage.CreateAskingMessage(_typeOfVariants))
-            return;
+        if (App.Current.Resources["EXTRA"] == null || (bool) App.Current.Resources["EXTRA"])
+        {
+            if (!manchkin.CheckStuffBeforeChanging(variant) && !UserMessage.CreateAskingMessage(_typeOfVariants))
+                        return;
+        }
         
         App.Current.Resources["NEW"] = variant;
+        App.Current.Resources["OK"] = true;
         Close();
         
     }
@@ -72,6 +76,7 @@ public partial class ChooseWindow : Window
     private void CancelButtonClick(object sender, RoutedEventArgs e)
     {
         App.Current.Resources["NEW"] = null;
+        App.Current.Resources["OK"] = false;
         Close();
     }
 }

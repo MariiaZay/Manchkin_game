@@ -113,13 +113,15 @@ public class Manchkin : IManchkin
     {
         if (IsNull(_class)) return manClass;
 
+        if(IsSuperManchkin)
+            RefuseSuperManchkin();
         LostDescriptions(Class.Descriptions);
         PurchaseDescriptions(manClass.Descriptions);
 
         return manClass;
     }
 
-    private void RecalculateParameters()
+    public void RecalculateParameters()
     {
         RemoveUnsuitableStuff();
         RecalculateDamage();
@@ -133,7 +135,8 @@ public class Manchkin : IManchkin
         DoublePrice = race.CellingByDoublePrice;
 
         if (IsNull(Race)) return race;
-
+        
+        if(IsHalfBlood) RefuseHalfblood();
         LostDescriptions(Race.Descriptions);
         PurchaseDescriptions(race.Descriptions);
 
@@ -298,6 +301,7 @@ public class Manchkin : IManchkin
                         && stuff.CanBeUsed(Gender);
                 else
                     additionalRaceRight = stuff.CanBeUsed(Race) && stuff.CanBeUsed(Gender);
+                //TODO: переделать это место
             }
             else
                 additionalClassRight = false;
@@ -315,6 +319,33 @@ public class Manchkin : IManchkin
             : stuff.All(s => CanHaveStuff(s, Class, descriptable as IRace, Gender));
     }
 
+    public bool CheckStuffBeforeChangingHalfblood()
+    {
+        var last = HalfBlood.SecondRace;
+        RefuseHalfblood();
+        var stuff = GetAllWornStuffs();
+        var ok = stuff.All(s => CanHaveStuff(s, Class, Race, Gender));
+        if(last == null)
+            BecameHalfBlood();
+        else
+            BecameHalfBlood(last);
+
+        return ok;
+    }
+
+    public bool CheckStuffBeforeChangingSuperManchkin()
+    {
+        var last = SuperManchkin.SecondClass;
+        RefuseSuperManchkin();
+        var stuff = GetAllWornStuffs();
+        var ok = stuff.All(s => CanHaveStuff(s, Class, Race, Gender));
+        if(last == null)
+            BecameSuperManchkin();
+        else
+            BecameSuperManchkin(last);
+        return ok;
+    }
+    
     public bool CheckStuffBeforeChanging(Genders gender)
     {
         var stuff = GetAllWornStuffs();
@@ -373,9 +404,8 @@ public class Manchkin : IManchkin
             if (!CanHaveStuff(s))
             {
                 LostStuff(s);
-                stuff.Remove(s);
-                stuff = GetAllWornStuffs();
             }
+            stuff.Remove(s);
         }
     }
 
@@ -721,12 +751,12 @@ public class Manchkin : IManchkin
 
     public void BecameHalfBlood(IRace second)
     {
-        HalfBlood = new Halfblood(HalfTypes.BOTH, second);
+        HalfBlood = new Halfblood(second);
         PurchaseDescriptions(second.Descriptions);
     }
 
     public void BecameHalfBlood()
-        => HalfBlood = new Halfblood(HalfTypes.SINGLE_CLEAN);
+        => HalfBlood = new Halfblood();
 
 
     public void RefuseHalfblood()

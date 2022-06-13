@@ -57,7 +57,7 @@ public static class Intallation
             superManchkin = "неактивно";
         else
             superManchkin = player.Manchkin.SuperManchkin.HalfType == HalfTypes.BOTH
-                ? player.Manchkin.SuperManchkin.SecondClass.ToString()
+                ? player.Manchkin.SuperManchkin.SecondClass.TextRepresentation
                 : "чистый";
         return superManchkin;
     }

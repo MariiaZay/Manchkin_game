@@ -1,4 +1,7 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Windows;
+using ManchkinCore.Enums.Accessory;
+using ManchkinCore.GameLogic;
 using ManchkinCore.Interfaces;
 
 namespace ManchkinGame.DialogWindows;
@@ -39,6 +42,73 @@ public partial class BothWeaponWindow : Window
         LeftFlushingLabel.Text = _left.FlushingBonus.ToString();
         RightFlushingLabel.Text = _right.FlushingBonus.ToString();
 
-        //TODO: доработть отображение рас, классв и гендеров
+        LeftRaceLabel.Text = GetAvailableRaces(_left);
+        RightRaceLabel.Text = GetAvailableRaces(_right);
+
+        LeftClassLabel.Text = GetAvailableClasses(_left);
+        RightClassLabel.Text = GetAvailableClasses(_right);
+
+        LeftGenderLabel.Text = GetAvailableGenders(_left);
+        RightGenderLabel.Text = GetAvailableGenders(_right);
+    }
+    
+    private string GetAvailableRaces(IStuff stuff)
+    {
+        var availableRaces = new List<string>();
+        var cheat = false;
+        foreach (var race in CardsBase.Races)
+        {
+            if (stuff.Cheat)
+            {
+                cheat = true;
+                stuff.Cheat = false;
+            }
+            if(stuff.CanBeUsed(race as IRace))
+                availableRaces.Add(race.TextRepresentation);
+            if (cheat)
+                stuff.Cheat = true;
+        }
+
+        return string.Join(", ", availableRaces);
+    }
+    
+    private string GetAvailableClasses(IStuff stuff)
+    {
+        var availableClasses = new List<string>();
+        var cheat = false;
+        foreach (var _class in CardsBase.Classes)
+        {
+            if (stuff.Cheat)
+            {
+                cheat = true;
+                stuff.Cheat = false;
+            }
+            if(stuff.CanBeUsed(_class as IClass))
+                availableClasses.Add(_class.TextRepresentation);
+            if (cheat)
+                stuff.Cheat = true;
+        }
+
+        return string.Join(", ", availableClasses);
+    }
+    
+    private string GetAvailableGenders(IStuff stuff)
+    {
+        var availableGender = new List<string>();
+        var cheat = false;
+        
+        if (stuff.Cheat)
+        {
+            cheat = true;
+            stuff.Cheat = false;
+        }
+        if(stuff.CanBeUsed(Genders.MALE))
+            availableGender.Add("муж");
+        if(stuff.CanBeUsed(Genders.FEMALE))
+            availableGender.Add("жен");
+        if (cheat)
+            stuff.Cheat = true;
+        
+        return string.Join(", ", availableGender);
     }
 }

@@ -56,7 +56,9 @@ public partial class PlayerWindow
 
         DescriptionButton.Click += DescriptionButtonClick;
 
+        SuperManchkinButton.Click += SuperManchkinButtonClick;
         HalfBloodButton.Click += HalfBloodButtonClick;
+        
 
         SmallStuffButton.Click += SmallStuffButtonClick;
         GetSmallStuffButton.Click += GetSmallStuffButtonClick;
@@ -71,6 +73,8 @@ public partial class PlayerWindow
         ChangeMercenaryButton.Click += ChangeMercenaryButtonClick;
         LostMercenaryButton.Click += LostMercenaryButtonClick;
     }
+
+   
 
 
     #region Level
@@ -471,6 +475,43 @@ public partial class PlayerWindow
 
     #endregion
 
+    private void SuperManchkinButtonClick(object sender, RoutedEventArgs e)
+    {
+        if (Player.Manchkin.IsDead)
+            UserMessage.CreateDeathActionMessage();
+        
+        else switch (SupermanchkinBlock.Text)
+        {
+            case "неактивно":
+                App.Current.Resources["EXTRA_TYPE"] = "super";
+                App.Current.Resources["MANCHKIN"] = Player.Manchkin;
+                DialogWindow.Show(new AskingExtraWindow(), this);
+                Refresh();
+                break;
+            case "чистый":
+                UserMessage.CreateHalfCleanMessage("Суперманчкин");
+                break;
+            default:
+            {
+                if (!Player.Manchkin.CheckStuffBeforeChangingSuperManchkin())
+                {
+                    if (!UserMessage.CreateAskingMessage("класс")) return;
+                    Player.Manchkin.RefuseSuperManchkin();
+                    Player.Manchkin.RecalculateParameters();
+                    Refresh();
+                }
+                else
+                {
+                    Player.Manchkin.RefuseSuperManchkin();
+                    Player.Manchkin.RecalculateParameters();
+                    Refresh();
+                }
+
+                break;
+            }
+        }
+    }
+    
     private void HalfBloodButtonClick(object sender, RoutedEventArgs e)
     {
         if (Player.Manchkin.IsDead)
@@ -687,13 +728,7 @@ public partial class PlayerWindow
             HalfBloodButton.Style = ReferenceEquals(HalfBloodButton.Content, "ПОЛУЧИТЬ")
                 ? (Style) FindResource("RoundedNotActiveGreenButtonStyle")
                 : (Style) FindResource("RoundedNotActiveRedButtonStyle");
-
-
-            if (ReferenceEquals(HalfBloodButton.Content, "ПОЛУЧИТЬ"))
-                HalfBloodButton.Style = (Style) FindResource("RoundedNotActiveGreenButtonStyle");
-            else
-                HalfBloodButton.Style = (Style) FindResource("RoundedNotActiveRedButtonStyle");
-
+            
             if (Player.Manchkin.Descriptions.Count == 0)
                 DescriptionButton.Style = (Style) FindResource("RoundedNotActiveGreenButtonStyle");
 
@@ -792,6 +827,19 @@ public partial class PlayerWindow
                 HalfBloodButton.Content = "ПОТЕРЯТЬ";
                 HalfBloodButton.Style = (Style) FindResource("RoundedRedButtonStyle");
             }
+            
+            if (ReferenceEquals(SupermanchkinBlock.Text, "неактивно") || ReferenceEquals(SupermanchkinBlock.Text, "чистый"))
+            {
+                SuperManchkinButton.Content = "ПОЛУЧИТЬ";
+                SuperManchkinButton.Style = ReferenceEquals(SupermanchkinBlock.Text, "неактивно")
+                    ? (Style) FindResource("RoundedGreenButtonStyle")
+                    : (Style) FindResource("RoundedNotActiveGreenButtonStyle");
+            }
+            else 
+            {
+                SuperManchkinButton.Content = "ПОТЕРЯТЬ";
+                SuperManchkinButton.Style = (Style) FindResource("RoundedRedButtonStyle");
+            }
 
             if (Player.Manchkin.SmallStuffs.Count == 0)
                 LostSmallStuffButton.Style = (Style) FindResource("RoundedNotActiveRedButtonStyle");
@@ -828,6 +876,7 @@ public partial class PlayerWindow
         WeaponBlock.Text = Intallation.Weapon(Player);
         HatBlock.Text = Intallation.Hat(Player);
         HalfBloodBlock.Text = Intallation.HalfBlood(Player);
+        SupermanchkinBlock.Text = Intallation.SuperManchkin(Player);
         SmallStuffBlock.Text = Intallation.SmallStuff(Player);
         HugeStuffBlock.Text = Intallation.HugeStuff(Player);
         ButtonRefresh();

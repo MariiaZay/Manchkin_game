@@ -7,6 +7,7 @@ public partial class AskingExtraWindow : Window
 {
     private string _extraType;
     private IManchkin _manchkin;
+
     public AskingExtraWindow()
     {
         InitializeComponent();
@@ -29,6 +30,7 @@ public partial class AskingExtraWindow : Window
                 App.Current.Resources["CURRENT"] = _manchkin.Class.TextRepresentation;
                 break;
         }
+
         CancelButton.Click += CancelButtonClick;
         CleanButton.Click += CleanButtonClick;
         ExtraButton.Click += ExtraButtonClick;
@@ -39,15 +41,21 @@ public partial class AskingExtraWindow : Window
         App.Current.Resources["EXTRA"] = true;
         DialogWindow.Show(new ChooseWindow(), this);
         var newRace = App.Current.Resources["NEW"] as IRace;
-        if(newRace != null)
+        var newClass = App.Current.Resources["NEW"] as IClass;
+        if (newRace != null)
             _manchkin.BecameHalfBlood(newRace);
+        if (newClass != null)
+            _manchkin.BecameSuperManchkin(newClass);
         if ((bool) App.Current.Resources["OK"])
             Close();
     }
 
     private void CleanButtonClick(object sender, RoutedEventArgs e)
     {
-        _manchkin.BecameHalfBlood();
+        if (_extraType == "halfblood")
+            _manchkin.BecameHalfBlood();
+        else
+            _manchkin.BecameSuperManchkin();
         Close();
     }
 

@@ -11,23 +11,34 @@ public class ManchkinTest
     public void Manchkin_Create_PropertiesValuesAreAdequate()
     {
         var manchkin = new Manchkin(Genders.MALE);
-
-        Assert.AreEqual(Genders.MALE, manchkin.Gender);
-        Assert.AreEqual(1, manchkin.Level);
-        Assert.AreEqual(manchkin.Damage, manchkin.Level);
-        Assert.IsInstanceOf<Human>(manchkin.Race);
-        Assert.AreEqual(false, manchkin.IsDead);
-        Assert.AreEqual(false, manchkin.IsHalfBlood);
-        Assert.AreEqual(false, manchkin.IsSuperManchkin);
-        Assert.IsEmpty(manchkin.Mercenaries);
-        Assert.AreEqual(5, manchkin.CardsCount);
-        Assert.IsNull(manchkin.WornHat);
-        Assert.IsNull(manchkin.WornArmor);
-        Assert.IsNull(manchkin.WornShoes);
-        Assert.IsNull(manchkin.Hands.LeftHand);
-        Assert.IsNull(manchkin.Hands.RightHand);
-        Assert.IsEmpty(manchkin.Descriptions);
-        Assert.AreEqual(false, manchkin.HasMercenary);
+        Assert.Multiple(() =>
+        {
+            Assert.That(manchkin.Gender, Is.EqualTo(Genders.MALE));
+            Assert.That(manchkin.Level, Is.EqualTo(1));
+        });
+        Assert.Multiple(() =>
+        {
+            Assert.That(manchkin.Level, Is.EqualTo(manchkin.Damage));
+            Assert.That(manchkin.IsDead, Is.EqualTo(false));
+            Assert.That(manchkin.IsHalfBlood, Is.EqualTo(false));
+            Assert.That(manchkin.IsSuperManchkin, Is.EqualTo(false));
+            Assert.That(manchkin.Race, Is.InstanceOf<Human>());
+        });
+        Assert.Multiple(() =>
+        {
+            Assert.IsEmpty(manchkin.Mercenaries);
+            Assert.That(manchkin.CardsCount, Is.EqualTo(5));
+            Assert.That(manchkin.WornHat, Is.Null);
+            Assert.That(manchkin.WornArmor, Is.Null);
+            Assert.That(manchkin.WornShoes, Is.Null);
+            Assert.That(manchkin.Hands.LeftHand, Is.Null);
+            Assert.That(manchkin.Hands.RightHand, Is.Null);
+        });
+        Assert.Multiple(() =>
+        {
+            Assert.That(manchkin.Descriptions, Is.Empty);
+            Assert.That(manchkin.HasMercenary, Is.EqualTo(false));
+        });
     }
 
     [Test]
@@ -38,7 +49,7 @@ public class ManchkinTest
 
         manchkin.GetLevel();
 
-        Assert.Greater(manchkin.Level, originLevel);
+        Assert.That(manchkin.Level, Is.GreaterThan(originLevel));
     }
 
     [Test]
@@ -49,7 +60,7 @@ public class ManchkinTest
 
         manchkin.GetLevel();
 
-        Assert.Greater(manchkin.Damage, originDamage);
+        Assert.That(manchkin.Damage, Is.GreaterThan(originDamage));
     }
 
     [Test]
@@ -62,7 +73,7 @@ public class ManchkinTest
 
         manchkin.GetLevel();
 
-        Assert.AreEqual(originLevel, manchkin.Level);
+        Assert.That(manchkin.Level, Is.EqualTo(originLevel));
     }
 
     [Test]
@@ -72,16 +83,17 @@ public class ManchkinTest
 
         manchkin.BecameSuperManchkin();
 
-        Assert.True(manchkin.IsSuperManchkin);
+        Assert.That(manchkin.IsSuperManchkin, Is.True);
     }
 
+    [Test]
     public void Manchin_BecomeHalfblood_Became()
     {
         var manchkin = new Manchkin(Genders.FEMALE);
 
         manchkin.BecameHalfBlood();
 
-        Assert.True(manchkin.IsHalfBlood);
+        Assert.That(manchkin.IsHalfBlood, Is.True);
     }
 
     [Test]
@@ -92,7 +104,7 @@ public class ManchkinTest
 
         manchkin.RefuseHalfblood();
 
-        Assert.False(manchkin.IsHalfBlood);
+        Assert.That(manchkin.IsHalfBlood, Is.False);
     }
 
     [Test]
@@ -102,7 +114,7 @@ public class ManchkinTest
 
         manchkin.GetMercenary();
 
-        Assert.True(manchkin.HasMercenary);
+        Assert.That(manchkin.HasMercenary, Is.True);
     }
 
     [Test]
@@ -112,7 +124,7 @@ public class ManchkinTest
 
         trapikFromRtf.ChangeGender();
 
-        Assert.AreEqual(Genders.FEMALE, trapikFromRtf.Gender);
+        Assert.That(trapikFromRtf.Gender, Is.EqualTo(Genders.FEMALE));
     }
 
     [Test]
@@ -122,7 +134,7 @@ public class ManchkinTest
 
         manchkin.Race = new Elf();
 
-        Assert.IsInstanceOf<Elf>(manchkin.Race);
+        Assert.That(manchkin.Race, Is.InstanceOf<Elf>());
     }
 
     [Test]
@@ -132,7 +144,7 @@ public class ManchkinTest
 
         manchkin.Class = new Thief();
 
-        Assert.IsInstanceOf<Thief>(manchkin.Class);
+        Assert.That(manchkin.Class, Is.InstanceOf<Thief>());
     }
 
     [Test]
@@ -144,18 +156,22 @@ public class ManchkinTest
         manchkin.TakeStuff(new HornedHelmet());
         manchkin.TakeStuff(new LeatherArmor());
         manchkin.TakeStuff(new MightyShoes());
-
-        Assert.NotNull(manchkin.WornHat);
-        Assert.NotNull(manchkin.WornArmor);
-        Assert.NotNull(manchkin.WornShoes);
+        Assert.Multiple(() =>
+        {
+            Assert.That(manchkin.WornHat, Is.Not.Null);
+            Assert.That(manchkin.WornArmor, Is.Not.Null);
+            Assert.That(manchkin.WornShoes, Is.Not.Null);
+        });
         // а что он типа вообще брать может я не шарю
 
         manchkin.ToDie();
-
-        Assert.IsEmpty(manchkin.SmallStuffs);
-        Assert.IsEmpty(manchkin.HugeStuffs);
-        Assert.IsNull(manchkin.WornHat);
-        Assert.IsNull(manchkin.WornArmor);
-        Assert.IsNull(manchkin.WornShoes);
+        Assert.Multiple(() =>
+        {
+            Assert.That(manchkin.SmallStuffs, Is.Empty);
+            Assert.That(manchkin.HugeStuffs, Is.Empty);
+            Assert.That(manchkin.WornHat, Is.Null);
+            Assert.That(manchkin.WornArmor, Is.Null);
+            Assert.That(manchkin.WornShoes, Is.Null);
+        });
     }
 }

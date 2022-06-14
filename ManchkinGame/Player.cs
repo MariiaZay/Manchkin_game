@@ -1,27 +1,24 @@
-﻿using ManchkinCore.Enums.Accessory;
+﻿using System;
+using System.Collections.Generic;
+using ManchkinCore.Enums.Accessory;
 using ManchkinCore.GameLogic.Implementation;
 using ManchkinCore.Interfaces;
 using Ninject;
 
 namespace ManchkinGame;
 
-public class Player
+public class Player : PlayerPrototipe
 {
-    private string _name;
-    public string Name
-    {
-        get => _name;
-    }
-    private IManchkin _manchkin;
+    public string Name { get; }
 
-    public IManchkin Manchkin
-    {
-        get => _manchkin;
-    }
+    public IManchkin Manchkin { get; }
 
     public Player(string name, IManchkin manchkin)
     {
-        _name = name;
-        _manchkin = manchkin;
+        Name = name;
+        Manchkin = manchkin;
+        CurrentFeatures = PlayerPossibilities.Always;
+        CurrentFeatures.AddRange(PlayerPossibilities.AlwaysButNotInFight);
     }
+
 }

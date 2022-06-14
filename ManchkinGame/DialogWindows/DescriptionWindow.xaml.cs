@@ -15,7 +15,7 @@ public partial class DescriptionWindow : Window
     {
         InitializeComponent();
         _descriptions = desc;
-        
+        Title.Text = App.Current.Resources["TITLE"].ToString();
         DescriptionScrollView.Loaded += DescriptionScrollViewLoaded;
         OkButton.Click += OkButtonClick;
     }

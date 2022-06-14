@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using ManchkinCore;
@@ -28,17 +29,21 @@ public partial class WearingWindow : Window
             "обувка" => _variants = DITree.CardsBase.Shoeses,
             "головняк" => _variants = DITree.CardsBase.Hats,
             "мелкие шмотки" => _variants = DITree.CardsBase.SmallStuffs,
+            "крупные шмотки" => _variants = DITree.CardsBase.HugeStuffs,
             "оружие" => _variants = DITree.CardsBase.BothHandWeapons
+
         };
-        VariantsComboBox.Loaded += VariantsComboBoxLoaded;
-        
+
+        if (_typeOfVariants != "мелкие шмотки" && _typeOfVariants != "крупные шмотки")
+            VariantsComboBox.Loaded += VariantsComboBoxLoadedEquipment;
+        else
+            VariantsComboBox.Loaded += VariantsComboBoxLoadedStuff;
+
         WearingButton.Click += WearingButtonClick;
         CancelButton.Click += CancelButtonClick;
         CheatButton.Click += CheatButtonClick;
     }
 
-    
-    
 
     private void CheatButtonClick(object sender, RoutedEventArgs e)
     {
@@ -52,17 +57,17 @@ public partial class WearingWindow : Window
 
     private void WearingButtonClick(object sender, RoutedEventArgs e)
     {
-        if(VariantsComboBox.Text == "")
+        if (VariantsComboBox.Text == "")
             UserMessage.CreateNotChosenItemMessage("новую шмотку");
         else if (AskBeforeChanging())
         {
             var variant = _variants.FirstOrDefault(vari => vari.TextRepresentation == VariantsComboBox.Text);
             var v = variant as IStuff;
-            
+
             if (ReferenceEquals(CheatButton.Content, "НЕ ЧИТ!"))
                 _manchkin.UseCheat(v);
-            
-            if (!_manchkin.TakeStuff(v)) 
+
+            if (!_manchkin.TakeStuff(v))
                 UserMessage.CreateImpossibleTakingStuffMessage(v.TextRepresentation);
             else
                 Close();
@@ -74,7 +79,9 @@ public partial class WearingWindow : Window
         bool ok;
         switch (_typeOfVariants)
         {
-            case "броник": case "обувка": case "головняк":
+            case "броник":
+            case "обувка":
+            case "головняк":
                 if (_current == "")
                     ok = true;
                 else
@@ -94,10 +101,21 @@ public partial class WearingWindow : Window
         return ok;
     }
 
-    private void VariantsComboBoxLoaded(object sender, RoutedEventArgs e)
+    private void VariantsComboBoxLoadedEquipment(object sender, RoutedEventArgs e)
     {
         foreach (var variant in _variants.Where(variant => _current != variant.TextRepresentation))
             VariantsComboBox.Items.Add(variant.TextRepresentation);
+    }
+
+    private void VariantsComboBoxLoadedStuff(object sender, RoutedEventArgs e)
+    {
+        var manchkinStuff = _typeOfVariants == "мелкие шмотки" ? _manchkin.SmallStuffs : _manchkin.HugeStuffs;
+
+        foreach (var variant in from variant in _variants 
+                 let v = variant as IStuff where !manchkinStuff.Contains(v) select variant)
+        {
+            VariantsComboBox.Items.Add(variant.TextRepresentation);
+        }
     }
 
 

@@ -32,7 +32,7 @@ public interface IManchkin : IOwnStuffs, IDescriptable, IHalfBloodAble, ISuper
 
         public int FlushingBonus { get; }
 
-        public bool DoublePrice { get; }
+        public bool DoublePrice { get; set; }
 
         #endregion
 }

@@ -24,8 +24,8 @@ public partial class ChooseWindow : Window
 
         _variants = _typeOfVariants switch
         {
-            "расу" => _variants = CardsBase.Races,
-            "класс" => _variants = CardsBase.Classes
+            "расу" => _variants = DITree.CardsBase.Races,
+            "класс" => _variants = DITree.CardsBase.Classes
         };
         ChooseBlock.Text = String.Format("Выберите {0}", _typeOfVariants);
         VariantsComboBox.Loaded += VariantsComboBoxLoaded;

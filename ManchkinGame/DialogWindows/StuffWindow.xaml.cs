@@ -41,7 +41,7 @@ public partial class StuffWindow : Window
     {
         var availableRaces = new List<string>();
         var cheat = false;
-        foreach (var race in CardsBase.Races)
+        foreach (var race in DITree.CardsBase.Races)
         {
             if (stuff.Cheat)
             {
@@ -61,7 +61,7 @@ public partial class StuffWindow : Window
     {
         var availableClasses = new List<string>();
         var cheat = false;
-        foreach (var _class in CardsBase.Classes)
+        foreach (var _class in DITree.CardsBase.Classes)
         {
             if (stuff.Cheat)
             {

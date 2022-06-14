@@ -1,6 +1,7 @@
 ﻿using ManchkinCore.Enums.Accessory;
 using ManchkinCore.GameLogic.Implementation;
 using ManchkinCore.Interfaces;
+using Ninject;
 
 namespace ManchkinGame;
 
@@ -18,9 +19,9 @@ public class Player
         get => _manchkin;
     }
 
-    public Player(string name, Genders gender)
+    public Player(string name, IManchkin manchkin)
     {
         _name = name;
-        _manchkin = new Manchkin(gender);
+        _manchkin = manchkin;
     }
 }

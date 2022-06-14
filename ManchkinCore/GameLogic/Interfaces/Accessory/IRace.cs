@@ -1,6 +1,8 @@
-﻿namespace ManchkinCore.Interfaces;
+﻿using ManchkinCore.GameLogic.Interfaces;
 
-public interface IRace : IDescriptable
+namespace ManchkinCore.Interfaces;
+
+public interface IRace : ICardsBaseableDescribable
 {
     public int FlushingBonus { get; }
     public int CardCount { get; }

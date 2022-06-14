@@ -24,11 +24,11 @@ public partial class WearingWindow : Window
 
         _variants = _typeOfVariants switch
         {
-            "броник" => _variants = CardsBase.Armors,
-            "обувка" => _variants = CardsBase.Shoeses,
-            "головняк" => _variants = CardsBase.Hats,
-            "мелкие шмотки" => _variants = CardsBase.SmallStuffs,
-            "оружие" => _variants = CardsBase.BothHandWeapons
+            "броник" => _variants = DITree.CardsBase.Armors,
+            "обувка" => _variants = DITree.CardsBase.Shoeses,
+            "головняк" => _variants = DITree.CardsBase.Hats,
+            "мелкие шмотки" => _variants = DITree.CardsBase.SmallStuffs,
+            "оружие" => _variants = DITree.CardsBase.BothHandWeapons
         };
         VariantsComboBox.Loaded += VariantsComboBoxLoaded;
         

@@ -1,10 +1,11 @@
 ﻿using ManchkinCore.Enums;
 using ManchkinCore.Enums.Accessory;
+using ManchkinCore.GameLogic.Interfaces;
 using ManchkinCore.Implementation;
 
 namespace ManchkinCore.Interfaces;
 
-public interface IStuff : IDescriptable
+public interface IStuff : ICardsBaseableDescribable
 {
     public int Price { get;}
     public int Damage { get;}

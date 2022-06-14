@@ -1,7 +1,6 @@
-﻿using System.Data;
-using System.Reflection.PortableExecutable;
-using ManchkinCore.Enums;
+﻿using ManchkinCore.Enums;
 using ManchkinCore.Enums.Accessory;
+using ManchkinCore.GameLogic.Implementation.Factories;
 using ManchkinCore.Implementation;
 using ManchkinCore.Interfaces;
 
@@ -9,7 +8,7 @@ namespace ManchkinCore.GameLogic.Implementation;
 
 public class Manchkin : IManchkin
 {
-    #region Main fields
+        #region Main fields
 
     public int Level { get; private set; }
 
@@ -69,9 +68,28 @@ public class Manchkin : IManchkin
     public ISuperManchkin? SuperManchkin { get; private set; }
 
     #endregion
+    
+    #region Factories
 
-    public Manchkin(Genders gender)
+    private MercenaryFactory _mercenaryFactory;
+    private HalfbloodFactory _halfbloodFactory;
+    private SuperManchkinFactory _superManchkinFactory;
+
+    #endregion
+
+    public Manchkin(
+        IClass initialClass, 
+        IRace initialRace,
+        IHands hands,
+        MercenaryFactory mercenaryFactory,
+        HalfbloodFactory halfbloodFactory,
+        SuperManchkinFactory superManchkinFactory,
+        Genders gender)
     {
+        _mercenaryFactory = mercenaryFactory;
+        _halfbloodFactory = halfbloodFactory;
+        _superManchkinFactory = superManchkinFactory;
+        
         Level = 1;
 
         CardsCount = 5;
@@ -79,7 +97,7 @@ public class Manchkin : IManchkin
         FlushingBonus = 0;
         DoublePrice = false;
 
-        Hands = new Hands();
+        Hands = hands;
         WornArmor = null;
         WornShoes = null;
         WornHat = null;
@@ -93,8 +111,8 @@ public class Manchkin : IManchkin
         HalfBlood = null;
         SuperManchkin = null;
 
-        Race = new Human();
-        Class = new Nobody();
+        Race = initialRace;
+        Class = initialClass;
         Gender = gender;
         Damage = Level;
         TextRepresentation = "Манчкин";
@@ -213,13 +231,15 @@ public class Manchkin : IManchkin
 
     public void GetMercenary()
     {
-        Mercenaries.Add(new Mercenary());
+        var mercenary = _mercenaryFactory.ResetStuff().Build();
+        Mercenaries.Add(mercenary);
         RecalculateParameters();
     }
 
     public void GetMercenary(IStuff stuff)
     {
-        Mercenaries.Add(new Mercenary(stuff));
+        var mercenary = _mercenaryFactory.SetStuff(stuff).Build();
+        Mercenaries.Add(mercenary);
         RecalculateParameters();
     }
 
@@ -751,12 +771,15 @@ public class Manchkin : IManchkin
 
     public void BecameHalfBlood(IRace second)
     {
-        HalfBlood = new Halfblood(second);
+        HalfBlood = _halfbloodFactory
+            .SetSecondRace(second)
+            .Build();
         PurchaseDescriptions(second.Descriptions);
     }
 
-    public void BecameHalfBlood()
-        => HalfBlood = new Halfblood();
+    public void BecameHalfBlood() => HalfBlood = _halfbloodFactory
+        .ResetSecondRace()
+        .Build();
 
 
     public void RefuseHalfblood()
@@ -776,12 +799,15 @@ public class Manchkin : IManchkin
 
     public void BecameSuperManchkin(IClass second)
     {
-        SuperManchkin = new SuperManchkin(HalfTypes.BOTH, second);
+        SuperManchkin = _superManchkinFactory
+            .SetSecondClass(second)
+            .Build();
         PurchaseDescriptions(second.Descriptions);
     }
 
-    public void BecameSuperManchkin()
-        => SuperManchkin = new SuperManchkin(HalfTypes.SINGLE_CLEAN);
+    public void BecameSuperManchkin() => SuperManchkin = _superManchkinFactory
+        .ResetSecondClass()
+        .Build();
 
     public void RefuseSuperManchkin()
     {

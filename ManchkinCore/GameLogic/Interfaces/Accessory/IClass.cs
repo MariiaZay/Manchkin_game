@@ -1,5 +1,7 @@
-﻿namespace ManchkinCore.Interfaces;
+﻿using ManchkinCore.GameLogic.Interfaces;
 
-public interface IClass : IDescriptable
+namespace ManchkinCore.Interfaces;
+
+public interface IClass : ICardsBaseableDescribable
 {
 }

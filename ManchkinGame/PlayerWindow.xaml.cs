@@ -19,7 +19,7 @@ public partial class PlayerWindow
         var name = Application.Current.Resources["USER_NAME"].ToString();
         var sex = Application.Current.Resources["SEX"].ToString() == "мужcкой" ? Genders.MALE : Genders.FEMALE;
 
-        Player = new Player(name, sex);
+        Player = DITree.MakePlayer(name, sex);
         InstallBaseManchkinParameters();
 
         IncreaseLevelButton.Click += IncreaseLevelButtonClick;

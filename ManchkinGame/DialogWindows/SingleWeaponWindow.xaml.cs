@@ -25,7 +25,7 @@ public partial class SingleWeaponWindow : Window
     {
         InitializeComponent();
         _manchkin = App.Current.Resources["MANCHKIN"] as Manchkin;
-        _variants = CardsBase.SingleHandWeapons;
+        _variants = DITree.CardsBase.SingleHandWeapons;
 
         _currentRight = Application.Current.Resources["CURRENT_RIGHT_HAND"] as IStuff;
         _currentRightText = _currentRight == null ? "" : _currentRight.TextRepresentation;

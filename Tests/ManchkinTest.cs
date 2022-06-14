@@ -1,8 +1,9 @@
 ﻿using ManchkinCore.Enums.Accessory;
+using ManchkinCore.GameLogic.Implementation;
 using ManchkinCore.Implementation;
 using NUnit.Framework;
 
-namespace ManchkinCore.GameLogic.Implementation;
+namespace Tests;
 
 [TestFixture]
 public class ManchkinTest
@@ -26,7 +27,7 @@ public class ManchkinTest
         });
         Assert.Multiple(() =>
         {
-            Assert.IsEmpty(manchkin.Mercenaries);
+            Assert.That(manchkin.Mercenaries, Is.Empty);
             Assert.That(manchkin.CardsCount, Is.EqualTo(5));
             Assert.That(manchkin.WornHat, Is.Null);
             Assert.That(manchkin.WornArmor, Is.Null);
@@ -67,7 +68,7 @@ public class ManchkinTest
     public void Manchkin_GetLevel_HasUpperBound10()
     {
         var manchkin = new Manchkin(Genders.MALE);
-        for (var i = 0; i < 10; i++)
+        for (var _ = 0; _ < 10; _++)
             manchkin.GetLevel();
         var originLevel = manchkin.Level;
 
@@ -77,7 +78,7 @@ public class ManchkinTest
     }
 
     [Test]
-    public void Manchin_BecomeSuperManchkin_Became()
+    public void Manchkin_BecomeSuperManchkin_Became()
     {
         var manchkin = new Manchkin(Genders.FEMALE);
 
@@ -87,7 +88,7 @@ public class ManchkinTest
     }
 
     [Test]
-    public void Manchin_BecomeHalfblood_Became()
+    public void Manchkin_BecomeHalfblood_Became()
     {
         var manchkin = new Manchkin(Genders.FEMALE);
 
@@ -108,7 +109,7 @@ public class ManchkinTest
     }
 
     [Test]
-    public void Manchin_GetMercenary_GetMercenaryTrue()
+    public void Manchkin_GetMercenary_GetMercenaryTrue()
     {
         var manchkin = new Manchkin(Genders.FEMALE);
 
@@ -120,19 +121,20 @@ public class ManchkinTest
     [Test]
     public void Manchkin_ChangeGender_Works()
     {
-        var trapikFromRtf = new Manchkin(Genders.MALE);
+        var manchkin = new Manchkin(Genders.MALE);
 
-        trapikFromRtf.ChangeGender();
+        manchkin.ChangeGender();
 
-        Assert.That(trapikFromRtf.Gender, Is.EqualTo(Genders.FEMALE));
+        Assert.That(manchkin.Gender, Is.EqualTo(Genders.FEMALE));
     }
 
     [Test]
     public void Manchkin_ChangeRace_Works()
     {
-        var manchkin = new Manchkin(Genders.MALE);
-
-        manchkin.Race = new Elf();
+        var manchkin = new Manchkin(Genders.MALE)
+        {
+            Race = new Elf()
+        };
 
         Assert.That(manchkin.Race, Is.InstanceOf<Elf>());
     }
@@ -140,9 +142,10 @@ public class ManchkinTest
     [Test]
     public void Manchkin_ChangeClass_Works()
     {
-        var manchkin = new Manchkin(Genders.FEMALE);
-
-        manchkin.Class = new Thief();
+        var manchkin = new Manchkin(Genders.FEMALE)
+        {
+            Class = new Thief()
+        };
 
         Assert.That(manchkin.Class, Is.InstanceOf<Thief>());
     }
@@ -162,7 +165,6 @@ public class ManchkinTest
             Assert.That(manchkin.WornArmor, Is.Not.Null);
             Assert.That(manchkin.WornShoes, Is.Not.Null);
         });
-        // а что он типа вообще брать может я не шарю
 
         manchkin.ToDie();
         Assert.Multiple(() =>

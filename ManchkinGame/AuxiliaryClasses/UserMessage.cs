@@ -39,6 +39,12 @@ public static class UserMessage
     public static void CreateOneWeaponInBothHandsMessage()
         => CreateInfoMessage("Ты не можешь держать одно и то же одноручное оружие в обеих руках",
             "ОЙ");
+
+    public static void CreateEndStuffMessage(string mess)
+        => CreateInfoMessage(
+            String.Format("Ты больше не можешь надевать {0} шмотки, так как они кончились в колоде", mess),
+            "КОНЧИЛИСЬ КАРТЫ");
+    
     public static void CreateEmptyActionStuffMessage()
         => CreateInfoMessage("У тебя пока что нет этого, чтобы с этим что-то делать", "Пока пусто");
 

@@ -57,10 +57,10 @@ public partial class PlayerWindow
         LostHatButton.Click += LostHatButtonClick;
 
         DescriptionButton.Click += DescriptionButtonClick;
+        ActionsButton.Click += ActionsButtonClick;
 
         SuperManchkinButton.Click += SuperManchkinButtonClick;
         HalfBloodButton.Click += HalfBloodButtonClick;
-
 
         SmallStuffButton.Click += SmallStuffButtonClick;
         GetSmallStuffButton.Click += GetSmallStuffButtonClick;
@@ -77,6 +77,8 @@ public partial class PlayerWindow
         ChangeMercenaryButton.Click += ChangeMercenaryButtonClick;
         LostMercenaryButton.Click += LostMercenaryButtonClick;
     }
+
+    
 
 
     #region Level
@@ -106,25 +108,28 @@ public partial class PlayerWindow
     #endregion
 
     #region Management
-
-    //TODO: прописать кнопки
+    
     private void BattleButtonClick(object sender, RoutedEventArgs e)
     {
         if (Player.Manchkin.IsDead)
             UserMessage.CreateDeathActionMessage();
         else
+        {
             BattleButton.Content = ReferenceEquals(BattleButton.Content, "БОЙ") ? "НЕ В БОЮ" : "БОЙ";
+            RefreshPossibilities();
+        }
     }
 
     private void MoveButtonClick(object sender, RoutedEventArgs e)
     {
         MoveButton.Content = ReferenceEquals(MoveButton.Content, "МОЙ ХОД") ? "ЧУЖОЙ ХОД" : "МОЙ ХОД";
-        if (Player.Manchkin.IsDead)
-        {
-            Player.Manchkin.IsDead = false;
-            BattleButton.Style = BattleButton.Style = (Style) FindResource("RoundGreenToggleButtonStyle");
-            Refresh();
-        }
+        RefreshPossibilities();
+        
+        if (!Player.Manchkin.IsDead) return;
+        
+        Player.Manchkin.IsDead = false;
+        BattleButton.Style = BattleButton.Style = (Style) FindResource("RoundGreenToggleButtonStyle");
+        Refresh();
     }
 
     #endregion
@@ -563,8 +568,15 @@ public partial class PlayerWindow
             UserMessage.CreateEmptyActionStuffMessage();
         else
         {
+            App.Current.Resources["TITLE"] = "Мои свойства";
             DialogWindow.Show(new DescriptionWindow(Player.Manchkin.Descriptions), this);
         }
+    }
+    
+    private void ActionsButtonClick(object sender, RoutedEventArgs e)
+    {
+        App.Current.Resources["TITLE"] = "Что можно сейчас сделать";
+        DialogWindow.Show(new DescriptionWindow(Player.CurrentFeatures), this);
     }
 
     #region Stuff
@@ -712,6 +724,48 @@ public partial class PlayerWindow
     #endregion
 
     #region Auxiliary methods
+
+    private void RefreshPossibilities()
+    {
+        if (ReferenceEquals(MoveButton.Content, "МОЙ ХОД"))
+        {
+            Player.AddFeatures(PlayerPossibilities.YourTurn);
+                
+            if (ReferenceEquals(BattleButton.Content, "БОЙ"))
+            {
+                Player.RemoveFeatures(PlayerPossibilities.AlwaysButNotInFight);
+                Player.AddFeatures(PlayerPossibilities.AlwaysInFight);
+                
+                Player.RemoveFeatures(PlayerPossibilities.YourTurnButNotInFight);
+                Player.AddFeatures(PlayerPossibilities.YourTurnInFight);
+            }
+            else
+            {
+                Player.AddFeatures(PlayerPossibilities.AlwaysButNotInFight);
+                Player.RemoveFeatures(PlayerPossibilities.AlwaysInFight);
+                
+                Player.AddFeatures(PlayerPossibilities.YourTurnButNotInFight);
+                Player.RemoveFeatures(PlayerPossibilities.YourTurnInFight);
+            }
+        }
+        else
+        {
+            Player.RemoveFeatures(PlayerPossibilities.YourTurn);
+            Player.RemoveFeatures(PlayerPossibilities.YourTurnInFight);
+            Player.RemoveFeatures(PlayerPossibilities.YourTurnButNotInFight);
+                
+            if (ReferenceEquals(BattleButton.Content, "БОЙ"))
+            {
+                Player.RemoveFeatures(PlayerPossibilities.AlwaysButNotInFight);
+                Player.AddFeatures(PlayerPossibilities.AlwaysInFight);
+            }
+            else
+            {
+                Player.AddFeatures(PlayerPossibilities.AlwaysButNotInFight);
+                Player.RemoveFeatures(PlayerPossibilities.AlwaysInFight);
+            }
+        }
+    }
 
     private bool CheckCardsBaseStuff(string mess)
     {
@@ -916,24 +970,26 @@ public partial class PlayerWindow
             }
 
             GetSmallStuffButton.Style = (Style) FindResource("RoundedGreenButtonStyle");
-            if (Player.Manchkin.SmallStuffs.Count == 0)
-                LostSmallStuffButton.Style = Player.Manchkin.SmallStuffs.Count == 0
-                    ? (Style) FindResource("RoundedNotActiveRedButtonStyle")
-                    : (Style) FindResource("RoundedRedButtonStyle");
+
+            LostSmallStuffButton.Style = Player.Manchkin.SmallStuffs.Count == 0
+                ? (Style) FindResource("RoundedNotActiveRedButtonStyle")
+                : (Style) FindResource("RoundedRedButtonStyle");
+
 
             GetHugeStuffButton.Style = (Style) FindResource("RoundedGreenButtonStyle");
             LostHugeStuffButton.Style = Player.Manchkin.HugeStuffs.Count == 0
-                    ? (Style) FindResource("RoundedNotActiveRedButtonStyle")
-                    : LostHugeStuffButton.Style = (Style) FindResource("RoundedRedButtonStyle");
-                
+                ? (Style) FindResource("RoundedNotActiveRedButtonStyle")
+                : LostHugeStuffButton.Style = (Style) FindResource("RoundedRedButtonStyle");
+
             SellStuffButton.Style = Player.Manchkin.SmallStuffs.Count == 0 && Player.Manchkin.HugeStuffs.Count == 0
                 ? (Style) FindResource("RoundedNotActiveGreenButtonStyle")
                 : (Style) FindResource("RoundedGreenButtonStyle");
-            
+
             GetMercenariesButton.Style = GetHugeStuffButton.Style = (Style) FindResource("RoundedGreenButtonStyle");
             ChangeMercenaryButton.Style = Player.Manchkin.HasMercenary
                 ? (Style) FindResource("RoundedGreenButtonStyle")
                 : (Style) FindResource("RoundedNotActiveGreenButtonStyle");
+            
             LostMercenaryButton.Style = Player.Manchkin.HasMercenary
                 ? (Style) FindResource("RoundedRedButtonStyle")
                 : (Style) FindResource("RoundedNotActiveRedButtonStyle");

@@ -27,17 +27,17 @@ public class ManchkinTest
         Assert.IsNull(manchkin.Hands.LeftHand);
         Assert.IsNull(manchkin.Hands.RightHand);
         Assert.IsEmpty(manchkin.Descriptions);
-        Assert.AreEqual(false,manchkin.HasMercenary);
+        Assert.AreEqual(false, manchkin.HasMercenary);
     }
-    
+
     [Test]
     public void Manchkin_GetLevel_IncreasesLevel()
     {
         var manchkin = new Manchkin(Genders.FEMALE);
         var originLevel = manchkin.Level;
-        
+
         manchkin.GetLevel();
-        
+
         Assert.Greater(manchkin.Level, originLevel);
     }
 
@@ -46,9 +46,9 @@ public class ManchkinTest
     {
         var manchkin = new Manchkin(Genders.FEMALE);
         var originDamage = manchkin.Damage;
-        
+
         manchkin.GetLevel();
-        
+
         Assert.Greater(manchkin.Damage, originDamage);
     }
 
@@ -59,9 +59,9 @@ public class ManchkinTest
         for (var i = 0; i < 10; i++)
             manchkin.GetLevel();
         var originLevel = manchkin.Level;
-        
+
         manchkin.GetLevel();
-        
+
         Assert.AreEqual(originLevel, manchkin.Level);
     }
 
@@ -69,18 +69,18 @@ public class ManchkinTest
     public void Manchin_BecomeSuperManchkin_Became()
     {
         var manchkin = new Manchkin(Genders.FEMALE);
-        
+
         manchkin.BecameSuperManchkin();
-        
+
         Assert.True(manchkin.IsSuperManchkin);
     }
-    
+
     public void Manchin_BecomeHalfblood_Became()
     {
         var manchkin = new Manchkin(Genders.FEMALE);
-        
+
         manchkin.BecameHalfBlood();
-        
+
         Assert.True(manchkin.IsHalfBlood);
     }
 
@@ -91,27 +91,27 @@ public class ManchkinTest
         manchkin.BecameHalfBlood();
 
         manchkin.RefuseHalfblood();
-        
+
         Assert.False(manchkin.IsHalfBlood);
     }
-    
+
     [Test]
     public void Manchin_GetMercenary_GetMercenaryTrue()
     {
         var manchkin = new Manchkin(Genders.FEMALE);
-        
+
         manchkin.GetMercenary();
-        
+
         Assert.True(manchkin.HasMercenary);
     }
-    
+
     [Test]
     public void Manchkin_ChangeGender_Works()
     {
         var trapikFromRtf = new Manchkin(Genders.MALE);
-        
+
         trapikFromRtf.ChangeGender();
-        
+
         Assert.AreEqual(Genders.FEMALE, trapikFromRtf.Gender);
     }
 
@@ -121,7 +121,7 @@ public class ManchkinTest
         var manchkin = new Manchkin(Genders.MALE);
 
         manchkin.Race = new Elf();
-        
+
         Assert.IsInstanceOf<Elf>(manchkin.Race);
     }
 
@@ -129,9 +129,9 @@ public class ManchkinTest
     public void Manchkin_ChangeClass_Works()
     {
         var manchkin = new Manchkin(Genders.FEMALE);
-        
+
         manchkin.Class = new Thief();
-        
+
         Assert.IsInstanceOf<Thief>(manchkin.Class);
     }
 
@@ -144,14 +144,14 @@ public class ManchkinTest
         manchkin.TakeStuff(new HornedHelmet());
         manchkin.TakeStuff(new LeatherArmor());
         manchkin.TakeStuff(new MightyShoes());
-        
+
         Assert.NotNull(manchkin.WornHat);
         Assert.NotNull(manchkin.WornArmor);
         Assert.NotNull(manchkin.WornShoes);
         // а что он типа вообще брать может я не шарю
-        
+
         manchkin.ToDie();
-        
+
         Assert.IsEmpty(manchkin.SmallStuffs);
         Assert.IsEmpty(manchkin.HugeStuffs);
         Assert.IsNull(manchkin.WornHat);

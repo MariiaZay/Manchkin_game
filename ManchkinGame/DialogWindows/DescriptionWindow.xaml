@@ -24,7 +24,7 @@
             </Style>
             <Style x:Key="TextStyle" TargetType="{x:Type TextBlock}">
                 <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
-                <Setter Property="TextAlignment" Value="Left"></Setter>
+                <Setter Property="TextAlignment" Value="Center"></Setter>
                 <Setter Property="VerticalAlignment" Value="Center"></Setter>
                 <Setter Property="FontSize" Value="20"></Setter>
                 <Setter Property="FontFamily" Value="Comic Sans MS"></Setter>
@@ -98,9 +98,8 @@
                 Style="{DynamicResource TextStyle}"
                 FontWeight="Bold"
                 FontSize="26"
-                TextDecorations="Underline"
                 
-            >Мои свойства:</TextBlock>
+            >Мои свойства</TextBlock>
             <Grid
                 Grid.Row="1"
                 Margin="0,4.4,0,0"

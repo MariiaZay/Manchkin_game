@@ -262,6 +262,7 @@ public class Manchkin : IManchkin
         if (!can) return can;
         if (stuff.Weight == Bulkiness.HUGE)
             return Race is not Dwarf && !HasHugeStuff || Race is Dwarf
+                                                      || stuff.Cheat
                                                       || IsHalfBlood && HalfBlood.HalfType == HalfTypes.BOTH
                                                                      && HalfBlood.SecondRace is Dwarf;
         return can;
@@ -564,6 +565,7 @@ public class Manchkin : IManchkin
             default:
                 if (CanTakeStuff(stuff))
                 {
+                    PurchaseDescriptions(stuff.Descriptions);
                     if (stuff.Weight == Bulkiness.HUGE)
                         HugeStuffs.Add(stuff);
                     else

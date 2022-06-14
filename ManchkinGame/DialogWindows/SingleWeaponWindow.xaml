@@ -118,7 +118,7 @@
         <Style x:Key="TextStyle" TargetType="{x:Type TextBlock}">
             <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
             <Setter Property="Foreground" Value="Black" />
-            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="Padding" Value="4.5" />
             <Setter Property="FontWeight" Value="Normal"></Setter>
@@ -197,7 +197,7 @@
                 Style="{DynamicResource TextStyle}"
                 FontWeight="Bold"
                 FontSize="26"
-                TextDecorations="Underline"
+                
             >Выберите шмотку</TextBlock>
             
             <Grid

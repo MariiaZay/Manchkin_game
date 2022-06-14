@@ -1,12 +1,11 @@
-﻿<Window x:Class="ManchkinGame.DialogWindows.WearingWindow"
+﻿<Window x:Class="ManchkinGame.DialogWindows.ShowStuffWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:ManchkinGame.DialogWindows"
         mc:Ignorable="d"
-        Title="WearingWindow"
-        Height="200"
+        Title="ShowStuffWindow" Height="200"
         Width="800"
         ResizeMode="NoResize"
         WindowStyle="None"
@@ -195,13 +194,13 @@
                 Style="{DynamicResource TextStyle}"
                 FontWeight="Bold"
                 FontSize="26"
-            >Выберите шмотку</TextBlock>
+            >Выберите шмотку для просмотра</TextBlock>
             
             <Grid
                 Grid.Row="1" Margin="0,4.4">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition Width="0.2*"></ColumnDefinition>
+                    <ColumnDefinition Width="0.5*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 
                 <ComboBox
@@ -216,30 +215,23 @@
                 </ComboBox>
                 
                 <Button
-                    Name="CheatButton"
+                    Name="ShowButton"
                     Grid.Column="1"
                     Margin="4.4,0,0,0"
-                    Style="{DynamicResource RoundedGreenButtonStyle}">ЧИТ!</Button>
+                    Style="{DynamicResource RoundedGreenButtonStyle}">ПОСМОТРЕТЬ</Button>
             </Grid>
             
-            <Grid Grid.Row="2" Margin="0,4.4,0,0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Button
-                    Grid.Column="0"
-                    Name="WearingButton"
-                    Margin="0,0,4.4,0"
-                    Style="{DynamicResource RoundedGreenButtonStyle}"
-                >НАДЕТЬ</Button>
+            
+                
                 <Button
                     Grid.Column="1"
                     Name="CancelButton"
-                    Margin="4.4,0,0,0"
+                    Grid.Row="2" Margin="0,4.4,0,0"
                     Style="{DynamicResource RoundedRedButtonStyle}"
+                    Height="35"
+                    Width="100"
                 >НАЗАД</Button>
-            </Grid>
+            
             
         </Grid>
     </Border>

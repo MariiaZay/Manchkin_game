@@ -124,6 +124,8 @@ public partial class PlayerWindow
     {
         MoveButton.Content = ReferenceEquals(MoveButton.Content, "МОЙ ХОД") ? "ЧУЖОЙ ХОД" : "МОЙ ХОД";
         RefreshPossibilities();
+        if (Player.Manchkin.Race is Halfling)
+            Player.Manchkin.DoublePrice = true;
         
         if (!Player.Manchkin.IsDead) return;
         

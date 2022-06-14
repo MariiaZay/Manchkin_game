@@ -1,6 +1,4 @@
-﻿
-
-namespace ManchkinCore.Interfaces;
+﻿namespace ManchkinCore.Interfaces;
 
 public interface IDescriptable
 {

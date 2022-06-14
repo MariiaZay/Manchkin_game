@@ -21,9 +21,10 @@ public partial class PlayerWindow
         var name = Application.Current.Resources["USER_NAME"].ToString();
         var sex = Application.Current.Resources["SEX"].ToString() == "мужcкой" ? Genders.MALE : Genders.FEMALE;
 
-        Player = new Player(name, sex);
+        Player = DITree.MakePlayer(name, sex);
         InstallBaseManchkinParameters();
 
+        //TODO: доработать возможности смены всего во врем боя и тд
         IncreaseLevelButton.Click += IncreaseLevelButtonClick;
         ReduceLevelButton.Click += ReduceLevelButtonClick;
 
@@ -771,7 +772,7 @@ public partial class PlayerWindow
 
     private bool CheckCardsBaseStuff(string mess)
     {
-        var list = mess == "мелкие" ? CardsBase.SmallStuffs : CardsBase.HugeStuffs;
+        var list = mess == "мелкие" ? DITree.CardsBase.SmallStuffs : DITree.CardsBase.HugeStuffs;
         var manStuff = mess == "мелкие" ? Player.Manchkin.SmallStuffs : Player.Manchkin.HugeStuffs;
         return list.Select(stuff => stuff as IStuff).Any(s => !manStuff.Contains(s));
     }

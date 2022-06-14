@@ -25,12 +25,13 @@ public partial class WearingWindow : Window
 
         _variants = _typeOfVariants switch
         {
-            "броник" => _variants = CardsBase.Armors,
-            "обувка" => _variants = CardsBase.Shoeses,
-            "головняк" => _variants = CardsBase.Hats,
-            "мелкие шмотки" => _variants = CardsBase.SmallStuffs,
-            "крупные шмотки" => _variants = CardsBase.HugeStuffs,
-            "оружие" => _variants = CardsBase.BothHandWeapons
+            "броник" => _variants = DITree.CardsBase.Armors,
+            "обувка" => _variants = DITree.CardsBase.Shoeses,
+            "головняк" => _variants = DITree.CardsBase.Hats,
+            "мелкие шмотки" => _variants = DITree.CardsBase.SmallStuffs,
+            "крупные шмотки" => _variants = DITree.CardsBase.HugeStuffs,
+            "оружие" => _variants = DITree.CardsBase.BothHandWeapons
+
         };
 
         if (_typeOfVariants != "мелкие шмотки" && _typeOfVariants != "крупные шмотки")

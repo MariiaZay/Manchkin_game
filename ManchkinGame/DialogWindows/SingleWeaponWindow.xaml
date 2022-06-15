@@ -217,7 +217,8 @@
                     Margin="4.4,0,4.4,0"
                     BorderThickness="0"
                     Foreground="Black"
-                    FontSize="14"
+                    FontSize="20"
+                    VerticalContentAlignment="Center"
                     FontFamily="Comic Sans MS"
                     Padding="4.5">
                 </ComboBox>
@@ -246,7 +247,8 @@
                     Margin="4.4,0,4.4,0"
                     BorderThickness="0"
                     Foreground="Black"
-                    FontSize="14"
+                    VerticalContentAlignment="Center"
+                    FontSize="20"
                     FontFamily="Comic Sans MS"
                     Padding="4.5">
                 </ComboBox>

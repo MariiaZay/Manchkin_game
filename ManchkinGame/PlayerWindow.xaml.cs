@@ -187,7 +187,9 @@ public partial class PlayerWindow : Window
 
     private void ChangeRaceButtonClick(object sender, RoutedEventArgs e)
     {
-        if (Player.Manchkin.IsDead)
+        if(!ReferenceEquals(MoveButton.Content, "МОЙ ХОД"))
+            UserMessage.CreateCantDoItNowMessage(MoveButton.Content.ToString());
+        else if (Player.Manchkin.IsDead)
             UserMessage.CreateDeathActionMessage();
         else
         {
@@ -235,7 +237,9 @@ public partial class PlayerWindow : Window
 
     private void ChangeClassButtonClick(object sender, RoutedEventArgs e)
     {
-        if (Player.Manchkin.IsDead)
+        if(!ReferenceEquals(MoveButton.Content, "МОЙ ХОД"))
+            UserMessage.CreateCantDoItNowMessage(MoveButton.Content.ToString());
+        else if (Player.Manchkin.IsDead)
             UserMessage.CreateDeathActionMessage();
         else
         {
@@ -286,7 +290,9 @@ public partial class PlayerWindow : Window
 
     private void ChangeArmorButtonClick(object sender, RoutedEventArgs e)
     {
-        if (Player.Manchkin.IsDead)
+        if(ReferenceEquals(BattleButton.Content, "БОЙ"))
+            UserMessage.CreateCantDoItNowMessage(BattleButton.Content.ToString());
+        else if (Player.Manchkin.IsDead)
             UserMessage.CreateDeathActionMessage();
         else
             ChangeStuff("броник", Player.Manchkin.WornArmor);
@@ -294,7 +300,9 @@ public partial class PlayerWindow : Window
 
     private void LostArmorButtonClick(object sender, RoutedEventArgs e)
     {
-        if (Player.Manchkin.IsDead)
+        if(!CanDoItNow())
+            UserMessage.CreateCantDoItNowMessage(BattleButton.Content.ToString());
+        else if (Player.Manchkin.IsDead)
             UserMessage.CreateDeathActionMessage();
         else
         {
@@ -327,7 +335,9 @@ public partial class PlayerWindow : Window
 
     private void ChangeShoesButtonClick(object sender, RoutedEventArgs e)
     {
-        if (Player.Manchkin.IsDead)
+        if(ReferenceEquals(BattleButton.Content, "БОЙ"))
+            UserMessage.CreateCantDoItNowMessage(BattleButton.Content.ToString());
+        else if (Player.Manchkin.IsDead)
             UserMessage.CreateDeathActionMessage();
         else
             ChangeStuff("обувка", Player.Manchkin.WornShoes);
@@ -335,7 +345,9 @@ public partial class PlayerWindow : Window
 
     private void LostShoesButtonClick(object sender, RoutedEventArgs e)
     {
-        if (Player.Manchkin.IsDead)
+        if(!CanDoItNow())
+            UserMessage.CreateCantDoItNowMessage(BattleButton.Content.ToString());
+        else if (Player.Manchkin.IsDead)
             UserMessage.CreateDeathActionMessage();
         else
         {
@@ -388,7 +400,9 @@ public partial class PlayerWindow : Window
 
     private void ChangeWeaponButtonClick(object sender, RoutedEventArgs e)
     {
-        if (Player.Manchkin.IsDead)
+        if(ReferenceEquals(BattleButton.Content, "БОЙ"))
+            UserMessage.CreateCantDoItNowMessage(BattleButton.Content.ToString());
+        else if (Player.Manchkin.IsDead)
             UserMessage.CreateDeathActionMessage();
         else
         {
@@ -426,7 +440,9 @@ public partial class PlayerWindow : Window
 
     private void LostWeaponButtonClick(object sender, RoutedEventArgs e)
     {
-        if (Player.Manchkin.IsDead)
+        if(!CanDoItNow())
+            UserMessage.CreateCantDoItNowMessage(BattleButton.Content.ToString());
+        else if (Player.Manchkin.IsDead)
             UserMessage.CreateDeathWearingMessage();
         else
         {
@@ -470,7 +486,10 @@ public partial class PlayerWindow : Window
 
     private void ChangeHatButtonClick(object sender, RoutedEventArgs e)
     {
-        if (Player.Manchkin.IsDead)
+        if(ReferenceEquals(BattleButton.Content, "БОЙ"))
+            UserMessage.CreateCantDoItNowMessage(BattleButton.Content.ToString());
+        else if (Player.Manchkin.IsDead)
+
             UserMessage.CreateDeathActionMessage();
         else
             ChangeStuff("головняк", Player.Manchkin.WornHat);
@@ -478,7 +497,9 @@ public partial class PlayerWindow : Window
 
     private void LostHatButtonClick(object sender, RoutedEventArgs e)
     {
-        if (Player.Manchkin.IsDead)
+        if(!CanDoItNow())
+            UserMessage.CreateCantDoItNowMessage(BattleButton.Content.ToString());
+        else if (Player.Manchkin.IsDead)
             UserMessage.CreateDeathActionMessage();
         else
         {
@@ -603,7 +624,9 @@ public partial class PlayerWindow : Window
 
     private void GetSmallStuffButtonClick(object sender, RoutedEventArgs e)
     {
-        if (Player.Manchkin.IsDead)
+        if(ReferenceEquals(BattleButton.Content, "БОЙ"))
+            UserMessage.CreateCantDoItNowMessage(BattleButton.Content.ToString());
+        else if (Player.Manchkin.IsDead)
             UserMessage.CreateDeathActionMessage();
         else
         {
@@ -616,7 +639,9 @@ public partial class PlayerWindow : Window
 
     private void LostSmallStuffButtonClick(object sender, RoutedEventArgs e)
     {
-        if (Player.Manchkin.IsDead)
+        if(!CanDoItNow())
+            UserMessage.CreateCantDoItNowMessage(BattleButton.Content.ToString());
+        else if (Player.Manchkin.IsDead)
             UserMessage.CreateDeathWearingMessage();
         else
         {
@@ -651,7 +676,9 @@ public partial class PlayerWindow : Window
 
     private void GetHugeStuffButtonClick(object sender, RoutedEventArgs e)
     {
-        if (Player.Manchkin.IsDead)
+        if(ReferenceEquals(BattleButton.Content, "БОЙ"))
+            UserMessage.CreateCantDoItNowMessage(BattleButton.Content.ToString());
+        else if (Player.Manchkin.IsDead)
             UserMessage.CreateDeathActionMessage();
         else
         {
@@ -664,7 +691,9 @@ public partial class PlayerWindow : Window
 
     private void LostHugeStuffButtonClick(object sender, RoutedEventArgs e)
     {
-        if (Player.Manchkin.IsDead)
+        if(!CanDoItNow())
+            UserMessage.CreateCantDoItNowMessage(BattleButton.Content.ToString());
+        else if (Player.Manchkin.IsDead)
             UserMessage.CreateDeathWearingMessage();
         else
         {
@@ -682,7 +711,11 @@ public partial class PlayerWindow : Window
 
     private void SellStuffButtonClick(object sender, RoutedEventArgs e)
     {
-        if (Player.Manchkin.IsDead)
+        if(ReferenceEquals(MoveButton.Content, "ЧУЖОЙ ХОД"))
+            UserMessage.CreateCantDoItNowMessage(MoveButton.Content.ToString());
+        else if (ReferenceEquals(BattleButton.Content, "БОЙ"))
+            UserMessage.CreateCantDoItNowMessage(BattleButton.Content.ToString());
+        else if (Player.Manchkin.IsDead)
             UserMessage.CreateDeathWearingMessage();
         else
         {
@@ -728,6 +761,8 @@ public partial class PlayerWindow : Window
 
     #region Auxiliary methods
 
+    private bool CanDoItNow()
+        => !ReferenceEquals(BattleButton.Content, "БОЙ") || UserMessage.CreateLostOrTakeOffMessage();
     private void RefreshPossibilities()
     {
         if (ReferenceEquals(MoveButton.Content, "МОЙ ХОД"))

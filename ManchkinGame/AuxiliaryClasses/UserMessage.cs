@@ -17,6 +17,17 @@ public static class UserMessage
         return answer == MessageBoxResult.Yes;
     }
     
+    public static bool CreateLostOrTakeOffMessage()
+    {
+        var answer = MessageBox.Show( 
+            "Если ты теряешь шмотку по принуждению, нажми Yes, иначе No",
+            "ЧТО ТЫ ДЕЛАЕШЬ", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+        return answer == MessageBoxResult.Yes;
+    }
+
+    public static void CreateCantDoItNowMessage(string mess)
+        => CreateInfoMessage(String.Format("Ты не можешь сделать это сейчас, потому что сейчас {0}", mess), "ОЙ");
+    
     public static bool CreateChangeBothWeaponMessage(string takenWeapon)
     {
         
@@ -91,6 +102,7 @@ public static class UserMessage
     
     public static void CreateAlreadyLostWeapon()
         => CreateInfoMessage("Ты уже потерял оруие в этой руке!", "ОЙ!");
+    
 
     public static void CreateHalfCleanMessage(string mess)
         => CreateInfoMessage(String.Format("Ты уже чистый {0}", mess), mess);

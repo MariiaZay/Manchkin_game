@@ -312,7 +312,7 @@
                             Grid.Row="0"
                             Name="ToSellButton"
                             Margin="0,0,4.4,0"
-                            Style="{DynamicResource RoundedGreenButtonStyle}"
+                            Style="{DynamicResource RoundedNotActiveGreenButtonStyle}"
                             >
                             ОТПРАВИТЬ НА ПРОДАЖУ
                         </Button>
@@ -321,7 +321,7 @@
                             Grid.Column="1"
                             Name="ShowStuffButton"
                             Margin="4.4,0,0,0"
-                            Style="{DynamicResource RoundedGreenButtonStyle}"
+                            Style="{DynamicResource RoundedNotActiveGreenButtonStyle}"
                             >
                             ПОСМОРЕТЬ ШМОТКУ
                         </Button>
@@ -372,9 +372,10 @@
                         </Button>
 
                         <Button
+                            Name="SellButton"
                             Grid.Column="1"
-                            Margin="4.4,0,0,0"
-                            Style="{DynamicResource RoundedGreenButtonStyle}"
+                            Margin="4.4,0,4.4,0"
+                            Style="{DynamicResource RoundedNotActiveGreenButtonStyle}"
                             >
                             ПРОДАТЬ
                         </Button>

@@ -15,25 +15,39 @@ public partial class SellWindow : Window
     private IManchkin _manchkin;
     private List<IStuff> _variants;
     private int _price;
+    private List<IStuff> _stackPanelContent;
     public SellWindow()
     {
         InitializeComponent();
         _manchkin = App.Current.Resources["MANCHKIN"] as IManchkin;
         _price = 0;
+        
+        _stackPanelContent = new List<IStuff>();
+        
         _variants = new List<IStuff>();
         _variants.AddRange(_manchkin.SmallStuffs);
         _variants.AddRange(_manchkin.HugeStuffs);
-        if (_manchkin.Race is Halfling && _manchkin.DoublePrice)
-            SellDoublePriceButton.Style = (Style) FindResource("RoundedGreenButtonStyle");
         
         StuffComboBox.Loaded += StuffComboBoxLoaded;
+        StuffComboBox.DropDownClosed += StuffComboBoxDropDownClosed;
+        
         ShowStuffButton.Click += ShowStuffButtonClick;
         ToSellButton.Click += ToSellButtonClick;
-        
+
+        DeleteButton.Click += DeleteButtonClick;
         
         SellAllButton.Click += SellAllButtonClick;
         CancelButton.Click += CancelButtonClick;
     }
+
+    private void DeleteButtonClick(object sender, RoutedEventArgs e)
+    {
+        if(StuffStackPanel.Children.Count == 0)
+            UserMessage.CreateCantDoItNowMessage("нет шмоток на продажу");
+        else
+            RemoveStuffFromSell();
+    }
+
 
     private void ToSellButtonClick(object sender, RoutedEventArgs e)
     {
@@ -45,8 +59,10 @@ public partial class SellWindow : Window
         {
             var stuff = _variants.FirstOrDefault(vari => vari.TextRepresentation == StuffComboBox.Text);
             AddStuffToSell(stuff);
+            
             _variants.Remove(stuff);
             RefreshComboBox();
+            RefreshButtons();
         }
     }
 
@@ -83,19 +99,30 @@ public partial class SellWindow : Window
             StuffComboBox.Items.Add(variant.TextRepresentation);
     }
     
+    private void StuffComboBoxDropDownClosed(object? sender, EventArgs e)
+        => RefreshButtons();
+    
+    
     private void RefreshComboBox()
     {
         StuffComboBox.Items.Clear();
         foreach (var variant in _variants)
             StuffComboBox.Items.Add(variant.TextRepresentation);
-        if(_variants.Count == 0)
-            ToSellButton.Style = (Style) FindResource("RoundedNotActiveGreenButtonStyle");
+        RefreshButtons();
+    }
+
+    private void RefreshStackPanel()
+    {
+        StuffStackPanel.Children.Clear();
+        foreach (var content in _stackPanelContent)
+            AddStuffToSell(content);
+        RefreshButtons();
     }
 
     private void AddStuffToSell(IStuff stuff)
     {
         var grid = new Grid();
-        
+        _stackPanelContent.Add(stuff);
         grid.Margin = StuffStackPanel.Children.Count == 0
             ? new Thickness(0, 0, 0, 4.4)
             : new Thickness(0, 4.4, 0, 4.4);
@@ -125,13 +152,25 @@ public partial class SellWindow : Window
         
         StuffScrollView.Content = StuffStackPanel;
         DeleteButton.Style = (Style) FindResource("RoundedRedButtonStyle");
+        SellButton.Style = (Style) FindResource("RoundedGreenButtonStyle");
     }
 
-    private void RemoveStuffFromSell(IStuff stuff)
+    private void RemoveStuffFromSell()
     {
-        throw new NotImplementedException();
+        App.Current.Resources["STUFFS"] = _stackPanelContent;
+        
+        DialogWindow.Show(new ReturnStuffWindow(), this);
+        var choosen = App.Current.Resources["CHOOSEN"] as IStuff;
+        
+        if (choosen == null) return;
+        
+        _stackPanelContent.Remove(choosen);
+        _variants.Add(choosen);
+        
+        RefreshComboBox();
+        RefreshStackPanel();
     }
-    
+
     private void ShowStuff(IStuff stuff)
     {
         if(stuff == null)
@@ -152,4 +191,25 @@ public partial class SellWindow : Window
     }
     private void CancelButtonClick(object sender, RoutedEventArgs e)
         => Close();
+
+    private void RefreshButtons()
+    {
+        ToSellButton.Style = ShowStuffButton.Style = 
+            _variants.Count == 0 || StuffComboBox.Text == ""
+            ? (Style) FindResource("RoundedNotActiveGreenButtonStyle")
+            : (Style) FindResource("RoundedGreenButtonStyle");
+        
+        SellDoublePriceButton.Style = _manchkin.Race is Halfling && _manchkin.DoublePrice
+            ? (Style) FindResource("RoundedGreenButtonStyle")
+            : (Style) FindResource("RoundedNotActiveGreenButtonStyle");
+        
+        SellButton.Style = StuffStackPanel.Children.Count == 0
+            ? (Style) FindResource("RoundedNotActiveGreenButtonStyle")
+            : (Style) FindResource("RoundedGreenButtonStyle");
+        
+        DeleteButton.Style = StuffStackPanel.Children.Count == 0
+            ? (Style) FindResource("RoundedNotActiveRedButtonStyle")
+            : (Style) FindResource("RoundedRedButtonStyle");
+
+    }
 }

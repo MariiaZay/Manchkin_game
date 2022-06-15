@@ -18,7 +18,7 @@ public class SuperManchkinTests
     }
 
     [Test]
-    public void BecomeSuperManchkin_Became1()
+    public void BecomeSuperManchkin_WithoutSecondClass_BecameAndUpdateSpecialParameters()
     {
         _manchkin.BecameSuperManchkin();
 
@@ -31,7 +31,7 @@ public class SuperManchkinTests
     }
 
     [Test]
-    public void BecomeSuperManchkin_Became2()
+    public void BecomeSuperManchkin_WithSecondClass_BecameAndUpdateSpecialParameters()
     {
         var desc = _manchkin.Descriptions;
         var thief = new Thief();
@@ -49,7 +49,7 @@ public class SuperManchkinTests
     }
 
     [Test]
-    public void RefuseSuperManchkin_Refuse1()
+    public void RefuseSuperManchkin_WithoutSecondClass_Refuse()
     {
         _manchkin.BecameSuperManchkin();
         _manchkin.RefuseSuperManchkin();
@@ -58,7 +58,7 @@ public class SuperManchkinTests
     }
 
     [Test]
-    public void RefuseSuperManchkin_Refuse2()
+    public void RefuseSuperManchkin_WithSecondClass_RefuseAndUpdateSpecialParameters()
     {
         var manchkinDesc = _manchkin.Descriptions.ToArray();
         var thief = new Thief();
@@ -74,7 +74,7 @@ public class SuperManchkinTests
     }
 
     [Test]
-    public void RefuseSuperManchkin_Refuse3()
+    public void RefuseSuperManchkin_ManchkinIsNotSuperManchkin_NothingHappens()
     {
         Assert.That(_manchkin.IsSuperManchkin, Is.False);
 

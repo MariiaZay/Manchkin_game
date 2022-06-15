@@ -36,7 +36,7 @@ public class LevelTests
     }
 
     [Test]
-    public void GetLevel_HasUpperBound10()
+    public void GetLevel_HasUpperBoundTen()
     {
         for (var _ = 0; _ < 10; _++)
             _manchkin.GetLevel();
@@ -68,7 +68,7 @@ public class LevelTests
     }
 
     [Test]
-    public void LostLevel_HasLowerBound1()
+    public void LostLevel_HasLowerBoundOne()
     {
         Assert.That(_manchkin.Level, Is.EqualTo(1));
 

@@ -62,7 +62,7 @@ public class RaceTests
     // }
 
     [Test]
-    public void ChangeRaceWhenManchkinIsHalfBlood_UpdatingRelevantParametersAndRefuseHalfblood()
+    public void ChangeRace_ManchkinIsHalfBlood_UpdatingRelevantParametersAndRefuseHalfblood()
     {
         var elf = new Elf();
 

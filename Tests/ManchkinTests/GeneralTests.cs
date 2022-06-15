@@ -77,7 +77,7 @@ public class GeneralTests
     }
 
     [Test]
-    public void RecalculateDamageWithoutMercenaries_Works()
+    public void RecalculateDamage_WithoutMercenaries_UpdateDamage()
     {
         var smallStuff = new GreatTitle();
         var hugeStuff = new Stepladder { Cheat = true };
@@ -92,7 +92,7 @@ public class GeneralTests
     }
 
     [Test]
-    public void RecalculateDamageWithMercenaries_Works()
+    public void RecalculateDamage_WithMercenaries_UpdateDamage()
     {
         var smallStuff = new GreatTitle();
         var hugeStuff = new Stepladder { Cheat = true };
@@ -118,7 +118,7 @@ public class GeneralTests
 
     [TestCase(true)]
     [TestCase(false)]
-    public void RecalculateFlushingBonusWithoutMercenaries_Works(bool isElf)
+    public void RecalculateFlushingBonus_WithoutMercenaries_UpdateFlushingBonus(bool isElf)
     {
         if (isElf)
             _manchkin.Race = new Elf();
@@ -138,7 +138,7 @@ public class GeneralTests
 
     [TestCase(true)]
     [TestCase(false)]
-    public void RecalculateFlushingBonusWithMercenaries_Works(bool isElf)
+    public void RecalculateFlushingBonus_WithMercenaries_UpdateFlushingBonus(bool isElf)
     {
         if (isElf)
             _manchkin.Race = new Elf();
@@ -161,4 +161,7 @@ public class GeneralTests
 
         Assert.That(_manchkin.FlushingBonus, Is.EqualTo(expectedFlushingBonus));
     }
+    
+    // [Test]
+    // public void 
 }

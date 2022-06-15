@@ -17,7 +17,7 @@ public class ClassTests
     }
 
     [Test]
-    public void ChangeClassWhenOriginClassIsNobody_UpdateClassAndDescriptions()
+    public void ChangeClass_OriginClassIsNobody_UpdateClassAndDescriptions()
     {
         var thief = new Thief();
         var nobody = new Nobody();
@@ -38,7 +38,7 @@ public class ClassTests
     }
 
     [Test]
-    public void ChangeClassWhenOriginClassIsNotNobody_UpdateClassAndDescriptions()
+    public void ChangeClass_OriginClassIsNotNobody_UpdateClassAndDescriptions()
     {
         var thief = new Thief();
 
@@ -53,7 +53,7 @@ public class ClassTests
     }
 
     [Test]
-    public void ChangeClassWhenOriginClassIsNotNobodyAndManchkinIsSuperManchkin_UpdateClassAndSpecialParameters()
+    public void ChangeClass_OriginClassIsNotNobodyAndManchkinIsSuperManchkin_UpdateClassAndSpecialParameters()
     {
         var thief = new Thief();
 

@@ -19,7 +19,7 @@ public class MercenaryTests
 
     [TestCase(true)]
     [TestCase(false)]
-    public void GetMercenary_GetMercenaryTrue(bool withStuff)
+    public void GetMercenary_HasMercenaryIsTrue(bool withStuff)
     {
         if (withStuff)
             _manchkin.GetMercenary(new Bow());

@@ -176,6 +176,7 @@ public class Manchkin : IManchkin
     {
         LostAllStuffs();
         RecalculateParameters();
+        IsDead = true;
     }
 
     public void GetLevel()

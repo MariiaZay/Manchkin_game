@@ -758,9 +758,7 @@ public class Manchkin : IManchkin
         PurchaseDescriptions(second.Descriptions);
     }
 
-    public void BecameHalfBlood()
-        => HalfBlood = new Halfblood();
-
+    public void BecameHalfBlood() => HalfBlood = new Halfblood();
 
     public void RefuseHalfblood()
     {

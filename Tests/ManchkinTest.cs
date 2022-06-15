@@ -142,6 +142,18 @@ public class ManchkinTest
     }
 
     [Test]
+    public void Manchkin_RefuseSuperManchkin_Refuse3()
+    {
+        var manchkin = new Manchkin(Genders.FEMALE);
+
+        Assert.That(manchkin.IsSuperManchkin, Is.False);
+
+        manchkin.RefuseSuperManchkin();
+
+        Assert.That(manchkin.IsSuperManchkin, Is.False);
+    }
+
+    [Test]
     public void Manchkin_BecomeHalfblood_Became()
     {
         var manchkin = new Manchkin(Genders.FEMALE);
@@ -153,6 +165,7 @@ public class ManchkinTest
         Assert.Multiple(() =>
         {
             Assert.That(manchkin.IsHalfBlood, Is.True);
+            Assert.That(manchkin.HalfBlood?.HalfType, Is.EqualTo(HalfTypes.SINGLE_CLEAN));
             Assert.That(manchkin.HalfBlood?.SecondRace, Is.Null);
         });
     }
@@ -170,22 +183,45 @@ public class ManchkinTest
         Assert.Multiple(() =>
         {
             Assert.That(manchkin.IsHalfBlood, Is.True);
+            Assert.That(manchkin.HalfBlood?.HalfType, Is.EqualTo(HalfTypes.BOTH));
             Assert.That(manchkin.HalfBlood?.SecondRace, Is.EqualTo(secondRace));
         });
     }
 
     [Test]
-    public void Manchkin_RefuseHalfblood_Works()
+    public void Manchkin_RefuseHalfblood_Works1()
     {
         var manchkin = new Manchkin(Genders.MALE);
 
-        manchkin.BecameHalfBlood();
-
-        Assert.That(manchkin.IsHalfBlood, Is.True);
+        Assert.That(manchkin.IsHalfBlood, Is.False);
 
         manchkin.RefuseHalfblood();
 
         Assert.That(manchkin.IsHalfBlood, Is.False);
+    }
+
+    [Test]
+    public void Manchkin_RefuseHalfblood_Works2()
+    {
+        var manchkin = new Manchkin(Genders.MALE);
+
+        manchkin.BecameHalfBlood();
+        manchkin.RefuseHalfblood();
+
+        Assert.That(manchkin.IsHalfBlood, Is.False);
+    }
+
+    [Test]
+    public void Manchkin_RefuseHalfblood_LostDescriptions()
+    {
+        var manchkin = new Manchkin(Genders.MALE);
+        var manchkinDesc = manchkin.Descriptions;
+        var secondRace = new Dwarf();
+
+        manchkin.BecameHalfBlood(secondRace);
+        manchkin.RefuseHalfblood();
+
+        Assert.That(manchkin.Descriptions, Is.EqualTo(manchkinDesc));
     }
 
     [Test]

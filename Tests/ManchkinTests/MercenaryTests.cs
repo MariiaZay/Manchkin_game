@@ -19,7 +19,7 @@ public class MercenaryTests
 
     [TestCase(true)]
     [TestCase(false)]
-    public void Manchkin_GetMercenary_GetMercenaryTrue(bool withStuff)
+    public void GetMercenary_GetMercenaryTrue(bool withStuff)
     {
         if (withStuff)
             _manchkin.GetMercenary(new Bow());
@@ -30,7 +30,7 @@ public class MercenaryTests
     }
 
     [Test]
-    public void Manchkin_GiveToMercenary_EquipmentChanges()
+    public void GiveToMercenary_EquipmentChanges()
     {
         _manchkin.GetMercenary();
         var mercenary = _manchkin.Mercenaries.First();

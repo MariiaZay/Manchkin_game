@@ -16,7 +16,7 @@ public class LevelTests
     }
 
     [Test]
-    public void Manchkin_GetLevel_IncreasesLevel()
+    public void GetLevel_IncreasesLevel()
     {
         var originLevel = _manchkin.Level;
 
@@ -26,7 +26,7 @@ public class LevelTests
     }
 
     [Test]
-    public void Manchkin_GetLevel_IncreasesDamage()
+    public void GetLevel_IncreasesDamage()
     {
         var originDamage = _manchkin.Damage;
 
@@ -36,7 +36,7 @@ public class LevelTests
     }
 
     [Test]
-    public void Manchkin_GetLevel_HasUpperBound10()
+    public void GetLevel_HasUpperBound10()
     {
         for (var _ = 0; _ < 10; _++)
             _manchkin.GetLevel();
@@ -48,7 +48,7 @@ public class LevelTests
     }
 
     [Test]
-    public void Manchkin_LostLevel_DecreasesLevel()
+    public void LostLevel_DecreasesLevel()
     {
         _manchkin.GetLevel();
         var originLevel = _manchkin.Level;
@@ -58,7 +58,7 @@ public class LevelTests
     }
 
     [Test]
-    public void Manchkin_LostLevel_DecreasesDamage()
+    public void LostLevel_DecreasesDamage()
     {
         _manchkin.GetLevel();
         var originDamage = _manchkin.Damage;
@@ -68,7 +68,7 @@ public class LevelTests
     }
 
     [Test]
-    public void Manchkin_LostLevel_HasLowerBound1()
+    public void LostLevel_HasLowerBound1()
     {
         Assert.That(_manchkin.Level, Is.EqualTo(1));
 

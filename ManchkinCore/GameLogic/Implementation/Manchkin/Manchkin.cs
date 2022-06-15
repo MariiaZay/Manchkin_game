@@ -143,8 +143,7 @@ public class Manchkin : IManchkin
 
         return race;
     }
-
-
+    
     public void RecalculateDamage()
     {
         Damage = 0;

@@ -17,7 +17,7 @@ public class StuffsTests
     }
 
     [Test]
-    public void Manchkin_ToDie_LosesAllStuff()
+    public void ToDie_LosesAllStuff()
     {
         for (var _ = 0; _ < 9; _++)
             _manchkin.GetLevel();
@@ -38,7 +38,7 @@ public class StuffsTests
     }
 
     [Test]
-    public void Manchkin_SellStuffs_Works()
+    public void SellStuffs_Works()
     {
         var stuffs = new List<IStuff?> { new HelmetOfCourage(), new LeatherArmor(), new MightyShoes() };
         var expectedLevel = _manchkin.Level + stuffs.Select(st => st!.Price).Sum() / 1000;
@@ -51,7 +51,7 @@ public class StuffsTests
     }
 
     [Test]
-    public void Manchkin_SellByDoublePriceStuffs_Works()
+    public void SellByDoublePriceStuffs_Works()
     {
         var stuffs = new List<IStuff?> { new HelmetOfCourage(), new LeatherArmor(), new MightyShoes() };
         var expectedLevel = _manchkin.Level + stuffs.Select(st => st!.Price * 2 / 1000).Sum();

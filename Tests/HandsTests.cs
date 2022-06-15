@@ -6,7 +6,7 @@ namespace Tests;
 public class HandsTests
 {
     [Test]
-    public void Hands_TakeInHands_Works()
+    public void TakeInHands_Works()
     {
         var hands = new Hands();
         var weapon1 = new BastardSword();
@@ -23,7 +23,7 @@ public class HandsTests
     }
 
     [Test]
-    public void Hands_TakeInBothHands_Works()
+    public void TakeInBothHands_Works()
     {
         var hands = new Hands();
         var weapon = new BastardSword();
@@ -38,7 +38,7 @@ public class HandsTests
     }
 
     [Test]
-    public void Hands_DropStuffsFromHands_Works()
+    public void DropStuffsFromHands_Works()
     {
         var hands = new Hands();
         var weapon = new BastardSword();

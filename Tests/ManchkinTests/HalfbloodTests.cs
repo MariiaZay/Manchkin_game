@@ -18,7 +18,7 @@ public class HalfbloodTests
     }
 
     [Test]
-    public void Manchkin_BecomeHalfblood_Became()
+    public void BecomeHalfblood_Became()
     {
         Assert.That(_manchkin.IsHalfBlood, Is.False);
 
@@ -33,7 +33,7 @@ public class HalfbloodTests
     }
 
     [Test]
-    public void Manchkin_BecomeHalfblood_Became2()
+    public void BecomeHalfblood_Became2()
     {
         var secondRace = new Dwarf();
 
@@ -50,7 +50,7 @@ public class HalfbloodTests
     }
 
     [Test]
-    public void Manchkin_RefuseHalfblood_Works1()
+    public void RefuseHalfblood_Works1()
     {
         Assert.That(_manchkin.IsHalfBlood, Is.False);
 
@@ -60,7 +60,7 @@ public class HalfbloodTests
     }
 
     [Test]
-    public void Manchkin_RefuseHalfblood_Works2()
+    public void RefuseHalfblood_Works2()
     {
         _manchkin.BecameHalfBlood();
         _manchkin.RefuseHalfblood();
@@ -69,7 +69,7 @@ public class HalfbloodTests
     }
 
     [Test]
-    public void Manchkin_RefuseHalfblood_LostDescriptions()
+    public void RefuseHalfblood_LostDescriptions()
     {
         var manchkinDesc = _manchkin.Descriptions;
         var secondRace = new Dwarf();

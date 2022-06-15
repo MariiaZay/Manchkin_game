@@ -18,7 +18,7 @@ public class GeneralTests
     }
 
     [Test]
-    public void Manchkin_Create_PropertiesValuesAreAdequate()
+    public void Create_PropertiesValuesAreAdequate()
     {
         Assert.Multiple(() =>
         {
@@ -51,7 +51,7 @@ public class GeneralTests
     }
 
     [Test]
-    public void Manchkin_ChangeGender_Works()
+    public void ChangeGender_Works()
     {
         var manchkinMale = new Manchkin(Genders.MALE);
         var manchkinFemale = new Manchkin(Genders.FEMALE);
@@ -67,49 +67,7 @@ public class GeneralTests
     }
 
     [Test]
-    public void Manchkin_ChangeRace_Works()
-    {
-        var elf = new Elf();
-        var human = new Human();
-
-        Assert.Multiple(() =>
-        {
-            Assert.That(_manchkin.Race, Is.InstanceOf<Human>());
-            Assert.That(_manchkin.Descriptions, Is.EqualTo(human.Descriptions));
-        });
-
-        _manchkin.Race = elf;
-
-        Assert.Multiple(() =>
-        {
-            Assert.That(_manchkin.Race, Is.InstanceOf<Elf>());
-            Assert.That(_manchkin.Descriptions, Is.EqualTo(elf.Descriptions));
-        });
-    }
-
-    [Test]
-    public void Manchkin_ChangeClass_Works()
-    {
-        var thief = new Thief();
-        var nobody = new Nobody();
-
-        Assert.Multiple(() =>
-        {
-            Assert.That(_manchkin.Class, Is.InstanceOf<Nobody>());
-            Assert.That(_manchkin.Descriptions, Is.EqualTo(nobody.Descriptions));
-        });
-
-        _manchkin.Class = thief;
-
-        Assert.Multiple(() =>
-        {
-            Assert.That(_manchkin.Class, Is.InstanceOf<Thief>());
-            Assert.That(_manchkin.Descriptions, Is.EqualTo(thief.Descriptions));
-        });
-    }
-
-    [Test]
-    public void Manchkin_ToDie_HeIsDead()
+    public void ToDie_HeIsDead()
     {
         Assert.That(_manchkin.IsDead, Is.False);
 
@@ -119,7 +77,7 @@ public class GeneralTests
     }
 
     [Test]
-    public void Manchkin_RecalculateDamageWithoutMercenaries_Works()
+    public void RecalculateDamageWithoutMercenaries_Works()
     {
         var smallStuff = new GreatTitle();
         var hugeStuff = new Stepladder { Cheat = true };
@@ -134,7 +92,7 @@ public class GeneralTests
     }
 
     [Test]
-    public void Manchkin_RecalculateDamageWithMercenaries_Works()
+    public void RecalculateDamageWithMercenaries_Works()
     {
         var smallStuff = new GreatTitle();
         var hugeStuff = new Stepladder { Cheat = true };
@@ -160,7 +118,7 @@ public class GeneralTests
 
     [TestCase(true)]
     [TestCase(false)]
-    public void Manchkin_RecalculateFlushingBonusWithoutMercenaries_Works(bool isElf)
+    public void RecalculateFlushingBonusWithoutMercenaries_Works(bool isElf)
     {
         if (isElf)
             _manchkin.Race = new Elf();
@@ -180,7 +138,7 @@ public class GeneralTests
 
     [TestCase(true)]
     [TestCase(false)]
-    public void Manchkin_RecalculateFlushingBonusWithMercenaries_Works(bool isElf)
+    public void RecalculateFlushingBonusWithMercenaries_Works(bool isElf)
     {
         if (isElf)
             _manchkin.Race = new Elf();

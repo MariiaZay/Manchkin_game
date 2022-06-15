@@ -84,6 +84,36 @@ public class ManchkinTest
     }
 
     [Test]
+    public void Manchkin_LostLevel_DecreasesLevel()
+    {
+        _manchkin.GetLevel();
+        var originLevel = _manchkin.Level;
+        _manchkin.LostLevel();
+
+        Assert.That(_manchkin.Level, Is.LessThan(originLevel));
+    }
+
+    [Test]
+    public void Manchkin_GetLevel_DecreasesDamage()
+    {
+        _manchkin.GetLevel();
+        var originDamage = _manchkin.Damage;
+        _manchkin.LostLevel();
+
+        Assert.That(_manchkin.Damage, Is.LessThan(originDamage));
+    }
+
+    [Test]
+    public void Manchkin_GetLevel_HasLowerBound1()
+    {
+        Assert.That(_manchkin.Level, Is.EqualTo(1));
+
+        _manchkin.LostLevel();
+
+        Assert.That(_manchkin.Level, Is.EqualTo(1));
+    }
+
+    [Test]
     public void Manchkin_BecomeSuperManchkin_Became1()
     {
         _manchkin.BecameSuperManchkin();

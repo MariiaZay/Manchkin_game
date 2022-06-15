@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Linq;
 using System.Windows;
+using ManchkinGame;
 using ManchkinCore;
 using ManchkinCore.Enums.Accessory;
-using ManchkinCore.GameLogic;
 using ManchkinCore.Implementation;
 using ManchkinCore.Interfaces;
 using ManchkinGame.DialogWindows;
 
 namespace ManchkinGame.Windows;
 
-public partial class PlayerWindow
+public partial class PlayerWindow : Window
 {
     private Player Player { get; }
-
+    
     public PlayerWindow()
     {
         InitializeComponent();

@@ -14,12 +14,14 @@ public partial class ChooseWindow : Window
 {
     private string _typeOfVariants;
     private List<IDescriptable> _variants;
+    private IManchkin _manchkin;
     private string _current;
 
     public ChooseWindow()
     {
         InitializeComponent();
         _typeOfVariants = App.Current.Resources["TYPE_OF_VARIANTS"].ToString();
+        _manchkin = Application.Current.Resources["MANCHKIN"] as IManchkin;
         _current = App.Current.Resources["CURRENT"].ToString();
 
         _variants = _typeOfVariants switch
@@ -37,8 +39,26 @@ public partial class ChooseWindow : Window
 
     private void VariantsComboBoxLoaded(object sender, RoutedEventArgs e)
     {
+        var extra = _typeOfVariants switch
+        {
+            "расу" =>  _manchkin.IsHalfBlood && _manchkin.HalfBlood.SecondRace != null 
+                ? _manchkin.HalfBlood.SecondRace.TextRepresentation
+                : "",
+            "класс" => _manchkin.IsSuperManchkin && _manchkin.SuperManchkin.SecondClass != null 
+                ? _manchkin.SuperManchkin.SecondClass.TextRepresentation
+                : ""
+        };
+        
+        var empty = _typeOfVariants switch
+        {
+            "расу" =>  "человек",
+            "класс" => "никто"
+        };
         foreach (var variant in
-                 _variants.Where(variant => _current != variant.TextRepresentation))
+                 _variants.Where(variant => _current != variant.TextRepresentation 
+                                            && extra != variant.TextRepresentation
+                                            && empty != variant.TextRepresentation
+                                            ))
         {
             VariantsComboBox.Items.Add(variant.TextRepresentation);
         }

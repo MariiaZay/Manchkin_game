@@ -131,7 +131,7 @@ public class Manchkin : IManchkin
     {
         if (IsNull(_class)) return manClass;
 
-        if(IsSuperManchkin)
+        if(IsSuperManchkin && IsNull(SuperManchkin.SecondClass))
             RefuseSuperManchkin();
         LostDescriptions(Class.Descriptions);
         PurchaseDescriptions(manClass.Descriptions);
@@ -142,8 +142,31 @@ public class Manchkin : IManchkin
     public void RecalculateParameters()
     {
         RemoveUnsuitableStuff();
+        RecalculateStats();
         RecalculateDamage();
         RecalculateFlushingBonus();
+    }
+
+    public void RecalculateStats()
+    {
+        if (IsHalfBlood && !IsNull(HalfBlood.SecondRace))
+        {
+            CardsCount = HalfBlood.SecondRace.CardCount > Race.CardCount 
+                ? HalfBlood.SecondRace.CardCount
+                : Race.CardCount;
+            
+            FlushingBonus = HalfBlood.SecondRace.FlushingBonus > Race.FlushingBonus 
+                ? HalfBlood.SecondRace.FlushingBonus
+                : Race.FlushingBonus;
+
+            DoublePrice = HalfBlood.SecondRace.CellingByDoublePrice;
+        }
+        else
+        {
+            CardsCount = Race.CardCount;
+            FlushingBonus = Race.FlushingBonus;
+            DoublePrice = Race.CellingByDoublePrice;
+        }
     }
 
     public IRace? ChangeRace(IRace? race)
@@ -154,7 +177,7 @@ public class Manchkin : IManchkin
 
         if (IsNull(Race)) return race;
         
-        if(IsHalfBlood) RefuseHalfblood();
+        if(IsHalfBlood && IsNull(HalfBlood.SecondRace)) RefuseHalfblood();
         LostDescriptions(Race.Descriptions);
         PurchaseDescriptions(race.Descriptions);
 
@@ -790,11 +813,14 @@ public class Manchkin : IManchkin
             .SetSecondRace(second)
             .Build();
         PurchaseDescriptions(second.Descriptions);
+        RecalculateStats();
     }
 
-    public void BecameHalfBlood() => HalfBlood = _halfbloodFactory
-        .ResetSecondRace()
-        .Build();
+    public void BecameHalfBlood(){
+        HalfBlood = _halfbloodFactory
+            .ResetSecondRace()
+            .Build();
+    }
 
 
     public void RefuseHalfblood()
@@ -818,11 +844,16 @@ public class Manchkin : IManchkin
             .SetSecondClass(second)
             .Build();
         PurchaseDescriptions(second.Descriptions);
+        RecalculateStats();
     }
 
-    public void BecameSuperManchkin() => SuperManchkin = _superManchkinFactory
-        .ResetSecondClass()
-        .Build();
+    public void BecameSuperManchkin()
+    {
+        SuperManchkin = _superManchkinFactory
+            .ResetSecondClass()
+            .Build();
+        
+    }
 
     public void RefuseSuperManchkin()
     {

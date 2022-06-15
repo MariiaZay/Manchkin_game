@@ -724,6 +724,7 @@ public partial class PlayerWindow : Window
         {
             App.Current.Resources["MANCHKIN"] = Player.Manchkin;
             DialogWindow.Show(new SellWindow(), this);
+            Refresh();
         }
     }
 

@@ -200,6 +200,15 @@ public class Manchkin : IManchkin
         RecalculateDamage();
     }
 
+    public void GetLevel(int level)
+    {
+        if (Level + level < 10)
+            Level += level;
+        else
+            Level = 9;
+        RecalculateDamage();
+    }
+
 
     public void LostLevel()
     {
@@ -729,22 +738,25 @@ public class Manchkin : IManchkin
         }
     }
 
-    public void SellStuffs(List<IStuff?> stuffs)
+    public int SellStuffs(List<IStuff?> stuffs)
     {
         var price = 0;
-        foreach (var stuff in stuffs)
+        while (stuffs.Count != 0)
         {
+            var stuff = stuffs.Last();
             price += stuff.Price;
             LostStuff(stuff);
+            stuffs.Remove(stuff);
         }
-
-        Level += price / 1000;
+        return price / 1000;
     }
 
-    public void SellByDoublePrice(IStuff? stuff)
+    public int SellByDoublePrice(IStuff? stuff)
     {
-        Level += stuff.Price * 2 / 1000;
+        if (IsNull(stuff)) return 0;
+        var price = stuff.Price * 2 / 1000;
         LostStuff(stuff);
+        return price;
     }
 
     #endregion

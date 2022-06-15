@@ -82,10 +82,7 @@ public partial class WearingWindow : Window
             case "броник":
             case "обувка":
             case "головняк":
-                if (_current == "")
-                    ok = true;
-                else
-                    ok = UserMessage.CreateChangeEquipmentMessage(_current, VariantsComboBox.Text);
+                ok = _current == "" || UserMessage.CreateChangeEquipmentMessage(_current, VariantsComboBox.Text);
                 break;
             case "оружие":
                 if (_manchkin.Hands.LeftHand == null && _manchkin.Hands.RightHand == null)

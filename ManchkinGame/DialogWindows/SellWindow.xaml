@@ -183,7 +183,7 @@
             <DropShadowEffect BlurRadius="15" Direction="-100" Color="Tan" Opacity="0.8" />
         </Border.Effect>
 
-        <Grid Margin="8.8" ShowGridLines="True">
+        <Grid Margin="8.8" >
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.15*"></RowDefinition>
@@ -195,7 +195,7 @@
                 Grid.Row="0"
                 Margin="0,0,0,4.4"
                 Style="{DynamicResource TextStyle}"
-                FontSize="45"
+                FontSize="40"
                 FontWeight="ExtraBold">
                 Выбери шмотки на продажу
             </TextBlock>
@@ -203,7 +203,7 @@
             <Grid
                 Grid.Row="1"
                 Margin="0,4.4"
-                ShowGridLines="True">
+                >
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
@@ -212,8 +212,7 @@
 
                 <Grid
                     Grid.Column="0"
-                    Margin="0,0,4.4,0"
-                    ShowGridLines="True">
+                    Margin="0,0,4.4,0">
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
                         <RowDefinition Height="0.5*"></RowDefinition>
@@ -225,7 +224,7 @@
                         Name="StuffComboBox"
                         Margin="0,0,0,4.4"
                         Foreground="Black"
-                        FontSize="30"
+                        FontSize="25"
                         
                         VerticalContentAlignment="Center"
                         FontFamily="Comic Sans MS"
@@ -233,7 +232,6 @@
                     </ComboBox>
                     <Grid
                         Grid.Row="2"
-                        ShowGridLines="True"
                         Margin="0,4.4,0,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
@@ -244,7 +242,7 @@
                             Name="ToSellButton"
                             Margin="0,0,4.4,0"
                             Style="{DynamicResource RoundedGreenButtonStyle}"
-                            Height="40">
+                            >
                             ОТПРАВИТЬ НА ПРОДАЖУ
                         </Button>
 
@@ -253,7 +251,7 @@
                             Name="ShowStuffButton"
                             Margin="4.4,0,0,0"
                             Style="{DynamicResource RoundedGreenButtonStyle}"
-                            Height="40">
+                            >
                             ПОСМОРЕТЬ ШМОТКУ
                         </Button>
                     </Grid>
@@ -262,27 +260,33 @@
 
                 <Grid
                     Grid.Column="1"
-                    Margin="4.4,0,0,0"
-                    ShowGridLines="True">
+                    Margin="4.4,0,0,0">
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
-                        <RowDefinition Height="0.15*"></RowDefinition>
+                        <RowDefinition Height="0.2*"></RowDefinition>
                     </Grid.RowDefinitions>
-
-                    <ScrollViewer
-                        Name="StuffScrollView"
+                    <Border
                         Grid.Row="0"
                         Margin="0,0,0,4.4"
-                        CanContentScroll="True">
-                        <StackPanel Name="StuffStackPanel" Margin="0,0,4.4,0">
-                        </StackPanel>
+                        BorderBrush="#FCECDC" 
+                        BorderThickness="3"
+                        CornerRadius="20"
+                        Padding="10">
+                        <ScrollViewer
+                            Name="StuffScrollView"
+                            CanContentScroll="True">
+                            <StackPanel Name="StuffStackPanel" Margin="0,0,4.4,0">
+                            </StackPanel>
 
-                    </ScrollViewer>
+                        </ScrollViewer>
+                    </Border>
+                    
                     <Grid
                         Grid.Row="1"
                         Margin="0,4.4,0,0"
-                        ShowGridLines="True">
+                        >
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
@@ -291,16 +295,24 @@
                             Name="SellDoublePriceButton"
                             Margin="0,0,4.4,0"
                             Style="{DynamicResource RoundedNotActiveGreenButtonStyle}"
-                            Height="40">
-                            ПРОДАТЬ ОДНУ ПО ДВОЙНОЙ ЦЕНЕ
+                            ><TextBlock Text="ПРОДАТЬ ОДНУ ПО ДВОЙНОЙ ЦЕНЕ" TextWrapping="Wrap" HorizontalAlignment="Center" 
+                                        VerticalAlignment="Center"/>
+                            
                         </Button>
 
                         <Button
                             Grid.Column="1"
                             Margin="4.4,0,0,0"
                             Style="{DynamicResource RoundedGreenButtonStyle}"
-                            Height="40">
+                            >
                             ПРОДАТЬ
+                        </Button>
+                        <Button
+                            Grid.Column="2"
+                            Name="DeleteButton"
+                            Margin="4.4,0,0,0"
+                            Style="{DynamicResource RoundedRedButtonStyle}">
+                            УБРАТЬ ЛИШНИЕ
                         </Button>
                     </Grid>
                 </Grid>
@@ -311,7 +323,7 @@
             <Grid
                 Grid.Row="2"
                 Margin="0,4.4,0,0"
-                ShowGridLines="True">
+                >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>

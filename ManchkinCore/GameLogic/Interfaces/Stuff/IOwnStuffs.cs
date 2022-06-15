@@ -46,6 +46,6 @@ public interface IOwnStuffs
     public void LostAllStuffs();
 
     #endregion
-    public void SellStuffs(List<IStuff?> stuffs);
-    public void SellByDoublePrice(IStuff? stuff);
+    public int SellStuffs(List<IStuff?> stuffs);
+    public int SellByDoublePrice(IStuff? stuff);
 }

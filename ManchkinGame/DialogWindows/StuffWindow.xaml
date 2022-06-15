@@ -103,7 +103,7 @@
                 Grid.Row="0"
                 Style="{DynamicResource TextStyle}"
                 FontWeight="ExtraBold"
-                FontSize = "23">
+                FontSize = "20">
             </TextBlock>
             
             <TextBlock

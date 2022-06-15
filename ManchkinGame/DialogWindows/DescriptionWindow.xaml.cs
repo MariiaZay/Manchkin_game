@@ -35,19 +35,24 @@ public partial class DescriptionWindow : Window
                     new Thickness(0, 4.4, 0, 0) 
                     : new Thickness(0, 4.4, 0, 4.4);
             }
+            
             var colDef0 =new ColumnDefinition();
             colDef0.Width = new GridLength(0.05, GridUnitType.Star);
             var colDef1 =new ColumnDefinition();
             grid.ColumnDefinitions.Add(colDef0);
             grid.ColumnDefinitions.Add(colDef1);
             
-            var ellipce = new Ellipse();
-            ellipce.Style = (Style) FindResource("EllipseStyle");
+            var ellipce = new Ellipse
+            {
+                Style = (Style) FindResource("EllipseStyle")
+            };
             Grid.SetColumn(ellipce,0);
 
-            var text = new TextBlock();
-            text.Style = (Style) FindResource("TextStyle");
-            text.Text = desc[i];
+            var text = new TextBlock
+            {
+                Style = (Style) FindResource("TextStyle"),
+                Text = desc[i]
+            };
             Grid.SetColumn(text,1);
 
             grid.Children.Add(ellipce);

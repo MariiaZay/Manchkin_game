@@ -1,11 +1,11 @@
-﻿<Window x:Class="ManchkinGame.DialogWindows.WearingWindow"
+﻿<Window x:Class="ManchkinGame.DialogWindows.ReturnStuffWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:ManchkinGame.DialogWindows"
         mc:Ignorable="d"
-        Title="WearingWindow"
+        Title="ReturnStuffWindow" 
         Height="200"
         Width="800"
         ResizeMode="NoResize"
@@ -188,41 +188,30 @@
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            
+
             <TextBlock
                 Grid.Row="0"
                 Margin="0,0,0,4.4"
                 Style="{DynamicResource TextStyle}"
                 FontWeight="Bold"
-                FontSize="26"
-            >Выберите шмотку</TextBlock>
-            
-            <Grid
-                Grid.Row="1" Margin="0,4.4">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition Width="0.2*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                
-                <ComboBox
-                    Name = "VariantsComboBox"
-                    Grid.Column="0"
-                    Margin="0,0,4.4,0"
-                    BorderThickness="0"
-                    Foreground="Black"
-                    FontSize="20"
-                    VerticalContentAlignment="Center"
-                    FontFamily="Comic Sans MS"
-                    Padding="4.5">
-                </ComboBox>
-                
-                <Button
-                    Name="CheatButton"
-                    Grid.Column="1"
-                    Margin="4.4,0,0,0"
-                    Style="{DynamicResource RoundedGreenButtonStyle}">ЧИТ!</Button>
-            </Grid>
-            
+                FontSize="26">
+                Выберите шмотку
+            </TextBlock>
+
+
+            <ComboBox
+                Name = "StuffComboBox"
+                Grid.Row="1"
+                Margin="0,4.4"
+                BorderThickness="0"
+                Foreground="Black"
+                FontSize="20"
+                VerticalContentAlignment="Center"
+                FontFamily="Comic Sans MS"
+                Padding="4.5">
+            </ComboBox>
+
+
             <Grid Grid.Row="2" Margin="0,4.4,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
@@ -230,18 +219,20 @@
                 </Grid.ColumnDefinitions>
                 <Button
                     Grid.Column="0"
-                    Name="WearingButton"
+                    Name="DeleteButton"
                     Margin="0,0,4.4,0"
-                    Style="{DynamicResource RoundedGreenButtonStyle}"
-                >НАДЕТЬ</Button>
+                    Style="{DynamicResource RoundedGreenButtonStyle}">
+                    УБРАТЬ
+                </Button>
                 <Button
                     Grid.Column="1"
                     Name="CancelButton"
                     Margin="4.4,0,0,0"
-                    Style="{DynamicResource RoundedRedButtonStyle}"
-                >НАЗАД</Button>
+                    Style="{DynamicResource RoundedRedButtonStyle}">
+                    НАЗАД
+                </Button>
             </Grid>
-            
+
         </Grid>
     </Border>
 

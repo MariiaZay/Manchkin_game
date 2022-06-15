@@ -66,6 +66,10 @@ public static class UserMessage
             String.Format("Ты больше не можешь надевать {0} шмотки, так как они кончились в колоде", mess),
             "КОНЧИЛИСЬ КАРТЫ");
     
+    public static void CreateErrorMessage(string mess)
+        => MessageBox.Show(mess,"Некорректный ввод",
+            MessageBoxButton.OK, MessageBoxImage.Error);
+    
     public static void CreateEndStuffForSellingMessage()
         => CreateInfoMessage(
             "Ты уже оправил все шмотки на продажу",

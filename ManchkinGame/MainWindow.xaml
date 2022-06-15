@@ -140,7 +140,7 @@
                     Margin="0,0,0,15"
                     Width="450"
                     HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <TextBox  FontFamily="Comic Sans MS" Name="NameBox" BorderThickness="0" />
+                    <TextBox  FontFamily="Comic Sans MS" Name="NameBox" BorderThickness="0" x:FieldModifier="public" />
                 </Border>
 
                 <Grid
@@ -151,7 +151,7 @@
                         FontFamily="Comic Sans MS"
                         Name="FemaleBottun"
                         Margin="0,0,0, 0"
-                        FontSize="13">
+                        FontSize="13" x:FieldModifier="public">
                         Ж
                     </RadioButton>
 
@@ -159,7 +159,7 @@
                         FontFamily="Comic Sans MS"
                         Name="MaleButton"
                         Margin="0,30,0, 0"
-                        FontSize="13">
+                        FontSize="13" x:FieldModifier="public">
                         M
                     </RadioButton>
                 </Grid>
@@ -177,7 +177,7 @@
                     Width="400"
                     VerticalAlignment="Bottom"
                     HorizontalAlignment="Center"
-                    Style="{DynamicResource RoundedButtonStyle}">
+                    Style="{DynamicResource RoundedButtonStyle}" x:FieldModifier="public">
 
                 </Button>
             </Grid>

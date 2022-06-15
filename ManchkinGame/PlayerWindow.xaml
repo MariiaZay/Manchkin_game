@@ -773,7 +773,7 @@
                         Margin="4.4,4.4,0,4.4"
                         Name="DeathButton"
                         Style="{DynamicResource RoundedRedButtonStyle}">
-                        УМЕРЕРТЬ
+                        УМЕРЕТЬ
                     </Button>
                 </Grid>
 

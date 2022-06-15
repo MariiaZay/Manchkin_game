@@ -122,6 +122,77 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        
+        <Style x:Key="RoundedNotActiveRedButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
+            <Setter Property="Background" Value="#FBCDAF" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Padding" Value="4.5" />
+            <Setter Property="FontWeight" Value="SemiBold"></Setter>
+            <Setter Property="FontFamily" Value="Comic Sans MS"></Setter>
+            <Setter Property="FontSize" Value="13.5"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" CornerRadius="15" BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding Background}" SnapsToDevicePixels="true" Margin="0,0,0,0">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              Margin="{TemplateBinding Padding}" RecognizesAccessKey="True"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border"
+                                        Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="#F9AB7A" />
+                                <Setter Property="BorderBrush" TargetName="border" Value="#F9AB7A" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="#F78E4C" />
+                                <Setter Property="BorderBrush" TargetName="border" Value="#F78E4C" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border"
+                                        Value="{StaticResource Button.Disabled.Background}" />
+                                <Setter Property="BorderBrush" TargetName="border"
+                                        Value="{StaticResource Button.Disabled.Border}" />
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter"
+                                        Value="{StaticResource Button.Disabled.Foreground}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="EllipseStyle" TargetType="{x:Type Ellipse}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Margin" Value="2.2,0,0,0"></Setter>
+            <Setter Property="Height" Value="10"></Setter>
+            <Setter Property="Width" Value="10"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+            <Setter Property="VerticalAlignment" Value="Top"></Setter>
+            <Setter Property= "Margin" Value="0,7"></Setter>
+            <Setter Property="Fill" Value="Black"></Setter>
+        </Style>
+        
+        <Style x:Key="TextSellStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="TextAlignment" Value="Left"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="FontSize" Value="20"></Setter>
+            <Setter Property="FontFamily" Value="Comic Sans MS"></Setter>
+            <Setter Property="Margin" Value="2.2,0,0,0"></Setter>
+            <Setter Property="TextWrapping" Value="Wrap"></Setter>
+        </Style>
+        
         <Style x:Key="RoundedRedButtonStyle" TargetType="{x:Type Button}">
             <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
             <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
@@ -311,7 +382,7 @@
                             Grid.Column="2"
                             Name="DeleteButton"
                             Margin="4.4,0,0,0"
-                            Style="{DynamicResource RoundedRedButtonStyle}">
+                            Style="{DynamicResource RoundedNotActiveRedButtonStyle}">
                             УБРАТЬ ЛИШНИЕ
                         </Button>
                     </Grid>

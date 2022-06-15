@@ -35,6 +35,7 @@ public partial class DescriptionWindow : Window
                     new Thickness(0, 4.4, 0, 0) 
                     : new Thickness(0, 4.4, 0, 4.4);
             }
+            
             var colDef0 =new ColumnDefinition();
             colDef0.Width = new GridLength(0.05, GridUnitType.Star);
             var colDef1 =new ColumnDefinition();

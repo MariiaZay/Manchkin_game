@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Documents;
+using System.Windows.Shapes;
 using ManchkinCore.Implementation;
 using ManchkinCore.Interfaces;
 
@@ -56,8 +58,10 @@ public partial class SellWindow : Window
             DialogWindow.Show(new DoblePriceSell(), this);
             _price += (int)App.Current.Resources["PRICE"];
         }
-            
-        _price += _manchkin.SellStuffs(_variants);
+
+        var stuffs = _manchkin.SmallStuffs;
+        stuffs.AddRange(_manchkin.HugeStuffs);
+        _price += _manchkin.SellStuffs(stuffs);
         _manchkin.GetLevel(_price / 1000);
         Close();
     }
@@ -90,8 +94,42 @@ public partial class SellWindow : Window
 
     private void AddStuffToSell(IStuff stuff)
     {
-        var s = stuff;
-        //TODO: реализовать
+        var grid = new Grid();
+        
+        grid.Margin = StuffStackPanel.Children.Count == 0
+            ? new Thickness(0, 0, 0, 4.4)
+            : new Thickness(0, 4.4, 0, 4.4);
+        
+        var colDef0 =new ColumnDefinition();
+        colDef0.Width = new GridLength(0.05, GridUnitType.Star);
+        var colDef1 =new ColumnDefinition();
+        
+        grid.ColumnDefinitions.Add(colDef0);
+        grid.ColumnDefinitions.Add(colDef1);
+        
+        var ellipce = new Ellipse
+        {
+            Style = (Style) FindResource("EllipseStyle")
+        };
+        Grid.SetColumn(ellipce,0);
+        
+        var text = new TextBlock
+        {
+            Style = (Style) FindResource("TextSellStyle"),
+            Text = stuff.TextRepresentation
+        };
+        Grid.SetColumn(text,1);
+        grid.Children.Add(ellipce);
+        grid.Children.Add(text);
+        StuffStackPanel.Children.Add(grid);
+        
+        StuffScrollView.Content = StuffStackPanel;
+        DeleteButton.Style = (Style) FindResource("RoundedRedButtonStyle");
+    }
+
+    private void RemoveStuffFromSell(IStuff stuff)
+    {
+        throw new NotImplementedException();
     }
     
     private void ShowStuff(IStuff stuff)

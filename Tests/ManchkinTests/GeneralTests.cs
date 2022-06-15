@@ -1,6 +1,7 @@
 ﻿using ManchkinCore.Enums.Accessory;
 using ManchkinCore.GameLogic.Implementation;
 using ManchkinCore.Implementation;
+using ManchkinCore.Implementation.Gears;
 using ManchkinCore.Interfaces;
 using NUnit.Framework;
 
@@ -115,5 +116,91 @@ public class GeneralTests
         _manchkin.ToDie();
 
         Assert.That(_manchkin.IsDead, Is.True);
+    }
+
+    [Test]
+    public void Manchkin_RecalculateDamageWithoutMercenaries_Works()
+    {
+        var smallStuff = new GreatTitle();
+        var hugeStuff = new Stepladder { Cheat = true };
+        var expectedDamage = _manchkin.Level
+                             + smallStuff.Damage
+                             + hugeStuff.Damage;
+
+        _manchkin.TakeStuff(smallStuff);
+        _manchkin.TakeStuff(hugeStuff);
+
+        Assert.That(_manchkin.Damage, Is.EqualTo(expectedDamage));
+    }
+
+    [Test]
+    public void Manchkin_RecalculateDamageWithMercenaries_Works()
+    {
+        var smallStuff = new GreatTitle();
+        var hugeStuff = new Stepladder { Cheat = true };
+        var mercenaryStuff = new Pole();
+        _manchkin.GetMercenary(mercenaryStuff);
+        var expectedDamage = _manchkin.Level
+                             + smallStuff.Damage
+                             + hugeStuff.Damage
+                             + _manchkin.Mercenaries
+                                 .Select(m =>
+                                 {
+                                     if (m.Item != null)
+                                         return 1 + m.Item.Damage;
+                                     return 1;
+                                 })
+                                 .Sum();
+
+        _manchkin.TakeStuff(smallStuff);
+        _manchkin.TakeStuff(hugeStuff);
+
+        Assert.That(_manchkin.Damage, Is.EqualTo(expectedDamage));
+    }
+
+    [TestCase(true)]
+    [TestCase(false)]
+    public void Manchkin_RecalculateFlushingBonusWithoutMercenaries_Works(bool isElf)
+    {
+        if (isElf)
+            _manchkin.Race = new Elf();
+        var smallStuff = new GreatTitle();
+        var hugeStuff = new Stepladder { Cheat = true };
+        var expectedFlushingBonus = isElf
+            ? 1
+            : 0
+              + smallStuff.FlushingBonus
+              + hugeStuff.FlushingBonus;
+
+        _manchkin.TakeStuff(smallStuff);
+        _manchkin.TakeStuff(hugeStuff);
+
+        Assert.That(_manchkin.FlushingBonus, Is.EqualTo(expectedFlushingBonus));
+    }
+
+    [TestCase(true)]
+    [TestCase(false)]
+    public void Manchkin_RecalculateFlushingBonusWithMercenaries_Works(bool isElf)
+    {
+        if (isElf)
+            _manchkin.Race = new Elf();
+        var smallStuff = new GreatTitle();
+        var hugeStuff = new Stepladder { Cheat = true };
+        var mercenaryStuff = new Pole();
+        _manchkin.GetMercenary(mercenaryStuff);
+        var expectedFlushingBonus = isElf
+            ? 1
+            : 0
+              + smallStuff.FlushingBonus
+              + hugeStuff.FlushingBonus
+              + _manchkin.Mercenaries
+                  .Where(m => m.Item != null)
+                  .Select(m => m.Item!.FlushingBonus)
+                  .Sum();
+
+        _manchkin.TakeStuff(smallStuff);
+        _manchkin.TakeStuff(hugeStuff);
+
+        Assert.That(_manchkin.FlushingBonus, Is.EqualTo(expectedFlushingBonus));
     }
 }

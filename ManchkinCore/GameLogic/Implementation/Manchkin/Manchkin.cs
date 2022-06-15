@@ -60,7 +60,6 @@ public class Manchkin : IManchkin
 
     public int CardsCount { get; private set; }
 
-
     public int FlushingBonus { get; private set; }
 
     public bool DoublePrice { get; set; } //TODO: придумать,как обновлять перед каждым ходом

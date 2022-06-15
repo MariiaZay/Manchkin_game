@@ -113,7 +113,7 @@ public class Manchkin : IManchkin
     {
         if (IsNull(_class)) return manClass;
 
-        if(IsSuperManchkin)
+        if (IsSuperManchkin)
             RefuseSuperManchkin();
         LostDescriptions(Class.Descriptions);
         PurchaseDescriptions(manClass.Descriptions);
@@ -134,9 +134,11 @@ public class Manchkin : IManchkin
         CardsCount = race.CardCount;
         DoublePrice = race.CellingByDoublePrice;
 
-        if (IsNull(Race)) return race;
-        
-        if(IsHalfBlood) RefuseHalfblood();
+        if (IsNull(Race))
+            return race;
+
+        if (IsHalfBlood)
+            RefuseHalfblood();
         LostDescriptions(Race.Descriptions);
         PurchaseDescriptions(race.Descriptions);
 
@@ -257,13 +259,12 @@ public class Manchkin : IManchkin
 
     public bool CanTakeStuff(IStuff? stuff)
     {
-        
         var can = CanHaveStuff(stuff);
         if (!can) return can;
         if (stuff.Weight == Bulkiness.HUGE)
-            return Race is not Dwarf && !HasHugeStuff || Race is Dwarf
-                                                      || IsHalfBlood && HalfBlood.HalfType == HalfTypes.BOTH
-                                                                     && HalfBlood.SecondRace is Dwarf;
+            return Race is not Dwarf && !HasHugeStuff
+                   || Race is Dwarf
+                   || IsHalfBlood && HalfBlood.HalfType == HalfTypes.BOTH && HalfBlood.SecondRace is Dwarf;
         return can;
     }
 
@@ -325,7 +326,7 @@ public class Manchkin : IManchkin
         RefuseHalfblood();
         var stuff = GetAllWornStuffs();
         var ok = stuff.All(s => CanHaveStuff(s, Class, Race, Gender));
-        if(last == null)
+        if (last == null)
             BecameHalfBlood();
         else
             BecameHalfBlood(last);
@@ -339,13 +340,13 @@ public class Manchkin : IManchkin
         RefuseSuperManchkin();
         var stuff = GetAllWornStuffs();
         var ok = stuff.All(s => CanHaveStuff(s, Class, Race, Gender));
-        if(last == null)
+        if (last == null)
             BecameSuperManchkin();
         else
             BecameSuperManchkin(last);
         return ok;
     }
-    
+
     public bool CheckStuffBeforeChanging(Genders gender)
     {
         var stuff = GetAllWornStuffs();
@@ -398,13 +399,14 @@ public class Manchkin : IManchkin
     {
         //TODO: возможно, придетя переписать
         var stuff = GetAllWornStuffs();
-        while(stuff.Count() != 0)
+        while (stuff.Count != 0)
         {
             var s = stuff.Last();
             if (!CanHaveStuff(s))
             {
                 LostStuff(s);
             }
+
             stuff.Remove(s);
         }
     }
@@ -427,7 +429,7 @@ public class Manchkin : IManchkin
 
     private void AddStuff(IStuff? stuff)
     {
-        if(IsNull(stuff)) return;
+        if (IsNull(stuff)) return;
         PurchaseDescriptions(stuff.Descriptions);
         if (stuff.Weight == Bulkiness.HUGE)
             HugeStuffs.Add(stuff);
@@ -550,6 +552,7 @@ public class Manchkin : IManchkin
                         if (!IsNull(right))
                             ReturnStuff(right);
                     }
+
                     ok = false;
                 }
                 else
@@ -580,15 +583,15 @@ public class Manchkin : IManchkin
         RecalculateFlushingBonus();
         return ok;
     }
-    
+
     public bool TakeSingleWeaponRightHand(IStuff? stuff)
     {
         IStuff? last;
         bool ok;
-        
+
         last = Hands.RightHand;
         LostStuff(Hands.RightHand);
-        
+
         if (!CanTakeStuff(stuff))
         {
             Hands.TakeInRightHand(last);
@@ -603,18 +606,18 @@ public class Manchkin : IManchkin
             RecalculateDamage();
             RecalculateFlushingBonus();
         }
-        
+
         return ok;
     }
-    
+
     public bool TakeSingleWeaponLeftHand(IStuff? stuff)
     {
         IStuff? last;
         bool ok;
-        
+
         last = Hands.LeftHand;
         LostStuff(Hands.LeftHand);
-        
+
         if (!CanTakeStuff(stuff))
         {
             Hands.TakeInLeftHand(last);
@@ -627,7 +630,7 @@ public class Manchkin : IManchkin
             AddStuff(stuff);
             ok = true;
         }
-        
+
         RecalculateDamage();
         RecalculateFlushingBonus();
         return ok;
@@ -670,14 +673,14 @@ public class Manchkin : IManchkin
                 switch (stuff.Fullness)
                 {
                     case Arms.BOTH:
-                        Hands.TakeInBothHands(null);
+                        Hands.DropFromBothHands();
                         break;
 
                     case Arms.SINGLE:
                         if (Hands.LeftHand == stuff)
-                            Hands.TakeInLeftHand(null);
+                            Hands.DropFromLeftHand();
                         else if (Hands.RightHand == stuff)
-                            Hands.TakeInRightHand(null);
+                            Hands.DropFromRightHand();
                         break;
                 }
 
@@ -761,7 +764,8 @@ public class Manchkin : IManchkin
 
     public void RefuseHalfblood()
     {
-        if (HalfBlood == null) return;
+        if (HalfBlood == null)
+            return;
         if (HalfBlood.SecondRace != null)
             LostDescriptions(HalfBlood.SecondRace.Descriptions);
         RecalculateParameters();

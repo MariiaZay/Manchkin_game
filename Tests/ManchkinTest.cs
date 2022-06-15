@@ -80,12 +80,9 @@ public class ManchkinTest
     }
 
     [Test]
-    public void Manchkin_BecomeSuperManchkin_Became()
+    public void Manchkin_BecomeSuperManchkin_Became1()
     {
         var manchkin = new Manchkin(Genders.FEMALE);
-        var desc = manchkin.Descriptions;
-        var thief = new Thief();
-        desc.AddRange(thief.Descriptions);
 
         manchkin.BecameSuperManchkin();
 
@@ -95,6 +92,15 @@ public class ManchkinTest
             Assert.That(manchkin.SuperManchkin!.HalfType, Is.EqualTo(HalfTypes.SINGLE_CLEAN));
             Assert.That(manchkin.SuperManchkin.SecondClass, Is.Null);
         });
+    }
+
+    [Test]
+    public void Manchkin_BecomeSuperManchkin_Became2()
+    {
+        var manchkin = new Manchkin(Genders.FEMALE);
+        var desc = manchkin.Descriptions;
+        var thief = new Thief();
+        desc.AddRange(thief.Descriptions);
 
         manchkin.BecameSuperManchkin(thief);
 
@@ -108,58 +114,30 @@ public class ManchkinTest
     }
 
     [Test]
-    public void Hands_TakeInHands_Works()
+    public void Manchkin_RefuseSuperManchkin_Refuse1()
     {
-        var hands = new Hands();
-        var weapon1 = new BastardSword();
-        var weapon2 = new Buckler();
+        var manchkin = new Manchkin(Genders.FEMALE);
 
-        hands.TakeInRightHand(weapon1);
-        hands.TakeInLeftHand(weapon2);
+        manchkin.BecameSuperManchkin();
+        manchkin.RefuseSuperManchkin();
 
-        Assert.Multiple(() =>
-        {
-            Assert.That(hands.RightHand, Is.EqualTo(weapon1));
-            Assert.That(hands.LeftHand, Is.EqualTo(weapon2));
-        });
+        Assert.That(manchkin.IsSuperManchkin, Is.False);
     }
 
     [Test]
-    public void Hands_TakeInBothHands_Works()
+    public void Manchkin_RefuseSuperManchkin_Refuse2()
     {
-        var hands = new Hands();
-        var weapon = new BastardSword();
+        var manchkin = new Manchkin(Genders.FEMALE);
+        var manchkinDesc = manchkin.Descriptions.ToArray();
+        var thief = new Thief();
 
-        hands.TakeInBothHands(weapon);
+        manchkin.BecameSuperManchkin(thief);
+        manchkin.RefuseSuperManchkin();
 
         Assert.Multiple(() =>
         {
-            Assert.That(hands.RightHand, Is.EqualTo(weapon));
-            Assert.That(hands.LeftHand, Is.EqualTo(weapon));
-        });
-    }
-    
-    [Test]
-    public void Hands_DropStuffsFromHands_Works()
-    {
-        var hands = new Hands();
-        var weapon = new BastardSword();
-
-        hands.TakeInRightHand(weapon);
-        hands.TakeInLeftHand(weapon);
-        
-        hands.DropFromLeftHand();
-        Assert.That(hands.LeftHand, Is.Null);
-        
-        hands.DropFromRightHand();
-        Assert.That(hands.RightHand, Is.Null);
-        
-        hands.TakeInBothHands(weapon);
-        hands.DropFromBothHands();
-        Assert.Multiple(() =>
-        {
-            Assert.That(hands.LeftHand, Is.Null);
-            Assert.That(hands.RightHand, Is.Null);
+            Assert.That(manchkin.IsSuperManchkin, Is.False);
+            Assert.That(manchkin.Descriptions, Is.EqualTo(manchkinDesc.ToList()));
         });
     }
 

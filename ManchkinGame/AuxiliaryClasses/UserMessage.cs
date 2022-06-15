@@ -21,7 +21,7 @@ public static class UserMessage
     public static bool CreateSellByDoublePriceMessage()
     {
         var answer = MessageBox.Show(
-            "Твоя раса - хаффлинг, поэтому ты можешь продать одну шмотку за двойну цену. Хочешь" +
+            "Твоя раса - хаффлинг, поэтому ты можешь продать одну шмотку за двойну цену. Хочешь " +
             "воспользоватся этой возможностью?",
             "ПРОДАЖА ПО ДВОЙНОЙ ЦЕНЕ", MessageBoxButton.YesNo, MessageBoxImage.Warning);
         return answer == MessageBoxResult.Yes;

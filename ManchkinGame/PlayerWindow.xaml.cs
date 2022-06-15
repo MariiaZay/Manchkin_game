@@ -714,7 +714,7 @@ public partial class PlayerWindow : Window
     {
         if (Player.Manchkin.IsDead)
             UserMessage.CreateDeathWearingMessage();
-        else if(ReferenceEquals(MoveButton.Content, "ЧУЖОЙ ХОД"))
+        else if(!ReferenceEquals(MoveButton.Content, "МОЙ ХОД"))
             UserMessage.CreateCantDoItNowMessage(MoveButton.Content.ToString());
         else if (ReferenceEquals(BattleButton.Content, "БОЙ"))
             UserMessage.CreateCantDoItNowMessage(BattleButton.Content.ToString());

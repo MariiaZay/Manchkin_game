@@ -21,6 +21,7 @@ public partial class SellWindow : Window
         InitializeComponent();
         _manchkin = App.Current.Resources["MANCHKIN"] as IManchkin;
         _price = 0;
+        PriceLabel.Text = "0";
         
         _stackPanelContent = new List<IStuff>();
         
@@ -35,9 +36,26 @@ public partial class SellWindow : Window
         ToSellButton.Click += ToSellButtonClick;
 
         DeleteButton.Click += DeleteButtonClick;
-        
+
+        SellButton.Click += SellButtonClick;
         SellAllButton.Click += SellAllButtonClick;
         CancelButton.Click += CancelButtonClick;
+    }
+
+    private void SellButtonClick(object sender, RoutedEventArgs e)
+    {
+        if (_manchkin.DoublePrice && UserMessage.CreateSellByDoublePriceMessage())
+        {
+            App.Current.Resources["MANCHKIN"] = _manchkin;
+            App.Current.Resources["ALL"] = true;
+            App.Current.Resources["SELL"] = _stackPanelContent;
+            DialogWindow.Show(new DoblePriceSell(), this);
+            _price += (int)App.Current.Resources["PRICE"];
+        }
+        
+        _price += _manchkin.SellStuffs(_stackPanelContent);
+        _manchkin.GetLevel(_price / 1000);
+        Close();
     }
 
     private void DeleteButtonClick(object sender, RoutedEventArgs e)
@@ -47,8 +65,7 @@ public partial class SellWindow : Window
         else
             RemoveStuffFromSell();
     }
-
-
+    
     private void ToSellButtonClick(object sender, RoutedEventArgs e)
     {
         if(_variants.Count == 0)
@@ -62,6 +79,7 @@ public partial class SellWindow : Window
             
             _variants.Remove(stuff);
             RefreshComboBox();
+            RefreshPriceLabel();
             RefreshButtons();
         }
     }
@@ -71,6 +89,7 @@ public partial class SellWindow : Window
         if (_manchkin.DoublePrice && UserMessage.CreateSellByDoublePriceMessage())
         {
             App.Current.Resources["MANCHKIN"] = _manchkin;
+            App.Current.Resources["ALL"] = false;
             DialogWindow.Show(new DoblePriceSell(), this);
             _price += (int)App.Current.Resources["PRICE"];
         }
@@ -101,7 +120,12 @@ public partial class SellWindow : Window
     
     private void StuffComboBoxDropDownClosed(object? sender, EventArgs e)
         => RefreshButtons();
-    
+
+    private void RefreshPriceLabel()
+    {
+        var price = _stackPanelContent.Sum(content => content.Price);
+        PriceLabel.Text = price.ToString();
+    }
     
     private void RefreshComboBox()
     {
@@ -114,9 +138,12 @@ public partial class SellWindow : Window
     private void RefreshStackPanel()
     {
         StuffStackPanel.Children.Clear();
-        foreach (var content in _stackPanelContent)
+        var stackPanelContent = new List<IStuff>();
+        stackPanelContent.AddRange(_stackPanelContent);
+        foreach (var content in stackPanelContent)
             AddStuffToSell(content);
         RefreshButtons();
+        RefreshPriceLabel();
     }
 
     private void AddStuffToSell(IStuff stuff)
@@ -151,8 +178,7 @@ public partial class SellWindow : Window
         StuffStackPanel.Children.Add(grid);
         
         StuffScrollView.Content = StuffStackPanel;
-        DeleteButton.Style = (Style) FindResource("RoundedRedButtonStyle");
-        SellButton.Style = (Style) FindResource("RoundedGreenButtonStyle");
+        
     }
 
     private void RemoveStuffFromSell()
@@ -198,11 +224,7 @@ public partial class SellWindow : Window
             _variants.Count == 0 || StuffComboBox.Text == ""
             ? (Style) FindResource("RoundedNotActiveGreenButtonStyle")
             : (Style) FindResource("RoundedGreenButtonStyle");
-        
-        SellDoublePriceButton.Style = _manchkin.Race is Halfling && _manchkin.DoublePrice
-            ? (Style) FindResource("RoundedGreenButtonStyle")
-            : (Style) FindResource("RoundedNotActiveGreenButtonStyle");
-        
+
         SellButton.Style = StuffStackPanel.Children.Count == 0
             ? (Style) FindResource("RoundedNotActiveGreenButtonStyle")
             : (Style) FindResource("RoundedGreenButtonStyle");

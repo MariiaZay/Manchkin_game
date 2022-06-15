@@ -122,7 +122,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        
+
         <Style x:Key="RoundedNotActiveRedButtonStyle" TargetType="{x:Type Button}">
             <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
             <Setter Property="Background" Value="#FBCDAF" />
@@ -173,18 +173,18 @@
             </Setter>
         </Style>
         <Style x:Key="EllipseStyle" TargetType="{x:Type Ellipse}">
-            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
             <Setter Property="Margin" Value="2.2,0,0,0"></Setter>
             <Setter Property="Height" Value="10"></Setter>
             <Setter Property="Width" Value="10"></Setter>
             <Setter Property="HorizontalAlignment" Value="Center"></Setter>
             <Setter Property="VerticalAlignment" Value="Top"></Setter>
-            <Setter Property= "Margin" Value="0,7"></Setter>
+            <Setter Property="Margin" Value="0,7"></Setter>
             <Setter Property="Fill" Value="Black"></Setter>
         </Style>
-        
+
         <Style x:Key="TextSellStyle" TargetType="{x:Type TextBlock}">
-            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
             <Setter Property="TextAlignment" Value="Left"></Setter>
             <Setter Property="VerticalAlignment" Value="Center"></Setter>
             <Setter Property="FontSize" Value="20"></Setter>
@@ -192,7 +192,7 @@
             <Setter Property="Margin" Value="2.2,0,0,0"></Setter>
             <Setter Property="TextWrapping" Value="Wrap"></Setter>
         </Style>
-        
+
         <Style x:Key="RoundedRedButtonStyle" TargetType="{x:Type Button}">
             <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
             <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
@@ -248,13 +248,13 @@
 
     <Border CornerRadius="20"
             BorderBrush="#FCECDC" BorderThickness="3"
-            Margin="15"
+            Margin="4.4, 0,0,0"
             Background="White">
         <Border.Effect>
             <DropShadowEffect BlurRadius="15" Direction="-100" Color="Tan" Opacity="0.8" />
         </Border.Effect>
 
-        <Grid Margin="8.8" >
+        <Grid Margin="8.8">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.15*"></RowDefinition>
@@ -273,8 +273,7 @@
 
             <Grid
                 Grid.Row="1"
-                Margin="0,4.4"
-                >
+                Margin="0,4.4">
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
@@ -288,6 +287,7 @@
                         <RowDefinition></RowDefinition>
                         <RowDefinition Height="0.5*"></RowDefinition>
                         <RowDefinition Height="0.5*"></RowDefinition>
+                        <RowDefinition Height="0.5*"></RowDefinition>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
                     <ComboBox
@@ -296,14 +296,14 @@
                         Margin="0,0,0,4.4"
                         Foreground="Black"
                         FontSize="25"
-                        
+
                         VerticalContentAlignment="Center"
                         FontFamily="Comic Sans MS"
                         Padding="4.5">
                     </ComboBox>
                     <Grid
                         Grid.Row="2"
-                        Margin="0,4.4,0,0">
+                        Margin="0,4.4">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
@@ -312,8 +312,7 @@
                             Grid.Row="0"
                             Name="ToSellButton"
                             Margin="0,0,4.4,0"
-                            Style="{DynamicResource RoundedNotActiveGreenButtonStyle}"
-                            >
+                            Style="{DynamicResource RoundedNotActiveGreenButtonStyle}">
                             ОТПРАВИТЬ НА ПРОДАЖУ
                         </Button>
 
@@ -321,11 +320,37 @@
                             Grid.Column="1"
                             Name="ShowStuffButton"
                             Margin="4.4,0,0,0"
-                            Style="{DynamicResource RoundedNotActiveGreenButtonStyle}"
-                            >
+                            Style="{DynamicResource RoundedNotActiveGreenButtonStyle}">
                             ПОСМОРЕТЬ ШМОТКУ
                         </Button>
                     </Grid>
+
+                    <Border 
+                        Grid.Row="3" Margin="0,4.4"
+                        CornerRadius="20"
+                        BorderBrush="#FCECDC" BorderThickness="3"
+                        Background="White">
+                        <Grid Margin="8.8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.7*"></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock
+                                Grid.Column="0"
+                                Margin="0,0,4.4,0"
+                                Style="{DynamicResource TextStyle}"
+                                FontSize="17">
+                                Потенциальная прибыль:</TextBlock>
+                            
+                            <TextBlock
+                                Grid.Column="1"
+                                Name="PriceLabel"
+                                Margin="0,0,4.4,0"
+                                Style="{DynamicResource TextStyle}"
+                                FontSize="17"
+                                FontWeight="Normal"></TextBlock>
+                        </Grid>
+                    </Border>
 
                 </Grid>
 
@@ -339,7 +364,7 @@
                     <Border
                         Grid.Row="0"
                         Margin="0,0,0,4.4"
-                        BorderBrush="#FCECDC" 
+                        BorderBrush="#FCECDC"
                         BorderThickness="3"
                         CornerRadius="20"
                         Padding="10">
@@ -351,36 +376,25 @@
 
                         </ScrollViewer>
                     </Border>
-                    
+
                     <Grid
                         Grid.Row="1"
-                        Margin="0,4.4,0,0"
-                        >
+                        Margin="0,4.4,0,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Button
-                            Grid.Column="0"
-                            Name="SellDoublePriceButton"
-                            Margin="0,0,4.4,0"
-                            Style="{DynamicResource RoundedNotActiveGreenButtonStyle}"
-                            ><TextBlock Text="ПРОДАТЬ ОДНУ ПО ДВОЙНОЙ ЦЕНЕ" TextWrapping="Wrap" HorizontalAlignment="Center" 
-                                        VerticalAlignment="Center"/>
-                            
-                        </Button>
+                        
 
                         <Button
                             Name="SellButton"
-                            Grid.Column="1"
-                            Margin="4.4,0,4.4,0"
-                            Style="{DynamicResource RoundedNotActiveGreenButtonStyle}"
-                            >
+                            Grid.Column="0"
+                            Margin="0,0,4.4,0"
+                            Style="{DynamicResource RoundedNotActiveGreenButtonStyle}">
                             ПРОДАТЬ
                         </Button>
                         <Button
-                            Grid.Column="2"
+                            Grid.Column="1"
                             Name="DeleteButton"
                             Margin="4.4,0,0,0"
                             Style="{DynamicResource RoundedNotActiveRedButtonStyle}">
@@ -394,8 +408,7 @@
 
             <Grid
                 Grid.Row="2"
-                Margin="0,4.4,0,0"
-                >
+                Margin="0,4.4,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>

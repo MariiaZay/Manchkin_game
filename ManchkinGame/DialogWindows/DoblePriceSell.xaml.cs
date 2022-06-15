@@ -11,11 +11,22 @@ public partial class DoblePriceSell : Window
 {
     private IManchkin _manchkin;
     private List<IStuff> _variants;
+    private bool _all;
     public DoblePriceSell()
     {
         _manchkin = App.Current.Resources["MANCHKIN"] as IManchkin;
-        _variants = _manchkin.SmallStuffs;
-        _variants.AddRange(_manchkin.HugeStuffs);
+        _variants = new List<IStuff>();
+        _all = (bool)App.Current.Resources["ALL"];
+        if (_all)
+        {
+            _variants.AddRange(_manchkin.SmallStuffs);
+            _variants.AddRange(_manchkin.HugeStuffs);
+        }
+        else
+        {
+            _variants.AddRange(App.Current.Resources["SELL"] as List<IStuff>);
+        }
+        
         InitializeComponent();
         ShowStuffButton.Click += ShowStuffButtonClick;
         CancelButton.Click += CancelButtonClick;

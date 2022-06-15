@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Documents;
@@ -16,21 +17,48 @@ public partial class SellWindow : Window
     {
         InitializeComponent();
         _manchkin = App.Current.Resources["MANCHKIN"] as IManchkin;
-        
-        _variants = _manchkin.SmallStuffs;
+        _price = 0;
+        _variants = new List<IStuff>();
+        _variants.AddRange(_manchkin.SmallStuffs);
         _variants.AddRange(_manchkin.HugeStuffs);
         if (_manchkin.Race is Halfling && _manchkin.DoublePrice)
             SellDoublePriceButton.Style = (Style) FindResource("RoundedGreenButtonStyle");
-
-        ShowStuffButton.Click += ShowStuffButtonClick;
+        
         StuffComboBox.Loaded += StuffComboBoxLoaded;
+        ShowStuffButton.Click += ShowStuffButtonClick;
+        ToSellButton.Click += ToSellButtonClick;
+        
+        
         SellAllButton.Click += SellAllButtonClick;
         CancelButton.Click += CancelButtonClick;
     }
 
+    private void ToSellButtonClick(object sender, RoutedEventArgs e)
+    {
+        if(_variants.Count == 0)
+            UserMessage.CreateEndStuffForSellingMessage();
+        else if(StuffComboBox.Text == "")
+            UserMessage.CreateNotChosenItemMessage("шмотку для продажи");
+        else
+        {
+            var stuff = _variants.FirstOrDefault(vari => vari.TextRepresentation == StuffComboBox.Text);
+            AddStuffToSell(stuff);
+            _variants.Remove(stuff);
+            RefreshComboBox();
+        }
+    }
+
     private void SellAllButtonClick(object sender, RoutedEventArgs e)
     {
-        _manchkin.GetLevel(_manchkin.SellStuffs(_variants));
+        if (_manchkin.DoublePrice && UserMessage.CreateSellByDoublePriceMessage())
+        {
+            App.Current.Resources["MANCHKIN"] = _manchkin;
+            DialogWindow.Show(new DoblePriceSell(), this);
+            _price += (int)App.Current.Resources["PRICE"];
+        }
+            
+        _price += _manchkin.SellStuffs(_variants);
+        _manchkin.GetLevel(_price / 1000);
         Close();
     }
 
@@ -56,6 +84,14 @@ public partial class SellWindow : Window
         StuffComboBox.Items.Clear();
         foreach (var variant in _variants)
             StuffComboBox.Items.Add(variant.TextRepresentation);
+        if(_variants.Count == 0)
+            ToSellButton.Style = (Style) FindResource("RoundedNotActiveGreenButtonStyle");
+    }
+
+    private void AddStuffToSell(IStuff stuff)
+    {
+        var s = stuff;
+        //TODO: реализовать
     }
     
     private void ShowStuff(IStuff stuff)

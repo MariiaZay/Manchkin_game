@@ -17,6 +17,16 @@ public static class UserMessage
         return answer == MessageBoxResult.Yes;
     }
     
+    
+    public static bool CreateSellByDoublePriceMessage()
+    {
+        var answer = MessageBox.Show(
+            "Твоя раса - хаффлинг, поэтому ты можешь продать одну шмотку за двойну цену. Хочешь" +
+            "воспользоватся этой возможностью?",
+            "ПРОДАЖА ПО ДВОЙНОЙ ЦЕНЕ", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+        return answer == MessageBoxResult.Yes;
+    }
+    
     public static bool CreateLostOrTakeOffMessage()
     {
         var answer = MessageBox.Show( 
@@ -55,6 +65,11 @@ public static class UserMessage
         => CreateInfoMessage(
             String.Format("Ты больше не можешь надевать {0} шмотки, так как они кончились в колоде", mess),
             "КОНЧИЛИСЬ КАРТЫ");
+    
+    public static void CreateEndStuffForSellingMessage()
+        => CreateInfoMessage(
+            "Ты уже оправил все шмотки на продажу",
+            "КОНЧИЛИСЬ ШМОТКИ");
     
     public static void CreateEmptyActionStuffMessage()
         => CreateInfoMessage("У тебя пока что нет этого, чтобы с этим что-то делать", "Пока пусто");

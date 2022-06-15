@@ -748,14 +748,15 @@ public class Manchkin : IManchkin
             LostStuff(stuff);
             stuffs.Remove(stuff);
         }
-        return price / 1000;
+        return price;
     }
 
     public int SellByDoublePrice(IStuff? stuff)
     {
         if (IsNull(stuff)) return 0;
-        var price = stuff.Price * 2 / 1000;
+        var price = stuff.Price * 2;
         LostStuff(stuff);
+        DoublePrice = false;
         return price;
     }
 

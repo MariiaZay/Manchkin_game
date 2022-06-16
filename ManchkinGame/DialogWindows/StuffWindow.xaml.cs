@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
+﻿using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Documents;
 using ManchkinCore;
 using ManchkinCore.Enums.Accessory;
-using ManchkinCore.GameLogic;
-using ManchkinCore.Implementation;
 using ManchkinCore.Interfaces;
 
 namespace ManchkinGame.DialogWindows;

@@ -1,5 +1,7 @@
 ﻿using ManchkinCore.Enums.Accessory;
 using ManchkinCore.GameLogic.Implementation;
+using ManchkinCore.GameLogic.Implementation.Factories;
+using ManchkinCore.Implementation;
 using ManchkinCore.Interfaces;
 using NUnit.Framework;
 
@@ -12,7 +14,15 @@ public class LevelTests
     [SetUp]
     public void SetUp()
     {
-        _manchkin = new Manchkin(Genders.MALE);
+        _manchkin = new Manchkin(
+            new Nobody(),
+            new Human(),
+            new Hands(),
+            new MercenaryFactory(),
+            new HalfbloodFactory(),
+            new SuperManchkinFactory(),
+            Genders.MALE
+        );
     }
 
     [Test]

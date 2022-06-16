@@ -1,5 +1,6 @@
 ﻿using ManchkinCore.Enums.Accessory;
 using ManchkinCore.GameLogic.Implementation;
+using ManchkinCore.GameLogic.Implementation.Factories;
 using ManchkinCore.Implementation;
 using ManchkinCore.Implementation.Gears;
 using ManchkinCore.Interfaces;
@@ -14,7 +15,15 @@ public class GeneralTests
     [SetUp]
     public void SetUp()
     {
-        _manchkin = new Manchkin(Genders.MALE);
+        _manchkin = new Manchkin(
+            new Nobody(),
+            new Human(),
+            new Hands(),
+            new MercenaryFactory(),
+            new HalfbloodFactory(),
+            new SuperManchkinFactory(),
+            Genders.MALE
+        );
     }
 
     [Test]
@@ -53,17 +62,9 @@ public class GeneralTests
     [Test]
     public void ChangeGender_Works()
     {
-        var manchkinMale = new Manchkin(Genders.MALE);
-        var manchkinFemale = new Manchkin(Genders.FEMALE);
-
-        manchkinMale.ChangeGender();
-        manchkinFemale.ChangeGender();
-
-        Assert.Multiple(() =>
-        {
-            Assert.That(manchkinMale.Gender, Is.EqualTo(Genders.FEMALE));
-            Assert.That(manchkinFemale.Gender, Is.EqualTo(Genders.MALE));
-        });
+        _manchkin.ChangeGender();
+        
+        Assert.That(_manchkin.Gender, Is.EqualTo(Genders.FEMALE));
     }
 
     [Test]

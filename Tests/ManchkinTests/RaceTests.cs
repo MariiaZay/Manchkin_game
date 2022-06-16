@@ -1,5 +1,6 @@
 ﻿using ManchkinCore.Enums.Accessory;
 using ManchkinCore.GameLogic.Implementation;
+using ManchkinCore.GameLogic.Implementation.Factories;
 using ManchkinCore.Implementation;
 using ManchkinCore.Interfaces;
 using NUnit.Framework;
@@ -13,7 +14,15 @@ public class RaceTests
     [SetUp]
     public void SetUp()
     {
-        _manchkin = new Manchkin(Genders.MALE);
+        _manchkin = new Manchkin(
+            new Nobody(),
+            new Human(),
+            new Hands(),
+            new MercenaryFactory(),
+            new HalfbloodFactory(),
+            new SuperManchkinFactory(),
+            Genders.MALE
+        );
     }
 
     [Test]
@@ -43,30 +52,12 @@ public class RaceTests
         });
     }
 
-    //TODO исправить код
-    // [Test]
-    // public void ChangeRaceWhenNewRaceIsNull_WithoutAnyChanges()
-    // {
-    //     var human = new Human();
-    //
-    //     _manchkin.Race = null;
-    //
-    //     Assert.Multiple(() =>
-    //     {
-    //         Assert.That(_manchkin.Race, Is.InstanceOf<Human>());
-    //         Assert.That(_manchkin.Descriptions, Is.EqualTo(human.Descriptions));
-    //         Assert.That(_manchkin.FlushingBonus, Is.EqualTo(human.FlushingBonus));
-    //         Assert.That(_manchkin.CardsCount, Is.EqualTo(human.CardCount));
-    //         Assert.That(_manchkin.DoublePrice, Is.EqualTo(human.CellingByDoublePrice));
-    //     });
-    // }
-
     [Test]
     public void ChangeRace_ManchkinIsHalfBlood_UpdatingRelevantParametersAndRefuseHalfblood()
     {
         var elf = new Elf();
 
-        _manchkin.BecameHalfBlood(elf);
+        _manchkin.BecameHalfBlood();
         _manchkin.Race = elf;
 
         Assert.Multiple(() =>

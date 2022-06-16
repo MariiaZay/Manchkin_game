@@ -155,6 +155,55 @@ public class StuffsTests
         Assert.That(_manchkin.Level, Is.EqualTo(expectedLevel));
     }
 
+    [Test]
+    public void TakeStuff_Hat()
+    {
+        var hat = new HelmetOfCourage();
+        _manchkin.TakeStuff(hat);
+
+        Assert.That(_manchkin.WornHat, Is.EqualTo(hat));
+    }
+
+    [Test]
+    public void TakeStuff_Armor()
+    {
+        var armor = new MucousMembrane();
+        _manchkin.TakeStuff(armor);
+
+        Assert.That(_manchkin.WornArmor, Is.EqualTo(armor));
+    }
+
+    [Test]
+    public void TakeStuff_Shoes()
+    {
+        var shoes = new SandalsOfProtection();
+        _manchkin.TakeStuff(shoes);
+
+        Assert.That(_manchkin.WornShoes, Is.EqualTo(shoes));
+    }
+
+    [Test]
+    public void TakeStuff_Weapon()
+    {
+        var weapon = new BastardSword();
+        _manchkin.TakeStuff(weapon);
+
+        Assert.That(_manchkin.Hands.LeftHand, Is.EqualTo(weapon));
+    }
+
+    [Test]
+    public void TakeStuff_DefaultCase()
+    {
+        var singingSword = new SingingSword { Cheat = true };
+        var stepladder = new Stepladder { Cheat = true };
+        _manchkin.TakeStuff(singingSword);
+        _manchkin.TakeStuff(stepladder);
+
+        Assert.That(_manchkin.HugeStuffs, Is.EqualTo(new List<IStuff?> { stepladder }));
+        Assert.That(_manchkin.SmallStuffs, Is.EqualTo(new List<IStuff?> { singingSword }));
+    }
+
+
     private void CheckThatManchkinDoesntHaveAnyStuffs()
     {
         Assert.Multiple(() =>

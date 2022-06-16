@@ -1,6 +1,7 @@
-﻿using ManchkinCore.Enums;
+﻿using System.Data;
+using System.Reflection.PortableExecutable;
+using ManchkinCore.Enums;
 using ManchkinCore.Enums.Accessory;
-using ManchkinCore.GameLogic.Implementation.Factories;
 using ManchkinCore.Implementation;
 using ManchkinCore.Interfaces;
 
@@ -8,7 +9,7 @@ namespace ManchkinCore.GameLogic.Implementation;
 
 public class Manchkin : IManchkin
 {
-        #region Main fields
+    #region Main fields
 
     public int Level { get; private set; }
 
@@ -59,7 +60,6 @@ public class Manchkin : IManchkin
 
     public int CardsCount { get; private set; }
 
-
     public int FlushingBonus { get; private set; }
 
     public bool DoublePrice { get; set; } //TODO: придумать,как обновлять перед каждым ходом
@@ -68,28 +68,9 @@ public class Manchkin : IManchkin
     public ISuperManchkin? SuperManchkin { get; private set; }
 
     #endregion
-    
-    #region Factories
 
-    private MercenaryFactory _mercenaryFactory;
-    private HalfbloodFactory _halfbloodFactory;
-    private SuperManchkinFactory _superManchkinFactory;
-
-    #endregion
-
-    public Manchkin(
-        IClass initialClass, 
-        IRace initialRace,
-        IHands hands,
-        MercenaryFactory mercenaryFactory,
-        HalfbloodFactory halfbloodFactory,
-        SuperManchkinFactory superManchkinFactory,
-        Genders gender)
+    public Manchkin(Genders gender)
     {
-        _mercenaryFactory = mercenaryFactory;
-        _halfbloodFactory = halfbloodFactory;
-        _superManchkinFactory = superManchkinFactory;
-        
         Level = 1;
 
         CardsCount = 5;
@@ -97,7 +78,7 @@ public class Manchkin : IManchkin
         FlushingBonus = 0;
         DoublePrice = false;
 
-        Hands = hands;
+        Hands = new Hands();
         WornArmor = null;
         WornShoes = null;
         WornHat = null;
@@ -111,8 +92,8 @@ public class Manchkin : IManchkin
         HalfBlood = null;
         SuperManchkin = null;
 
-        Race = initialRace;
-        Class = initialClass;
+        Race = new Human();
+        Class = new Nobody();
         Gender = gender;
         Damage = Level;
         TextRepresentation = "Манчкин";
@@ -131,7 +112,7 @@ public class Manchkin : IManchkin
     {
         if (IsNull(_class)) return manClass;
 
-        if(IsSuperManchkin && IsNull(SuperManchkin.SecondClass))
+        if (IsSuperManchkin)
             RefuseSuperManchkin();
         LostDescriptions(Class.Descriptions);
         PurchaseDescriptions(manClass.Descriptions);
@@ -142,31 +123,8 @@ public class Manchkin : IManchkin
     public void RecalculateParameters()
     {
         RemoveUnsuitableStuff();
-        RecalculateStats();
         RecalculateDamage();
         RecalculateFlushingBonus();
-    }
-
-    public void RecalculateStats()
-    {
-        if (IsHalfBlood && !IsNull(HalfBlood.SecondRace))
-        {
-            CardsCount = HalfBlood.SecondRace.CardCount > Race.CardCount 
-                ? HalfBlood.SecondRace.CardCount
-                : Race.CardCount;
-            
-            FlushingBonus = HalfBlood.SecondRace.FlushingBonus > Race.FlushingBonus 
-                ? HalfBlood.SecondRace.FlushingBonus
-                : Race.FlushingBonus;
-
-            DoublePrice = HalfBlood.SecondRace.CellingByDoublePrice;
-        }
-        else
-        {
-            CardsCount = Race.CardCount;
-            FlushingBonus = Race.FlushingBonus;
-            DoublePrice = Race.CellingByDoublePrice;
-        }
     }
 
     public IRace? ChangeRace(IRace? race)
@@ -175,16 +133,17 @@ public class Manchkin : IManchkin
         CardsCount = race.CardCount;
         DoublePrice = race.CellingByDoublePrice;
 
-        if (IsNull(Race)) return race;
-        
-        if(IsHalfBlood && IsNull(HalfBlood.SecondRace)) RefuseHalfblood();
+        if (IsNull(Race))
+            return race;
+
+        if (IsHalfBlood)
+            RefuseHalfblood();
         LostDescriptions(Race.Descriptions);
         PurchaseDescriptions(race.Descriptions);
 
         return race;
     }
-
-
+    
     public void RecalculateDamage()
     {
         Damage = 0;
@@ -215,20 +174,12 @@ public class Manchkin : IManchkin
     {
         LostAllStuffs();
         RecalculateParameters();
+        IsDead = true;
     }
 
     public void GetLevel()
     {
         if (Level < 10) Level++;
-        RecalculateDamage();
-    }
-
-    public void GetLevel(int level)
-    {
-        if (Level + level < 10)
-            Level += level;
-        else
-            Level = 9;
         RecalculateDamage();
     }
 
@@ -263,15 +214,13 @@ public class Manchkin : IManchkin
 
     public void GetMercenary()
     {
-        var mercenary = _mercenaryFactory.ResetStuff().Build();
-        Mercenaries.Add(mercenary);
+        Mercenaries.Add(new Mercenary());
         RecalculateParameters();
     }
 
     public void GetMercenary(IStuff stuff)
     {
-        var mercenary = _mercenaryFactory.SetStuff(stuff).Build();
-        Mercenaries.Add(mercenary);
+        Mercenaries.Add(new Mercenary(stuff));
         RecalculateParameters();
     }
 
@@ -309,14 +258,12 @@ public class Manchkin : IManchkin
 
     public bool CanTakeStuff(IStuff? stuff)
     {
-        
         var can = CanHaveStuff(stuff);
         if (!can) return can;
         if (stuff.Weight == Bulkiness.HUGE)
-            return Race is not Dwarf && !HasHugeStuff || Race is Dwarf
-                                                      || stuff.Cheat
-                                                      || IsHalfBlood && HalfBlood.HalfType == HalfTypes.BOTH
-                                                                     && HalfBlood.SecondRace is Dwarf;
+            return Race is not Dwarf && !HasHugeStuff
+                   || Race is Dwarf
+                   || IsHalfBlood && HalfBlood.HalfType == HalfTypes.BOTH && HalfBlood.SecondRace is Dwarf;
         return can;
     }
 
@@ -378,7 +325,7 @@ public class Manchkin : IManchkin
         RefuseHalfblood();
         var stuff = GetAllWornStuffs();
         var ok = stuff.All(s => CanHaveStuff(s, Class, Race, Gender));
-        if(last == null)
+        if (last == null)
             BecameHalfBlood();
         else
             BecameHalfBlood(last);
@@ -392,13 +339,13 @@ public class Manchkin : IManchkin
         RefuseSuperManchkin();
         var stuff = GetAllWornStuffs();
         var ok = stuff.All(s => CanHaveStuff(s, Class, Race, Gender));
-        if(last == null)
+        if (last == null)
             BecameSuperManchkin();
         else
             BecameSuperManchkin(last);
         return ok;
     }
-    
+
     public bool CheckStuffBeforeChanging(Genders gender)
     {
         var stuff = GetAllWornStuffs();
@@ -451,13 +398,14 @@ public class Manchkin : IManchkin
     {
         //TODO: возможно, придетя переписать
         var stuff = GetAllWornStuffs();
-        while(stuff.Count() != 0)
+        while (stuff.Count != 0)
         {
             var s = stuff.Last();
             if (!CanHaveStuff(s))
             {
                 LostStuff(s);
             }
+
             stuff.Remove(s);
         }
     }
@@ -480,7 +428,7 @@ public class Manchkin : IManchkin
 
     private void AddStuff(IStuff? stuff)
     {
-        if(IsNull(stuff)) return;
+        if (IsNull(stuff)) return;
         PurchaseDescriptions(stuff.Descriptions);
         if (stuff.Weight == Bulkiness.HUGE)
             HugeStuffs.Add(stuff);
@@ -603,6 +551,7 @@ public class Manchkin : IManchkin
                         if (!IsNull(right))
                             ReturnStuff(right);
                     }
+
                     ok = false;
                 }
                 else
@@ -617,7 +566,6 @@ public class Manchkin : IManchkin
             default:
                 if (CanTakeStuff(stuff))
                 {
-                    PurchaseDescriptions(stuff.Descriptions);
                     if (stuff.Weight == Bulkiness.HUGE)
                         HugeStuffs.Add(stuff);
                     else
@@ -634,15 +582,15 @@ public class Manchkin : IManchkin
         RecalculateFlushingBonus();
         return ok;
     }
-    
+
     public bool TakeSingleWeaponRightHand(IStuff? stuff)
     {
         IStuff? last;
         bool ok;
-        
+
         last = Hands.RightHand;
         LostStuff(Hands.RightHand);
-        
+
         if (!CanTakeStuff(stuff))
         {
             Hands.TakeInRightHand(last);
@@ -657,18 +605,18 @@ public class Manchkin : IManchkin
             RecalculateDamage();
             RecalculateFlushingBonus();
         }
-        
+
         return ok;
     }
-    
+
     public bool TakeSingleWeaponLeftHand(IStuff? stuff)
     {
         IStuff? last;
         bool ok;
-        
+
         last = Hands.LeftHand;
         LostStuff(Hands.LeftHand);
-        
+
         if (!CanTakeStuff(stuff))
         {
             Hands.TakeInLeftHand(last);
@@ -681,7 +629,7 @@ public class Manchkin : IManchkin
             AddStuff(stuff);
             ok = true;
         }
-        
+
         RecalculateDamage();
         RecalculateFlushingBonus();
         return ok;
@@ -724,14 +672,14 @@ public class Manchkin : IManchkin
                 switch (stuff.Fullness)
                 {
                     case Arms.BOTH:
-                        Hands.TakeInBothHands(null);
+                        Hands.DropFromBothHands();
                         break;
 
                     case Arms.SINGLE:
                         if (Hands.LeftHand == stuff)
-                            Hands.TakeInLeftHand(null);
+                            Hands.DropFromLeftHand();
                         else if (Hands.RightHand == stuff)
-                            Hands.TakeInRightHand(null);
+                            Hands.DropFromRightHand();
                         break;
                 }
 
@@ -761,26 +709,22 @@ public class Manchkin : IManchkin
         }
     }
 
-    public int SellStuffs(List<IStuff?> stuffs)
+    public void SellStuffs(List<IStuff?> stuffs)
     {
         var price = 0;
-        while (stuffs.Count != 0)
+        foreach (var stuff in stuffs)
         {
-            var stuff = stuffs.Last();
             price += stuff.Price;
             LostStuff(stuff);
-            stuffs.Remove(stuff);
         }
-        return price;
+
+        Level += price / 1000;
     }
 
-    public int SellByDoublePrice(IStuff? stuff)
+    public void SellByDoublePrice(IStuff? stuff)
     {
-        if (IsNull(stuff)) return 0;
-        var price = stuff.Price * 2;
+        Level += stuff.Price * 2 / 1000;
         LostStuff(stuff);
-        DoublePrice = false;
-        return price;
     }
 
     #endregion
@@ -809,23 +753,16 @@ public class Manchkin : IManchkin
 
     public void BecameHalfBlood(IRace second)
     {
-        HalfBlood = _halfbloodFactory
-            .SetSecondRace(second)
-            .Build();
+        HalfBlood = new Halfblood(second);
         PurchaseDescriptions(second.Descriptions);
-        RecalculateStats();
     }
 
-    public void BecameHalfBlood(){
-        HalfBlood = _halfbloodFactory
-            .ResetSecondRace()
-            .Build();
-    }
-
+    public void BecameHalfBlood() => HalfBlood = new Halfblood();
 
     public void RefuseHalfblood()
     {
-        if (HalfBlood == null) return;
+        if (HalfBlood == null)
+            return;
         if (HalfBlood.SecondRace != null)
             LostDescriptions(HalfBlood.SecondRace.Descriptions);
         RecalculateParameters();
@@ -840,20 +777,12 @@ public class Manchkin : IManchkin
 
     public void BecameSuperManchkin(IClass second)
     {
-        SuperManchkin = _superManchkinFactory
-            .SetSecondClass(second)
-            .Build();
+        SuperManchkin = new SuperManchkin(HalfTypes.BOTH, second);
         PurchaseDescriptions(second.Descriptions);
-        RecalculateStats();
     }
 
     public void BecameSuperManchkin()
-    {
-        SuperManchkin = _superManchkinFactory
-            .ResetSecondClass()
-            .Build();
-        
-    }
+        => SuperManchkin = new SuperManchkin(HalfTypes.SINGLE_CLEAN);
 
     public void RefuseSuperManchkin()
     {

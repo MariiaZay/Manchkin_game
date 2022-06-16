@@ -328,20 +328,19 @@ public class Manchkin : IManchkin
 
     public bool CanHaveStuff(IStuff? stuff)
     {
-        bool mainRight;
         bool additionalRaceRight;
-        var additionalClassRight = false;
+        bool additionalClassRight;
 
         if (IsNull(stuff))
             return true;
-        mainRight = stuff.Cheat
-                    || stuff.CanBeUsed(Class)
-                    && stuff.CanBeUsed(Race)
-                    && stuff.CanBeUsed(Gender);
+        var mainRight = stuff!.Cheat
+                        || stuff.CanBeUsed(Class)
+                        && stuff.CanBeUsed(Race)
+                        && stuff.CanBeUsed(Gender);
         if (IsHalfBlood)
         {
             additionalRaceRight = stuff.CanBeUsed(Class) && stuff.CanBeUsed(Gender);
-            if (HalfBlood.HalfType == HalfTypes.BOTH)
+            if (HalfBlood != null && HalfBlood.HalfType == HalfTypes.BOTH)
                 additionalRaceRight = additionalRaceRight && stuff.CanBeUsed(HalfBlood.SecondRace);
         }
         else
@@ -349,9 +348,9 @@ public class Manchkin : IManchkin
 
         if (IsSuperManchkin)
         {
-            additionalRaceRight = stuff.CanBeUsed(Race) && stuff.CanBeUsed(Gender);
-            if (SuperManchkin.HalfType == HalfTypes.BOTH)
-                additionalRaceRight = additionalRaceRight && stuff.CanBeUsed(SuperManchkin.SecondClass);
+            additionalClassRight = stuff.CanBeUsed(Race) && stuff.CanBeUsed(Gender);
+            if (SuperManchkin!.HalfType == HalfTypes.BOTH)
+                additionalClassRight = additionalClassRight && stuff.CanBeUsed(SuperManchkin.SecondClass);
         }
         else
             additionalClassRight = false;
@@ -369,7 +368,7 @@ public class Manchkin : IManchkin
 
     public bool CheckStuffBeforeChangingHalfblood()
     {
-        var last = HalfBlood.SecondRace;
+        var last = HalfBlood!.SecondRace;
         RefuseHalfblood();
         var stuff = GetAllWornStuffs();
         var ok = stuff.All(s => CanHaveStuff(s, Class, Race, Gender));
@@ -551,7 +550,7 @@ public class Manchkin : IManchkin
 
             case Weapon:
                 IStuff? right = null;
-                if (!IsNull(Hands.LeftHand) && Hands.LeftHand.Fullness == Arms.BOTH)
+                if (!IsNull(Hands.LeftHand) && Hands.LeftHand!.Fullness == Arms.BOTH)
                 {
                     st = Hands.LeftHand;
                     LostStuff(Hands.LeftHand);
@@ -577,7 +576,7 @@ public class Manchkin : IManchkin
 
                 if (!CanTakeStuff(stuff))
                 {
-                    if (!IsNull(st) && st.Fullness == Arms.BOTH)
+                    if (st != null && !IsNull(st) && st.Fullness == Arms.BOTH)
                     {
                         Hands.TakeInBothHands(st);
                         ReturnStuff(st);

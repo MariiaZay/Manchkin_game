@@ -1,6 +1,7 @@
 ﻿using ManchkinCore.Enums.Accessory;
 using ManchkinCore.GameLogic.Implementation.Factories;
 using ManchkinCore.Implementation;
+using ManchkinCore.Implementation.Gears;
 using ManchkinCore.Interfaces;
 using NUnit.Framework;
 
@@ -26,6 +27,87 @@ public class StuffsTests
     }
 
     [Test]
+    public void UseCheat()
+    {
+        var stuff = new Cloack();
+
+        Assert.That(stuff.Cheat, Is.False);
+
+        _manchkin.UseCheat(stuff);
+
+        Assert.That(stuff.Cheat, Is.True);
+    }
+
+    [Test]
+    public void CancelCheat()
+    {
+        var stuff = new Cloack { Cheat = true };
+
+        Assert.That(stuff.Cheat, Is.True);
+
+        _manchkin.CancelCheat(stuff);
+
+        Assert.That(stuff.Cheat, Is.False);
+    }
+
+    [Test]
+    public void LostMostPowerfulStuff()
+    {
+        var singingSword = new SingingSword { Cheat = true };
+        var stepladder = new Stepladder { Cheat = true };
+        _manchkin.TakeStuff(new Cloack { Cheat = true });
+        _manchkin.TakeStuff(singingSword);
+        _manchkin.TakeStuff(stepladder);
+
+        _manchkin.LostMostPowerfulStuff();
+
+        Assert.That(_manchkin.HugeStuffs, Is.EqualTo(new List<IStuff?> { stepladder }));
+        Assert.That(_manchkin.SmallStuffs, Is.EqualTo(new List<IStuff?> { singingSword }));
+    }
+
+    [Test]
+    public void TakeSingleWeaponRightHand_WithEmptyHand()
+    {
+        var weapon = new Rapier();
+
+        _manchkin.TakeSingleWeaponRightHand(weapon);
+
+        Assert.That(_manchkin.Hands.RightHand, Is.EqualTo(weapon));
+    }
+
+    [Test]
+    public void TakeSingleWeaponRightHand_WithNonEmptyHand()
+    {
+        var weapon = new Rapier();
+        _manchkin.TakeSingleWeaponRightHand(new Buckler());
+
+        _manchkin.TakeSingleWeaponRightHand(weapon);
+
+        Assert.That(_manchkin.Hands.RightHand, Is.EqualTo(weapon));
+    }
+
+    [Test]
+    public void TakeSingleWeaponLeftHand_WithEmptyHand()
+    {
+        var weapon = new Rapier();
+
+        _manchkin.TakeSingleWeaponLeftHand(weapon);
+
+        Assert.That(_manchkin.Hands.LeftHand, Is.EqualTo(weapon));
+    }
+
+    [Test]
+    public void TakeSingleWeaponLeftHand_WithNonEmptyHand()
+    {
+        var weapon = new Rapier();
+        _manchkin.TakeSingleWeaponLeftHand(new Buckler());
+
+        _manchkin.TakeSingleWeaponLeftHand(weapon);
+
+        Assert.That(_manchkin.Hands.LeftHand, Is.EqualTo(weapon));
+    }
+
+    [Test]
     public void ToDie_LosesAllStuff()
     {
         for (var _ = 0; _ < 9; _++)
@@ -47,7 +129,7 @@ public class StuffsTests
     }
 
     [Test]
-    public void SellStuffs_Works()
+    public void SellStuffs()
     {
         var stuffs = new List<IStuff?> { new HelmetOfCourage(), new LeatherArmor(), new MightyShoes() };
         var expectedLevel = _manchkin.Level + stuffs.Select(st => st!.Price).Sum() / 1000;
@@ -60,7 +142,7 @@ public class StuffsTests
     }
 
     [Test]
-    public void SellByDoublePriceStuffs_Works()
+    public void SellByDoublePriceStuffs()
     {
         var stuffs = new List<IStuff?> { new HelmetOfCourage(), new LeatherArmor(), new MightyShoes() };
         var expectedLevel = _manchkin.Level + stuffs.Select(st => st!.Price * 2 / 1000).Sum();

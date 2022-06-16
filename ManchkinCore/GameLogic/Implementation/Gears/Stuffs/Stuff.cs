@@ -1,15 +1,7 @@
 ﻿using ManchkinCore.Enums.Accessory;
 using ManchkinCore.Interfaces;
 
-namespace ManchkinCore.Implementation.Gears;
-
-public abstract class SmallStuff : Stuff
-{ 
-}
-
-public abstract class HugeStuff : Stuff
-{
-} 
+namespace ManchkinCore.GameLogic.Implementation.Gears.Stuffs;
 
 public abstract class Stuff : IStuff
 {

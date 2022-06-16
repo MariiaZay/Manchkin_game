@@ -1,19 +1,20 @@
 ﻿using ManchkinCore.Enums.Accessory;
+using ManchkinCore.GameLogic.Implementation.Gears.Stuffs;
 using ManchkinCore.Interfaces;
 
 namespace ManchkinCore.Implementation.Gears;
 
-public class Sandwich : SmallStuff
+public class Stepladder : HugeStuff
 {
-    public Sandwich()
+    public Stepladder()
     {
         Price = 400;
         Damage = 3;
-        Weight = Bulkiness.SMALL;
+        Weight = Bulkiness.HUGE;
         Fullness = Arms.NO;
         Descriptions = new List<string>();
         FlushingBonus = 0;
-        TextRepresentation = "Сэндвич \"Душитая смерть\"";
+        TextRepresentation = "Боевая стремянка";
     }
 
     public override bool CanBeUsed(IRace? race) => race is Halfling || Cheat;

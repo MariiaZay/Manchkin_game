@@ -35,6 +35,17 @@ public class LevelTests
         Assert.That(_manchkin.Level, Is.GreaterThan(originLevel));
     }
 
+    [TestCase(0, 1)]
+    [TestCase(1, 2)]
+    [TestCase(5, 6)]
+    [TestCase(15, 9)]
+    public void GetLevel_WithIncreaseByValue_IncreasesLevel(int increaseByValue, int expectedLevel)
+    {
+        _manchkin.GetLevel(increaseByValue);
+
+        Assert.That(_manchkin.Level, Is.EqualTo(expectedLevel));
+    }
+
     [Test]
     public void GetLevel_IncreasesDamage()
     {

@@ -1,4 +1,5 @@
-﻿using ManchkinCore.Implementation;
+﻿using ManchkinCore.GameLogic.Implementation.Gears.Stuffs;
+using ManchkinCore.Implementation;
 using ManchkinCore.Implementation.Gears;
 using ManchkinCore.Interfaces;
 

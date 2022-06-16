@@ -224,10 +224,10 @@ public class Manchkin : IManchkin
         RecalculateDamage();
     }
 
-    public void GetLevel(int level)
+    public void GetLevel(int increaseByValue)
     {
-        if (Level + level < 10)
-            Level += level;
+        if (Level + increaseByValue < 10)
+            Level += increaseByValue;
         else
             Level = 9;
         RecalculateDamage();
@@ -351,7 +351,6 @@ public class Manchkin : IManchkin
                         && stuff.CanBeUsed(Gender);
                 else
                     additionalRaceRight = stuff.CanBeUsed(Race) && stuff.CanBeUsed(Gender);
-                //TODO: переделать это место
             }
             else
                 additionalClassRight = false;
@@ -360,7 +359,6 @@ public class Manchkin : IManchkin
         return mainRight || additionalRaceRight || additionalClassRight;
     }
 
-    //TODO:возможно, тут тоже нуно будет переписать
     public bool CheckStuffBeforeChanging(IDescriptable? descriptable)
     {
         var stuff = GetAllWornStuffs();
@@ -446,7 +444,6 @@ public class Manchkin : IManchkin
 
     public void RemoveUnsuitableStuff()
     {
-        //TODO: возможно, придетя переписать
         var stuff = GetAllWornStuffs();
         while (stuff.Count() != 0)
         {
@@ -461,11 +458,7 @@ public class Manchkin : IManchkin
     }
 
     private bool IsNull(object? ob) => ob == null;
-
-
-    //TODO: придумать, как вынести повторяющиеся куски в отдельный метод
-    //TODO: проверить, что это стабильно и правильно работает
-
+    
     private void ReturnStuff(IStuff? stuff)
     {
         if (IsNull(stuff)) return;
@@ -486,16 +479,15 @@ public class Manchkin : IManchkin
             SmallStuffs.Add(stuff);
     }
 
-
-    public bool TakeStuff(IStuff? stuff) //это говнокод, но оно работает
+    public bool TakeStuff(IStuff? stuff)
     {
         IStuff? st;
-        var ok = false;
+        bool ok;
         switch (stuff)
         {
             case Hat:
 
-                st = WornHat; //TODO: вынести в отдельный метод
+                st = WornHat;
                 LostStuff(WornHat);
 
                 if (!CanTakeStuff(stuff))
@@ -557,7 +549,7 @@ public class Manchkin : IManchkin
 
                 break;
 
-            case Weapon: //TODO: придумать, как переписать эту хуйню
+            case Weapon:
                 IStuff? right = null;
                 if (!IsNull(Hands.LeftHand) && Hands.LeftHand.Fullness == Arms.BOTH)
                 {

@@ -1,24 +1,25 @@
 ﻿using ManchkinCore.Enums.Accessory;
+using ManchkinCore.GameLogic.Implementation.Gears.Stuffs;
 using ManchkinCore.Interfaces;
 
 namespace ManchkinCore.Implementation.Gears;
 
-public class SingingSword : SmallStuff
+public class Pantyhose : SmallStuff
 {
-    public SingingSword()
+    public Pantyhose()
     {
-        Price = 400;
-        Damage = 2;
+        Price = 600;
+        Damage = 3;
         Weight = Bulkiness.SMALL;
         Fullness = Arms.NO;
         Descriptions = new List<string>();
         FlushingBonus = 0;
-        TextRepresentation = "Меч песни и пляски";
+        TextRepresentation = "Колготы великанской силы";
     }
 
     public override bool CanBeUsed(IRace? race) => true;
 
-    public override bool CanBeUsed(IClass? _class) => _class is not Thief || Cheat;
+    public override bool CanBeUsed(IClass? _class) => _class is not Warrior || Cheat;
 
     public override bool CanBeUsed(Genders gender) => true;
 }

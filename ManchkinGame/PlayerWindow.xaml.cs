@@ -250,7 +250,6 @@ public partial class PlayerWindow : Window
             if (Application.Current.Resources["NEW"] == null) return;
 
             Player.Manchkin.Class = Application.Current.Resources["NEW"] as IClass;
-            //TODO: вынести в отдельный метод
             Refresh();
         }
     }
@@ -731,7 +730,6 @@ public partial class PlayerWindow : Window
     #endregion
 
     #region Mercenary
-    //TODO: разобраться с наемничками
     private void MercenariesButtonClick(object sender, RoutedEventArgs e)
     {
         if (Player.Manchkin.Mercenaries.Count == 0)
@@ -1035,7 +1033,6 @@ public partial class PlayerWindow : Window
             LostMercenaryButton.Style = Player.Manchkin.HasMercenary
                 ? (Style) FindResource("RoundedRedButtonStyle")
                 : (Style) FindResource("RoundedNotActiveRedButtonStyle");
-            //TODO: занться рефакорнгом
         }
     }
 

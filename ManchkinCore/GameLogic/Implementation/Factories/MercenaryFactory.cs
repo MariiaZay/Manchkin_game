@@ -4,7 +4,7 @@ namespace ManchkinCore.Implementation;
 
 public class MercenaryFactory
 {
-    private IStuff _stuff;
+    private readonly IStuff _stuff;
     
     public MercenaryFactory() {}
 
@@ -13,9 +13,9 @@ public class MercenaryFactory
         _stuff = stuff;
     }
 
-    public MercenaryFactory SetStuff(IStuff stuff) => new MercenaryFactory(stuff);
+    public static MercenaryFactory SetStuff(IStuff stuff) => new MercenaryFactory(stuff);
 
-    public MercenaryFactory ResetStuff() => new MercenaryFactory();
+    public static MercenaryFactory ResetStuff() => new MercenaryFactory();
 
     public IMercenary Build() => _stuff == null ? new Mercenary() : new Mercenary(_stuff);
 }

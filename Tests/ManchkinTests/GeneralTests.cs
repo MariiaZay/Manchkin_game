@@ -15,15 +15,16 @@ public class GeneralTests
     [SetUp]
     public void SetUp()
     {
-        _manchkin = new Manchkin(
+        var manchkinFactory = new ManchkinFactory(
             new Nobody(),
             new Human(),
             new Hands(),
             new MercenaryFactory(),
             new HalfbloodFactory(),
-            new SuperManchkinFactory(),
-            Genders.MALE
-        );
+            new SuperManchkinFactory()
+            )
+            .SetGender(Genders.MALE);
+        _manchkin = manchkinFactory.Build();
     }
 
     [Test]

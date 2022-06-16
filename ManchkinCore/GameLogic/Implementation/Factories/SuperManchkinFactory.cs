@@ -5,7 +5,7 @@ namespace ManchkinCore.GameLogic.Implementation.Factories;
 
 public class SuperManchkinFactory
 {
-    private IClass _secondClass;
+    private readonly IClass _secondClass;
     
     public SuperManchkinFactory() {}
 
@@ -14,9 +14,9 @@ public class SuperManchkinFactory
         _secondClass = secondClass;
     }
 
-    public SuperManchkinFactory SetSecondClass(IClass secondClass) => new SuperManchkinFactory(secondClass);
+    public static SuperManchkinFactory SetSecondClass(IClass secondClass) => new SuperManchkinFactory(secondClass);
 
-    public SuperManchkinFactory ResetSecondClass() => new SuperManchkinFactory();
+    public static SuperManchkinFactory ResetSecondClass() => new SuperManchkinFactory();
 
     public ISuperManchkin Build() => _secondClass == null 
         ? new SuperManchkin(HalfTypes.SINGLE_CLEAN)

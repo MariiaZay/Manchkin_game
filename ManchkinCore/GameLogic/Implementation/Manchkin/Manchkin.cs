@@ -264,14 +264,14 @@ public class Manchkin : IManchkin
 
     public void GetMercenary()
     {
-        var mercenary = _mercenaryFactory.ResetStuff().Build();
+        var mercenary = MercenaryFactory.ResetStuff().Build();
         Mercenaries.Add(mercenary);
         RecalculateParameters();
     }
 
     public void GetMercenary(IStuff stuff)
     {
-        var mercenary = _mercenaryFactory.SetStuff(stuff).Build();
+        var mercenary = MercenaryFactory.SetStuff(stuff).Build();
         Mercenaries.Add(mercenary);
         RecalculateParameters();
     }
@@ -812,8 +812,7 @@ public class Manchkin : IManchkin
 
     public void BecameHalfBlood(IRace second)
     {
-        HalfBlood = _halfbloodFactory
-            .SetSecondRace(second)
+        HalfBlood = HalfbloodFactory.SetSecondRace(second)
             .Build();
         PurchaseDescriptions(second.Descriptions);
         RecalculateStats();
@@ -821,8 +820,7 @@ public class Manchkin : IManchkin
 
     public void BecameHalfBlood()
     {
-        HalfBlood = _halfbloodFactory
-            .ResetSecondRace()
+        HalfBlood = HalfbloodFactory.ResetSecondRace()
             .Build();
     }
 
@@ -844,8 +842,7 @@ public class Manchkin : IManchkin
 
     public void BecameSuperManchkin(IClass second)
     {
-        SuperManchkin = _superManchkinFactory
-            .SetSecondClass(second)
+        SuperManchkin = SuperManchkinFactory.SetSecondClass(second)
             .Build();
         PurchaseDescriptions(second.Descriptions);
         RecalculateStats();
@@ -853,8 +850,7 @@ public class Manchkin : IManchkin
 
     public void BecameSuperManchkin()
     {
-        SuperManchkin = _superManchkinFactory
-            .ResetSecondClass()
+        SuperManchkin = SuperManchkinFactory.ResetSecondClass()
             .Build();
     }
 

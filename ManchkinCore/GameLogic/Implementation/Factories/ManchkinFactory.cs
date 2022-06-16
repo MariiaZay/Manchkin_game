@@ -6,12 +6,12 @@ namespace ManchkinCore.GameLogic.Implementation.Factories;
 
 public class ManchkinFactory
 {
-    private IClass _initialClass;
-    private IRace _initialRace;
-    private IHands _hands;
-    private MercenaryFactory _mercenaryFactory;
-    private HalfbloodFactory _halfbloodFactory;
-    private SuperManchkinFactory _superManchkinFactory;
+    private readonly IClass _initialClass;
+    private readonly IRace _initialRace;
+    private readonly IHands _hands;
+    private readonly MercenaryFactory _mercenaryFactory;
+    private readonly HalfbloodFactory _halfbloodFactory;
+    private readonly SuperManchkinFactory _superManchkinFactory;
 
     private Genders _gender;
     

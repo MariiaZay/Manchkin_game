@@ -15,15 +15,16 @@ public class HalfbloodTests
     [SetUp]
     public void SetUp()
     {
-        _manchkin = new Manchkin(
-            new Nobody(),
-            new Human(),
-            new Hands(),
-            new MercenaryFactory(),
-            new HalfbloodFactory(),
-            new SuperManchkinFactory(),
-            Genders.MALE
-        );
+        var manchkinFactory = new ManchkinFactory(
+                new Nobody(),
+                new Human(),
+                new Hands(),
+                new MercenaryFactory(),
+                new HalfbloodFactory(),
+                new SuperManchkinFactory()
+            )
+            .SetGender(Genders.MALE);
+        _manchkin = manchkinFactory.Build();
     }
 
     [Test]

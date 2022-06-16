@@ -1,5 +1,4 @@
 ﻿using ManchkinCore.Enums.Accessory;
-using ManchkinCore.GameLogic.Implementation;
 using ManchkinCore.GameLogic.Implementation.Factories;
 using ManchkinCore.Implementation;
 using ManchkinCore.Implementation.Gears;

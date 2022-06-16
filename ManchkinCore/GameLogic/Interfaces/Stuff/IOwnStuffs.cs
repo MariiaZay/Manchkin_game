@@ -24,8 +24,7 @@ public interface IOwnStuffs
     public void GetMercenary();
     public void GetMercenary(IStuff stuff);
     public void GiveToMercenary(IStuff stuff);
-    public void KillMercenary(IMercenary mercenary);
-    public void LostMercenary(IMercenary mercenary);
+    public void KillMercenaries();
     
     public bool CanTakeStuff(IStuff? stuff);
     public bool CanHaveStuff(IStuff stuff);

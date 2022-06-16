@@ -1,5 +1,4 @@
 ﻿using ManchkinCore.Enums.Accessory;
-using ManchkinCore.GameLogic.Implementation;
 using ManchkinCore.GameLogic.Implementation.Factories;
 using ManchkinCore.Implementation;
 using ManchkinCore.Interfaces;
@@ -50,5 +49,22 @@ public class MercenaryTests
         _manchkin.GiveToMercenary(new Bow());
 
         Assert.That(mercenary.Item, Is.Not.EqualTo(null));
+    }
+
+    [Test]
+    public void KillMercenaries_ListOfMercenariesIsEmptyAndLevelUp()
+    {
+        _manchkin.GetMercenary();
+        _manchkin.GetMercenary();
+
+        Assert.That(_manchkin.Mercenaries, Has.Count.EqualTo(2));
+
+        _manchkin.KillMercenaries();
+        
+        Assert.Multiple(() =>
+        {
+            Assert.That(_manchkin.Mercenaries, Has.Count.EqualTo(0));
+            Assert.That(_manchkin.Level, Is.EqualTo(3));
+        });
     }
 }

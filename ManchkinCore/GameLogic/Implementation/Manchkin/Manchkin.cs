@@ -62,7 +62,7 @@ public class Manchkin : IManchkin
 
     public int FlushingBonus { get; private set; }
 
-    public bool DoublePrice { get; set; } //TODO: придумать,как обновлять перед каждым ходом
+    public bool DoublePrice { get; set; }
 
     public IHulfblood? HalfBlood { get; private set; }
     public ISuperManchkin? SuperManchkin { get; private set; }
@@ -174,7 +174,7 @@ public class Manchkin : IManchkin
         FlushingBonus = race.FlushingBonus;
         CardsCount = race.CardCount;
         DoublePrice = race.CellingByDoublePrice;
-        
+
         if (IsNull(Race)) return race;
 
         if (IsHalfBlood && IsNull(HalfBlood.SecondRace)) RefuseHalfblood();
@@ -287,16 +287,13 @@ public class Manchkin : IManchkin
         RecalculateParameters();
     }
 
-    public void KillMercenary(IMercenary mercenary)
+    public void KillMercenaries()
     {
-        LostMercenary(mercenary);
-        Level++;
-    }
-
-    public void LostMercenary(IMercenary mercenary)
-    {
-        Mercenaries.Remove(mercenary);
-        RecalculateParameters();
+        foreach (var mercenary in Mercenaries.ToArray())
+        {
+            GetLevel();
+            Mercenaries.Remove(mercenary);
+        }
     }
 
     #endregion

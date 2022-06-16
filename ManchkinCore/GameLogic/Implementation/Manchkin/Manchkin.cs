@@ -310,10 +310,12 @@ public class Manchkin : IManchkin
         var can = CanHaveStuff(stuff);
         if (!can) return can;
         if (stuff.Weight == Bulkiness.HUGE)
-            return Race is not Dwarf && !HasHugeStuff || Race is Dwarf
-                                                      || stuff.Cheat
-                                                      || IsHalfBlood && HalfBlood.HalfType == HalfTypes.BOTH
-                                                                     && HalfBlood.SecondRace is Dwarf;
+            return IsHalfBlood
+                   && HalfBlood.HalfType == HalfTypes.BOTH
+                   && HalfBlood.SecondRace is Dwarf
+                   || Race is not Dwarf && !HasHugeStuff
+                   || Race is Dwarf
+                   || stuff.Cheat;
         return can;
     }
 
@@ -458,7 +460,7 @@ public class Manchkin : IManchkin
     }
 
     private bool IsNull(object? ob) => ob == null;
-    
+
     private void ReturnStuff(IStuff? stuff)
     {
         if (IsNull(stuff)) return;

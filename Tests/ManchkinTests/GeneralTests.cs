@@ -161,7 +161,4 @@ public class GeneralTests
 
         Assert.That(_manchkin.FlushingBonus, Is.EqualTo(expectedFlushingBonus));
     }
-    
-    // [Test]
-    // public void 
 }

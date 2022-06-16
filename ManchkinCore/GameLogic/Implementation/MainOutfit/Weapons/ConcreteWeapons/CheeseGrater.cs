@@ -1,4 +1,5 @@
 ﻿using ManchkinCore.Enums.Accessory;
+using ManchkinCore.GameLogic.Implementation.MainOutfit.Weapons;
 using ManchkinCore.Interfaces;
 
 namespace ManchkinCore.Implementation;

@@ -338,8 +338,9 @@ public class Manchkin : IManchkin
             if (IsHalfBlood)
             {
                 if (HalfBlood.HalfType == HalfTypes.BOTH)
-                    additionalRaceRight = stuff.CanBeUsed(Class) && stuff.CanBeUsed(HalfBlood.SecondRace)
-                                                                 && stuff.CanBeUsed(Gender);
+                    additionalRaceRight = stuff.CanBeUsed(Class)
+                                          && stuff.CanBeUsed(HalfBlood.SecondRace)
+                                          && stuff.CanBeUsed(Gender);
                 else
                     additionalRaceRight = stuff.CanBeUsed(Class) && stuff.CanBeUsed(Gender);
             }

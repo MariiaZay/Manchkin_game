@@ -10,7 +10,7 @@ public class Mercenary : IMercenary
     public Mercenary(IStuff? stuff) => Item = stuff;
     
     public void ChangeEquipment(IStuff? stuff) =>Item = stuff;
-    public List<string> Descriptions { get;} = new List<string>() {FirstFeature, SecondFeature};
+    public List<string> Descriptions { get;} = new List<string> {FirstFeature, SecondFeature};
 
     private const string FirstFeature = "Можешь нести и применять еще одну шмотку, даже если не имеешь на это право. " +
                                         "Если теряешь наемничка, то шмотку теряешь с ним";

@@ -1,4 +1,5 @@
 ﻿using ManchkinCore.GameLogic.Implementation.Gears.Stuffs;
+using ManchkinCore.GameLogic.Implementation.MainOutfit.Weapons;
 using ManchkinCore.Implementation;
 using ManchkinCore.Implementation.Gears;
 using ManchkinCore.Interfaces;

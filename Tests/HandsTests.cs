@@ -1,4 +1,5 @@
-﻿using ManchkinCore.Implementation;
+﻿using ManchkinCore.GameLogic.Implementation.MainOutfit.Weapons.ConcreteWeapons;
+using ManchkinCore.GameLogic.Implementation.Manchkin;
 using NUnit.Framework;
 
 namespace Tests;

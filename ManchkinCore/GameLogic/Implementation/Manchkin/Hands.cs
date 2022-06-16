@@ -1,6 +1,7 @@
-﻿using ManchkinCore.Interfaces;
+﻿using ManchkinCore.GameLogic.Interfaces.Manchkin;
+using ManchkinCore.GameLogic.Interfaces.Stuff;
 
-namespace ManchkinCore.Implementation;
+namespace ManchkinCore.GameLogic.Implementation.Manchkin;
 
 public class Hands : IHands
 {

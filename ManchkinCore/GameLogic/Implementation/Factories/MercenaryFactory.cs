@@ -1,6 +1,7 @@
-﻿using ManchkinCore.Interfaces;
+﻿using ManchkinCore.GameLogic.Implementation.Gears;
+using ManchkinCore.GameLogic.Interfaces.Stuff;
 
-namespace ManchkinCore.Implementation;
+namespace ManchkinCore.GameLogic.Implementation.Factories;
 
 public class MercenaryFactory
 {

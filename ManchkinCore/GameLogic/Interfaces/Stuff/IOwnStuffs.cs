@@ -1,6 +1,7 @@
-﻿using ManchkinCore.Enums.Accessory;
+﻿using ManchkinCore.CardEnums.Accessory;
+using ManchkinCore.GameLogic.Interfaces.Manchkin;
 
-namespace ManchkinCore.Interfaces;
+namespace ManchkinCore.GameLogic.Interfaces.Stuff;
 
 public interface IOwnStuffs
 {

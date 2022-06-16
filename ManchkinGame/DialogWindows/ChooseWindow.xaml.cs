@@ -5,7 +5,7 @@ using System.Windows;
 using System.Windows.Documents;
 using ManchkinCore.GameLogic;
 using ManchkinCore.GameLogic.Implementation;
-using ManchkinCore.Interfaces;
+using ManchkinCore.GameLogic.Interfaces.Manchkin;
 using Microsoft.VisualBasic;
 
 namespace ManchkinGame;

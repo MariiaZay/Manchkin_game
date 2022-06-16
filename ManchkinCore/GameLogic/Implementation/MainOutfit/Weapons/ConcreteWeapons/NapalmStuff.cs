@@ -1,8 +1,9 @@
-﻿using ManchkinCore.Enums.Accessory;
-using ManchkinCore.GameLogic.Implementation.MainOutfit.Weapons;
-using ManchkinCore.Interfaces;
+﻿using ManchkinCore.CardEnums.Accessory;
+using ManchkinCore.CardEnums.Aspects;
+using ManchkinCore.GameLogic.Implementation.Accessory.Classes;
+using ManchkinCore.GameLogic.Interfaces.Accessory;
 
-namespace ManchkinCore.Implementation;
+namespace ManchkinCore.GameLogic.Implementation.MainOutfit.Weapons.ConcreteWeapons;
 
 public class NapalmStuff : SingleHandWeapon
 {

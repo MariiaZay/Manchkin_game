@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows;
 using ManchkinCore;
-using ManchkinCore.Implementation;
 using Microsoft.VisualBasic;
 
 namespace ManchkinGame;

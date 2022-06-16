@@ -1,5 +1,6 @@
 ﻿using System.Windows;
-using ManchkinCore.Interfaces;
+using ManchkinCore.GameLogic.Interfaces.Accessory;
+using ManchkinCore.GameLogic.Interfaces.Manchkin;
 
 namespace ManchkinGame.DialogWindows;
 

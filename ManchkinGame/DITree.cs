@@ -1,10 +1,12 @@
 ﻿using System.Linq;
-using ManchkinCore.Enums.Accessory;
+using ManchkinCore.CardEnums.Accessory;
 using ManchkinCore.GameLogic;
+using ManchkinCore.GameLogic.Implementation.Accessory.Classes;
+using ManchkinCore.GameLogic.Implementation.Accessory.Races;
 using ManchkinCore.GameLogic.Implementation.Factories;
+using ManchkinCore.GameLogic.Implementation.Manchkin;
 using ManchkinCore.GameLogic.Interfaces;
-using ManchkinCore.Implementation;
-using ManchkinCore.Interfaces;
+using ManchkinCore.GameLogic.Interfaces.Manchkin;
 using Ninject;
 using Ninject.Extensions.Conventions;
 

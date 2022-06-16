@@ -5,8 +5,8 @@ using System.Windows;
 using System.Windows.Documents;
 using ManchkinCore.GameLogic;
 using ManchkinCore.GameLogic.Implementation;
-using ManchkinCore.Implementation.Gears;
-using ManchkinCore.Interfaces;
+using ManchkinCore.GameLogic.Interfaces.Manchkin;
+using ManchkinCore.GameLogic.Interfaces.Stuff;
 
 namespace ManchkinGame.DialogWindows;
 

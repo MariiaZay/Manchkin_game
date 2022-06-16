@@ -1,8 +1,8 @@
-﻿
-using ManchkinCore.Enums.Accessory;
-using ManchkinCore.Implementation;
+﻿using ManchkinCore.CardEnums.Accessory;
+using ManchkinCore.GameLogic.Interfaces.Accessory;
+using ManchkinCore.GameLogic.Interfaces.Stuff;
 
-namespace ManchkinCore.Interfaces;
+namespace ManchkinCore.GameLogic.Interfaces.Manchkin;
 
 public interface IManchkin : IOwnStuffs, IDescriptable, IHalfBloodAble, ISuper
 {

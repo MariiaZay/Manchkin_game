@@ -1,7 +1,8 @@
-﻿using ManchkinCore.Enums;
-using ManchkinCore.Interfaces;
+﻿using ManchkinCore.CardEnums;
+using ManchkinCore.GameLogic.Interfaces.Accessory;
+using ManchkinCore.GameLogic.Interfaces.Manchkin;
 
-namespace ManchkinCore.GameLogic.Implementation;
+namespace ManchkinCore.GameLogic.Implementation.Manchkin;
 
 public class SuperManchkin : ISuperManchkin
 {

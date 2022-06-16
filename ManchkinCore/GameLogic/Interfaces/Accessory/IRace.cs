@@ -1,6 +1,4 @@
-﻿using ManchkinCore.GameLogic.Interfaces;
-
-namespace ManchkinCore.Interfaces;
+﻿namespace ManchkinCore.GameLogic.Interfaces.Accessory;
 
 public interface IRace : ICardsBaseableDescribable
 {

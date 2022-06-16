@@ -1,7 +1,6 @@
-﻿using ManchkinCore.Enums;
-using ManchkinCore.Enums.Accessory;
-using ManchkinCore.Implementation;
-using System.Windows;
+﻿using System.Windows;
+using ManchkinCore.CardEnums;
+using ManchkinCore.CardEnums.Accessory;
 
 namespace ManchkinGame;
 

@@ -1,6 +1,7 @@
-﻿using ManchkinCore.Enums;
+﻿using ManchkinCore.CardEnums;
+using ManchkinCore.GameLogic.Interfaces.Accessory;
 
-namespace ManchkinCore.Interfaces;
+namespace ManchkinCore.GameLogic.Interfaces.Manchkin;
 
 public interface IHulfblood
 {

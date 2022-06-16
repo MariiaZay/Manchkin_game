@@ -1,7 +1,9 @@
-﻿using ManchkinCore.Enums.Accessory;
-using ManchkinCore.Interfaces;
+﻿using ManchkinCore.CardEnums.Accessory;
+using ManchkinCore.CardEnums.Aspects;
+using ManchkinCore.GameLogic.Interfaces.Accessory;
+using ManchkinCore.GameLogic.Interfaces.Stuff;
 
-namespace ManchkinCore.Implementation;
+namespace ManchkinCore.GameLogic.Implementation.MainOutfit.Armor;
 
 public abstract class Armor : IStuff
 {

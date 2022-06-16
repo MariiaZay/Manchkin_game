@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
-using ManchkinCore.Interfaces;
+using ManchkinCore.GameLogic.Interfaces.Stuff;
 
 namespace ManchkinGame.DialogWindows;
 

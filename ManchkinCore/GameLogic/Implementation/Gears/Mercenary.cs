@@ -1,6 +1,6 @@
-﻿using ManchkinCore.Interfaces;
+﻿using ManchkinCore.GameLogic.Interfaces.Stuff;
 
-namespace ManchkinCore.Implementation;
+namespace ManchkinCore.GameLogic.Implementation.Gears;
 
 public class Mercenary : IMercenary
 {

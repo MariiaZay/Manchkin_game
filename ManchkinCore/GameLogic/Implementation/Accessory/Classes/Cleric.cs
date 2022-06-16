@@ -1,6 +1,6 @@
-﻿using ManchkinCore.Interfaces;
+﻿using ManchkinCore.GameLogic.Interfaces.Accessory;
 
-namespace ManchkinCore.Implementation;
+namespace ManchkinCore.GameLogic.Implementation.Accessory.Classes;
 
 public class Cleric : IClass
 {

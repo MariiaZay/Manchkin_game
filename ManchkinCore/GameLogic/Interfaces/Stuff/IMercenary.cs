@@ -1,4 +1,6 @@
-﻿namespace ManchkinCore.Interfaces;
+﻿using ManchkinCore.GameLogic.Interfaces.Manchkin;
+
+namespace ManchkinCore.GameLogic.Interfaces.Stuff;
 
 public interface IMercenary : IDescriptable
 {

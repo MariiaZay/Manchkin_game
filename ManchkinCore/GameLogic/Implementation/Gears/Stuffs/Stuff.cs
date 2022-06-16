@@ -1,5 +1,7 @@
-﻿using ManchkinCore.Enums.Accessory;
-using ManchkinCore.Interfaces;
+﻿using ManchkinCore.CardEnums.Accessory;
+using ManchkinCore.CardEnums.Aspects;
+using ManchkinCore.GameLogic.Interfaces.Accessory;
+using ManchkinCore.GameLogic.Interfaces.Stuff;
 
 namespace ManchkinCore.GameLogic.Implementation.Gears.Stuffs;
 

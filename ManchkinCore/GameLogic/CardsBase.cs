@@ -1,8 +1,10 @@
 ﻿using ManchkinCore.GameLogic.Implementation.Gears.Stuffs;
+using ManchkinCore.GameLogic.Implementation.MainOutfit.Armor;
+using ManchkinCore.GameLogic.Implementation.MainOutfit.Hats;
+using ManchkinCore.GameLogic.Implementation.MainOutfit.Shoes;
 using ManchkinCore.GameLogic.Implementation.MainOutfit.Weapons;
-using ManchkinCore.Implementation;
-using ManchkinCore.Implementation.Gears;
-using ManchkinCore.Interfaces;
+using ManchkinCore.GameLogic.Interfaces.Accessory;
+using ManchkinCore.GameLogic.Interfaces.Manchkin;
 
 
 namespace ManchkinCore.GameLogic;

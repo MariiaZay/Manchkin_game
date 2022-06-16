@@ -1,4 +1,6 @@
-﻿namespace ManchkinCore.Interfaces;
+﻿using ManchkinCore.GameLogic.Interfaces.Stuff;
+
+namespace ManchkinCore.GameLogic.Interfaces.Manchkin;
 
 public interface IHands
 {

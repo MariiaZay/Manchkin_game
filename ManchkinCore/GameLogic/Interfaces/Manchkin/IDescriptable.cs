@@ -1,4 +1,4 @@
-﻿namespace ManchkinCore.Interfaces;
+﻿namespace ManchkinCore.GameLogic.Interfaces.Manchkin;
 
 public interface IDescriptable
 {

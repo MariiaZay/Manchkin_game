@@ -1,10 +1,17 @@
-﻿using ManchkinCore.Enums;
-using ManchkinCore.Enums.Accessory;
+﻿using ManchkinCore.CardEnums;
+using ManchkinCore.CardEnums.Accessory;
+using ManchkinCore.CardEnums.Aspects;
+using ManchkinCore.GameLogic.Implementation.Accessory.Races;
 using ManchkinCore.GameLogic.Implementation.Factories;
-using ManchkinCore.Implementation;
-using ManchkinCore.Interfaces;
+using ManchkinCore.GameLogic.Implementation.MainOutfit.Armor;
+using ManchkinCore.GameLogic.Implementation.MainOutfit.Hats;
+using ManchkinCore.GameLogic.Implementation.MainOutfit.Shoes;
+using ManchkinCore.GameLogic.Implementation.MainOutfit.Weapons;
+using ManchkinCore.GameLogic.Interfaces.Accessory;
+using ManchkinCore.GameLogic.Interfaces.Manchkin;
+using ManchkinCore.GameLogic.Interfaces.Stuff;
 
-namespace ManchkinCore.GameLogic.Implementation;
+namespace ManchkinCore.GameLogic.Implementation.Manchkin;
 
 public class Manchkin : IManchkin
 {
@@ -325,39 +332,29 @@ public class Manchkin : IManchkin
         bool additionalRaceRight;
         var additionalClassRight = false;
 
-
         if (IsNull(stuff))
-            mainRight = additionalRaceRight = additionalClassRight = true;
-        else
+            return true;
+        mainRight = stuff.Cheat
+                    || stuff.CanBeUsed(Class)
+                    && stuff.CanBeUsed(Race)
+                    && stuff.CanBeUsed(Gender);
+        if (IsHalfBlood)
         {
-            if (stuff.Cheat)
-                mainRight = true;
-            else
-                mainRight = stuff.CanBeUsed(Class) && stuff.CanBeUsed(Race) && stuff.CanBeUsed(Gender);
-
-            if (IsHalfBlood)
-            {
-                if (HalfBlood.HalfType == HalfTypes.BOTH)
-                    additionalRaceRight = stuff.CanBeUsed(Class)
-                                          && stuff.CanBeUsed(HalfBlood.SecondRace)
-                                          && stuff.CanBeUsed(Gender);
-                else
-                    additionalRaceRight = stuff.CanBeUsed(Class) && stuff.CanBeUsed(Gender);
-            }
-            else
-                additionalRaceRight = false;
-
-            if (IsSuperManchkin)
-            {
-                if (SuperManchkin.HalfType == HalfTypes.BOTH)
-                    additionalRaceRight = stuff.CanBeUsed(SuperManchkin.SecondClass) && stuff.CanBeUsed(Race)
-                        && stuff.CanBeUsed(Gender);
-                else
-                    additionalRaceRight = stuff.CanBeUsed(Race) && stuff.CanBeUsed(Gender);
-            }
-            else
-                additionalClassRight = false;
+            additionalRaceRight = stuff.CanBeUsed(Class) && stuff.CanBeUsed(Gender);
+            if (HalfBlood.HalfType == HalfTypes.BOTH)
+                additionalRaceRight = additionalRaceRight && stuff.CanBeUsed(HalfBlood.SecondRace);
         }
+        else
+            additionalRaceRight = false;
+
+        if (IsSuperManchkin)
+        {
+            additionalRaceRight = stuff.CanBeUsed(Race) && stuff.CanBeUsed(Gender);
+            if (SuperManchkin.HalfType == HalfTypes.BOTH)
+                additionalRaceRight = additionalRaceRight && stuff.CanBeUsed(SuperManchkin.SecondClass);
+        }
+        else
+            additionalClassRight = false;
 
         return mainRight || additionalRaceRight || additionalClassRight;
     }

@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
 using ManchkinCore;
-using ManchkinCore.Enums.Accessory;
-using ManchkinCore.Interfaces;
+using ManchkinCore.CardEnums.Accessory;
+using ManchkinCore.CardEnums.Aspects;
+using ManchkinCore.GameLogic.Interfaces.Accessory;
+using ManchkinCore.GameLogic.Interfaces.Stuff;
 
 namespace ManchkinGame.DialogWindows;
 

@@ -1,4 +1,4 @@
-﻿using ManchkinCore.Interfaces;
+﻿using ManchkinCore.GameLogic.Interfaces.Manchkin;
 
 namespace ManchkinCore.GameLogic.Interfaces;
 

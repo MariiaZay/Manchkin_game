@@ -1,4 +1,5 @@
-﻿using ManchkinCore.Interfaces;
+﻿using ManchkinCore.GameLogic.Implementation.Manchkin;
+using ManchkinCore.GameLogic.Interfaces.Accessory;
 
 namespace ManchkinCore.GameLogic.Implementation.Factories;
 

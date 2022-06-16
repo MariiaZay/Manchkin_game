@@ -1,8 +1,9 @@
-﻿using ManchkinCore.Enums.Accessory;
-using ManchkinCore.GameLogic.Implementation.Gears.Stuffs;
-using ManchkinCore.Interfaces;
+﻿using ManchkinCore.CardEnums.Accessory;
+using ManchkinCore.CardEnums.Aspects;
+using ManchkinCore.GameLogic.Interfaces.Accessory;
+using ManchkinCore.GameLogic.Interfaces.Manchkin;
 
-namespace ManchkinCore.Implementation.Gears;
+namespace ManchkinCore.GameLogic.Implementation.Gears.Stuffs.ConcreteStuffs;
 
 public class KneepadsOfAllure : SmallStuff, IDescriptable
 {

@@ -1,4 +1,4 @@
-﻿namespace ManchkinCore;
+﻿namespace ManchkinCore.CardEnums.Aspects;
 
 public enum Bulkiness
 {

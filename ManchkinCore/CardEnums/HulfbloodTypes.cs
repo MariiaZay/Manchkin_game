@@ -1,4 +1,4 @@
-﻿namespace ManchkinCore.Enums;
+﻿namespace ManchkinCore.CardEnums;
 
 public enum HalfTypes
 {

@@ -1,6 +1,6 @@
-﻿using ManchkinCore.Enums.Accessory;
-using ManchkinCore.Implementation;
-using ManchkinCore.Interfaces;
+﻿using ManchkinCore.CardEnums.Accessory;
+using ManchkinCore.GameLogic.Interfaces.Accessory;
+using ManchkinCore.GameLogic.Interfaces.Manchkin;
 
 namespace ManchkinCore.GameLogic.Implementation.Factories;
 
@@ -33,6 +33,6 @@ public class ManchkinFactory
         return this;
     }
 
-    public Manchkin Build() => new Manchkin(_initialClass, _initialRace, _hands,
+    public Manchkin.Manchkin Build() => new Manchkin.Manchkin(_initialClass, _initialRace, _hands,
         _mercenaryFactory, _halfbloodFactory, _superManchkinFactory, _gender);
 }

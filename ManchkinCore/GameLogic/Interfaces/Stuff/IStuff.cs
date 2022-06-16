@@ -1,9 +1,8 @@
-﻿using ManchkinCore.Enums;
-using ManchkinCore.Enums.Accessory;
-using ManchkinCore.GameLogic.Interfaces;
-using ManchkinCore.Implementation;
+﻿using ManchkinCore.CardEnums.Accessory;
+using ManchkinCore.CardEnums.Aspects;
+using ManchkinCore.GameLogic.Interfaces.Accessory;
 
-namespace ManchkinCore.Interfaces;
+namespace ManchkinCore.GameLogic.Interfaces.Stuff;
 
 public interface IStuff : ICardsBaseableDescribable
 {

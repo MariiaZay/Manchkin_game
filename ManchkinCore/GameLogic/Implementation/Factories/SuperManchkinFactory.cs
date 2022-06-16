@@ -1,5 +1,7 @@
-﻿using ManchkinCore.Enums;
-using ManchkinCore.Interfaces;
+﻿using ManchkinCore.CardEnums;
+using ManchkinCore.GameLogic.Implementation.Manchkin;
+using ManchkinCore.GameLogic.Interfaces.Accessory;
+using ManchkinCore.GameLogic.Interfaces.Manchkin;
 
 namespace ManchkinCore.GameLogic.Implementation.Factories;
 

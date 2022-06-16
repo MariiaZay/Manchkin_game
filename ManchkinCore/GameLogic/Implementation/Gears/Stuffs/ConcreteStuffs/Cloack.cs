@@ -1,8 +1,9 @@
-﻿using ManchkinCore.Enums.Accessory;
-using ManchkinCore.GameLogic.Implementation.Gears.Stuffs;
-using ManchkinCore.Interfaces;
+﻿using ManchkinCore.CardEnums.Accessory;
+using ManchkinCore.CardEnums.Aspects;
+using ManchkinCore.GameLogic.Implementation.Accessory.Classes;
+using ManchkinCore.GameLogic.Interfaces.Accessory;
 
-namespace ManchkinCore.Implementation.Gears;
+namespace ManchkinCore.GameLogic.Implementation.Gears.Stuffs.ConcreteStuffs;
 
 public class Cloack : SmallStuff
 {

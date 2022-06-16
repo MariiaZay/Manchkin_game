@@ -7,8 +7,10 @@ using System.Windows.Input;
 using ManchkinCore;
 using ManchkinCore.GameLogic;
 using ManchkinCore.GameLogic.Implementation;
-using ManchkinCore.Implementation;
-using ManchkinCore.Interfaces;
+using ManchkinCore.GameLogic.Implementation.MainOutfit.Weapons.ConcreteWeapons;
+using ManchkinCore.GameLogic.Implementation.Manchkin;
+using ManchkinCore.GameLogic.Interfaces.Manchkin;
+using ManchkinCore.GameLogic.Interfaces.Stuff;
 
 namespace ManchkinGame.DialogWindows;
 

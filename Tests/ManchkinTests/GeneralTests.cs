@@ -1,8 +1,11 @@
-﻿using ManchkinCore.Enums.Accessory;
+﻿using ManchkinCore.CardEnums.Accessory;
+using ManchkinCore.GameLogic.Implementation.Accessory.Classes;
+using ManchkinCore.GameLogic.Implementation.Accessory.Races;
 using ManchkinCore.GameLogic.Implementation.Factories;
-using ManchkinCore.Implementation;
-using ManchkinCore.Implementation.Gears;
-using ManchkinCore.Interfaces;
+using ManchkinCore.GameLogic.Implementation.Gears.Stuffs.ConcreteStuffs;
+using ManchkinCore.GameLogic.Implementation.MainOutfit.Weapons.ConcreteWeapons;
+using ManchkinCore.GameLogic.Implementation.Manchkin;
+using ManchkinCore.GameLogic.Interfaces.Manchkin;
 using NUnit.Framework;
 
 namespace Tests.ManchkinTests;

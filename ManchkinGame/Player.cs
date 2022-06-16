@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using ManchkinCore.Enums.Accessory;
 using ManchkinCore.GameLogic.Implementation;
-using ManchkinCore.Interfaces;
+using ManchkinCore.GameLogic.Interfaces.Manchkin;
 using Ninject;
 
 namespace ManchkinGame;

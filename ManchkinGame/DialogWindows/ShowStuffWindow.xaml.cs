@@ -1,8 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
-using ManchkinCore.Implementation;
-using ManchkinCore.Interfaces;
+using ManchkinCore.GameLogic.Implementation.MainOutfit.Armor;
+using ManchkinCore.GameLogic.Implementation.MainOutfit.Hats;
+using ManchkinCore.GameLogic.Implementation.MainOutfit.Shoes;
+using ManchkinCore.GameLogic.Implementation.MainOutfit.Weapons;
+using ManchkinCore.GameLogic.Interfaces.Manchkin;
+using ManchkinCore.GameLogic.Interfaces.Stuff;
 
 namespace ManchkinGame.DialogWindows;
 

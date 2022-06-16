@@ -1,4 +1,6 @@
-﻿namespace ManchkinCore.Interfaces;
+﻿using ManchkinCore.GameLogic.Interfaces.Accessory;
+
+namespace ManchkinCore.GameLogic.Interfaces.Manchkin;
 
 public interface IHalfBloodAble
 {
